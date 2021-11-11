@@ -1,8 +1,7 @@
 package com.eqriesracingteam.garage.model;
 
-import org.springframework.core.SpringVersion;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "klanten")
@@ -13,14 +12,22 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false, length = 50)
     private String firstName;
-    private String LastName;
+    @Column(nullable = false, length = 50)
+    private String lastName;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Car> cars;
 
     //Constructor
 
-    public Customer( String firstName, String lastName) {
+
+    public Customer(int id, String firstName, String lastName, List<Car> cars) {
+        this.id = id;
         this.firstName = firstName;
-        LastName = lastName;
+        this.lastName = lastName;
+        this.cars = cars;
     }
 
     public Customer() {
@@ -45,10 +52,10 @@ public class Customer {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 }
