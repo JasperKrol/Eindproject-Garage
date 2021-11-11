@@ -17,8 +17,9 @@ public class Customer {
     @Column(nullable = false, length = 50)
     private String lastName;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Car> cars;
+    // TODO: 11-11-2021 uitzoeken naar relatie springsql
+//    @OneToMany(targetEntity = Car.class, mappedBy = "id")
+//    private List<Car> cars;
 
     //Constructor
 
