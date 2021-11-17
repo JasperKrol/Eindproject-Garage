@@ -18,8 +18,10 @@ public class Customer {
     private String lastName;
 
     // TODO: 11-11-2021 uitzoeken naar relatie springsql
-//    @OneToMany(targetEntity = Car.class, mappedBy = "id")
-//    private List<Car> cars;
+    //mapped by = eigenaar van de relatie, mapped over lijst van autos adhv de user id
+    //user id is eigenaar en achter komt de lijst met autos
+    @OneToMany(targetEntity = Car.class, mappedBy = "id")
+    private List<Car> cars;
 
     //Constructor
 
