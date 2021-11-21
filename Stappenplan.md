@@ -3,10 +3,10 @@
 
 ## Stappenplan
 _Let op_: het is uitdagender om jouw eigen stappenplan te maken. Mocht je niet zo goed weten waar je moet beginnen, kun je onderstaand stappenplan volgen:
-1. []Zet een nieuw project op via Spring Boot Initialzr genaamd garage
-2. []Maak een nieuwe map aan in je project genaamd Controllers
-3. []Maak een nieuwe map aan in je project genaamd Exceptions
-4. []Maak een nieuwe klasse aan in de map Controllers voor de Car/CustomerContontroller
+1. [x]Zet een nieuw project op via Spring Boot Initialzr genaamd garage
+2. [x]Maak een nieuwe map aan in je project genaamd Controllers
+3. [x]Maak een nieuwe map aan in je project genaamd Exceptions
+4. [x]Maak een nieuwe klasse aan in de map Controllers voor de Car/CustomerContontroller
 5. []Voorzie de klassen van de juiste annotaties
 6. []Maak in de klassen de gevraagde requests met de juiste response entities
 7. []Maak een nieuwe klassen aan in de map Controllers voor de exceptionController

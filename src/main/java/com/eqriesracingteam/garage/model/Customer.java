@@ -10,11 +10,11 @@ public class Customer {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "first_name",nullable = false, length = 50)
     private String firstName;
-    @Column(nullable = false, length = 50)
+    @Column(name = "last_name",nullable = false, length = 50)
     private String lastName;
 
     // TODO: 11-11-2021 uitzoeken naar relatie springsql
@@ -24,41 +24,8 @@ public class Customer {
     private List<Car> cars;
 
     //Constructor
-
-
-    public Customer(int id, String firstName, String lastName, List<Car> cars) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.cars = cars;
-    }
-
-    public Customer() {
-    }
+    // TODO: 21-11-2021 Constructors toevoegen -leeg en alle
 
     //Getters and setters
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    // TODO: 21-11-2021 getters en setters maken
 }

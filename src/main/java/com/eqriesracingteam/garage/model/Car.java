@@ -22,6 +22,10 @@ public class Car {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    // TODO: 21-11-2021 ENUM TOEVOEGEN 
+    @Column
+    private final enum appointmentStatus;
+
     //Constructors
 
 
