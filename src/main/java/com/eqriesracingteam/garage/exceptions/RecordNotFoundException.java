@@ -1,9 +1,8 @@
 package com.eqriesracingteam.garage.exceptions;
 
-import java.io.Serial;
-
 public class RecordNotFoundException extends RuntimeException {
-    @Serial
+    // TODO: 21-11-2021 @SERIAL BOVEN TOEVOEGEN / VRAGEN
+    //    @Serial
     private static final long serialVersionUID = 1L;
 
     public RecordNotFoundException() {
