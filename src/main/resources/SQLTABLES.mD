@@ -17,7 +17,7 @@ kenteken     TEXT NOT NULL UNIQUE,
 autopapieren INTEGER DEFAULT 5,
 eigenaar_id  INT  NOT NULL,
 PRIMARY KEY (id),
-CONSTRAINT fk_hoofddocent FOREIGN KEY (eigenaar_id) REFERENCES klanten (id)
+CONSTRAINT fk_eigenaar FOREIGN KEY (eigenaar_id) REFERENCES klanten (id)
 );
 
 CREATE TABLE auto_eigenaren

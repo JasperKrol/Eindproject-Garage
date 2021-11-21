@@ -9,12 +9,13 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "license_plate")
     private String licensePlate;
 
     // TODO: 11-11-2021 veranderen in PDF
-    @Column(nullable = false, length = 50)
+    @Column(name = "registration_papers")
     private String registrationPapers;
 
     @ManyToOne
@@ -22,8 +23,8 @@ public class Car {
     private Customer customer;
 
     // TODO: 21-11-2021 ENUM TOEVOEGEN 
-//    @Column
-//    private final enum appointmentStatus;
+    //    @Column
+    //    private final enum appointmentStatus;
 
     //Constructors
     // TODO: 21-11-2021 1 lege en een volledige met alle toevoegen
