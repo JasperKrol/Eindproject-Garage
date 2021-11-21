@@ -1,6 +1,5 @@
 package com.eqriesracingteam.garage.model;
 
-import jdk.jfr.DataAmount;
 
 import javax.persistence.*;
 
@@ -23,20 +22,11 @@ public class Car {
     private Customer customer;
 
     // TODO: 21-11-2021 ENUM TOEVOEGEN 
-    @Column
-    private final enum appointmentStatus;
+//    @Column
+//    private final enum appointmentStatus;
 
     //Constructors
-
-
-    public Car(String licensePlate, String registrationPapers, Customer customer) {
-        this.licensePlate = licensePlate;
-        this.registrationPapers = registrationPapers;
-        this.customer = customer;
-    }
-
-    public Car() {
-    }
+    // TODO: 21-11-2021 1 lege en een volledige met alle toevoegen
 
     //Getters and Setters
 
