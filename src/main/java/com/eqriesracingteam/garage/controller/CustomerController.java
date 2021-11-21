@@ -40,14 +40,21 @@ public class CustomerController {
     // - Find all, with option on lastnames
     // TODO: 21-11-2021 perhaps on lastname query string?
     @GetMapping(value = "/api/garage/customers")
-    public ResponseEntity<Object> getCustomers(@RequestParam(name = "lastName", defaultValue = "") String lastName) {
+    public ResponseEntity<Object> getCustomers(@RequestParam(name = "lastname", defaultValue = "") String lastName) {
         // in de ok()komt de body te staan
         return ResponseEntity.ok(customerService.getAllCustomers(lastName));
     }
 
-    // - get by ID
-//    @GetMapping(value = "/api/garage/customers/{id}")
-//    public ResponseEntity<Object> getCustomer(@PathVariable("id") Long id) {
-//        return ResponseEntity.ok(customerService.getCustomer(id));
-//    }
+    // TODO: 21-11-2021 perhaps on postalCode query string?
+    // - Find by last name
+    @GetMapping(value = "/api/garage/customers/{lastname}")
+    public ResponseEntity<Object> getCustomer(@RequestParam(name = "lastname", defaultValue = "")@PathVariable("lastname") String lastName) {
+        return ResponseEntity.ok(customerService.getCustomer(lastName));
+    }
+
+    @DeleteMapping(value = "/api/garage/customers/{id}")
+    public ResponseEntity<Object> deleteBook(@PathVariable("id") Long id) {
+        customerService.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
+    }
 }
