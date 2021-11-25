@@ -1,7 +1,6 @@
 package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.model.Customer;
-import com.eqriesracingteam.garage.repository.CustomerRepository;
 import com.eqriesracingteam.garage.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @RestController
 public class CustomerController {
@@ -48,13 +46,27 @@ public class CustomerController {
     // TODO: 21-11-2021 perhaps on postalCode query string?
     // - Find by last name
     @GetMapping(value = "/api/garage/customers/{lastname}")
-    public ResponseEntity<Object> getCustomer(@RequestParam(name = "lastname", defaultValue = "")@PathVariable("lastname") String lastName) {
+    public ResponseEntity<Object> getCustomer(@RequestParam(name = "lastname", defaultValue = "") @PathVariable("lastname") String lastName) {
         return ResponseEntity.ok(customerService.getCustomer(lastName));
     }
 
     @DeleteMapping(value = "/api/garage/customers/{id}")
     public ResponseEntity<Object> deleteBook(@PathVariable("id") Long id) {
         customerService.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    //Update
+    @PutMapping(value = "/api/garage/customers/{id}")
+    public ResponseEntity<Object> updateCustomer(@PathVariable("id") Long id, @RequestBody Customer customer) {
+        customerService.updateCustomer(id, customer);
+        return ResponseEntity.noContent().build();
+    }
+
+    //Partial update customer
+    @PatchMapping(value = "/api/garage/customers/{id}")
+    public ResponseEntity<Object> partialUpdateCustomer(@PathVariable("id") Long id, @RequestBody Customer customer) {
+        customerService.partialUpdateCustomer(id, customer);
         return ResponseEntity.noContent().build();
     }
 }

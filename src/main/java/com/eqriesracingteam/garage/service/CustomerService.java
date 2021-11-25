@@ -21,7 +21,7 @@ public class CustomerService {
         String postalCode = customer.getPostalCode();
         List<Customer> customers = (List<Customer>) customerRepository.findAllByPostalCode(postalCode);
 
-        if (customers.size() > 0) {
+        if (customers.size() > 0 && customer.getLastName().equalsIgnoreCase(customer.getLastName())) {
             throw new BadRequestException("Customer allready excists");
         }
         Customer newCustomer = customerRepository.save(customer);
@@ -36,6 +36,7 @@ public class CustomerService {
         }
     }
 
+    // TODO: 25-11-2021 customer by lastname vinden 
     public Customer getCustomer(String lastName) {
         Optional<Customer> optionalCustomer = customerRepository.findCustomerByLastNameContainingIgnoreCase(lastName);
         //        Optional<Customer> optionalCustomer = customerRepository.findCustomerByLastNameContainingIgnoreCase(lastName);
@@ -48,10 +49,48 @@ public class CustomerService {
     }
 
     public void deleteCustomer(Long id) {
-        if (customerRepository.existsById(id)){
+        if (customerRepository.existsById(id)) {
             customerRepository.deleteById(id);
         } else {
             throw new RecordNotFoundException("ID not found");
+        }
+    }
+
+    public void updateCustomer(Long id, Customer customer) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+
+        if (optionalCustomer.isPresent()) {
+            Customer existingCustomer = optionalCustomer.get();
+
+            customer.setId(existingCustomer.getId());
+            customerRepository.save(customer);
+        }
+        else {
+            throw new RecordNotFoundException("Custormer ID does not exists");
+        }
+    }
+
+    // TODO: 25-11-2021 werkt nog niet helemaal goed
+    public void partialUpdateCustomer(Long id, Customer customer) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+
+        //Add conditions
+        if (optionalCustomer.isPresent()) {
+            Customer existingCustomer = customerRepository.findById(id).orElse(null);
+
+            if (customer.getFirstName() != null && !customer.getFirstName().isEmpty()) {
+                existingCustomer.setFirstName(customer.getFirstName());
+            }
+            if (customer.getLastName() != null && !customer.getLastName().isEmpty()){
+                existingCustomer.setLastName(customer.getLastName());
+            }
+            if (customer.getPostalCode() != null && !customer.getPostalCode().isEmpty()){
+                existingCustomer.setPostalCode(customer.getPostalCode());
+
+                //save new partial update
+                customerRepository.save(existingCustomer);
+            } else
+                throw new RecordNotFoundException("Customer not found");
         }
     }
 }
