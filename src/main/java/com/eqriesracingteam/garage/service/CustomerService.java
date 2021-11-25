@@ -17,12 +17,13 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    // TODO: 25-11-2021 kijken of er een functie kan komen die checked op achternaam === postcode
     public Long addCustomer(Customer customer) {
         String postalCode = customer.getPostalCode();
         List<Customer> customers = (List<Customer>) customerRepository.findAllByPostalCode(postalCode);
 
-        if (customers.size() > 0 && customer.getLastName().equalsIgnoreCase(customer.getLastName())) {
-            throw new BadRequestException("Customer allready excists");
+        if (customers.size() > 0) {
+            throw new BadRequestException("Customer already exists");
         }
         Customer newCustomer = customerRepository.save(customer);
         return newCustomer.getId();
@@ -66,7 +67,7 @@ public class CustomerService {
             customerRepository.save(customer);
         }
         else {
-            throw new RecordNotFoundException("Custormer ID does not exists");
+            throw new RecordNotFoundException("Customer ID does not exists");
         }
     }
 
