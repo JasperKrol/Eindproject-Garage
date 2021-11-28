@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,20 +13,20 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name",nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "postal_code",nullable = false)
+    @Column(name = "postal_code")
     private String postalCode;
 
     // TODO: 11-11-2021 uitzoeken naar relatie springsql
     //mapped by = eigenaar van de relatie, mapped over lijst van autos adhv de user id
     //user id is eigenaar en achter komt de lijst met autos
-    @OneToMany(targetEntity = Car.class, mappedBy = "id")
-    private List<Car> cars;
+    @OneToMany(targetEntity = Car.class, mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Car> cars = new ArrayList<>();
 
     //Constructor
     // TODO: 21-11-2021 Constructors toevoegen -leeg en alle

@@ -65,8 +65,7 @@ public class CustomerService {
 
             customer.setId(existingCustomer.getId());
             customerRepository.save(customer);
-        }
-        else {
+        } else {
             throw new RecordNotFoundException("Customer ID does not exists");
         }
     }
@@ -82,16 +81,16 @@ public class CustomerService {
             if (customer.getFirstName() != null && !customer.getFirstName().isEmpty()) {
                 existingCustomer.setFirstName(customer.getFirstName());
             }
-            if (customer.getLastName() != null && !customer.getLastName().isEmpty()){
+            if (customer.getLastName() != null && !customer.getLastName().isEmpty()) {
                 existingCustomer.setLastName(customer.getLastName());
             }
-            if (customer.getPostalCode() != null && !customer.getPostalCode().isEmpty()){
+            if (customer.getPostalCode() != null && !customer.getPostalCode().isEmpty()) {
                 existingCustomer.setPostalCode(customer.getPostalCode());
+            }
+            customerRepository.save(existingCustomer);
 
-                //save new partial update
-                customerRepository.save(existingCustomer);
-            } else
-                throw new RecordNotFoundException("Customer not found");
+        } else {
+            throw new RecordNotFoundException("ID does not exist!!!");
         }
     }
 }
