@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -24,14 +25,14 @@ public class CarService {
         String licensePlate = car.getLicensePlate();
         List<Car> cars = (List<Car>) carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
 
-        if (cars.size() >0) {
+        if (cars.size() > 0) {
             throw new BadRequestException("Car with license plate already in system");
         }
         Car newCar = carRepository.save(car);
         return newCar.getId();
     }
 
-    public Object getAllCustomers() {
+    public Iterable<Car> getAllCars() {
         List<Car> carsList = new ArrayList<>();
 
         var cars = carRepository.findAll();
@@ -40,5 +41,15 @@ public class CarService {
             carsList.add(car);
         }
         return cars;
+    }
+
+    public Car getOneCar(Long id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (optionalCar.isPresent()) {
+            return optionalCar.get();
+        } else {
+            throw new BadRequestException("Car not found");
+        }
+
     }
 }

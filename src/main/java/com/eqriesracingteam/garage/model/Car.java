@@ -20,7 +20,7 @@ public class Car {
 
     // TODO: 28-11-2021 kenteken koppelen in tabel?
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer owner;
 
     // TODO: 21-11-2021 ENUM TOEVOEGEN 
