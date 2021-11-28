@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.controller;
 
+import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
 import com.eqriesracingteam.garage.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +68,16 @@ public class CustomerController {
     public ResponseEntity<Object> partialUpdateCustomer(@PathVariable("id") Long id, @RequestBody Customer customer) {
         customerService.partialUpdateCustomer(id, customer);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/api/garage/customers/{id}/cars")
+    public ResponseEntity<Object> getCustomerCars(@PathVariable Long id) {
+        return ResponseEntity.ok(customerService.getCustomerCars(id));
+    }
+
+    @PostMapping(value = "/api/garage/customers/{id}/cars")
+    public ResponseEntity<Object> addCustomerCar(@PathVariable Long id, @RequestBody Car car) {
+        customerService.addCustomerCar(id,car);
+        return ResponseEntity.ok().build();
     }
 }

@@ -25,11 +25,13 @@ public class Customer {
     // TODO: 11-11-2021 uitzoeken naar relatie springsql
     //mapped by = eigenaar van de relatie, mapped over lijst van autos adhv de user id
     //user id is eigenaar en achter komt de lijst met autos
-    @OneToMany(targetEntity = Car.class, mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "owner_car", referencedColumnName = "id")
     private List<Car> cars = new ArrayList<>();
 
     //Constructor
     // TODO: 21-11-2021 Constructors toevoegen -leeg en alle
+
 
     //Getters and setters
     // TODO: 21-11-2021 getters en setters maken

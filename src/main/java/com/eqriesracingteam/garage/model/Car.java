@@ -18,6 +18,7 @@ public class Car {
     @Column(name = "registration_papers")
     private String registrationPapers;
 
+    // TODO: 28-11-2021 kenteken koppelen in tabel?
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer owner;

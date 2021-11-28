@@ -2,7 +2,9 @@ package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
+import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
+import com.eqriesracingteam.garage.repository.CarRepository;
 import com.eqriesracingteam.garage.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ public class CustomerService {
     //talks to Repository layer
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private CarRepository carRepository;
 
     // TODO: 25-11-2021 kijken of er een functie kan komen die checked op achternaam === postcode
     public Long addCustomer(Customer customer) {
@@ -91,6 +95,32 @@ public class CustomerService {
 
         } else {
             throw new RecordNotFoundException("ID does not exist!!!");
+        }
+    }
+
+    public Iterable<Car> getCustomerCars(Long id) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+
+        if (optionalCustomer.isPresent()) {
+            Customer customer = optionalCustomer.get();
+            return customer.getCars();
+        } else {
+            throw new RecordNotFoundException("Customer not found");
+        }
+    }
+
+    public void addCustomerCar(Long id, Car car) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+
+        if (optionalCustomer.isPresent()) {
+            Customer customer = optionalCustomer.get();
+            List<Car> cars = customer.getCars();
+
+            carRepository.save(car);
+            cars.add(car);
+            customerRepository.save(customer);
+        } else {
+            throw new RecordNotFoundException("Customer not found");
         }
     }
 }
