@@ -20,16 +20,33 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private Customer owner;
 
     // TODO: 21-11-2021 ENUM TOEVOEGEN 
     //    @Column
     //    private final enum appointmentStatus;
 
     //Constructors
-    // TODO: 21-11-2021 1 lege en een volledige met alle toevoegen
+    public Car() {
+    }
+
+    public Car(Long id, String licensePlate, String registrationPapers, Customer owner) {
+        this.id = id;
+        this.licensePlate = licensePlate;
+        this.registrationPapers = registrationPapers;
+        this.owner = owner;
+    }
 
     //Getters and Setters
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLicensePlate() {
         return licensePlate;
@@ -45,5 +62,13 @@ public class Car {
 
     public void setRegistrationPapers(String registrationPapers) {
         this.registrationPapers = registrationPapers;
+    }
+
+    public Customer getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Customer owner) {
+        this.owner = owner;
     }
 }

@@ -14,7 +14,6 @@ import java.net.URI;
 public class CustomerController {
 
     //Attribute
-    //Connect to service layer
     @Autowired
     private CustomerService customerService;
 
