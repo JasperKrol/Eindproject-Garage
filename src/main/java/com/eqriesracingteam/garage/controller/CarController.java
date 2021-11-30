@@ -34,9 +34,30 @@ public class CarController {
     public ResponseEntity<Object> getAllCars(){
         return ResponseEntity.ok(carService.getAllCars());
     }
-    //Get one cars
+    //Get one car
     @GetMapping(value = "/api/garage/cars/{id}")
     public ResponseEntity<Object> getOneCar(@PathVariable("id") Long id){
         return ResponseEntity.ok(carService.getOneCar(id));
+    }
+
+    //Delete
+    @DeleteMapping(value = "/api/garage/cars/{id}")
+    public ResponseEntity<Object> deleteCar(@PathVariable("id") Long id){
+        carService.deleteCar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    //Updates
+    //Total update
+    @PutMapping(value = "/api/garage/cars/{id}")
+    public ResponseEntity<Object> updateCar(@PathVariable("id") Long id,@RequestBody Car car){
+        carService.updateCar(id, car);
+        return ResponseEntity.noContent().build();
+    }
+    //Partial update
+    @PatchMapping(value = "/api/garage/cars/{id}")
+    public ResponseEntity<Object> partialUpdateCar(@PathVariable("id") Long id, @RequestBody Car car){
+        carService.partialUpdateCar(id, car);
+        return ResponseEntity.noContent().build();
     }
 }

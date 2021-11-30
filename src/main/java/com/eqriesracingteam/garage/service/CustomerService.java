@@ -98,6 +98,7 @@ public class CustomerService {
         }
     }
 
+    //Methods for getting and adding cars with relations
     public Iterable<Car> getCustomerCars(Long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
