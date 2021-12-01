@@ -93,4 +93,8 @@ public class CarService {
             throw new RecordNotFoundException("ID does not exist!!!");
         }
     }
+
+    // TODO: 30-11-2021 Methodes maken die eigenaarschap kunnen vastleggen
+    //Methods for getting and adding cars with relations
+
 }
