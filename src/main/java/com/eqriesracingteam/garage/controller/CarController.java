@@ -1,5 +1,7 @@
 package com.eqriesracingteam.garage.controller;
 
+import com.eqriesracingteam.garage.dto.CarDto;
+import com.eqriesracingteam.garage.dto.CarInputDto;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,32 +19,35 @@ public class CarController {
     private CarService carService;
 
     //Constructor
+    @Autowired
+    public CarController(CarService carService){
+        this.carService = carService;
+    }
 
     //CRUD Requests
     //Post request
     @PostMapping(value = "/api/garage/cars")
-    public ResponseEntity<Object> addCar(@RequestBody Car car){
-        long newId = carService.addCar(car);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(newId).toUri();
-        return ResponseEntity.created(location).build();
+    public CarDto addCar(@RequestBody CarInputDto dto){
+        var car = carService.addCar(dto.toCar());
+        return CarDto.fromCar(car);
     }
 
     //Get requests
     //Get all cars
     @GetMapping(value = "/api/garage/cars")
-    public ResponseEntity<Object> getAllCars(){
+    public ResponseEntity<Object> getAllCars() {
         return ResponseEntity.ok(carService.getAllCars());
     }
+
     //Get one car
     @GetMapping(value = "/api/garage/cars/{id}")
-    public ResponseEntity<Object> getOneCar(@PathVariable("id") Long id){
+    public ResponseEntity<Object> getOneCar(@PathVariable("id") Long id) {
         return ResponseEntity.ok(carService.getOneCar(id));
     }
 
     //Delete
     @DeleteMapping(value = "/api/garage/cars/{id}")
-    public ResponseEntity<Object> deleteCar(@PathVariable("id") Long id){
+    public ResponseEntity<Object> deleteCar(@PathVariable("id") Long id) {
         carService.deleteCar(id);
         return ResponseEntity.noContent().build();
     }
@@ -50,13 +55,14 @@ public class CarController {
     //Updates
     //Total update
     @PutMapping(value = "/api/garage/cars/{id}")
-    public ResponseEntity<Object> updateCar(@PathVariable("id") Long id,@RequestBody Car car){
+    public ResponseEntity<Object> updateCar(@PathVariable("id") Long id, @RequestBody Car car) {
         carService.updateCar(id, car);
         return ResponseEntity.noContent().build();
     }
+
     //Partial update
     @PatchMapping(value = "/api/garage/cars/{id}")
-    public ResponseEntity<Object> partialUpdateCar(@PathVariable("id") Long id, @RequestBody Car car){
+    public ResponseEntity<Object> partialUpdateCar(@PathVariable("id") Long id, @RequestBody Car car) {
         carService.partialUpdateCar(id, car);
         return ResponseEntity.noContent().build();
     }

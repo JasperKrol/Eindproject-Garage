@@ -20,17 +20,31 @@ public class CarService {
     private CarRepository carRepository;
 
     //Constructor
+    public CarService(CarRepository carRepository) {
+        this.carRepository = carRepository;
+    }
 
     //Methods
-    public Long addCar(Car car) {
-        String licensePlate = car.getLicensePlate();
-        List<Car> cars = (List<Car>) carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
+//    public Long addCar(Car car) {
+//        String licensePlate = car.getLicensePlate();
+//        List<Car> cars = (List<Car>) carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
+//
+//        if (cars.size() > 0) {
+//            throw new BadRequestException("Car with license plate already in system");
+//        }
+//        Car newCar = carRepository.save(car);
+//        return newCar.getId();
+//    }
 
-        if (cars.size() > 0) {
-            throw new BadRequestException("Car with license plate already in system");
-        }
-        Car newCar = carRepository.save(car);
-        return newCar.getId();
+    public Car addCar(Car car){
+        String licensePlate = car.getLicensePlate();
+                List<Car> cars = (List<Car>) carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
+
+                if (cars.size() > 0) {
+                    throw new BadRequestException("Car with identical license plate already exists");
+                }
+                Car newCar = carRepository.save(car);
+                return newCar;
     }
 
     public Iterable<Car> getAllCars() {
