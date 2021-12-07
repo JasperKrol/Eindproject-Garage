@@ -45,9 +45,9 @@ public class CustomerController {
 
     // TODO: 21-11-2021 perhaps on postalCode query string?
     // - Find by last name
-    @GetMapping(value = "/api/garage/customers/{lastname}")
-    public ResponseEntity<Object> getCustomer(@RequestParam(name = "lastname", defaultValue = "") @PathVariable("lastname") String lastName) {
-        return ResponseEntity.ok(customerService.getCustomer(lastName));
+    @GetMapping(value = "/api/garage/customers/{id}")
+    public ResponseEntity<Object> getCustomer(@RequestParam(name = "lastName", defaultValue = "") String lastName, @PathVariable("id") Long id) {
+        return ResponseEntity.ok(customerService.getCustomer(id, lastName));
     }
 
     @DeleteMapping(value = "/api/garage/customers/{id}")

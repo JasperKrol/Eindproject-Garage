@@ -42,12 +42,13 @@ public class CustomerService {
     }
 
     // TODO: 25-11-2021 customer by lastname vinden 
-    public Customer getCustomer(String lastName) {
-        Optional<Customer> optionalCustomer = customerRepository.findCustomerByLastNameContainingIgnoreCase(lastName);
-        //        Optional<Customer> optionalCustomer = customerRepository.findCustomerByLastNameContainingIgnoreCase(lastName);
-
-        if (optionalCustomer.isPresent()) {
-            return optionalCustomer.get();
+    public Optional<Customer> getCustomer(Long id ,String lastName) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+        if (lastName.isEmpty() || optionalCustomer.isPresent()){
+            return customerRepository.findById(id);
+        }
+        if (!lastName.isEmpty()) {
+            return customerRepository.findCustomerByLastNameContainingIgnoreCase(lastName);
         } else {
             throw new RecordNotFoundException("Customer not found");
         }
