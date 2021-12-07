@@ -1,6 +1,9 @@
 package com.eqriesracingteam.garage.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,6 +24,7 @@ public class Car {
     // TODO: 28-11-2021 kenteken koppelen in tabel?
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("cars")
     private Customer owner;
 
     // TODO: 21-11-2021 ENUM TOEVOEGEN 

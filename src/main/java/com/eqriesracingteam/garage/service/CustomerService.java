@@ -119,6 +119,7 @@ public class CustomerService {
 
             carRepository.save(car);
             cars.add(car);
+            car.setOwner(customer);
             customerRepository.save(customer);
         } else {
             throw new RecordNotFoundException("Customer not found");
