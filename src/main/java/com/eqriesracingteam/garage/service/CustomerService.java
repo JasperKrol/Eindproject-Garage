@@ -74,7 +74,6 @@ public class CustomerService {
         }
     }
 
-    // TODO: 25-11-2021 werkt nog niet helemaal goed
     public void partialUpdateCustomer(Long id, Customer customer) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
