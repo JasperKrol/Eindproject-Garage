@@ -25,37 +25,36 @@ public class CarService {
     }
 
     //Methods
-//    public Long addCar(Car car) {
-//        String licensePlate = car.getLicensePlate();
-//        List<Car> cars = (List<Car>) carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
-//
-//        if (cars.size() > 0) {
-//            throw new BadRequestException("Car with license plate already in system");
-//        }
-//        Car newCar = carRepository.save(car);
-//        return newCar.getId();
-//    }
 
-    public Car addCar(Car car){
+    public Car addCar(Car car) {
         String licensePlate = car.getLicensePlate();
-                List<Car> cars = (List<Car>) carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
+        List<Car> cars = (List<Car>) carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
 
-                if (cars.size() > 0) {
-                    throw new BadRequestException("Car with identical license plate already exists");
-                }
-                Car newCar = carRepository.save(car);
-                return newCar;
+        if (cars.size() > 0) {
+            throw new BadRequestException("Car with identical license plate already exists");
+        }
+        Car newCar = carRepository.save(car);
+        return newCar;
     }
 
-    public Iterable<Car> getAllCars() {
+    public Iterable<Car> getAllCars(String licensePlate) {
         List<Car> carsList = new ArrayList<>();
 
-        var cars = carRepository.findAll();
+        if (licensePlate.isEmpty()) {
+            var cars = carRepository.findAll();
 
-        for (Car car : cars) {
-            carsList.add(car);
+            for (Car car : cars) {
+                carsList.add(car);
+            }
+            return cars;
         }
-        return cars;
+        if (!licensePlate.isEmpty()) {
+            return carRepository.findAllByLicensePlateContainingIgnoreCase(licensePlate);
+        } else {
+            throw new BadRequestException("Cannot find any cars");
+        }
+
+
     }
 
     public Car getOneCar(Long id) {
@@ -107,8 +106,5 @@ public class CarService {
             throw new RecordNotFoundException("ID does not exist!!!");
         }
     }
-
-    // TODO: 30-11-2021 Methodes maken die eigenaarschap kunnen vastleggen
-    //Methods for getting and adding cars with relations
 
 }

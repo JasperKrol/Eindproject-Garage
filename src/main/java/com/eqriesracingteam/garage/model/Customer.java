@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Customer {
     //mapped by = eigenaar van de relatie, mapped over lijst van autos adhv de user id
     //user id is eigenaar en achter komt de lijst met autos
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonIgnoreProperties("owner")
     private List<Car> cars = new ArrayList<>();
 
     //Constructor

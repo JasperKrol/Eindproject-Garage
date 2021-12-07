@@ -35,8 +35,8 @@ public class CarController {
     //Get requests
     //Get all cars
     @GetMapping(value = "/api/garage/cars")
-    public ResponseEntity<Object> getAllCars() {
-        return ResponseEntity.ok(carService.getAllCars());
+    public ResponseEntity<Object> getAllCars(@RequestParam(name = "licenseplate", defaultValue="") String licensePlate) {
+        return ResponseEntity.ok(carService.getAllCars(licensePlate));
     }
 
     //Get one car
