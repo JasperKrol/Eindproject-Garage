@@ -105,7 +105,7 @@ public class CustomerService {
     }
 
     //Methods for getting and adding cars with relations
-    public Iterable<Car> getCustomerCars(long id) {
+    public List<Car> getCustomerCars(long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
         if (optionalCustomer.isPresent()) {
@@ -131,6 +131,8 @@ public class CustomerService {
             throw new RecordNotFoundException("Customer not found");
         }
     }
+
+    // TODO: 13-12-2021 needed for plan?
 
     //    public void assingCarToCustomer(Long id, Long carId) {
     //        var optionalCustomer = customerRepository.findById(id);
