@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
@@ -9,7 +10,7 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "license_plate")
     private String licensePlate;
@@ -21,7 +22,7 @@ public class Car {
     //Create relationship in sql/database
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("cars")
+    @JsonIgnore
     private Customer owner;
 
     // TODO: 21-11-2021 ENUM TOEVOEGEN 
@@ -32,7 +33,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(Long id, String licensePlate, String registrationPapers, Customer owner) {
+    public Car(long id, String licensePlate, String registrationPapers, Customer owner) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.registrationPapers = registrationPapers;
@@ -40,11 +41,11 @@ public class Car {
     }
 
     //Getters and Setters
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

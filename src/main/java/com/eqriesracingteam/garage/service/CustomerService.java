@@ -1,5 +1,7 @@
 package com.eqriesracingteam.garage.service;
 
+import com.eqriesracingteam.garage.dto.CustomerDto;
+import com.eqriesracingteam.garage.dto.CustomerInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Car;
@@ -9,6 +11,7 @@ import com.eqriesracingteam.garage.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +25,7 @@ public class CustomerService {
     private CarRepository carRepository;
 
     // TODO: 25-11-2021 kijken of er een functie kan komen die checked op achternaam === postcode
-    public Long addCustomer(Customer customer) {
+    public long addCustomer(Customer customer) {
         String postalCode = customer.getPostalCode();
         List<Customer> customers = (List<Customer>) customerRepository.findAllByPostalCode(postalCode);
 
@@ -33,28 +36,26 @@ public class CustomerService {
         return newCustomer.getId();
     }
 
-    public Iterable<Customer> getAllCustomers(String lastName) {
-        if (lastName.isEmpty()) {
-            return customerRepository.findAll();
-        } else {
-            return customerRepository.findAllByLastName(lastName);
-        }
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
     }
 
+    public List<Customer> getAllCustomersByLastName(String lastname) {
+        return customerRepository.findAllByLastNameContainingIgnoreCase(lastname);
+    }
+
+
     // TODO: 25-11-2021 customer by lastname vinden 
-    public Optional<Customer> getCustomer(Long id ,String lastName) {
+    public Customer getCustomer(long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
-        if (lastName.isEmpty() || optionalCustomer.isPresent()){
-            return customerRepository.findById(id);
-        }
-        if (!lastName.isEmpty()) {
-            return customerRepository.findCustomerByLastNameContainingIgnoreCase(lastName);
+        if (optionalCustomer.isPresent()) {
+            return optionalCustomer.get();
         } else {
             throw new RecordNotFoundException("Customer not found");
         }
     }
 
-    public void deleteCustomer(Long id) {
+    public void deleteCustomer(long id) {
         if (customerRepository.existsById(id)) {
             customerRepository.deleteById(id);
         } else {
@@ -62,7 +63,7 @@ public class CustomerService {
         }
     }
 
-    public void updateCustomer(Long id, Customer customer) {
+    public void updateCustomer(long id, Customer customer) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
         if (optionalCustomer.isPresent()) {
@@ -75,7 +76,7 @@ public class CustomerService {
         }
     }
 
-    public void partialUpdateCustomer(Long id, Customer customer) {
+    public void partialUpdateCustomer(long id, Customer customer) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
         //Add conditions
@@ -99,7 +100,7 @@ public class CustomerService {
     }
 
     //Methods for getting and adding cars with relations
-    public Iterable<Car> getCustomerCars(Long id) {
+    public Iterable<Car> getCustomerCars(long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
         if (optionalCustomer.isPresent()) {
@@ -110,7 +111,7 @@ public class CustomerService {
         }
     }
 
-    public void addCustomerCar(Long id, Car car) {
+    public void addCustomerCar(long id, Car car) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
         if (optionalCustomer.isPresent()) {

@@ -57,7 +57,7 @@ public class CarService {
 
     }
 
-    public Car getOneCar(Long id) {
+    public Car getOneCar(long id) {
         Optional<Car> optionalCar = carRepository.findById(id);
         if (optionalCar.isPresent()) {
             return optionalCar.get();
@@ -67,7 +67,7 @@ public class CarService {
 
     }
 
-    public void deleteCar(Long id) {
+    public void deleteCar(long id) {
         if (carRepository.existsById(id)) {
             carRepository.deleteById(id);
         } else {
@@ -75,7 +75,7 @@ public class CarService {
         }
     }
 
-    public void updateCar(Long id, Car car) {
+    public void updateCar(long id, Car car) {
         Optional<Car> optionalCar = carRepository.findById(id);
         if (optionalCar.isPresent()) {
             Car existingCar = optionalCar.get();
@@ -87,7 +87,7 @@ public class CarService {
         }
     }
 
-    public void partialUpdateCar(Long id, Car car) {
+    public void partialUpdateCar(long id, Car car) {
         Optional<Car> optionalCar = carRepository.findById(id);
 
         //Add conditions

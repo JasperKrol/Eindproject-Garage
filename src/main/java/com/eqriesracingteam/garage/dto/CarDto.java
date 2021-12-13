@@ -5,6 +5,7 @@ import com.eqriesracingteam.garage.model.Customer;
 
 public class CarDto {
     //Attributes
+    public long id;
     public String licensePlate;
     public String registrationPapers;
     public Customer customer;
@@ -13,6 +14,7 @@ public class CarDto {
     public static CarDto fromCar(Car car) {
         var dto = new CarDto();
 
+        dto.id = car.getId();
         dto.licensePlate = car.getLicensePlate();
         dto.registrationPapers = car.getRegistrationPapers();
         dto.customer = car.getOwner();

@@ -33,7 +33,6 @@ public class CarController {
     }
 
     //Get requests
-    //Get all cars
     @GetMapping(value = "/api/garage/cars")
     public ResponseEntity<Object> getAllCars(@RequestParam(name = "licenseplate", defaultValue="") String licensePlate) {
         return ResponseEntity.ok(carService.getAllCars(licensePlate));
@@ -41,13 +40,13 @@ public class CarController {
 
     //Get one car
     @GetMapping(value = "/api/garage/cars/{id}")
-    public ResponseEntity<Object> getOneCar(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> getOneCar(@PathVariable("id") long id) {
         return ResponseEntity.ok(carService.getOneCar(id));
     }
 
     //Delete
     @DeleteMapping(value = "/api/garage/cars/{id}")
-    public ResponseEntity<Object> deleteCar(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> deleteCar(@PathVariable("id") long id) {
         carService.deleteCar(id);
         return ResponseEntity.noContent().build();
     }
@@ -55,14 +54,14 @@ public class CarController {
     //Updates
     //Total update
     @PutMapping(value = "/api/garage/cars/{id}")
-    public ResponseEntity<Object> updateCar(@PathVariable("id") Long id, @RequestBody Car car) {
+    public ResponseEntity<Object> updateCar(@PathVariable("id") long id, @RequestBody Car car) {
         carService.updateCar(id, car);
         return ResponseEntity.noContent().build();
     }
 
     //Partial update
     @PatchMapping(value = "/api/garage/cars/{id}")
-    public ResponseEntity<Object> partialUpdateCar(@PathVariable("id") Long id, @RequestBody Car car) {
+    public ResponseEntity<Object> partialUpdateCar(@PathVariable("id") long id, @RequestBody Car car) {
         carService.partialUpdateCar(id, car);
         return ResponseEntity.noContent().build();
     }

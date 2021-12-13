@@ -1,7 +1,9 @@
 package com.eqriesracingteam.garage.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ public class Customer {
     //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -25,20 +27,19 @@ public class Customer {
     private String postalCode;
 
     //Create relationship in sql/database
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("owner")
+    @OneToMany(mappedBy = "owner")
+    @JsonIgnore
     private List<Car> cars = new ArrayList<>();
 
     //Constructor
     // TODO: 21-11-2021 Constructors toevoegen alleen voor de extra services
 
-
     //Getters and setters
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
