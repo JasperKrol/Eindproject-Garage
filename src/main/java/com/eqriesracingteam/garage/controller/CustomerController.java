@@ -98,8 +98,8 @@ public class CustomerController {
 
     // TODO: 13-12-2021 needed for plan?
 
-//        @PutMapping("/api/garage/customers/{id}/{car}")
-//        public void assingCarToCustomer(@PathVariable("id") Long id, @PathVariable("car") Long carId) {
-//            customerService.assingCarToCustomer(id, carId);
-//        }
+    //        @PutMapping("/api/garage/customers/{id}/{car}")
+    //        public void assingCarToCustomer(@PathVariable("id") Long id, @PathVariable("car") Long carId) {
+    //            customerService.assingCarToCustomer(id, carId);
+    //        }
 }
