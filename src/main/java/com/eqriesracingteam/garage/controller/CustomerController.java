@@ -40,7 +40,6 @@ public class CustomerController {
 
     //Get
     // - Find all, with option on lastnames
-    // TODO: 21-11-2021 perhaps on lastname query string?
     @GetMapping(value = "/api/garage/customers")
     public List<CustomerDto> getCustomers(@RequestParam(name = "lastname", defaultValue = "") String lastName) {
         var dtos = new ArrayList<CustomerDto>();
@@ -83,9 +82,9 @@ public class CustomerController {
 
     //Partial update customer
     @PatchMapping(value = "/api/garage/customers/{id}")
-    public ResponseEntity<Object> partialUpdateCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
+    public CustomerDto partialUpdateCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
         customerService.partialUpdateCustomer(id, customer);
-        return ResponseEntity.noContent().build();
+        return CustomerDto.fromCustomer(customer);
     }
 
     @GetMapping(value = "/api/garage/customers/{id}/cars")

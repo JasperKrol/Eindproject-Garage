@@ -24,6 +24,11 @@ public class CustomerService {
     @Autowired
     private CarRepository carRepository;
 
+    public CustomerService(CustomerRepository customerRepository, CarRepository carRepository) {
+        this.customerRepository = customerRepository;
+        this.carRepository = carRepository;
+    }
+
     // TODO: 25-11-2021 kijken of er een functie kan komen die checked op achternaam === postcode
     public long addCustomer(Customer customer) {
         String postalCode = customer.getPostalCode();
