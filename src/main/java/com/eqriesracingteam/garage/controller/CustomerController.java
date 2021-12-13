@@ -28,7 +28,6 @@ public class CustomerController {
     }
 
     //CRUD Requests
-
     //Post
     @PostMapping(value = "/api/garage/customers")
     public ResponseEntity<Object> addCustomer(@RequestBody Customer customer) {

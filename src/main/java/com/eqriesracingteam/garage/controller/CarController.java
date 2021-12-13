@@ -7,9 +7,6 @@ import com.eqriesracingteam.garage.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 
 @RestController
 public class CarController {
@@ -20,21 +17,21 @@ public class CarController {
 
     //Constructor
     @Autowired
-    public CarController(CarService carService){
+    public CarController(CarService carService) {
         this.carService = carService;
     }
 
     //CRUD Requests
     //Post request
     @PostMapping(value = "/api/garage/cars")
-    public CarDto addCar(@RequestBody CarInputDto dto){
+    public CarDto addCar(@RequestBody CarInputDto dto) {
         var car = carService.addCar(dto.toCar());
         return CarDto.fromCar(car);
     }
 
     //Get requests
     @GetMapping(value = "/api/garage/cars")
-    public ResponseEntity<Object> getAllCars(@RequestParam(name = "licenseplate", defaultValue="") String licensePlate) {
+    public ResponseEntity<Object> getAllCars(@RequestParam(name = "licenseplate", defaultValue = "") String licensePlate) {
         return ResponseEntity.ok(carService.getAllCars(licensePlate));
     }
 
