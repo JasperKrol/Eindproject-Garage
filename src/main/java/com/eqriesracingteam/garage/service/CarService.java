@@ -7,7 +7,6 @@ import com.eqriesracingteam.garage.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,24 +36,12 @@ public class CarService {
         return newCar;
     }
 
-    public Iterable<Car> getAllCars(String licensePlate) {
-        List<Car> carsList = new ArrayList<>();
+    public List<Car> getAllCars() {
+        return carRepository.findAll();
+    }
 
-        if (licensePlate.isEmpty()) {
-            var cars = carRepository.findAll();
-
-            for (Car car : cars) {
-                carsList.add(car);
-            }
-            return cars;
-        }
-        if (!licensePlate.isEmpty()) {
-            return carRepository.findAllByLicensePlateContainingIgnoreCase(licensePlate);
-        } else {
-            throw new BadRequestException("Cannot find any cars");
-        }
-
-
+    public List<Car> getAllCarsByLicensePlate(String licensePlate) {
+        return carRepository.findAllByLicensePlateContainingIgnoreCase(licensePlate);
     }
 
     public Car getOneCar(long id) {

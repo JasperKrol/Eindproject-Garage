@@ -30,15 +30,15 @@ public class CustomerService {
     }
 
     // TODO: 25-11-2021 kijken of er een functie kan komen die checked op achternaam === postcode
-    public long addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) {
         String postalCode = customer.getPostalCode();
         List<Customer> customers = (List<Customer>) customerRepository.findAllByPostalCode(postalCode);
 
         if (customers.size() > 0) {
             throw new BadRequestException("Customer already exists");
+        } else {
+            return customerRepository.save(customer);
         }
-        Customer newCustomer = customerRepository.save(customer);
-        return newCustomer.getId();
     }
 
     public List<Customer> getAllCustomers() {
@@ -50,7 +50,7 @@ public class CustomerService {
     }
 
 
-    // TODO: 25-11-2021 customer by lastname vinden 
+    // TODO: 25-11-2021 customer by lastname vinden
     public Customer getCustomer(long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
         if (optionalCustomer.isPresent()) {
@@ -100,7 +100,7 @@ public class CustomerService {
             customerRepository.save(existingCustomer);
 
         } else {
-            throw new RecordNotFoundException("ID does not exist!!!");
+            throw new BadRequestException("ID does not exist");
         }
     }
 
@@ -131,4 +131,19 @@ public class CustomerService {
             throw new RecordNotFoundException("Customer not found");
         }
     }
+
+    //    public void assingCarToCustomer(Long id, Long carId) {
+    //        var optionalCustomer = customerRepository.findById(id);
+    //        var optionalCar = carRepository.findById(carId);
+    //
+    //        if (optionalCustomer.isPresent() && optionalCar.isPresent()) {
+    //            var customer = optionalCustomer.get();
+    //            var car = optionalCar.get();
+    //
+    //            customer.setCars((List<Car>) car);
+    //            customerRepository.save(customer);
+    //        } else {
+    //            throw new RecordNotFoundException();
+    //        }
+    //    }
 }

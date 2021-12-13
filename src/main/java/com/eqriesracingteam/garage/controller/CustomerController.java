@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.CustomerDto;
+import com.eqriesracingteam.garage.dto.CustomerInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
@@ -30,11 +31,9 @@ public class CustomerController {
     //CRUD Requests
     //Post
     @PostMapping(value = "/api/garage/customers")
-    public ResponseEntity<Object> addCustomer(@RequestBody Customer customer) {
-        long newId = customerService.addCustomer(customer);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").buildAndExpand(newId).toUri();
-        return ResponseEntity.created(location).build();
+    public CustomerDto addCustomer(@RequestBody CustomerInputDto dto) {
+        var customer = customerService.addCustomer(dto.toCustomer());
+        return CustomerDto.fromCustomer(customer);
     }
 
     //Get
@@ -50,7 +49,7 @@ public class CustomerController {
         } else if (lastName == null) {
             customers = customerService.getAllCustomers();
         } else {
-            throw new BadRequestException();
+            throw new BadRequestException("Customer not found");
         }
 
         for (Customer customer : customers) {
@@ -96,4 +95,11 @@ public class CustomerController {
         customerService.addCustomerCar(id, car);
         return ResponseEntity.ok().build();
     }
+
+    // TODO: 13-12-2021 needed for plan?
+
+//        @PutMapping("/api/garage/customers/{id}/{car}")
+//        public void assingCarToCustomer(@PathVariable("id") Long id, @PathVariable("car") Long carId) {
+//            customerService.assingCarToCustomer(id, carId);
+//        }
 }
