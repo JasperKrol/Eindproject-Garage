@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.CustomerDto;
 import com.eqriesracingteam.garage.dto.CustomerInputDto;
+import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
@@ -96,10 +97,10 @@ public class CustomerController {
         return ResponseEntity.ok().build();
     }
 
-    // TODO: 13-12-2021 needed for plan?
+    // TODO: 13-12-2021 assign car to customer needed for plan?
 
-    //        @PutMapping("/api/garage/customers/{id}/{car}")
-    //        public void assingCarToCustomer(@PathVariable("id") Long id, @PathVariable("car") Long carId) {
-    //            customerService.assingCarToCustomer(id, carId);
-    //        }
+//    @PutMapping("/api/garage/customers/{id}/car")
+//    public void assingCarToCustomer(@PathVariable("id") Long id, @RequestBody IdInputDto input) {
+//        customerService.assingCarToCustomer(id, input.id);
+//    }
 }

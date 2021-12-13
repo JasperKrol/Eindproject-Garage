@@ -81,9 +81,9 @@ public class CarController {
     }
 
     //Partial update
-    @PatchMapping(value = "/api/garage/cars/{id}")
-    public CarDto partialUpdateCar(@PathVariable("id") long id, @RequestBody Car car) {
-        carService.partialUpdateCar(id, car);
-        return CarDto.fromCar(car);
-    }
+//    @PatchMapping(value = "/api/garage/cars/{id}")
+//    public CarDto partialUpdateCar(@PathVariable("id") long id, @RequestBody Car car) {
+//        carService.partialUpdateCar(id, car);
+//        return CarDto.fromCar(car);
+//    }
 }
