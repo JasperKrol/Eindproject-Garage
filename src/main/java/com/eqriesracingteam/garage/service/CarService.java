@@ -68,6 +68,7 @@ public class CarService {
             Car existingCar = optionalCar.get();
 
             car.setId(existingCar.getId());
+            car.setOwner(existingCar.getOwner());
             carRepository.save(car);
         } else {
             throw new RecordNotFoundException("Car ID not found");

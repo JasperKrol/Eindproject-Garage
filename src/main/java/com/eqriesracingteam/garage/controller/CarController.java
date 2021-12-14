@@ -2,13 +2,10 @@ package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.CarDto;
 import com.eqriesracingteam.garage.dto.CarInputDto;
-import com.eqriesracingteam.garage.dto.CustomerDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.Car;
-import com.eqriesracingteam.garage.model.Customer;
 import com.eqriesracingteam.garage.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Array;
@@ -81,9 +78,9 @@ public class CarController {
     }
 
     //Partial update
-//    @PatchMapping(value = "/api/garage/cars/{id}")
-//    public CarDto partialUpdateCar(@PathVariable("id") long id, @RequestBody Car car) {
-//        carService.partialUpdateCar(id, car);
-//        return CarDto.fromCar(car);
-//    }
+    @PatchMapping(value = "/api/garage/cars/{id}")
+    public CarDto partialUpdateCar(@PathVariable("id") long id, @RequestBody Car car) {
+        carService.partialUpdateCar(id, car);
+        return CarDto.fromCar(car);
+    }
 }

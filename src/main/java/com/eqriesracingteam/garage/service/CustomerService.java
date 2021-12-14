@@ -134,18 +134,18 @@ public class CustomerService {
 
     // TODO: 13-12-2021 needed for plan?
 
-        public void assingCarToCustomer(Long id, Long carId) {
-            var optionalCustomer = customerRepository.findById(id);
-            var optionalCar = carRepository.findById(carId);
-
-            if (optionalCustomer.isPresent() && optionalCar.isPresent()) {
-                var customer = optionalCustomer.get();
-                var car = optionalCar.get();
-
-                customer.setCars((List<Car>) car);
-                customerRepository.save(customer);
-            } else {
-                throw new RecordNotFoundException();
-            }
-        }
+//        public void assingCarToCustomer(Long id, Long carId) {
+//            var optionalCustomer = customerRepository.findById(id);
+//            var optionalCar = carRepository.findById(carId);
+//
+//            if (optionalCustomer.isPresent() && optionalCar.isPresent()) {
+//                var customer = optionalCustomer.get();
+//                var car = optionalCar.get();
+//
+//                customer.setCars((List<Car>) car);
+//                customerRepository.save(customer);
+//            } else {
+//                throw new RecordNotFoundException();
+//            }
+//        }
 }
