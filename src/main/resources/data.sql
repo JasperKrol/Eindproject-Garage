@@ -1,12 +1,14 @@
 --Users
 INSERT INTO users(username, password, enabled, email)
-VALUES ('user', 'welkom123', TRUE, 'user@eqries.nl'),
-       ('admin', 'admin123', TRUE, 'hoof.admin@eqries.nl');
+VALUES ('Henk', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, 'user@eqries.nl'),
+       ('Jasper', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, 'hoof.admin@eqries.nl');
 
---Users
-INSERT INTO users(username, password, enabled, email)
-VALUES ('user', 'welkom123', TRUE, 'user@eqries.nl'),
-       ('admin', 'admin123', TRUE, 'hoof.admin@eqries.nl');
+--Authorities
+INSERT INTO authorities (username, authority)
+VALUES
+    ('Henk', 'ROLE_USER'),
+    ('Jasper', 'ROLE_USER'),
+    ('Jasper', 'ROLE_ADMIN');
 
 --Customers
 INSERT INTO klanten (first_name, last_name, postal_code)
