@@ -62,14 +62,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(PATCH,"/users/{^[\\w]$}/password").authenticated()
-                //.hasRole alleen voor 1 rol
+                .antMatchers(PATCH,"/users/{^[\\w]$}/password").authenticated()//hasRole alleen voor 1 rol
                 .antMatchers("/api/garage/users/**").hasRole("ADMIN")
                 .antMatchers("/api/garage/cars/**").hasRole("USER")
                 .antMatchers("/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
-                //.authenticated voor alleen ingelogde te bezoeken
+                //authenticated voor alleen ingelogde te bezoeken
                 .antMatchers(HttpMethod.GET, "hello").authenticated()
-                //.permit all voor iedereen ongeacht ingelogd of niet
+                //permit all voor iedereen ongeacht ingelogd of niet
                 .antMatchers(HttpMethod.GET, "goodbye").permitAll()
                 .anyRequest().permitAll()
                 .and()
