@@ -2,6 +2,8 @@ package com.eqriesracingteam.garage.dto;
 
 import com.eqriesracingteam.garage.model.Authority;
 import com.eqriesracingteam.garage.model.User;
+import org.springframework.lang.Nullable;
+
 
 import java.util.Set;
 
@@ -14,6 +16,8 @@ public class UserDto {
 
     public static UserDto fromUser(User user) {
         var dto = new UserDto();
+
+//        Set<UserDto> authoritiesList = new HashSet<>();
 
         dto.username = user.getUsername();
         dto.password = user.getPassword();
