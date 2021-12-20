@@ -26,15 +26,20 @@ import static org.springframework.http.HttpMethod.PATCH;
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
     private DataSource dataSource;
+    private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    JwtRequestFilter jwtRequestFilter;
-
-    @Autowired
-    WebSecurityConfiguration(DataSource dataSource) {
+    WebSecurityConfiguration(DataSource dataSource, JwtRequestFilter jwtRequestFilter) {
         this.dataSource = dataSource;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
+
+    // Encryptor
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        // you can select your own strength in encoder parameter
+        return new BCryptPasswordEncoder();
     }
 
     // Needed for JWT
@@ -48,12 +53,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public UserDetailsService userDetailsServiceBean() throws Exception {
         return super.userDetailsServiceBean();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        // you can select your own strength in encoder parameter
-        return new BCryptPasswordEncoder();
     }
 
     // Authentication
