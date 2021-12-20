@@ -19,12 +19,22 @@ public class User {
     @Column(nullable = false)
     private boolean enabled = true;
 
+    private String telephoneNumber;
     private String email;
 
     @OneToMany(targetEntity = Authority.class, mappedBy = "username", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
     // getters and setters
+
+
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNr) {
+        this.telephoneNumber = telephoneNr;
+    }
 
     public String getUsername() {
         return username;

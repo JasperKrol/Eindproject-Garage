@@ -76,23 +76,23 @@ public class UserService {
     }
 
     // TODO: 15-12-2021 testing
-//    public User createUser(User user) {
-//
-//            String username = user.getUsername();
-//            Optional<User> existingUser = userRepository.findById(username);
-//
-//            if (existingUser.isPresent()) {
-//                throw new BadRequestException("Cannot create user.");
-//            } else {
-//                Authority authority = new Authority();
-//                authority.setUsername(user.getUsername());
-//                authority.setAuthority("ROLE_USER");
-//                user.addAuthority(authority);
-//                User newUser = userRepository.save(user);
-//
-//                return newUser;
-//            }
-//    }
+    //    public User createUser(User user) {
+    //
+    //            String username = user.getUsername();
+    //            Optional<User> existingUser = userRepository.findById(username);
+    //
+    //            if (existingUser.isPresent()) {
+    //                throw new BadRequestException("Cannot create user.");
+    //            } else {
+    //                Authority authority = new Authority();
+    //                authority.setUsername(user.getUsername());
+    //                authority.setAuthority("ROLE_USER");
+    //                user.addAuthority(authority);
+    //                User newUser = userRepository.save(user);
+    //
+    //                return newUser;
+    //            }
+    //    }
 
     public void updateUser(String username, User user) {
         Optional<User> optionalUser = userRepository.findById(username);
@@ -116,10 +116,9 @@ public class UserService {
         }
     }
 
-
     public Set<Authority> getAuthorities(String username) {
         Optional<User> optionalUser = userRepository.findById(username);
-        if (optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             return user.getAuthorities();
         } else {
@@ -131,8 +130,7 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(username);
         if (userOptional.isEmpty()) {
             throw new UserNotFoundException(username);
-        }
-        else {
+        } else {
             User user = userOptional.get();
             user.addAuthority(authorityString);
             userRepository.save(user);
@@ -143,8 +141,7 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(username);
         if (userOptional.isEmpty()) {
             throw new UserNotFoundException(username);
-        }
-        else {
+        } else {
             User user = userOptional.get();
             user.removeAuthority(authorityString);
             userRepository.save(user);
@@ -182,16 +179,13 @@ public class UserService {
                     User user = userOptional.get();
                     user.setPassword(passwordEncoder.encode(password));
                     userRepository.save(user);
-                }
-                else {
+                } else {
                     throw new UserNotFoundException(username);
                 }
-            }
-            else {
+            } else {
                 throw new InvalidPasswordException();
             }
-        }
-        else {
+        } else {
             throw new NotAuthorizedException();
         }
     }

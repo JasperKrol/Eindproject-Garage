@@ -9,6 +9,7 @@ public class UserInputDto {
     public String username;
     public String password;
     public boolean enabled;
+    private String telephoneNumber;
     public String email;
     public Set<Authority> authority;
 
@@ -19,6 +20,7 @@ public class UserInputDto {
         user.setPassword(password);
         user.setEnabled(enabled);
         user.setEmail(email);
+        user.setTelephoneNumber(telephoneNumber);
         user.setAuthorities(authority);
         return user;
     }

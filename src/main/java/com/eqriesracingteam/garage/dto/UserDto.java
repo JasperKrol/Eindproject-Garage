@@ -8,20 +8,20 @@ import org.springframework.lang.Nullable;
 import java.util.Set;
 
 public class UserDto {
-    public String username;
-    public String password;
-    public boolean enabled;
-    public String email;
-    public Set<Authority> authorities;
+    private String username;
+    private String password;
+    private boolean enabled;
+    private String telephoneNumber;
+    private String email;
+    private Set<Authority> authorities;
 
     public static UserDto fromUser(User user) {
         var dto = new UserDto();
 
-//        Set<UserDto> authoritiesList = new HashSet<>();
-
         dto.username = user.getUsername();
         dto.password = user.getPassword();
         dto.enabled = user.isEnabled();
+        dto.telephoneNumber = user.getTelephoneNumber();
         dto.email = user.getEmail();
         dto.authorities = user.getAuthorities();
 

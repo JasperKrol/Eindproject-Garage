@@ -1,18 +1,19 @@
 --Users
-INSERT INTO users(username, password, enabled, email)
-VALUES ('Henk', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, 'user@eqries.nl'),
-       ('Jasper', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, 'hoof.admin@eqries.nl');
+INSERT INTO users(username, password, enabled, telephone_number, email)
+VALUES ('Henk', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, '061234567', 'user@eqries.nl'),
+       ('Peter', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE,'067654321', 'peter@eqries.nl'),
+       ('Jasper', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, '066565445', 'hoofd.admin@eqries.nl');
 
 --Authorities
 INSERT INTO authorities (username, authority)
-VALUES
-    ('Henk', 'ROLE_USER'),
-    ('Jasper', 'ROLE_USER'),
-    ('Jasper', 'ROLE_ADMIN');
+VALUES ('Henk', 'ROLE_USER'),
+       ('Peter', 'ROLE_USER'),
+       ('Jasper', 'ROLE_USER'),
+       ('Jasper', 'ROLE_ADMIN');
 
 --Customers
 INSERT INTO klanten (first_name, last_name, postal_code)
-VALUES ('Jasper', 'Krol', '1234AB'),
+VALUES ('Paul', 'Krol', '1234AB'),
        ('Willeke', 'Vossen', '4321BA'),
        ('Henk', 'Jansen', '2341CD');
 
