@@ -30,6 +30,7 @@ public class CustomerService {
     }
 
     // TODO: 25-11-2021 kijken of er een functie kan komen die checked op achternaam === postcode
+    //@Pathvariable postalcode
     public Customer addCustomer(Customer customer) {
         String postalCode = customer.getPostalCode();
         List<Customer> customers = (List<Customer>) customerRepository.findAllByPostalCode(postalCode);

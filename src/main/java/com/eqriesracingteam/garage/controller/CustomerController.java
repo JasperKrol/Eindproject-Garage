@@ -39,6 +39,7 @@ public class CustomerController {
 
     //Get
     // - Find all, with option on lastnames
+    // TODO: 20-12-2021 @Pathvariable lastname/postalcode toevoegen
     @GetMapping(value = "/api/garage/customers")
     public List<CustomerDto> getCustomers(@RequestParam(name = "lastname", defaultValue = "") String lastName) {
         var dtos = new ArrayList<CustomerDto>();
@@ -96,11 +97,4 @@ public class CustomerController {
         customerService.addCustomerCar(id, car);
         return ResponseEntity.ok().build();
     }
-
-    // TODO: 13-12-2021 assign car to customer needed for plan?
-
-//    @PutMapping("/api/garage/customers/{id}/car")
-//    public void assingCarToCustomer(@PathVariable("id") Long id, @RequestBody IdInputDto input) {
-//        customerService.assingCarToCustomer(id, input.id);
-//    }
 }
