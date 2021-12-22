@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,6 +21,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private DataSource dataSource;
@@ -31,35 +33,33 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.jwtRequestFilter = jwtRequestFilter;
     }
 
-    // Encryptor
+    // Authentication
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
+                .authoritiesByUsernameQuery("SELECT username, authority FROM authorities AS a WHERE username=?");
+
+    }
+
+    // Encrypt the password
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // you can select your own strength in encoder parameter
         return new BCryptPasswordEncoder();
     }
 
-    // Needed for JWT
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    // Needed for JWT
+
     @Bean
     @Override
     public UserDetailsService userDetailsServiceBean() throws Exception {
         return super.userDetailsServiceBean();
-    }
-
-    // Authentication
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.userDetailsService(userDetailsService());
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
-//                .authoritiesByUsernameQuery("SELECT username, authority FROM authorities AS a WHERE username=?");
-
     }
 
 
@@ -101,10 +101,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers(HttpMethod.GET,"/cars").hasAnyRole("USER", "ADMIN")
                         .antMatchers(HttpMethod.POST,"/cars/**").hasAnyRole("USER", "ADMIN")
                         .antMatchers(HttpMethod.DELETE, "/cars/**").hasAnyRole("USER", "ADMIN")
-                .anyRequest().permitAll()
+                .anyRequest().denyAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
 }

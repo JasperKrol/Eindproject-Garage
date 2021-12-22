@@ -1,8 +1,8 @@
 package com.eqriesracingteam.garage.controller;
 
-import com.eqriesracingteam.garage.dto.AuthenticationRequestDto;
-import com.eqriesracingteam.garage.dto.AuthenticationResponseDto;
-import com.eqriesracingteam.garage.service.AuthenticationService;
+import com.eqriesracingteam.garage.dto.AuthenticationRequest;
+import com.eqriesracingteam.garage.dto.AuthenticationResponse;
+import com.eqriesracingteam.garage.service.UserAuthenticateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
 
-    AuthenticationService authenticationService;
+    UserAuthenticateService userAuthenticateService;
 
     @Autowired
-    public AuthenticationController(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
+    public AuthenticationController(UserAuthenticateService userAuthenticateService) {
+        this.userAuthenticateService = userAuthenticateService;
     }
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequestDto authenticationRequestDto) {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
 
-        AuthenticationResponseDto authenticationResponseDto = authenticationService.authenticateUser(authenticationRequestDto);
+        AuthenticationResponse authenticationResponse = userAuthenticateService.authenticateUser(authenticationRequest);
 
-        return ResponseEntity.ok(authenticationResponseDto);
+        return ResponseEntity.ok(authenticationResponse);
     }
 
 }
