@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.config;
 
 import com.eqriesracingteam.garage.security.JwtRequestFilter;
+import com.eqriesracingteam.garage.service.UserAuthenticateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
     private JwtRequestFilter jwtRequestFilter;
 
+    // Needed for no auth query authorization
+    @Autowired
+    public UserAuthenticateService userAuthenticateService;
+
     @Autowired
     WebSecurityConfiguration(DataSource dataSource, JwtRequestFilter jwtRequestFilter) {
         this.dataSource = dataSource;
@@ -37,11 +42,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
-                .authoritiesByUsernameQuery("SELECT username, authority FROM authorities AS a WHERE username=?");
-
+    auth.userDetailsService(userAuthenticateService);
     }
 
     // Encrypt the password
@@ -56,11 +57,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception {
-        return super.userDetailsServiceBean();
-    }
+    // Replaced by loaduserbyusername to check all authorities and grand them
+    /**
+     * @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
+            auth.jdbcAuthentication().dataSource(dataSource)
+                    .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
+                    .authoritiesByUsernameQuery("SELECT username, authority FROM authorities AS a WHERE username=?");
+
+        }
+
+        @Bean
+        @Override
+        public UserDetailsService userDetailsServiceBean() throws Exception {
+            return super.userDetailsServiceBean();
+        }
+    * */
 
 
     //Secure endpoints with HTTP authentication
@@ -78,7 +91,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/api/garage/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/api/garage/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/garage/users/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET,"/api/garage/customers/**").hasAnyRole("USER", "ADMIN") // api/users if you only want the authorized person to get list of users. ** needed for more path
                 .antMatchers(HttpMethod.POST,"/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
