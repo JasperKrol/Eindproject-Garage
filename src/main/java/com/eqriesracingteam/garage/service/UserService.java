@@ -37,7 +37,6 @@ public class UserService {
         return ((UserDetails) authentication.getPrincipal()).getUsername();
     }
 
-
     //Handling the requests
     public Iterable<User> getUsers() {
         return userRepository.findAll();
