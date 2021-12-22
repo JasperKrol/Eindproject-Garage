@@ -69,23 +69,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers(PATCH,"/users/{^[\\w]$}/password").authenticated()
-//                .antMatchers("/users/**").hasRole("ADMIN")
-//                .antMatchers("/customers/**").hasRole("USER") //Welke rol mag bij users? instellen
-//                .antMatchers("/admin/**").hasAnyRole("USER", "ADMIN")//Als admin mag je bij admin en alles wat erachter komt als waar de user rol toegang toe heeft.
-//                .antMatchers(HttpMethod.GET, "Car").authenticated() //Zodra je een geldige naam en ww hebt opgegeven onafhankelijk van welke rol mag je bij deze endpoint, maar alleen maar een get doen.
-//                //.antMatchers(HttpMethod.GET, "Afspraak").permitAll()//Iedereen ongeacht of je geauthenticeerd bent mag hier de get afspraak opgeven.
-//                .anyRequest().permitAll() //De rest mag iedereen zien.
-//                //.anyRequest().denyAll()// De rest mag niemand zien.
-//                .and()
-//                .csrf().disable()
-//                .formLogin().disable()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
                 //JWT token authentication
                 http
                 .csrf().disable()
@@ -93,15 +76,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/users/**").hasRole("ADMIN")
                 .antMatchers("/authenticated").authenticated()
                 .antMatchers("/authenticate").permitAll()
-                        .antMatchers(HttpMethod.GET,"/customers").hasAnyRole("USER", "ADMIN")
-                        .antMatchers(HttpMethod.POST,"/customers/**").hasAnyRole("USER", "ADMIN")
-                        .antMatchers(HttpMethod.DELETE, "/customers/**").hasAnyRole("USER", "ADMIN")
-                        .antMatchers(HttpMethod.GET,"/cars").hasAnyRole("USER", "ADMIN")
-                        .antMatchers(HttpMethod.POST,"/cars/**").hasAnyRole("USER", "ADMIN")
-                        .antMatchers(HttpMethod.DELETE, "/cars/**").hasAnyRole("USER", "ADMIN")
-                .anyRequest().denyAll()
+                        .antMatchers(HttpMethod.GET,"/api/garage/customers").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.POST,"/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.DELETE, "/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.PUT, "/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.PATCH, "/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.GET,"/api/garage/cars").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.POST,"/api/garage/cars/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.DELETE, "/api/garage/cars/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.PUT, "/api/garage/cars/**").hasAnyRole("USER", "ADMIN")
+                        .antMatchers(HttpMethod.PATCH, "/api/garage/cars/**").hasAnyRole("USER", "ADMIN")
+//                .anyRequest().denyAll()
+                        .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
