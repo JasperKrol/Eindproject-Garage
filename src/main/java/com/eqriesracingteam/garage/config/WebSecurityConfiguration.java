@@ -88,7 +88,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/api/garage/cars/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/garage/cars/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/api/garage/cars/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/authenticated").authenticated()
                 .antMatchers("/authenticate").permitAll()
                 .anyRequest().denyAll()
                 .and()
