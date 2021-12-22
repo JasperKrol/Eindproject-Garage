@@ -19,7 +19,6 @@ import java.net.URI;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api/garage/users")
 public class UserController {
 
     private UserService userService;
@@ -33,25 +32,25 @@ public class UserController {
 
     // Get
     // -- All
-    @GetMapping(value = "")
+    @GetMapping(value = "/api/garage/users")
     public ResponseEntity<Object> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
     // -- one by username, id is username
-    @GetMapping(value = "/{username}")
+    @GetMapping(value = "/api/garage/users/{username}")
     public ResponseEntity<Object> getUser(@PathVariable("username") String username) {
         return ResponseEntity.ok().body(userService.getUser(username));
     }
 
-    @GetMapping(value = "/{username}/authorities")
+    @GetMapping(value = "/api/garage/users/{username}/authorities")
     public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
         return ResponseEntity.ok().body(userService.getAuthorities(username));
     }
 
     // Post
     // TODO: 15-12-2021 working request
-    @PostMapping(value = "")
+    @PostMapping(value = "/api/garage/users")
     public ResponseEntity<Object> createUser(@RequestBody UserPostRequestDto user) {
         String newUsername = userService.createUser(user);
 
@@ -68,20 +67,20 @@ public class UserController {
 //    }
 
     // Put
-    @PutMapping(value = "/{username}")
+    @PutMapping(value = "/api/garage/users/{username}")
     public ResponseEntity<Object> updateUser(@PathVariable("username") String username, @RequestBody User user) {
         userService.updateUser(username, user);
     return ResponseEntity.noContent().build();
     }
     // Delete
-    @DeleteMapping(value = "/{username}")
+    @DeleteMapping(value = "/api/garage/users/{username}")
     public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
         return ResponseEntity.noContent().build();
     }
 
     // Assign
-    @PostMapping(value = "/{username}/authorities")
+    @PostMapping(value = "/api/garage/users/{username}/authorities")
     public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
         try {
             String authorityName = (String) fields.get("authority");
@@ -93,13 +92,13 @@ public class UserController {
         }
     }
 
-    @DeleteMapping(value = "/{username}/authorities/{authority}")
+    @DeleteMapping(value = "/api/garage/users/{username}/authorities/{authority}")
     public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping(value = "/{username}/password")
+    @PatchMapping(value = "/api/garage/users/{username}/password")
     public ResponseEntity<Object> setPassword(@PathVariable("username") String username, @RequestBody String password) {
         userService.setPassword(username, password);
         return ResponseEntity.noContent().build();

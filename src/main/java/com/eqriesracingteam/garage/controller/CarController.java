@@ -8,7 +8,6 @@ import com.eqriesracingteam.garage.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
