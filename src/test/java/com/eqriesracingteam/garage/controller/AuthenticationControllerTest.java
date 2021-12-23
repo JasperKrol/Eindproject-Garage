@@ -28,7 +28,7 @@ class AuthenticationControllerTest {
 
     @Test
     void shouldReturn200() throws Exception {
-        mockMvc.perform(get("/authenticate"))
+        mockMvc.perform(get("/customers"))
                 .andExpect(status().isOk());
     }
 }
