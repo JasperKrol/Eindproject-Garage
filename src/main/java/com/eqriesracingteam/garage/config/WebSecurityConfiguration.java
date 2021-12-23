@@ -28,10 +28,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
     private JwtRequestFilter jwtRequestFilter;
 
-    // Needed for no auth query authorization
-    @Autowired
-    public UserAuthenticateService userAuthenticateService;
-
     @Autowired
     WebSecurityConfiguration(DataSource dataSource, JwtRequestFilter jwtRequestFilter) {
         this.dataSource = dataSource;
@@ -42,7 +38,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userAuthenticateService);
+
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
+                .authoritiesByUsernameQuery("SELECT username, authority FROM authorities AS a WHERE username=?");
+
     }
 
     // Encrypt the password
@@ -57,23 +57,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    // Replaced by loaduserbyusername to check all authorities and grand them
-    /**
-     * @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-            auth.jdbcAuthentication().dataSource(dataSource)
-                    .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
-                    .authoritiesByUsernameQuery("SELECT username, authority FROM authorities AS a WHERE username=?");
-
-        }
-
-        @Bean
-        @Override
-        public UserDetailsService userDetailsServiceBean() throws Exception {
-            return super.userDetailsServiceBean();
-        }
-    * */
+    @Bean
+    @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        return super.userDetailsServiceBean();
+    }
 
 
     //Secure endpoints with HTTP authentication
