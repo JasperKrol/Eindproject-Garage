@@ -25,7 +25,7 @@ class UserRepositoryTest {
     @Test
     void testFindByID(){
         // given
-        User testUser = new User("Jasper", "password", true, "061233244", "test1@email", "ROLE_USER");
+//        User testUser = new User("Jasper", "password", true, "061233244", "test1@email", "ROLE_USER");
     }
 
 }
