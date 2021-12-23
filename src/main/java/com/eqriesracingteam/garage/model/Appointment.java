@@ -1,6 +1,10 @@
 package com.eqriesracingteam.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.apache.tomcat.jni.Local;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,8 +16,14 @@ public class Appointment {
     @Id
     @GeneratedValue
     private long id;
+
+    @JsonFormat(pattern = "mm-dd-yyyy")
     private Date appointmentDate;
+
     private AppointmentStatus appointmentStatus;
+
+    @JsonFormat(pattern = "mm-dd-yyyy")
+    private Date carPickUpDate;
 
     //one to one of many to one 1 afsprak heeft betrekking op 1 persoon, maar kan meerdere afspraken hebben
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -26,7 +36,7 @@ public class Appointment {
 //    private Invoice invoiceNumber;
     
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "license_plate", referencedColumnName = "license_plate")
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 
     // Getters and setters
@@ -53,6 +63,14 @@ public class Appointment {
 
     public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
         this.appointmentStatus = appointmentStatus;
+    }
+
+    public Date getCarPickUpDate() {
+        return carPickUpDate;
+    }
+
+    public void setCarPickUpDate(Date carPickUpDate) {
+        this.carPickUpDate = carPickUpDate;
     }
 
     public Customer getCustomer() {

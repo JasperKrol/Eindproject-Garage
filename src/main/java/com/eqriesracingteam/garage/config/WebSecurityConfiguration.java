@@ -86,6 +86,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/api/garage/cars/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/api/garage/cars/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/authenticate").permitAll()
+                //to set up, all acces for developing
+                .antMatchers("/api/garage/appointments").permitAll()
                 .anyRequest().denyAll()
                 .and()
                 .sessionManagement()
