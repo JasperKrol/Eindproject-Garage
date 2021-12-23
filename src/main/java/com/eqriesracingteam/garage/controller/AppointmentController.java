@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.AppointmentDto;
+
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.service.AppointmentService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ public class AppointmentController {
         for (Appointment appointment : appointments) {
             dtos.add(AppointmentDto.fromAppointment(appointment));
         }
+
         return dtos;
     }
 }

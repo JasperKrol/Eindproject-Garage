@@ -24,3 +24,10 @@ VALUES ('vv-11-ww', 'legalDocument', 2),
        ('dd-23-qw', 'legalDocument', 3),
        ('ff-11-dd', 'legalDocument', 2);
 
+--Appointments
+INSERT INTO afspraken (appointment_date, appointment_status, car_pickup_date)
+VALUES ('21-12-2021', '1', '29-12-2021'),
+       ('21-12-2021', '1', '29-12-2021'),
+       ('21-12-2021', '1', '29-12-2021'),
+       ('21-12-2021', '1', '29-12-2021')
+

@@ -34,7 +34,7 @@ public class ExceptionController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getMessage());
     }
 
-    @ExceptionHandler(value = NotAuthorizedException.class)
+    @ExceptionHandler(value = AppointmentException.class)
     public ResponseEntity<Object> exception(AppointmentException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }

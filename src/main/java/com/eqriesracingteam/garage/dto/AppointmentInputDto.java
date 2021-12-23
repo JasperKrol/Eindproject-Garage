@@ -10,7 +10,7 @@ public class AppointmentInputDto {
     public long id;
     public Date appointmentDate;
     public AppointmentStatus appointmentStatus;
-    public Date carPickUpdate;
+    public Date carPickupDate;
 
     public Appointment toAppointment() {
         var appointment = new Appointment();
@@ -18,7 +18,7 @@ public class AppointmentInputDto {
         appointment.setId(id);
         appointment.setAppointmentDate(appointmentDate);
         appointment.setAppointmentStatus(appointmentStatus);
-        appointment.setCarPickUpDate(carPickUpdate);
+        appointment.setCarPickupDate(carPickupDate);
 
         return appointment;
     }

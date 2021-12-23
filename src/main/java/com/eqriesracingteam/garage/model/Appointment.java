@@ -1,10 +1,8 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,7 +12,7 @@ public class Appointment {
     // Attributes
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @JsonFormat(pattern = "mm-dd-yyyy")
@@ -23,21 +21,21 @@ public class Appointment {
     private AppointmentStatus appointmentStatus;
 
     @JsonFormat(pattern = "mm-dd-yyyy")
-    private Date carPickUpDate;
+    private Date carPickupDate;
 
-    //one to one of many to one 1 afsprak heeft betrekking op 1 persoon, maar kan meerdere afspraken hebben
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customer customer;
-
-    // TODO: 23-12-2021 invoice relatie in appointment maken + getters and setters
+//    //one to one of many to one 1 afsprak heeft betrekking op 1 persoon, maar kan meerdere afspraken hebben
 //    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "invoice_nr", referencedColumnName = "invoice_nr")
-//    private Invoice invoiceNumber;
-    
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_id", referencedColumnName = "id")
-    private Car car;
+//    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+//    private Customer customer;
+//
+//    // TODO: 23-12-2021 invoice relatie in appointment maken + getters and setters
+////    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+////    @JoinColumn(name = "invoice_nr", referencedColumnName = "invoice_nr")
+////    private Invoice invoiceNumber;
+//
+//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "car_id", referencedColumnName = "id")
+//    private Car car;
 
     // Getters and setters
 
@@ -65,27 +63,27 @@ public class Appointment {
         this.appointmentStatus = appointmentStatus;
     }
 
-    public Date getCarPickUpDate() {
-        return carPickUpDate;
+    public Date getCarPickupDate() {
+        return carPickupDate;
     }
 
-    public void setCarPickUpDate(Date carPickUpDate) {
-        this.carPickUpDate = carPickUpDate;
+    public void setCarPickupDate(Date carPickupDate) {
+        this.carPickupDate = carPickupDate;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
+//
+//    public Car getCar() {
+//        return car;
+//    }
+//
+//    public void setCar(Car car) {
+//        this.car = car;
+//    }
 }

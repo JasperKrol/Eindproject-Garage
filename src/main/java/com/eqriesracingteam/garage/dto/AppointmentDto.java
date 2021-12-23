@@ -10,9 +10,10 @@ public class AppointmentDto {
     public long id;
     public Date appointmentDate;
     public AppointmentStatus appointmentStatus;
-    public Date carPickUpdate;
+    public Date carPickupDate;
 
     //Customer en car toevoegen?
+    //dto.customer = car.getOwner(); hieronder
 
     public static AppointmentDto fromAppointment(Appointment appointment) {
         var dto = new AppointmentDto();
@@ -20,7 +21,7 @@ public class AppointmentDto {
         dto.id = appointment.getId();
         dto.appointmentDate = appointment.getAppointmentDate();
         dto.appointmentStatus = appointment.getAppointmentStatus();
-        dto.carPickUpdate = appointment.getCarPickUpDate();
+        dto.carPickupDate = appointment.getCarPickupDate();
 
         return dto;
     }
