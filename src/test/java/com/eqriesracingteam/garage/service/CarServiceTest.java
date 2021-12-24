@@ -5,8 +5,11 @@ import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.repository.CarRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -18,17 +21,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@WebMvcTest
-@ContextConfiguration(classes={GarageApplication.class})
-@EnableConfigurationProperties
+
+//@WebMvcTest
+//@ContextConfiguration(classes={GarageApplication.class})
+//@EnableConfigurationProperties
+@ExtendWith(MockitoExtension.class)
 class CarServiceTest {
 
-    @Autowired
+    @InjectMocks
     private CarService carService;
 
-    @MockBean
+    @Mock
     private CarRepository carRepository;
 
     @Mock
@@ -44,21 +51,34 @@ class CarServiceTest {
     }
 
     @Test
-    void getAllCars() {
+    void getallbylicscenplate() {
     }
 
     @Test
-    void getAllCarsByLicensePlate() {
-        car = new Car(1,"aa-bb-cc", "document", null);
-        car = new Car(2,"xx-xx-xx", "document", null);
+    void getAllCars() {
+        Car car1 = new Car(1,"aa-bb-cc", "document", null);
+        Car car2 = new Car(2,"xx-xx-xx", "document", null);
 
         List<Car> cars = new ArrayList<>();
-        Mockito.when(carRepository.findAll());
+        cars.add(car1);
+        cars.add(car2);
 
-        String licensePlate = "xx--xx-xx";
-        String expected = "xx-xx-xx";
+        when(carRepository.findAll()).thenReturn(cars);
 
-        assertEquals(expected, cars);
+        carService.getAllCars();
+
+        verify(carRepository, times(1)).findAll();
+
+        assertThat(cars.size()).isEqualTo(2);
+//        Mockito.when(carRepository.findAll())
+//                .thenReturn(cars);
+
+//        String licensePlate = "xx--xx-xx";
+//        String expected = "xx-xx-xx";
+
+//        var found = carService.getAllCars();
+//
+//        assertEquals(found, cars);
     }
 
     @Test

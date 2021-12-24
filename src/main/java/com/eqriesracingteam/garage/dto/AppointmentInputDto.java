@@ -17,7 +17,6 @@ public class AppointmentInputDto {
 
         appointment.setId(id);
         appointment.setAppointmentDate(appointmentDate);
-        appointment.setAppointmentStatus(appointmentStatus);
         appointment.setCarPickupDate(carPickupDate);
 
         return appointment;

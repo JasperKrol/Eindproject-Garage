@@ -15,10 +15,10 @@ import java.util.Optional;
 public class CarService {
 
     //Attributes
-    @Autowired
     private CarRepository carRepository;
 
     //Constructor
+    @Autowired
     public CarService(CarRepository carRepository) {
         this.carRepository = carRepository;
     }

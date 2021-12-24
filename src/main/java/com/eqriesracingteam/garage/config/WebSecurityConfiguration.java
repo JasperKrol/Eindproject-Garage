@@ -74,7 +74,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/garage/users/**").hasRole("ADMIN")
+//                .antMatchers("/api/garage/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/api/garage/customers/**").hasAnyRole("USER", "ADMIN") // api/users if you only want the authorized person to get list of users. ** needed for more path
                 .antMatchers(HttpMethod.POST,"/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/garage/customers/**").hasAnyRole("USER", "ADMIN")
