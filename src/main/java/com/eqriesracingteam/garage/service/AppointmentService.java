@@ -34,17 +34,17 @@ public class AppointmentService {
         }
     }
 
-//    public Appointment createAppointment(Appointment appointment) {
-//        AppointmentStatus status = appointment.getAppointmentStatus();
-//        List<Appointment> appointments = appointmentRepository.findAllByAppointmentStatusContainsAndIgnoreCase(status);
-//
-//        if (!appointments.isEmpty()){
-//            Appointment newAppointment = appointmentRepository.save(appointment);
-//            newAppointment.setAppointmentStatus(AppointmentStatus.AFSPRAAK_GEPLAND);
-//            return newAppointment;
-//        } else {
-//            throw new BadRequestException("Appointment taken");
-//        }
-//    }
+    public Appointment createAppointment(Appointment appointment) {
+        var date = appointment.getAppointmentDate();
+        List<Appointment> appointments = appointmentRepository.findAllByAppointmentDate(date);
+
+        if (appointments.isEmpty()){
+            Appointment newAppointment = appointmentRepository.save(appointment);
+            newAppointment.setAppointmentStatus(AppointmentStatus.AFSPRAAK_GEPLAND);
+            return newAppointment;
+        } else {
+            throw new BadRequestException("Appointment taken");
+        }
+    }
 
 }
