@@ -2,11 +2,12 @@ package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.AppointmentDto;
 
+import com.eqriesracingteam.garage.dto.AppointmentInputDto;
 import com.eqriesracingteam.garage.model.Appointment;
+import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,4 +36,19 @@ public class AppointmentController {
 
         return dtos;
     }
+
+    // Get one
+    @GetMapping(value = "/api/garage/appointments/{id}")
+    public AppointmentDto getOneAppointment(@PathVariable("id") long id) {
+        var appointment = appointmentService.getAppointment(id);
+        return AppointmentDto.fromAppointment(appointment);
+    }
+
+    // Add appointment
+    @PostMapping(value = "/api/garage/appointments")
+    public AppointmentDto createAppointment(@RequestBody AppointmentInputDto dto) {
+        var appointment = appointmentService.createAppointment(dto.toAppointment());
+        return AppointmentDto.fromAppointment(appointment);
+    }
+
 }
