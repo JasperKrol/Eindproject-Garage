@@ -39,8 +39,9 @@ public class AppointmentService {
         List<Appointment> appointments = appointmentRepository.findAllByAppointmentDate(date);
 
         if (appointments.isEmpty()){
+            appointment.setAppointmentStatus(AppointmentStatus.AFSPRAAK_GEPLAND);
             Appointment newAppointment = appointmentRepository.save(appointment);
-            newAppointment.setAppointmentStatus(AppointmentStatus.AFSPRAAK_GEPLAND);
+
             return newAppointment;
         } else {
             throw new BadRequestException("Appointment taken");
