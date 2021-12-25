@@ -15,12 +15,8 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JsonFormat(pattern = "mm-dd-yyyy")
     private Date appointmentDate;
-
     private AppointmentStatus appointmentStatus;
-
-    @JsonFormat(pattern = "mm-dd-yyyy")
     private Date carPickupDate;
 
 //    //one to one of many to one 1 afsprak heeft betrekking op 1 persoon, maar kan meerdere afspraken hebben

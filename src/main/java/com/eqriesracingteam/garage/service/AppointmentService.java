@@ -48,4 +48,16 @@ public class AppointmentService {
         }
     }
 
+    public void updateAppointment(long id, Appointment appointment) {
+        Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
+
+        if (optionalAppointment.isPresent()){
+            Appointment existingAppointment = optionalAppointment.get();
+
+            appointment.setId(existingAppointment.getId());
+            appointmentRepository.save(appointment);
+
+            // TODO: 25-12-2021 add customer and car 
+        }
+    }
 }

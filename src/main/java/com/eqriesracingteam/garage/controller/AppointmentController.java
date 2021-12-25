@@ -51,4 +51,12 @@ public class AppointmentController {
         return AppointmentDto.fromAppointment(appointment);
     }
 
+    // Adjust appointment
+    @PutMapping(value = "/api/garage/appointments/{id}")
+    public AppointmentDto adjustAppointment(@PathVariable("id") long id, @RequestBody Appointment appointment) {
+        appointmentService.updateAppointment(id, appointment);
+        return AppointmentDto.fromAppointment(appointment);
+
+    }
+
 }
