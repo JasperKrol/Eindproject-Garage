@@ -29,6 +29,9 @@ public class Customer {
     @JsonIgnore
     private List<Car> cars = new ArrayList<>();
 
+    @OneToOne
+    private Appointment appointment;
+
     //Constructor
     // TODO: 21-11-2021 Constructors toevoegen alleen voor de extra services
 
@@ -71,5 +74,13 @@ public class Customer {
 
     public void setCars(List<Car> cars) {
         this.cars = cars;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 }

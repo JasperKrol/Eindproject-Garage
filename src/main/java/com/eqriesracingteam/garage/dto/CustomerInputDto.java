@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.dto;
 
+import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Customer;
 
 public class CustomerInputDto {
@@ -8,6 +9,7 @@ public class CustomerInputDto {
     public String firstName;
     public String lastName;
     public String postalCode;
+    public Appointment appointment;
 
     public Customer toCustomer() {
         var customer = new Customer();

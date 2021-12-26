@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.dto;
 
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.AppointmentStatus;
+import com.eqriesracingteam.garage.model.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -17,6 +18,8 @@ public class AppointmentInputDto {
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     public Date carPickupDate;
+
+    public long customerId;
 
     public Appointment toAppointment() {
         var appointment = new Appointment();

@@ -19,10 +19,9 @@ public class Appointment {
     private AppointmentStatus appointmentStatus;
     private Date carPickupDate;
 
-//    //one to one of many to one 1 afsprak heeft betrekking op 1 persoon, maar kan meerdere afspraken hebben
-//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-//    private Customer customer;
+    //one to one of many to one 1 afsprak heeft betrekking op 1 persoon, maar kan meerdere afspraken hebben
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL ,mappedBy = "appointment")
+    private Customer customer;
 //
 //    // TODO: 23-12-2021 invoice relatie in appointment maken + getters and setters
 ////    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -67,13 +66,13 @@ public class Appointment {
         this.carPickupDate = carPickupDate;
     }
 
-//    public Customer getCustomer() {
-//        return customer;
-//    }
-//
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 //
 //    public Car getCar() {
 //        return car;

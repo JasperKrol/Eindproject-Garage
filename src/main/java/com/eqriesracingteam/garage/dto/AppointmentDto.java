@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.dto;
 
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.AppointmentStatus;
+import com.eqriesracingteam.garage.model.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
@@ -20,6 +21,9 @@ public class AppointmentDto {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     public Date carPickupDate;
 
+//    @JsonSerialize
+//    public CustomerDto customer;
+
     //Customer en car toevoegen?
     //dto.customer = car.getOwner(); hieronder
 
@@ -31,6 +35,7 @@ public class AppointmentDto {
         dto.appointmentStatus = appointment.getAppointmentStatus();
         dto.carPickupDate = appointment.getCarPickupDate();
 
+//        dto.customer = CustomerDto.fromCustomer(appointment.getCustomer());
         return dto;
     }
 }
