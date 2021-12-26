@@ -4,7 +4,6 @@ import com.eqriesracingteam.garage.dto.AppointmentDto;
 
 import com.eqriesracingteam.garage.dto.AppointmentInputDto;
 import com.eqriesracingteam.garage.model.Appointment;
-import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +56,12 @@ public class AppointmentController {
         appointmentService.updateAppointment(id, appointment);
         return AppointmentDto.fromAppointment(appointment);
 
+    }
+
+    // Delete appointment
+    @DeleteMapping(value = "/api/garage/appointments/{id}")
+    public void deleteAppointment(@PathVariable("id") long id){
+        appointmentService.deleteAppointment(id);
     }
 
 }

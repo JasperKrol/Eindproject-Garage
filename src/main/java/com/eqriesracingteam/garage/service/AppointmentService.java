@@ -54,12 +54,23 @@ public class AppointmentService {
         if (optionalAppointment.isPresent()){
             Appointment existingAppointment = optionalAppointment.get();
 
-            appointment.setId(existingAppointment.getId());
-            appointment.setAppointmentDate(existingAppointment.getAppointmentDate());
-            appointment.setCarPickupDate(existingAppointment.getCarPickupDate());
-            appointmentRepository.save(appointment);
+            existingAppointment.setId(existingAppointment.getId());
+            existingAppointment.setAppointmentDate(existingAppointment.getAppointmentDate());
+            existingAppointment.setCarPickupDate(existingAppointment.getCarPickupDate());
+            // TODO: 25-12-2021 add customer and car
+            appointmentRepository.save(existingAppointment);
 
-            // TODO: 25-12-2021 add customer and car 
+
+        }
+    }
+
+    public void deleteAppointment(long id) {
+        var existingAppointment = appointmentRepository.findById(id);
+
+        if (existingAppointment.isPresent()){
+            appointmentRepository.deleteById(id);
+        } else {
+            throw new AppointmentException("Appointment not found");
         }
     }
 }
