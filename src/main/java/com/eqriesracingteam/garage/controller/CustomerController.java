@@ -4,6 +4,7 @@ import com.eqriesracingteam.garage.dto.CustomerDto;
 import com.eqriesracingteam.garage.dto.CustomerInputDto;
 import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
+import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
 import com.eqriesracingteam.garage.service.CustomerService;
@@ -101,5 +102,11 @@ public class CustomerController {
     @GetMapping(value = "/api/garage/customers/{id}/appointments")
     public ResponseEntity<Object> getCustomerAppointments(@PathVariable("id") long id){
         return ResponseEntity.ok(customerService.getCustomerAppointments(id));
+    }
+
+    @PostMapping(value = "/api/garage/customers/{id}/appointments")
+    public ResponseEntity<Object> addAppointmentToCustomer(@PathVariable("id") long id, @RequestBody Appointment appointment) {
+        customerService.addAppointmentToCustomer(id, appointment);
+        return ResponseEntity.ok().build();
     }
 }

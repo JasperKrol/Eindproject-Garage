@@ -5,6 +5,7 @@ import com.eqriesracingteam.garage.dto.CustomerInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Appointment;
+import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
 import com.eqriesracingteam.garage.repository.AppointmentRepository;
@@ -142,6 +143,23 @@ public class CustomerService {
         if (optionalCustomer.isPresent()){
             Customer customer = optionalCustomer.get();
             return customer.getAppointments();
+        } else {
+            throw new RecordNotFoundException("Customer not found");
+        }
+    }
+
+    public void addAppointmentToCustomer(long id, Appointment appointment) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+
+        if (optionalCustomer.isPresent()){
+            Customer customer = optionalCustomer.get();
+            List<Appointment> appointments = customer.getAppointments();
+
+            appointment.setAppointmentStatus(AppointmentStatus.AFSPRAAK_GEPLAND);
+            appointments.add(appointment);
+            appointmentRepository.save(appointment);
+            appointment.setCustomer(customer);
+            customerRepository.save(customer);
         } else {
             throw new RecordNotFoundException("Customer not found");
         }
