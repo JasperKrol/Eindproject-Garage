@@ -26,6 +26,7 @@ public class Car {
     private Customer owner;
 
     @OneToOne
+    @JsonIgnore
     private Appointment appointment;
 
     //Constructors
