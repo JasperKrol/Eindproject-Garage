@@ -25,6 +25,9 @@ public class Car {
     @JsonIgnore
     private Customer owner;
 
+    @OneToOne
+    private Appointment appointment;
+
     //Constructors
     public Car() {
     }
@@ -67,5 +70,13 @@ public class Car {
 
     public void setOwner(Customer owner) {
         this.owner = owner;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 }

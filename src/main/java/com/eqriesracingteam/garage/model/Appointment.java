@@ -22,20 +22,23 @@ public class Appointment {
     private AppointmentStatus appointmentStatus;
     private Date carPickupDate;
 
+    @OneToOne
+    @JsonIgnore
+    private Car car;
+
     //one to one of many to one 1 afsprak heeft betrekking op 1 persoon, maar kan meerdere afspraken hebben
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonSerialize
+    @JsonIgnore
     private Customer customer;
-//
-//    // TODO: 23-12-2021 invoice relatie in appointment maken + getters and setters
-////    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-////    @JoinColumn(name = "invoice_nr", referencedColumnName = "invoice_nr")
-////    private Invoice invoiceNumber;
-//
-//    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "car_id", referencedColumnName = "id")
-//    private Car car;
+
+
+    // TODO: 28-12-2021 invoice link?
+    ////    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    ////    @JoinColumn(name = "invoice_nr", referencedColumnName = "invoice_nr")
+    ////    private Invoice invoiceNumber;
+    //
+    //
 
     // Getters and setters
 
@@ -78,12 +81,12 @@ public class Appointment {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    //
-//    public Car getCar() {
-//        return car;
-//    }
-//
-//    public void setCar(Car car) {
-//        this.car = car;
-//    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
 }

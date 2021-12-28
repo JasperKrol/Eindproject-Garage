@@ -5,6 +5,7 @@ import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.model.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
@@ -30,10 +31,15 @@ public class AppointmentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date carPickupDate;
 
+    @JsonIgnoreProperties("id")
     @JsonSerialize
     public CustomerDto customer;
 
-    //Customer en car toevoegen?
+    @JsonIgnoreProperties("customer")
+    @JsonSerialize
+    public CarDto car;
+
+    // TODO: 28-12-2021 Car toevoegen
 
     public static AppointmentDto fromAppointment(Appointment appointment) {
         if (appointment == null ) return null;
@@ -45,6 +51,7 @@ public class AppointmentDto {
         dto.carPickupDate = appointment.getCarPickupDate();
 
         dto.customer = CustomerDto.fromCustomer(appointment.getCustomer());
+        dto.car = CarDto.fromCar(appointment.getCar());
         return dto;
     }
 }

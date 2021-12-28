@@ -1,8 +1,9 @@
 --Users
 INSERT INTO users(username, password, enabled, telephone_number, email)
 VALUES ('Henk', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, '061234567', 'user@eqries.nl'),
-       ('Peter', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE,'067654321', 'peter@eqries.nl'),
-       ('Jasper', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, '066565445', 'hoofd.admin@eqries.nl');
+       ('Peter', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, '067654321', 'peter@eqries.nl'),
+       ('Jasper', '$2y$10$YD.MlrfFbKHACWVwZxDQVOWuTR.3z0ZlUTVaT7gCcPwPDpZSXUV/q', TRUE, '066565445',
+        'hoofd.admin@eqries.nl');
 
 --Authorities
 INSERT INTO authorities (username, authority)
@@ -19,14 +20,15 @@ VALUES ('Paul', 'Krol', '1234AB'),
 
 --Cars
 INSERT INTO autos (license_plate, registration_papers, customer_id)
-VALUES ('vv-11-ww', 'legalDocument', 2),
-       ('aa-99-bc', 'legalDocument', 1),
-       ('dd-23-qw', 'legalDocument', 3),
-       ('ff-11-dd', 'legalDocument', 2);
+VALUES ('vv-11-ww', 'legalDocument', 1),
+       ('aa-99-bc', 'legalDocument', 2),
+       ('dd-23-qw', 'legalDocument', 2),
+       ('ff-11-dd', 'legalDocument', 3);
 
 --Appointments
-INSERT INTO afspraken (appointment_date, appointment_status, car_pickup_date, customer_id)
-VALUES ('2021-12-01T08:00:00', 1, '2021-12-20T08:00:00', 1 ),
-       ('2021-11-04T09:00:00', 1, '2021-12-04T12:00:00', 2),
-       ('2021-09-02T12:00:00', 1, '2021-10-04T09:00:00', 3)
+INSERT INTO afspraken (appointment_date, appointment_status, car_pickup_date, customer_id, car_id)
+VALUES ('2021-12-01T08:00:00', 1, '2021-12-20T08:00:00', 1, 1),
+       ('2021-11-04T09:00:00', 1, '2021-12-04T12:00:00', 2, 2),
+       ('2021-09-02T12:00:00', 1, '2021-10-04T09:00:00', 2, 2),
+       ('2021-09-02T12:00:00', 1, '2021-10-04T09:00:00', 3, 3)
 
