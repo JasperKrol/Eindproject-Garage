@@ -19,15 +19,11 @@ public class CustomerDto {
 
     public static CustomerDto fromCustomer(Customer customer) {
         var dto = new CustomerDto();
-        List<CarDto> carList = new ArrayList<>();
 
         dto.id = customer.getId();
         dto.firstName = customer.getFirstName();
         dto.lastName = customer.getLastName();
         dto.postalCode = customer.getPostalCode();
-//        for (Car car : customer.getCars()) {
-//            carList.add(CarDto.fromCar(car));
-//        }
         dto.cars = customer.getCars();
         dto.appointments = customer.getAppointments();
 
