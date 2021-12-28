@@ -88,6 +88,7 @@ public class CustomerController {
         return CustomerDto.fromCustomer(customer);
     }
 
+    // Assignments and specific routes
     @GetMapping(value = "/api/garage/customers/{id}/cars")
     public ResponseEntity<Object> getCustomerCars(@PathVariable long id) {
         return ResponseEntity.ok(customerService.getCustomerCars(id));
