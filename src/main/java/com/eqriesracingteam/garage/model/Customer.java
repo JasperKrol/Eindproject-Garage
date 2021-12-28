@@ -29,8 +29,8 @@ public class Customer {
     @JsonIgnore
     private List<Car> cars = new ArrayList<>();
 
-    @OneToOne
-    private Appointment appointment;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Appointment> appointments = new ArrayList<>();
 
     //Constructor
     // TODO: 21-11-2021 Constructors toevoegen alleen voor de extra services
@@ -76,11 +76,11 @@ public class Customer {
         this.cars = cars;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
+    public List<Appointment> getAppointments() {
+        return appointments;
     }
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }
