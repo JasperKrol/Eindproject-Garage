@@ -97,4 +97,9 @@ public class CustomerController {
         customerService.addCustomerCar(id, car);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping(value = "/api/garage/customers/{id}/appointments")
+    public ResponseEntity<Object> getCustomerAppointments(@PathVariable("id") long id){
+        return ResponseEntity.ok(customerService.getCustomerAppointments(id));
+    }
 }

@@ -25,8 +25,8 @@ VALUES ('vv-11-ww', 'legalDocument', 2),
        ('ff-11-dd', 'legalDocument', 2);
 
 --Appointments
-INSERT INTO afspraken (appointment_date, appointment_status, car_pickup_date)
-VALUES ('2021-12-01T08:00:00', 1, '2021-12-20T08:00:00' ),
-       ('2021-11-04T09:00:00', 1, '2021-12-04T12:00:00'),
-       ('2021-09-02T12:00:00', 1, '2021-10-04T09:00:00')
+INSERT INTO afspraken (appointment_date, appointment_status, car_pickup_date, customer_id)
+VALUES ('2021-12-01T08:00:00', 1, '2021-12-20T08:00:00', 1 ),
+       ('2021-11-04T09:00:00', 1, '2021-12-04T12:00:00', 2),
+       ('2021-09-02T12:00:00', 1, '2021-10-04T09:00:00', 3)
 

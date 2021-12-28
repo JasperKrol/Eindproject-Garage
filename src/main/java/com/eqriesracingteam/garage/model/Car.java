@@ -25,10 +25,6 @@ public class Car {
     @JsonIgnore
     private Customer owner;
 
-    // TODO: 21-11-2021 ENUM TOEVOEGEN 
-    //    @Column
-    //    private final enum appointmentStatus;
-
     //Constructors
     public Car() {
     }

@@ -1,6 +1,9 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,6 +25,7 @@ public class Appointment {
     //one to one of many to one 1 afsprak heeft betrekking op 1 persoon, maar kan meerdere afspraken hebben
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JsonSerialize
     private Customer customer;
 //
 //    // TODO: 23-12-2021 invoice relatie in appointment maken + getters and setters

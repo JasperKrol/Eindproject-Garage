@@ -4,8 +4,10 @@ import com.eqriesracingteam.garage.dto.CustomerDto;
 import com.eqriesracingteam.garage.dto.CustomerInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
+import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
+import com.eqriesracingteam.garage.repository.AppointmentRepository;
 import com.eqriesracingteam.garage.repository.CarRepository;
 import com.eqriesracingteam.garage.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +21,15 @@ import java.util.Optional;
 public class CustomerService {
 
     //talks to Repository layer
-    @Autowired
     private CustomerRepository customerRepository;
-    @Autowired
     private CarRepository carRepository;
+    private AppointmentRepository appointmentRepository;
 
-    public CustomerService(CustomerRepository customerRepository, CarRepository carRepository) {
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository, CarRepository carRepository, AppointmentRepository appointmentRepository) {
         this.customerRepository = customerRepository;
         this.carRepository = carRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     // TODO: 25-11-2021 kijken of er een functie kan komen die checked op achternaam === postcode
@@ -128,6 +131,17 @@ public class CustomerService {
             cars.add(car);
             car.setOwner(customer);
             customerRepository.save(customer);
+        } else {
+            throw new RecordNotFoundException("Customer not found");
+        }
+    }
+
+    public List<Appointment> getCustomerAppointments(long id) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+
+        if (optionalCustomer.isPresent()){
+            Customer customer = optionalCustomer.get();
+            return customer.getAppointments();
         } else {
             throw new RecordNotFoundException("Customer not found");
         }

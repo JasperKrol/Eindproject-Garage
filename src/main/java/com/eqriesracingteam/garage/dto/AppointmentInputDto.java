@@ -4,22 +4,28 @@ import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.model.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Date;
 
 public class AppointmentInputDto {
 
     public long id;
 
+//    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     public Date appointmentDate;
 
     public AppointmentStatus appointmentStatus;
 
+//    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     public Date carPickupDate;
 
-    public long customerId;
+//    public long customerId;
 
     public Appointment toAppointment() {
         var appointment = new Appointment();
