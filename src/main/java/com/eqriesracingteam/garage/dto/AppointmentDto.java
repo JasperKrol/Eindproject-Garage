@@ -31,12 +31,11 @@ public class AppointmentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date carPickupDate;
 
-    @JsonIgnoreProperties("id")
-    @JsonSerialize
+//    @JsonIgnoreProperties("customer.appointments")
     public CustomerDto customer;
 
-    @JsonIgnoreProperties("customer")
-    @JsonSerialize
+//    @JsonIgnoreProperties("customer")
+//    @JsonSerialize
     public CarDto car;
 
     // TODO: 28-12-2021 Car toevoegen

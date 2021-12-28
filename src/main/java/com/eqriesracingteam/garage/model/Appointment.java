@@ -26,10 +26,10 @@ public class Appointment {
     @JsonIgnore
     private Car car;
 
-    //one to one of many to one 1 afsprak heeft betrekking op 1 persoon, maar kan meerdere afspraken hebben
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonIgnore
+    @JsonIgnoreProperties("appointments")
+    @JsonSerialize
     private Customer customer;
 
 
