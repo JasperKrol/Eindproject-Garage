@@ -14,7 +14,7 @@ public class CustomerDto {
     public String firstName;
     public String lastName;
     public String postalCode;
-    public List<CarDto> cars;
+    public List<Car> cars;
     public List<Appointment> appointments;
 
     public static CustomerDto fromCustomer(Customer customer) {
@@ -28,7 +28,7 @@ public class CustomerDto {
 //        for (Car car : customer.getCars()) {
 //            carList.add(CarDto.fromCar(car));
 //        }
-        dto.cars = carList;
+        dto.cars = customer.getCars();
         dto.appointments = customer.getAppointments();
 
         return dto;
