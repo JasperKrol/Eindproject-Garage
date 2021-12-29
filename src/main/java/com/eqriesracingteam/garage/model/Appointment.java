@@ -30,7 +30,6 @@ public class Appointment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("appointments")
     private Customer customer;
 
 

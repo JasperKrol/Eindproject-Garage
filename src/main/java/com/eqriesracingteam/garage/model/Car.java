@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -23,11 +24,9 @@ public class Car {
     //Create relationship in sql/database
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonBackReference
     private Customer owner;
 
     @OneToOne
-    @JsonIgnore
     private Appointment appointment;
 
     //Constructors

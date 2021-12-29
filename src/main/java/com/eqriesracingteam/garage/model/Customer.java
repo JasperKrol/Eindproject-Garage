@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -28,10 +29,9 @@ public class Customer {
 
     //Create relationship in sql/database
     @OneToMany(mappedBy = "owner")
-    @JsonIgnore
     private List<Car> cars = new ArrayList<>();
 
-    @JsonIgnoreProperties("appointments")
+
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments = new ArrayList<>();
 

@@ -17,8 +17,6 @@ public class CustomerDto {
     public String lastName;
     public String postalCode;
     public List<Car> cars;
-
-    @JsonIgnoreProperties("customer")
     public List<Appointment> appointments;
 
     public static CustomerDto fromCustomer(Customer customer) {
