@@ -20,8 +20,12 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    public List<Appointment> getAllAppointments() {
-        return appointmentRepository.findAll();
+    public List<Appointment> getAllAppointments(Date date) {
+        if (date == null) {
+            return appointmentRepository.findAll();
+        } else {
+            return appointmentRepository.findAllByAppointmentDate(date);
+        }
     }
 
     public Appointment getAppointment(long id) {

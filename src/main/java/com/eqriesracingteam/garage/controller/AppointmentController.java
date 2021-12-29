@@ -6,9 +6,11 @@ import com.eqriesracingteam.garage.dto.AppointmentInputDto;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,10 +26,10 @@ public class AppointmentController {
     // Get requests
     //  get all
     @GetMapping(value = "/api/garage/appointments")
-    public List<AppointmentDto> getAppointments() {
+    public List<AppointmentDto> getAppointments(@RequestParam(name = "date", defaultValue="") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date){
         var dtos = new ArrayList<AppointmentDto>();
 
-        var appointments = appointmentService.getAllAppointments();
+        var appointments = appointmentService.getAllAppointments(date);
 
         for (Appointment appointment : appointments) {
             dtos.add(AppointmentDto.fromAppointment(appointment));
