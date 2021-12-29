@@ -40,7 +40,6 @@ public class CustomerController {
 
     //Get
     // - Find all, with option on lastnames
-    // TODO: 20-12-2021 @Pathvariable lastname/postalcode toevoegen
     @GetMapping(value = "/api/garage/customers")
     public List<CustomerDto> getCustomers(@RequestParam(name = "lastname", defaultValue = "") String lastName) {
         var dtos = new ArrayList<CustomerDto>();
