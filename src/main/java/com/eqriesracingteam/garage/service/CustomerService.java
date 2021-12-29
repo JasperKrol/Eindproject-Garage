@@ -80,6 +80,8 @@ public class CustomerService {
             Customer existingCustomer = optionalCustomer.get();
 
             customer.setId(existingCustomer.getId());
+            customer.setAppointments(existingCustomer.getAppointments());
+            customer.setCars(existingCustomer.getCars());
             customerRepository.save(customer);
         } else {
             throw new RecordNotFoundException("Customer ID does not exists");
@@ -101,6 +103,10 @@ public class CustomerService {
             }
             if (customer.getPostalCode() != null && !customer.getPostalCode().isEmpty()) {
                 existingCustomer.setPostalCode(customer.getPostalCode());
+            }if (customer.getCars() != null && !customer.getCars().isEmpty()) {
+                existingCustomer.setCars(customer.getCars());
+            }if (customer.getAppointments() != null && !customer.getAppointments().isEmpty()) {
+                existingCustomer.setAppointments(customer.getAppointments());
             }
             customerRepository.save(existingCustomer);
 
