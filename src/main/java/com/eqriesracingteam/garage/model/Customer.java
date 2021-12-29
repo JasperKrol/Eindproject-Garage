@@ -86,4 +86,5 @@ public class Customer {
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
+
 }

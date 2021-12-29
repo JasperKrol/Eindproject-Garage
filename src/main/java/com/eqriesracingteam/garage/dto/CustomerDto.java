@@ -3,6 +3,8 @@ package com.eqriesracingteam.garage.dto;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,8 @@ public class CustomerDto {
     public String lastName;
     public String postalCode;
     public List<Car> cars;
+
+    @JsonIgnoreProperties("customer")
     public List<Appointment> appointments;
 
     public static CustomerDto fromCustomer(Customer customer) {
