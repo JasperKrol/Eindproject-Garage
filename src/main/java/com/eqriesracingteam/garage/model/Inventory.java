@@ -13,8 +13,8 @@ public class Inventory {
 
     private String itemDescription;
     private double price;
-    private double stock;
-    private double usedParts;
+    private long stock;
+    private long usedParts;
 
     // Getters and setters
 
@@ -46,7 +46,7 @@ public class Inventory {
         return stock;
     }
 
-    public void setStock(double stock) {
+    public void setStock(long stock) {
         this.stock = stock;
     }
 
@@ -54,7 +54,7 @@ public class Inventory {
         return usedParts;
     }
 
-    public void setUsedParts(double usedParts) {
+    public void setUsedParts(long usedParts) {
         this.usedParts = usedParts;
     }
 }
