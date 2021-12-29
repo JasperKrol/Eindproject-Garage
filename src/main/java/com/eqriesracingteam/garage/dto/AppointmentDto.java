@@ -36,6 +36,7 @@ public class AppointmentDto {
 
     public CarDto car;
 
+
     public static AppointmentDto fromAppointment(Appointment appointment) {
         if (appointment == null)
             return null;
