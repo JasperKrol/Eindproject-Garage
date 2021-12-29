@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class Customer {
     @JsonIgnore
     private List<Car> cars = new ArrayList<>();
 
-    @JsonIgnoreProperties("customer")
+    @JsonIgnoreProperties("appointments")
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments = new ArrayList<>();
 

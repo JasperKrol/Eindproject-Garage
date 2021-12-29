@@ -31,17 +31,18 @@ public class AppointmentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date carPickupDate;
 
-//    @JsonIgnoreProperties("customer.appointments")
+    @JsonIgnoreProperties("appointments")
     public CustomerDto customer;
 
-//    @JsonIgnoreProperties("customer")
-//    @JsonSerialize
+    //    @JsonIgnoreProperties("customer")
+    //    @JsonSerialize
     public CarDto car;
 
     // TODO: 28-12-2021 Car toevoegen
 
     public static AppointmentDto fromAppointment(Appointment appointment) {
-        if (appointment == null ) return null;
+        if (appointment == null)
+            return null;
         var dto = new AppointmentDto();
 
         dto.id = appointment.getId();
@@ -50,7 +51,7 @@ public class AppointmentDto {
         dto.carPickupDate = appointment.getCarPickupDate();
 
         dto.customer = CustomerDto.fromCustomer(appointment.getCustomer());
-        dto.car = CarDto.fromCar(appointment.getCar());
+        //        dto.car = CarDto.fromCar(appointment.getCar());
         return dto;
     }
 }

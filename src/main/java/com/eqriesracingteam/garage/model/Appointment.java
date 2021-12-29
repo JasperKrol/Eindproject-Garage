@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,7 +30,6 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @JsonIgnoreProperties("appointments")
-    @JsonSerialize
     private Customer customer;
 
 
