@@ -38,7 +38,6 @@ public class Customer {
 
 
     //Constructor
-    // TODO: 21-11-2021 Constructors toevoegen alleen voor de extra services
 
     //Getters and setters
     public long getId() {

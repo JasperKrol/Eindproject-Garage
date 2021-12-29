@@ -38,7 +38,7 @@ public class AppointmentDto {
         dto.appointmentStatus = appointment.getAppointmentStatus();
         dto.carPickupDate = appointment.getCarPickupDate();
         dto.car = appointment.getCar();
-//        dto.customer = appointment.getCustomer();
+        dto.customer = appointment.getCustomer();
 
         return dto;
     }
