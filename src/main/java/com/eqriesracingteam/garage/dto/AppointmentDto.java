@@ -34,8 +34,6 @@ public class AppointmentDto {
     @JsonIgnoreProperties("appointments")
     public CustomerDto customer;
 
-    //    @JsonIgnoreProperties("customer")
-    //    @JsonSerialize
     public CarDto car;
 
     // TODO: 28-12-2021 Car toevoegen
@@ -51,7 +49,6 @@ public class AppointmentDto {
         dto.carPickupDate = appointment.getCarPickupDate();
 
         dto.customer = CustomerDto.fromCustomer(appointment.getCustomer());
-        //        dto.car = CarDto.fromCar(appointment.getCar());
         return dto;
     }
 }
