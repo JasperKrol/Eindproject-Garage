@@ -36,8 +36,6 @@ public class AppointmentDto {
 
     public CarDto car;
 
-    // TODO: 28-12-2021 Car toevoegen
-
     public static AppointmentDto fromAppointment(Appointment appointment) {
         if (appointment == null)
             return null;
