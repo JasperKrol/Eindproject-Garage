@@ -24,9 +24,11 @@ public class Car {
     //Create relationship in sql/database
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JsonBackReference
     private Customer owner;
 
     @OneToOne
+    @JsonIgnore
     private Appointment appointment;
 
     //Constructors

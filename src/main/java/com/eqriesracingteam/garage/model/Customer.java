@@ -29,11 +29,13 @@ public class Customer {
 
     //Create relationship in sql/database
     @OneToMany(mappedBy = "owner")
+    @JsonIgnore
     private List<Car> cars = new ArrayList<>();
 
-
+    @JsonIgnoreProperties("appointments")
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments = new ArrayList<>();
+
 
     //Constructor
     // TODO: 21-11-2021 Constructors toevoegen alleen voor de extra services
@@ -86,5 +88,4 @@ public class Customer {
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
-
 }

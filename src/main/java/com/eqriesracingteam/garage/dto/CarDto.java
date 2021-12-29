@@ -23,8 +23,7 @@ public class CarDto {
         dto.id = car.getId();
         dto.licensePlate = car.getLicensePlate();
         dto.registrationPapers = car.getRegistrationPapers();
-        dto.customer = car.getOwner();
-
+//        dto.customer = car.getOwner();
 
         return dto;
     }

@@ -15,7 +15,6 @@ import java.util.Date;
 public class Appointment {
 
     // Attributes
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -24,13 +23,13 @@ public class Appointment {
     private AppointmentStatus appointmentStatus;
     private LocalDateTime carPickupDate;
 
-
     @OneToOne
     @JsonIgnore
     private Car car;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("appointments")
     private Customer customer;
 
 
