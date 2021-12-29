@@ -23,7 +23,8 @@ public class AppointmentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime carPickupDate;
 
-    @JsonIgnoreProperties("appointments")
+//    @JsonIgnoreProperties("appointments")
+    @JsonIgnore
     public Customer customer;
 
     public Car car;
