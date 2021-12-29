@@ -21,12 +21,14 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    public List<Appointment> getAllAppointments(LocalDateTime date) {
-        if (date == null) {
-            return appointmentRepository.findAll();
-        } else {
-            return appointmentRepository.findAllByAppointmentDate(date);
-        }
+    public List<Appointment> getAllAppointments() {
+        return appointmentRepository.findAll();
+        // TODO: 29-12-2021 if i want an time param
+//        if (date == null) {
+//            return appointmentRepository.findAll();
+//        } else {
+//            return appointmentRepository.findAllByAppointmentDate(date);
+//        }
     }
 
     public Appointment getAppointment(long id) {
