@@ -3,26 +3,27 @@ package com.eqriesracingteam.garage.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "inventory_list")
+@Table(name = "magazijn_onderdelen")
 public class Inventory {
 
     // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long itemId;
+    private long id;
 
     private String itemDescription;
     private double price;
     private double stock;
+    private double usedParts;
 
     // Getters and setters
 
-    public long getItemId() {
-        return itemId;
+    public long getId() {
+        return id;
     }
 
-    public void setItemId(long itemId) {
-        this.itemId = itemId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getItemDescription() {
@@ -47,5 +48,13 @@ public class Inventory {
 
     public void setStock(double stock) {
         this.stock = stock;
+    }
+
+    public double getUsedParts() {
+        return usedParts;
+    }
+
+    public void setUsedParts(double usedParts) {
+        this.usedParts = usedParts;
     }
 }
