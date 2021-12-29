@@ -103,10 +103,10 @@ public class CustomerService {
             }
             if (customer.getPostalCode() != null && !customer.getPostalCode().isEmpty()) {
                 existingCustomer.setPostalCode(customer.getPostalCode());
-            }if (customer.getCars() != null && !customer.getCars().isEmpty()) {
-                existingCustomer.setCars(customer.getCars());
             }if (customer.getAppointments() != null && !customer.getAppointments().isEmpty()) {
                 existingCustomer.setAppointments(customer.getAppointments());
+            }if (customer.getCars() != null && !customer.getCars().isEmpty()) {
+                existingCustomer.setCars(customer.getCars());
             }
             customerRepository.save(existingCustomer);
 
