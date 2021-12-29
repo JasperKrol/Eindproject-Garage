@@ -9,6 +9,7 @@ import com.eqriesracingteam.garage.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    public List<Appointment> getAllAppointments(Date date) {
+    public List<Appointment> getAllAppointments(LocalDateTime date) {
         if (date == null) {
             return appointmentRepository.findAll();
         } else {

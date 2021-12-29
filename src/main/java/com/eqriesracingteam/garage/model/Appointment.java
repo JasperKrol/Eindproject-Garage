@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,15 +20,15 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private Date appointmentDate;
+    private LocalDateTime appointmentDate;
     private AppointmentStatus appointmentStatus;
-    private Date carPickupDate;
+    private LocalDateTime carPickupDate;
 
     @OneToOne
     @JsonIgnore
     private Car car;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @JsonIgnoreProperties("appointments")
     private Customer customer;
@@ -50,11 +51,11 @@ public class Appointment {
         this.id = id;
     }
 
-    public Date getAppointmentDate() {
+    public LocalDateTime getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
+    public void setAppointmentDate(LocalDateTime appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 
@@ -66,11 +67,11 @@ public class Appointment {
         this.appointmentStatus = appointmentStatus;
     }
 
-    public Date getCarPickupDate() {
+    public LocalDateTime getCarPickupDate() {
         return carPickupDate;
     }
 
-    public void setCarPickupDate(Date carPickupDate) {
+    public void setCarPickupDate(LocalDateTime carPickupDate) {
         this.carPickupDate = carPickupDate;
     }
 

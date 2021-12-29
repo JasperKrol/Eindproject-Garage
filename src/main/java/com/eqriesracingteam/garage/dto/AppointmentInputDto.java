@@ -9,6 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class AppointmentInputDto {
@@ -17,13 +18,13 @@ public class AppointmentInputDto {
 
 //    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    public Date appointmentDate;
+    public LocalDateTime appointmentDate;
 
     public AppointmentStatus appointmentStatus;
 
 //    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    public Date carPickupDate;
+    public LocalDateTime carPickupDate;
 
 //    public long customerId;
 

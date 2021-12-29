@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,7 @@ public class AppointmentController {
     // Get requests
     //  get all
     @GetMapping(value = "/api/garage/appointments")
-    public List<AppointmentDto> getAppointments(@RequestParam(name = "date", defaultValue="") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date){
+    public List<AppointmentDto> getAppointments(@RequestParam(name = "date", defaultValue="") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime date){
         var dtos = new ArrayList<AppointmentDto>();
 
         var appointments = appointmentService.getAllAppointments(date);

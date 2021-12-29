@@ -2,52 +2,44 @@ package com.eqriesracingteam.garage.dto;
 
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.AppointmentStatus;
+import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.DateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import org.springframework.lang.Nullable;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class AppointmentDto {
 
     public long id;
 
-    //    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public Date appointmentDate;
+    public LocalDateTime appointmentDate;
 
     public AppointmentStatus appointmentStatus;
 
-    //    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public Date carPickupDate;
+    public LocalDateTime carPickupDate;
 
     @JsonIgnoreProperties("appointments")
-    public CustomerDto customer;
+    public Customer customer;
 
-    public CarDto car;
+    public Car car;
 
 
     public static AppointmentDto fromAppointment(Appointment appointment) {
-        if (appointment == null)
-            return null;
+
         var dto = new AppointmentDto();
 
         dto.id = appointment.getId();
         dto.appointmentDate = appointment.getAppointmentDate();
         dto.appointmentStatus = appointment.getAppointmentStatus();
         dto.carPickupDate = appointment.getCarPickupDate();
+        dto.customer = appointment.getCustomer();
+        dto.car = appointment.getCar();
 
-        dto.customer = CustomerDto.fromCustomer(appointment.getCustomer());
         return dto;
     }
 }
