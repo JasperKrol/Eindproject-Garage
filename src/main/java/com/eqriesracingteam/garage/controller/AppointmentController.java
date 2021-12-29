@@ -26,12 +26,11 @@ public class AppointmentController {
 
     // Get requests
     //  get all
-    // TODO: 29-12-2021 @RequestParam(name = "date", defaultValue="") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime date) 
     @GetMapping(value = "/api/garage/appointments")
-    public List<AppointmentDto> getAppointments(){
+    public List<AppointmentDto> getAppointments(@RequestParam(name = "date", defaultValue="") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime date){
         var dtos = new ArrayList<AppointmentDto>();
 
-        var appointments = appointmentService.getAllAppointments();
+        var appointments = appointmentService.getAllAppointments(date);
 
         for (Appointment appointment : appointments) {
             dtos.add(AppointmentDto.fromAppointment(appointment));
