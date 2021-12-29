@@ -24,6 +24,7 @@ public class Appointment {
     private AppointmentStatus appointmentStatus;
     private LocalDateTime carPickupDate;
 
+
     @OneToOne
     @JsonIgnore
     private Car car;
