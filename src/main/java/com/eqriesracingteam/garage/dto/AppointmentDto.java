@@ -24,6 +24,9 @@ public class AppointmentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime carPickupDate;
 
+    @JsonIgnoreProperties("appointments")
+    public Car cars;
+
     public static AppointmentDto fromAppointment(Appointment appointment) {
 
         var dto = new AppointmentDto();
@@ -32,6 +35,7 @@ public class AppointmentDto {
         dto.appointmentDate = appointment.getAppointmentDate();
         dto.appointmentStatus = appointment.getAppointmentStatus();
         dto.carPickupDate = appointment.getCarPickupDate();
+        dto.cars = appointment.getCar();
 
 
         return dto;

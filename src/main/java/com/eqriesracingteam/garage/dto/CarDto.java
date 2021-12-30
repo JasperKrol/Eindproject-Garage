@@ -13,6 +13,7 @@ public class CarDto {
     public long id;
     public String licensePlate;
     public String registrationPapers;
+    public Customer customer;
 
 
     //Constructor
