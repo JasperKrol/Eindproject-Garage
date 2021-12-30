@@ -18,8 +18,8 @@ public class CustomerDto {
     public String postalCode;
     public List<Car> cars;
 
-    @JsonIgnoreProperties("customer")
-    public List<Appointment> appointments;
+//    @JsonIgnoreProperties("customer")
+//    public List<Appointment> appointments;
 
     public static CustomerDto fromCustomer(Customer customer) {
         var dto = new CustomerDto();
@@ -31,7 +31,7 @@ public class CustomerDto {
         dto.cars = customer.getCars();
 
         // TODO: 30-12-2021 if appointmentstatus is !afgerond customer.get) :: ""
-        dto.appointments = customer.getAppointments();
+//        dto.appointments = customer.getAppointments();
 
         return dto;
     }

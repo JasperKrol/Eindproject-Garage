@@ -27,10 +27,8 @@ public class Customer {
 
     //Create relationship in sql/database
     @OneToMany(mappedBy = "owner")
-    @JsonIgnore
-    private List<Car> cars = new ArrayList<>();
+    private List<Car> cars;
 
-    @JsonIgnoreProperties("appointments")
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments = new ArrayList<>();
 

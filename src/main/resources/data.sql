@@ -30,7 +30,8 @@ INSERT INTO afspraken (appointment_date, appointment_status, car_pickup_date, cu
 VALUES ('2021-12-01T08:00:00', 0, '2021-12-20T08:00:00', 1, 1),
        ('2021-11-04T09:00:00', 1, '2021-12-04T12:00:00', 2, 2),
        ('2021-09-02T12:00:00', 2, '2021-10-04T09:00:00', 2, 2),
-       ('2021-09-02T12:00:00', 4, '2021-10-04T09:00:00', 3, 3);
+       ('2021-12-02T12:00:00', 2, '2021-12-31T09:00:00', 2, 3),
+       ('2021-09-02T12:00:00', 4, '2021-10-04T09:00:00', 3, 4);
 
 --Appointments
 INSERT INTO magazijn_onderdelen (item_description, price, stock , used_parts)

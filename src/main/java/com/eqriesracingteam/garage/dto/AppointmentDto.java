@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class AppointmentDto {
@@ -23,13 +24,6 @@ public class AppointmentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime carPickupDate;
 
-//    @JsonIgnoreProperties("appointments")
-    @JsonIgnore
-    public Customer customer;
-
-    public Car car;
-
-
     public static AppointmentDto fromAppointment(Appointment appointment) {
 
         var dto = new AppointmentDto();
@@ -38,8 +32,7 @@ public class AppointmentDto {
         dto.appointmentDate = appointment.getAppointmentDate();
         dto.appointmentStatus = appointment.getAppointmentStatus();
         dto.carPickupDate = appointment.getCarPickupDate();
-        dto.car = appointment.getCar();
-        dto.customer = appointment.getCustomer();
+
 
         return dto;
     }

@@ -13,7 +13,6 @@ public class CarDto {
     public long id;
     public String licensePlate;
     public String registrationPapers;
-    public Customer customer;
 
 
     //Constructor
@@ -23,7 +22,6 @@ public class CarDto {
         dto.id = car.getId();
         dto.licensePlate = car.getLicensePlate();
         dto.registrationPapers = car.getRegistrationPapers();
-        dto.customer = car.getOwner();
 
         return dto;
     }

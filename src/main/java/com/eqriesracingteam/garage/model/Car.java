@@ -1,8 +1,11 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.*;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "autos")
@@ -20,17 +23,15 @@ public class Car {
     @Column(name = "registration_papers")
     private String registrationPapers;
 
-    //Create relationship in sql/database
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("")
+    @JsonIgnore
     private Customer owner;
 
-    @OneToOne
-    @JsonIgnore
-    private Appointment appointment;
+    @OneToMany(mappedBy = "carForAppointment", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Appointment> appointments;
 
-    //Constructors
+    // Constructors
     public Car() {
     }
 
@@ -74,11 +75,11 @@ public class Car {
         this.owner = owner;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
+    public List<Appointment> getAppointments() {
+        return appointments;
     }
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }

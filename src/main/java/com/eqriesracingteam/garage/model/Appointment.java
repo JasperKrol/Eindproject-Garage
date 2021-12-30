@@ -1,11 +1,9 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "afspraken")
@@ -21,13 +19,14 @@ public class Appointment {
     private AppointmentStatus appointmentStatus;
     private LocalDateTime carPickupDate;
 
-    @OneToOne
     @JsonIgnore
-    private Car car;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
+    private Car carForAppointment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("")
     private Customer customer;
 
 
@@ -81,10 +80,10 @@ public class Appointment {
     }
 
     public Car getCar() {
-        return car;
+        return carForAppointment;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCar(Car carForAppointment) {
+        this.carForAppointment = carForAppointment;
     }
 }
