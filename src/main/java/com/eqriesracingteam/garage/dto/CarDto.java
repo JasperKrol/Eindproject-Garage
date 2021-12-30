@@ -13,7 +13,8 @@ public class CarDto {
     public long id;
     public String licensePlate;
     public String registrationPapers;
-    @JsonIgnoreProperties("appointments")
+
+    @JsonIgnoreProperties({"appointments", "cars"})
     public Customer owner;
 
 

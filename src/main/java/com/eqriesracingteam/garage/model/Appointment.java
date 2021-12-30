@@ -24,6 +24,7 @@ public class Appointment {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
+    @JsonIgnore
     private Car carForAppointment;
 
     @ManyToOne(fetch = FetchType.EAGER)
