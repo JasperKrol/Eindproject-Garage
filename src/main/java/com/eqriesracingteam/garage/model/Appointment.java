@@ -22,7 +22,7 @@ public class Appointment {
     private LocalDateTime carPickupDate;
 
     @OneToOne
-//    @JsonIgnore
+    @JsonIgnore
     private Car car;
 
     @ManyToOne(fetch = FetchType.LAZY)
