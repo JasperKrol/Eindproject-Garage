@@ -3,6 +3,8 @@ package com.eqriesracingteam.garage.model;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,12 +19,12 @@ public class Appointment {
     private LocalDateTime appointmentDate;
     private AppointmentStatus appointmentStatus;
     private LocalDateTime carPickupDate;
+    //    @Size(min = 1)
+    private String description;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car carForAppointment;
-
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -68,6 +70,22 @@ public class Appointment {
 
     public void setCarPickupDate(LocalDateTime carPickupDate) {
         this.carPickupDate = carPickupDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Car getCarForAppointment() {
+        return carForAppointment;
+    }
+
+    public void setCarForAppointment(Car carForAppointment) {
+        this.carForAppointment = carForAppointment;
     }
 
     public Customer getCustomer() {

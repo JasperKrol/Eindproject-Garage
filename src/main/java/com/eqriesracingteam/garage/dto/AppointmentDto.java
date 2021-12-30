@@ -22,10 +22,12 @@ public class AppointmentDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime carPickupDate;
 
+    public String description;
+
     @JsonIgnoreProperties("appointments")
     public Car car;
 
-    @JsonIgnoreProperties({ "appointments", "cars" })
+    @JsonIgnoreProperties({"appointments", "cars"})
     public Customer customer;
 
     public static AppointmentDto fromAppointment(Appointment appointment) {
@@ -36,6 +38,7 @@ public class AppointmentDto {
         dto.appointmentDate = appointment.getAppointmentDate();
         dto.appointmentStatus = appointment.getAppointmentStatus();
         dto.carPickupDate = appointment.getCarPickupDate();
+        dto.description = appointment.getDescription();
         dto.car = appointment.getCar();
         dto.customer = appointment.getCustomer();
 
