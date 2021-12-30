@@ -62,8 +62,11 @@ public class AppointmentService {
             Appointment existingAppointment = optionalAppointment.get();
 
             existingAppointment.setId(existingAppointment.getId());
-            existingAppointment.setAppointmentDate(existingAppointment.getAppointmentDate());
-            existingAppointment.setCarPickupDate(existingAppointment.getCarPickupDate());
+            existingAppointment.setAppointmentDate(appointment.getAppointmentDate());
+            existingAppointment.setCarPickupDate(appointment.getCarPickupDate());
+            existingAppointment.setCarForAppointment(appointment.getCarForAppointment());
+            existingAppointment.setDescription(appointment.getDescription());
+            existingAppointment.setCustomer(appointment.getCustomer());
             // TODO: 25-12-2021 add customer and car
             appointmentRepository.save(existingAppointment);
 

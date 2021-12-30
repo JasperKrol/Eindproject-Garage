@@ -33,6 +33,13 @@ VALUES ('2021-12-01T08:00:00', 0, '2021-12-20T08:00:00', 1, 1, 'motor doet raar'
        ('2021-12-02T12:00:00', 2, '2021-12-31T09:00:00', 2, 3, 'Remmen lopen aan'),
        ('2021-09-02T12:00:00', 4, '2021-10-04T09:00:00', 3, 4, 'distributieriem versleten en koelvloeistof op');
 
---Appointments
-INSERT INTO magazijn_onderdelen (item_description, price, stock , used_parts)
-VALUES ('remset', 99, 10, 2)
+--Onderdelen
+INSERT INTO auto_onderdelen (item_description, price, stock, used_parts)
+VALUES ('Remset voor', 99, 21, 2),
+       ('Remset achter', 105, 33, 22),
+       ('Koppeling', 799, 10, 4),
+       ('Knipperlicht vloeistof', 600, 999, 1),
+       ('Ruitenwisser', 33, 20, 10),
+       ('Winterband', 100, 8, 35),
+       ('Allroundband', 120, 20, 99),
+       ('Zomerband', 95, 10, 95)

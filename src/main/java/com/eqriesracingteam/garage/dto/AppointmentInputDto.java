@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.dto;
 
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.AppointmentStatus;
+import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -16,23 +17,26 @@ public class AppointmentInputDto {
 
     public long id;
 
-//    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime appointmentDate;
 
     public AppointmentStatus appointmentStatus;
 
-//    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime carPickupDate;
 
-//    public long customerId;
+    public String description;
+
+    public Car car;
 
     public Appointment toAppointment() {
         var appointment = new Appointment();
 
         appointment.setId(id);
         appointment.setAppointmentDate(appointmentDate);
+        appointment.setDescription(description);
         appointment.setCarPickupDate(carPickupDate);
 
         return appointment;

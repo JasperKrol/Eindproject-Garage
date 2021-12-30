@@ -97,11 +97,11 @@ public class Appointment {
         this.customer = customer;
     }
 
-    public Car getCar() {
-        return carForAppointment;
-    }
-
-    public void setCar(Car carForAppointment) {
-        this.carForAppointment = carForAppointment;
-    }
+//    public Car getCar() {
+//        return carForAppointment;
+//    }
+//
+//    public void setCar(Car carForAppointment) {
+//        this.carForAppointment = carForAppointment;
+//    }
 }
