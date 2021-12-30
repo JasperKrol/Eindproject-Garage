@@ -1,9 +1,6 @@
 package com.eqriesracingteam.garage.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
@@ -12,6 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "afspraken")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Appointment {
 
     // Attributes
@@ -24,12 +22,12 @@ public class Appointment {
     private LocalDateTime carPickupDate;
 
     @OneToOne
-    @JsonIgnore
+//    @JsonIgnore
     private Car car;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("appointments")
+    @JsonIgnoreProperties("")
     private Customer customer;
 
 

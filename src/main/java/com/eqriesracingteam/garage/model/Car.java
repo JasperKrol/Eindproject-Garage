@@ -1,13 +1,12 @@
 package com.eqriesracingteam.garage.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "autos")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Car {
 
     @Id
@@ -24,11 +23,11 @@ public class Car {
     //Create relationship in sql/database
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonBackReference
+    @JsonIgnoreProperties("")
     private Customer owner;
 
     @OneToOne
-    @JsonIgnore
+//    @JsonIgnore
     private Appointment appointment;
 
     //Constructors

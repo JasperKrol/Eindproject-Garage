@@ -134,9 +134,10 @@ public class CustomerService {
             Customer customer = optionalCustomer.get();
             List<Car> cars = customer.getCars();
 
-            carRepository.save(car);
+
             cars.add(car);
             car.setOwner(customer);
+            carRepository.save(car);
             customerRepository.save(customer);
         } else {
             throw new RecordNotFoundException("Customer not found");

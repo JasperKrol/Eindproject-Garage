@@ -3,7 +3,7 @@ package com.eqriesracingteam.garage.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "magazijn_onderdelen")
+@Table(name = "auto_onderdelen")
 public class Inventory {
 
     // Attributes

@@ -29,6 +29,8 @@ public class CustomerDto {
         dto.lastName = customer.getLastName();
         dto.postalCode = customer.getPostalCode();
         dto.cars = customer.getCars();
+
+        // TODO: 30-12-2021 if appointmentstatus is !afgerond customer.get) :: ""
         dto.appointments = customer.getAppointments();
 
         return dto;
