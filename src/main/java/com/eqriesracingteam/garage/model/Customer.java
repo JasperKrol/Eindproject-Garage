@@ -24,11 +24,9 @@ public class Customer {
     @Column(name = "postal_code")
     private String postalCode;
 
-    @JsonIgnoreProperties
     @OneToMany(mappedBy = "owner")
     private List<Car> cars;
 
-    @JsonIgnoreProperties("car")
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments = new ArrayList<>();
 
