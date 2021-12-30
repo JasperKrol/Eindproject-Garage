@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "afspraken")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Appointment {
 
     // Attributes
@@ -24,7 +23,7 @@ public class Appointment {
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car carForAppointment;
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;

@@ -13,7 +13,8 @@ public class CarDto {
     public long id;
     public String licensePlate;
     public String registrationPapers;
-    public Customer customer;
+    @JsonIgnoreProperties("appointments")
+    public Customer owner;
 
 
     //Constructor
@@ -23,6 +24,7 @@ public class CarDto {
         dto.id = car.getId();
         dto.licensePlate = car.getLicensePlate();
         dto.registrationPapers = car.getRegistrationPapers();
+        dto.owner = car.getOwner();
 
         return dto;
     }

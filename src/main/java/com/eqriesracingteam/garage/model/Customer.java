@@ -8,7 +8,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "klanten")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Customer {
 
     //Attributes
@@ -25,10 +24,11 @@ public class Customer {
     @Column(name = "postal_code")
     private String postalCode;
 
-    //Create relationship in sql/database
+    @JsonIgnoreProperties
     @OneToMany(mappedBy = "owner")
     private List<Car> cars;
 
+    @JsonIgnoreProperties("car")
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments = new ArrayList<>();
 

@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "autos")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Car {
 
     @Id
