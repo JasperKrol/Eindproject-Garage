@@ -27,7 +27,7 @@ public class Car {
     @JsonIgnore
     private Customer owner;
 
-    @OneToMany(mappedBy = "carForAppointment", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "carForAppointment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
     // Constructors
