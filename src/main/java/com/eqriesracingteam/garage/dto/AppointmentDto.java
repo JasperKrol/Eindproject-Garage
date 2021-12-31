@@ -14,12 +14,10 @@ public class AppointmentDto {
 
     public long id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime appointmentDate;
 
     public AppointmentStatus appointmentStatus;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime carPickupDate;
 
     public String description;

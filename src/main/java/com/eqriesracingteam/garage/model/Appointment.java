@@ -1,6 +1,8 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -17,9 +19,11 @@ public class Appointment {
     private long id;
 
     private LocalDateTime appointmentDate;
+
     private AppointmentStatus appointmentStatus;
+
     private LocalDateTime carPickupDate;
-    //    @Size(min = 1)
+
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
