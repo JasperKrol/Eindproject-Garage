@@ -6,12 +6,9 @@ import com.eqriesracingteam.garage.dto.AppointmentInputDto;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController

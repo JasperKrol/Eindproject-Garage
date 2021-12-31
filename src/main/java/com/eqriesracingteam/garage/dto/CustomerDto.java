@@ -17,10 +17,11 @@ public class CustomerDto {
     public String lastName;
     public String postalCode;
 
-    @JsonIgnoreProperties({"appointments", "cars"})
+
+    @JsonIgnoreProperties("appointments")
     public List<Car> cars;
 
-    @JsonIgnoreProperties({"cars", "appointments"})
+    @JsonIgnoreProperties("customer")
     public List<Appointment> appointments;
 
     public static CustomerDto fromCustomer(Customer customer) {
@@ -30,8 +31,8 @@ public class CustomerDto {
         dto.firstName = customer.getFirstName();
         dto.lastName = customer.getLastName();
         dto.postalCode = customer.getPostalCode();
-        dto.cars = customer.getCars();
         dto.appointments = customer.getAppointments();
+        dto.cars = customer.getCars();
 
         // TODO: 30-12-2021 if appointmentstatus is !afgerond customer.get) :: ""
         //        dto.appointments = customer.getAppointments();
