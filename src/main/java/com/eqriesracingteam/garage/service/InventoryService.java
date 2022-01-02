@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.InventoryException;
+import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Inventory;
 import com.eqriesracingteam.garage.repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,33 @@ public class InventoryService {
         }
     }
 
-    // Handling of requests
+    public void deleteItemFromInventory(long id) {
+        if (inventoryRepository.existsById(id)) {
+            inventoryRepository.deleteById(id);
+        } else {
+            throw new RecordNotFoundException("Item with id not found");
+        }
+    }
 
+    public void updateInventoryItem(long id, Inventory inventoryItem) {
+        Optional<Inventory> optionalInventory = inventoryRepository.findById(id);
+
+        if (optionalInventory.isPresent()) {
+            Inventory storedItem = optionalInventory.get();
+
+            inventoryItem.setId(storedItem.getId());
+            inventoryRepository.save(inventoryItem);
+        }
+    }
+
+    public void partialUpdateItem(long id, Inventory inventory) {
+        Optional<Inventory> optionalInventory = inventoryRepository.findById(id);
+
+        if (optionalInventory.isPresent()) {
+            Inventory storedItem = inventoryRepository.findById(id).orElse(null);
+            if (inventory.getPrice() != null) {
+                storedItem.setPrice(inventory.getPrice());
+            }
+        }
+    }
 }

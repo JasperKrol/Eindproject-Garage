@@ -59,4 +59,21 @@ public class InventoryController {
         var inventoryItem = inventoryService.createNewInventoryItem(dto.toInventory());
         return InventoryDto.fromInventory(inventoryItem);
     }
+
+    @DeleteMapping(value = "/api/garage/inventory/{id}")
+    public void deleteItem(@PathVariable("id") long id){
+        inventoryService.deleteItemFromInventory(id);
+    }
+
+    @PutMapping(value = "/api/garage/inventory/{id}")
+    public InventoryDto updateInventoryItem(@PathVariable("id") long id, @RequestBody Inventory inventory){
+        inventoryService.updateInventoryItem(id, inventory);
+        return InventoryDto.fromInventory(inventory);
+    }
+
+    @PatchMapping(value = "/api/garage/inventory/{id}")
+    public InventoryDto partialUpdateItem(@PathVariable("id") long id, @RequestBody Inventory inventory){
+        inventoryService.partialUpdateItem(id, inventory);
+        return InventoryDto.fromInventory(inventory);
+    }
 }

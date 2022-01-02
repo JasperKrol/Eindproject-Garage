@@ -103,9 +103,11 @@ public class CustomerService {
             }
             if (customer.getPostalCode() != null && !customer.getPostalCode().isEmpty()) {
                 existingCustomer.setPostalCode(customer.getPostalCode());
-            }if (customer.getAppointments() != null && !customer.getAppointments().isEmpty()) {
+            }
+            if (customer.getAppointments() != null && !customer.getAppointments().isEmpty()) {
                 existingCustomer.setAppointments(customer.getAppointments());
-            }if (customer.getCars() != null && !customer.getCars().isEmpty()) {
+            }
+            if (customer.getCars() != null && !customer.getCars().isEmpty()) {
                 existingCustomer.setCars(customer.getCars());
             }
             customerRepository.save(existingCustomer);
@@ -147,7 +149,7 @@ public class CustomerService {
     public List<Appointment> getCustomerAppointments(long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
-        if (optionalCustomer.isPresent()){
+        if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
             return customer.getAppointments();
         } else {
@@ -158,7 +160,7 @@ public class CustomerService {
     public void addAppointmentToCustomer(long id, Appointment appointment) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
-        if (optionalCustomer.isPresent()){
+        if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
             List<Appointment> appointments = customer.getAppointments();
 
@@ -174,18 +176,18 @@ public class CustomerService {
 
     // TODO: 13-12-2021 needed for plan?
 
-//        public void assingCarToCustomer(Long id, Long carId) {
-//            var optionalCustomer = customerRepository.findById(id);
-//            var optionalCar = carRepository.findById(carId);
-//
-//            if (optionalCustomer.isPresent() && optionalCar.isPresent()) {
-//                var customer = optionalCustomer.get();
-//                var car = optionalCar.get();
-//
-//                customer.setCars((List<Car>) car);
-//                customerRepository.save(customer);
-//            } else {
-//                throw new RecordNotFoundException();
-//            }
-//        }
+    //        public void assingCarToCustomer(Long id, Long carId) {
+    //            var optionalCustomer = customerRepository.findById(id);
+    //            var optionalCar = carRepository.findById(carId);
+    //
+    //            if (optionalCustomer.isPresent() && optionalCar.isPresent()) {
+    //                var customer = optionalCustomer.get();
+    //                var car = optionalCar.get();
+    //
+    //                customer.setCars((List<Car>) car);
+    //                customerRepository.save(customer);
+    //            } else {
+    //                throw new RecordNotFoundException();
+    //            }
+    //        }
 }
