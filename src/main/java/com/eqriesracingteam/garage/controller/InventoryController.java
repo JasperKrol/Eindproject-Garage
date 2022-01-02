@@ -1,12 +1,18 @@
 package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.AppointmentDto;
+import com.eqriesracingteam.garage.dto.InventoryDto;
+import com.eqriesracingteam.garage.dto.InventoryInputDto;
+import com.eqriesracingteam.garage.exceptions.BadRequestException;
+import com.eqriesracingteam.garage.model.Inventory;
 import com.eqriesracingteam.garage.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class InventoryController {
@@ -25,5 +31,32 @@ public class InventoryController {
     @GetMapping(value = "/api/garage/inventory/{id}")
     public ResponseEntity<Object> getOnePart(@PathVariable("id") long id) {
         return ResponseEntity.ok().body(inventoryService.getOnePart(id));
+    }
+
+    // Get all
+    @GetMapping(value = "/api/garage/inventory")
+    public List<InventoryDto> getAllInventoryItems(@RequestParam(name = "description", defaultValue = "")String description){
+        var dtos = new ArrayList<InventoryDto>();
+
+        List<Inventory> inventoryList;
+
+        if (description !=null ){
+            inventoryList = inventoryService.getAllItemsByDescription(description);
+        } else if (description == null){
+            inventoryList = inventoryService.getAllInventoryItems();
+        } else {
+            throw new BadRequestException("Items not found");
+        }
+
+        for (Inventory inventoryItem : inventoryList) {
+            dtos.add(InventoryDto.fromInventory(inventoryItem));
+        }
+        return dtos;
+    }
+
+    @PostMapping(value = "/api/garage/inventory")
+    public InventoryDto addInventoryItem(@RequestBody InventoryInputDto dto){
+        var inventoryItem = inventoryService.createNewInventoryItem(dto.toInventory());
+        return InventoryDto.fromInventory(inventoryItem);
     }
 }

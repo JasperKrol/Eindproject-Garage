@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "auto_onderdelen")
@@ -12,7 +13,7 @@ public class Inventory {
     private long id;
 
     private String itemDescription;
-    private double price;
+    private BigDecimal price;
     private long stock;
     private long usedParts;
 
@@ -34,23 +35,23 @@ public class Inventory {
         this.itemDescription = itemDescription;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public double getStock() {
+    public long getStock() {
         return stock;
     }
 
-    public void setStock(long stock) {
+    public void setStock(Long stock) {
         this.stock = stock;
     }
 
-    public double getUsedParts() {
+    public long getUsedParts() {
         return usedParts;
     }
 

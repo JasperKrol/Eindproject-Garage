@@ -39,4 +39,8 @@ public class ExceptionController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
+    @ExceptionHandler(value = InventoryException.class)
+    public ResponseEntity<Object> exception(InventoryException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
 }
