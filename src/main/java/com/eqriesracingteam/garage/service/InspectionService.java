@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class InspectionService {
@@ -13,12 +14,12 @@ public class InspectionService {
     @Autowired
     private InspectionRepository inspectionRepository;
 
-    public Iterable<Inspection> getInspections(LocalDateTime appointmentDate) {
+    public List<Inspection> getInspections(LocalDateTime inspectionDate) {
 
-        if (appointmentDate == null) {
+        if (inspectionDate == null) {
             return inspectionRepository.findAll();
         } else {
-            return inspectionRepository.findAllByAppointmentDate(appointmentDate);
+            return inspectionRepository.findAllByInspectionDate(inspectionDate);
         }
 
     }

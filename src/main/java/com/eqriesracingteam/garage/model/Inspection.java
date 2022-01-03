@@ -5,34 +5,32 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Entity
 @Table(name = "inspecties")
-public class Inspection extends Appointment{
+public class Inspection {
 
-    @JsonIgnoreProperties("inspections")
-    @ManyToOne
-    @JoinColumn(name = "car_id", referencedColumnName = "id")
-    private Car scheduledCar;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-//    @OneToMany(mappedBy = "deficiency", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @LazyCollection(LazyCollectionOption.FALSE)
-//    private List<Deficiency> deficiencies = new ArrayList<>();
+    private LocalDateTime inspectionDate;
 
-    public Car getScheduledCar() {
-        return scheduledCar;
+    public long getId() {
+        return id;
     }
 
-    public void setScheduledCar(Car scheduledCar) {
-        this.scheduledCar = scheduledCar;
+    public void setId(long id) {
+        this.id = id;
     }
 
-//    public List<Deficiency> getDeficiencies() {
-//        return deficiencies;
-//    }
-//
-//    public void setDeficiencies(List<Deficiency> deficiencies) {
-//        this.deficiencies = deficiencies;
-//    }
+    public LocalDateTime getInspectionDate() {
+        return inspectionDate;
+    }
+
+    public void setInspectionDate(LocalDateTime inspectionDate) {
+        this.inspectionDate = inspectionDate;
+    }
 }

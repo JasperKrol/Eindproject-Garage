@@ -89,6 +89,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //to set up, all acces for developing
                 .antMatchers("/api/garage/appointments/**").permitAll()
                 .antMatchers("/api/garage/inventory/**").permitAll()
+                .antMatchers("/api/garage/inspections/**").permitAll()
                 .anyRequest().denyAll()
                 .and()
                 .sessionManagement()
