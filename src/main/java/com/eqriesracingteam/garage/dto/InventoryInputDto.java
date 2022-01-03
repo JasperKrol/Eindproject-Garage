@@ -9,8 +9,8 @@ public class InventoryInputDto {
     public long itemId;
     public String itemDescription;
     public BigDecimal price;
-    public long stock;
-    private long usedParts;
+    public int stock;
+    private int usedParts;
 
     public Inventory toInventory(){
         var inventory = new Inventory();
@@ -19,6 +19,7 @@ public class InventoryInputDto {
         inventory.setItemDescription(itemDescription);
         inventory.setPrice(price);
         inventory.setStock(stock);
+        inventory.setUsedParts(usedParts);
 
         return inventory;
     }

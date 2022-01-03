@@ -9,8 +9,8 @@ public class InventoryDto {
     public long itemId;
     public String itemDescription;
     public BigDecimal price;
-    public long stock;
-    public long usedParts;
+    public int stock;
+    public int usedParts;
 
     public static InventoryDto fromInventory(Inventory inventory) {
 

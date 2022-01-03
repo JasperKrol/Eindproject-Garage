@@ -41,6 +41,7 @@ public class InventoryService {
         if (inventoryList.size() > 0) {
             throw new InventoryException("Inventory item already exists");
         } else {
+            inventoryItem.setUsedParts(0);
             return inventoryRepository.save(inventoryItem);
         }
     }
@@ -61,17 +62,6 @@ public class InventoryService {
 
             inventoryItem.setId(storedItem.getId());
             inventoryRepository.save(inventoryItem);
-        }
-    }
-
-    public void partialUpdateItem(long id, Inventory inventory) {
-        Optional<Inventory> optionalInventory = inventoryRepository.findById(id);
-
-        if (optionalInventory.isPresent()) {
-            Inventory storedItem = inventoryRepository.findById(id).orElse(null);
-            if (inventory.getPrice() != null) {
-                storedItem.setPrice(inventory.getPrice());
-            }
         }
     }
 }

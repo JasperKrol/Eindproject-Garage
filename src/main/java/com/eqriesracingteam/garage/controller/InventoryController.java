@@ -70,10 +70,4 @@ public class InventoryController {
         inventoryService.updateInventoryItem(id, inventory);
         return InventoryDto.fromInventory(inventory);
     }
-
-    @PatchMapping(value = "/api/garage/inventory/{id}")
-    public InventoryDto partialUpdateItem(@PathVariable("id") long id, @RequestBody Inventory inventory){
-        inventoryService.partialUpdateItem(id, inventory);
-        return InventoryDto.fromInventory(inventory);
-    }
 }

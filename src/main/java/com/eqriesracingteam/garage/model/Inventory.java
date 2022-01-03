@@ -14,8 +14,8 @@ public class Inventory {
 
     private String itemDescription;
     private BigDecimal price;
-    private long stock;
-    private long usedParts;
+    private int stock;
+    private int usedParts;
 
     // Getters and setters
 
@@ -43,19 +43,19 @@ public class Inventory {
         this.price = price;
     }
 
-    public long getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(Long stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
-    public long getUsedParts() {
+    public int getUsedParts() {
         return usedParts;
     }
 
-    public void setUsedParts(long usedParts) {
+    public void setUsedParts(int usedParts) {
         this.usedParts = usedParts;
     }
 }
