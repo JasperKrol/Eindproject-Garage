@@ -1,7 +1,9 @@
 package com.eqriesracingteam.garage.service;
 
+import com.eqriesracingteam.garage.dto.InspectionInputDto;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Inspection;
+import com.eqriesracingteam.garage.model.InspectionStatus;
 import com.eqriesracingteam.garage.repository.InspectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +36,11 @@ public class InspectionService {
         } else {
             throw new RecordNotFoundException("Inspection not found");
         }
+    }
+
+    public Inspection createInspection(Inspection inspection) {
+
+        inspection.setInspectionStatus(InspectionStatus.INSPECTIE_GEPLAND);
+        return inspectionRepository.save(inspection);
     }
 }
