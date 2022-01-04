@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.model;
 
 import com.eqriesracingteam.garage.dto.AppointmentDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -19,15 +20,18 @@ public class Inspection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    // TODO: 4-1-2022 relation with appointment date 
     private LocalDateTime inspectionDate;
-    // TODO: 4-1-2022 appointmentstatus setting
 
     private String findings;
 
     private BigDecimal estimatedCosts;
 
     private InspectionStatus inspectionStatus;
+
+    @JsonIgnoreProperties("cars")
+    @ManyToOne
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
+    private Car scheduledCar;
 
     public long getId() {
         return id;
@@ -67,5 +71,13 @@ public class Inspection {
 
     public void setInspectionStatus(InspectionStatus inspectionStatus) {
         this.inspectionStatus = inspectionStatus;
+    }
+
+    public Car getScheduledCar() {
+        return scheduledCar;
+    }
+
+    public void setScheduledCar(Car scheduledCar) {
+        this.scheduledCar = scheduledCar;
     }
 }

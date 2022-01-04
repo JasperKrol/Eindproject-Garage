@@ -1,11 +1,11 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.dto.InspectionInputDto;
-import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.InspectionException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
+import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Inspection;
 import com.eqriesracingteam.garage.model.InspectionStatus;
+import com.eqriesracingteam.garage.repository.CarRepository;
 import com.eqriesracingteam.garage.repository.InspectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,14 @@ import java.util.Optional;
 @Service
 public class InspectionService {
 
-    @Autowired
     private InspectionRepository inspectionRepository;
+    private CarRepository carRepository;
+
+    @Autowired
+    public InspectionService (InspectionRepository inspectionRepository, CarRepository carRepository){
+        this.inspectionRepository = inspectionRepository;
+        this.carRepository = carRepository;
+    }
 
     public List<Inspection> getInspections(LocalDateTime inspectionDate) {
 
@@ -78,6 +84,21 @@ public class InspectionService {
             throw new InspectionException("Inspection with id not found");
         } else {
            inspectionRepository.deleteById(id);
+        }
+    }
+
+    public Inspection assignCarToInspection(long id, long carId) {
+        Optional<Inspection> optionalInspection = inspectionRepository.findById(id);
+        Optional<Car> optionalCar = carRepository.findById(carId);
+
+        if (optionalInspection.isPresent() && optionalCar.isPresent()){
+            var inspection = optionalInspection.get();
+            var car = optionalCar.get();
+
+            inspection.setScheduledCar(car);
+            return inspectionRepository.save(inspection);
+        } else {
+            throw new InspectionException("Inspection with id not found");
         }
     }
 }

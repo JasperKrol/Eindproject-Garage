@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.controller;
 
+import com.eqriesracingteam.garage.dto.CarInputDto;
 import com.eqriesracingteam.garage.dto.InspectionDto;
 import com.eqriesracingteam.garage.dto.InspectionInputDto;
 import com.eqriesracingteam.garage.model.Inspection;
@@ -53,5 +54,12 @@ public class InspectionController {
     @DeleteMapping(value = "/api/garage/inspections/{id}")
     public void deleteInspection(@PathVariable("id") long id){
         inspectionService.deleteInspection(id);
+    }
+
+    //Assign
+    // Put
+    @PutMapping(value = "/api/garage/inspections/{id}/car")
+    public InspectionDto assignCarToInspection(@PathVariable("id") long id, @RequestBody CarInputDto inputDto){
+        return InspectionDto.fromInspection(inspectionService.assignCarToInspection(id, inputDto.id));
     }
 }

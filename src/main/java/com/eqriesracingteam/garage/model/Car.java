@@ -30,6 +30,10 @@ public class Car {
     @OneToMany(mappedBy = "carForAppointment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "scheduledCar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Inspection> inspections = new ArrayList<>();
+
     // Constructors
     public Car() {
     }
@@ -80,5 +84,13 @@ public class Car {
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    public List<Inspection> getInspections() {
+        return inspections;
+    }
+
+    public void setInspections(List<Inspection> inspections) {
+        this.inspections = inspections;
     }
 }

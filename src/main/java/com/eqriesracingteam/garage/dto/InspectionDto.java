@@ -1,8 +1,10 @@
 package com.eqriesracingteam.garage.dto;
 
+import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Inspection;
 import com.eqriesracingteam.garage.model.InspectionStatus;
-import org.springframework.lang.Nullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,6 +16,9 @@ public class InspectionDto {
     public BigDecimal estimatedCosts;
     public InspectionStatus inspectionStatus;
 
+    @JsonIgnoreProperties({"cars", "appointments"})
+    public Car scheduledCar;
+
     public static InspectionDto fromInspection(Inspection inspection){
         var dto = new InspectionDto();
 
@@ -22,6 +27,7 @@ public class InspectionDto {
         dto.findings = inspection.getFindings();
         dto.estimatedCosts = inspection.getEstimatedCosts();
         dto.inspectionStatus = inspection.getInspectionStatus();
+        dto.scheduledCar = inspection.getScheduledCar();
 
         return dto;
     }
