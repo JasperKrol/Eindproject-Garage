@@ -69,6 +69,8 @@ public class AppointmentService {
             appointmentRepository.save(existingAppointment);
 
 
+        } else {
+            throw new AppointmentException("Appointment could not be saved");
         }
     }
 

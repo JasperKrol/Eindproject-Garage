@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.dto.InspectionInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
+import com.eqriesracingteam.garage.exceptions.InspectionException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Inspection;
 import com.eqriesracingteam.garage.model.InspectionStatus;
@@ -32,7 +33,7 @@ public class InspectionService {
     public Inspection getInspection(long id) {
         Optional<Inspection> inspectionOptional = inspectionRepository.findById(id);
 
-        if (inspectionOptional.isPresent()){
+        if (inspectionOptional.isPresent()) {
             return inspectionOptional.get();
         } else {
             throw new RecordNotFoundException("Inspection not found");
@@ -46,9 +47,37 @@ public class InspectionService {
         inspection.setInspectionStatus(InspectionStatus.INSPECTIE_GEPLAND);
 
         if (inspections.size() > 0) {
-            throw new BadRequestException("No more space on this date/time combination");
+            throw new InspectionException("No more space on this date/time combination");
         } else {
             return inspectionRepository.save(inspection);
+        }
+    }
+
+    public Inspection updateInspection(long id, Inspection inspection) {
+        Optional<Inspection> optionalInspection = inspectionRepository.findById(id);
+
+        if (optionalInspection.isPresent()) {
+            Inspection plannedInspection = optionalInspection.get();
+
+            plannedInspection.setId(plannedInspection.getId());
+            plannedInspection.setInspectionDate(inspection.getInspectionDate());
+            plannedInspection.setInspectionStatus(inspection.getInspectionStatus());
+            plannedInspection.setFindings(inspection.getFindings());
+            plannedInspection.setEstimatedCosts(inspection.getEstimatedCosts());
+
+            return inspectionRepository.save(plannedInspection);
+        } else {
+            throw new InspectionException("Inspection could not be saved or found");
+        }
+    }
+
+    public void deleteInspection(long id) {
+        Optional<Inspection> optionalInspection = inspectionRepository.findById(id);
+
+        if (!optionalInspection.isPresent()){
+            throw new InspectionException("Inspection with id not found");
+        } else {
+           inspectionRepository.deleteById(id);
         }
     }
 }

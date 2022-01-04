@@ -41,4 +41,17 @@ public class InspectionController {
         var inspection = inspectionService.createInspection(dto.toInspection());
         return InspectionDto.fromInspection(inspection);
     }
+
+    // Update
+    @PutMapping(value = "/api/garage/inspections/{id}")
+    public InspectionDto updateInspection(@PathVariable("id") long id, @RequestBody Inspection inspection) {
+        inspectionService.updateInspection(id, inspection);
+        return InspectionDto.fromInspection(inspection);
+    }
+
+    // Delete
+    @DeleteMapping(value = "/api/garage/inspections/{id}")
+    public void deleteInspection(@PathVariable("id") long id){
+        inspectionService.deleteInspection(id);
+    }
 }
