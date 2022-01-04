@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.dto.InspectionInputDto;
+import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Inspection;
 import com.eqriesracingteam.garage.model.InspectionStatus;
@@ -39,8 +40,15 @@ public class InspectionService {
     }
 
     public Inspection createInspection(Inspection inspection) {
+        var inspectionDate = inspection.getInspectionDate();
+        List<Inspection> inspections = inspectionRepository.findAllByInspectionDate(inspectionDate);
 
         inspection.setInspectionStatus(InspectionStatus.INSPECTIE_GEPLAND);
-        return inspectionRepository.save(inspection);
+
+        if (inspections.size() > 0) {
+            throw new BadRequestException("No more space on this date/time combination");
+        } else {
+            return inspectionRepository.save(inspection);
+        }
     }
 }

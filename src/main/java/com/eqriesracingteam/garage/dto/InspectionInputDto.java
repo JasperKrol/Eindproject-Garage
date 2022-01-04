@@ -20,7 +20,6 @@ public class InspectionInputDto {
         inspection.setInspectionDate(inspectionDate);
         inspection.setFindings(findings);
         inspection.setEstimatedCosts(estimatedCosts);
-        inspection.setInspectionStatus(inspectionStatus);
 
         return inspection;
     }
