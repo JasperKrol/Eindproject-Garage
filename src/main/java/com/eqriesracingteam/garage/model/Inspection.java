@@ -5,6 +5,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -17,6 +18,10 @@ public class Inspection {
     private long id;
 
     private LocalDateTime inspectionDate;
+
+    private String findings;
+
+    private BigDecimal estimatedCosts;
 
     public long getId() {
         return id;
@@ -32,5 +37,21 @@ public class Inspection {
 
     public void setInspectionDate(LocalDateTime inspectionDate) {
         this.inspectionDate = inspectionDate;
+    }
+
+    public String getFindings() {
+        return findings;
+    }
+
+    public void setFindings(String findings) {
+        this.findings = findings;
+    }
+
+    public BigDecimal getEstimatedCosts() {
+        return estimatedCosts;
+    }
+
+    public void setEstimatedCosts(BigDecimal estimatedCosts) {
+        this.estimatedCosts = estimatedCosts;
     }
 }
