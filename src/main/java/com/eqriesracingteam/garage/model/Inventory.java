@@ -21,7 +21,7 @@ public class Inventory {
     private int usedParts;
 
     // TODO: 5-1-2022 many to many relation
-    @ManyToMany
+    @ManyToMany(mappedBy = "repairItems", fetch = FetchType.LAZY)
     private List<Repair> repairs;
 
     // Getters and setters
