@@ -22,7 +22,7 @@ public class Repair {
     private Car scheduledCar;
 
     // TODO: 5-1-2022 many to many relation 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "item")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Inventory> items = new ArrayList<>();
 
