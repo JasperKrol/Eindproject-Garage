@@ -24,7 +24,7 @@ public class Repair {
     // TODO: 5-1-2022 many to many relation
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
-    @JoinTable(name = "repair_items", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "inventory_id"))
+    @JoinTable(name = "repairs_items", joinColumns = @JoinColumn(name = "repair_id"), inverseJoinColumns = @JoinColumn(name = "inventory_id"))
     private List<Inventory> repairItems = new ArrayList<>();
 
     public long getId() {
