@@ -19,6 +19,7 @@ public class Inventory {
     private int stock;
     private int usedParts;
 
+    // TODO: 5-1-2022 many to many relation
     @JsonIgnoreProperties("items")
     @ManyToOne
     @JoinColumn(name = "repair_id", referencedColumnName = "id")

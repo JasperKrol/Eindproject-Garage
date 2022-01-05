@@ -21,6 +21,7 @@ public class Repair {
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car scheduledCar;
 
+    // TODO: 5-1-2022 many to many relation 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Inventory> items = new ArrayList<>();
