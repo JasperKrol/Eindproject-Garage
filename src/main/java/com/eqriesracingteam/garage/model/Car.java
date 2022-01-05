@@ -1,6 +1,8 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.persistence.*;
@@ -34,6 +36,10 @@ public class Car {
     @OneToMany(mappedBy = "scheduledCar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inspection> inspections = new ArrayList<>();
 
+    @OneToMany(mappedBy = "scheduledCar", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Repair> repairs = new ArrayList<>();
+
     // Constructors
     public Car() {
     }
@@ -46,6 +52,7 @@ public class Car {
     }
 
     //Getters and Setters
+
     public long getId() {
         return id;
     }
@@ -92,5 +99,13 @@ public class Car {
 
     public void setInspections(List<Inspection> inspections) {
         this.inspections = inspections;
+    }
+
+    public List<Repair> getRepairs() {
+        return repairs;
+    }
+
+    public void setRepairs(List<Repair> repairs) {
+        this.repairs = repairs;
     }
 }

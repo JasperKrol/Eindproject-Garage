@@ -1,5 +1,7 @@
 package com.eqriesracingteam.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -16,6 +18,11 @@ public class Inventory {
     private BigDecimal price;
     private int stock;
     private int usedParts;
+
+    @JsonIgnoreProperties("items")
+    @ManyToOne
+    @JoinColumn(name = "repair_id", referencedColumnName = "id")
+    private Repair item;
 
     // Getters and setters
 
@@ -57,5 +64,13 @@ public class Inventory {
 
     public void setUsedParts(int usedParts) {
         this.usedParts = usedParts;
+    }
+
+    public Repair getItem() {
+        return item;
+    }
+
+    public void setItem(Repair item) {
+        this.item = item;
     }
 }

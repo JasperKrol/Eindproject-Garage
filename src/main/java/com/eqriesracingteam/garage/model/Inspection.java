@@ -34,6 +34,8 @@ public class Inspection {
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car scheduledCar;
 
+    // Getters and setters
+
     public long getId() {
         return id;
     }
@@ -81,4 +83,5 @@ public class Inspection {
     public void setScheduledCar(Car scheduledCar) {
         this.scheduledCar = scheduledCar;
     }
+
 }
