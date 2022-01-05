@@ -16,6 +16,7 @@ public class InspectionDto {
     public BigDecimal estimatedCosts;
     public InspectionStatus inspectionStatus;
 
+    // TODO: 5-1-2022 for now just this hard ignore
     @JsonIgnoreProperties({"cars", "appointments"})
     public Car scheduledCar;
 

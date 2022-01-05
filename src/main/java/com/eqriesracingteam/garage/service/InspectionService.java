@@ -26,9 +26,11 @@ public class InspectionService {
         this.carRepository = carRepository;
     }
 
-    public List<Inspection> getInspections(LocalDateTime inspectionDate) {
+    public List<Inspection> getInspections(LocalDateTime inspectionDate, String licensePlate) {
 
         if (inspectionDate == null) {
+            return inspectionRepository.findAll();
+        }if (licensePlate == null) {
             return inspectionRepository.findAll();
         } else {
             return inspectionRepository.findAllByInspectionDate(inspectionDate);

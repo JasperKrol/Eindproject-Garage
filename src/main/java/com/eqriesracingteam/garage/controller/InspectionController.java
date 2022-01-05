@@ -26,8 +26,8 @@ public class InspectionController {
 
     // Get all
     @GetMapping(value = "/api/garage/inspections")
-    public ResponseEntity<Object> getInspections(@RequestParam(value = "date", required = false) LocalDateTime inspectionDate) {
-        return ResponseEntity.ok(inspectionService.getInspections(inspectionDate));
+    public ResponseEntity<Object> getInspections(@RequestParam(value = "date", required = false) LocalDateTime inspectionDate, @RequestParam(value = "licensePlate", required = false) String licensePlate) {
+        return ResponseEntity.ok(inspectionService.getInspections(inspectionDate, licensePlate));
     }
 
     // Get one
