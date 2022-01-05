@@ -3,6 +3,7 @@ package com.eqriesracingteam.garage.service;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Car;
+import com.eqriesracingteam.garage.model.Inspection;
 import com.eqriesracingteam.garage.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,4 +96,14 @@ public class CarService {
         }
     }
 
+    public List<Inspection> getCarInspection(long id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+
+        if (optionalCar.isPresent()){
+            Car car = optionalCar.get();
+            return car.getInspections();
+        } else {
+            throw new RecordNotFoundException("No inspection found under car id");
+        }
+    }
 }
