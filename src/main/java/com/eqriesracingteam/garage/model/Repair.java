@@ -21,10 +21,19 @@ public class Repair {
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car scheduledCar;
 
-    // TODO: 5-1-2022 many to many relation 
-    @OneToMany(mappedBy = "item")
+    // TODO: 5-1-2022 many to many relation
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Inventory> items = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "repair_items", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "inventory_id"))
+    private List<Inventory> RepairItems = new ArrayList<>();
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Car getScheduledCar() {
         return scheduledCar;
@@ -34,11 +43,11 @@ public class Repair {
         this.scheduledCar = scheduledCar;
     }
 
-    public List<Inventory> getItems() {
-        return items;
+    public List<Inventory> getRepairItems() {
+        return RepairItems;
     }
 
-    public void setItems(List<Inventory> items) {
-        this.items = items;
+    public void setRepairItems(List<Inventory> repairItems) {
+        RepairItems = repairItems;
     }
 }
