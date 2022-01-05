@@ -25,7 +25,7 @@ public class Repair {
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany
     @JoinTable(name = "repair_items", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "inventory_id"))
-    private List<Inventory> RepairItems = new ArrayList<>();
+    private List<Inventory> repairItems = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -44,10 +44,18 @@ public class Repair {
     }
 
     public List<Inventory> getRepairItems() {
-        return RepairItems;
+        return repairItems;
     }
 
     public void setRepairItems(List<Inventory> repairItems) {
-        RepairItems = repairItems;
+        this.repairItems = repairItems;
+    }
+
+    public void addInventoryItem(Inventory inventoryItem) {
+        this.repairItems.add(inventoryItem);
+    }
+
+    public void removeInventoryItem(Inventory inventoryItem) {
+        this.repairItems.remove(inventoryItem);
     }
 }
