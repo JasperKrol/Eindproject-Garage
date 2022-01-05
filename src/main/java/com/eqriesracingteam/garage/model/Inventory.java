@@ -58,6 +58,14 @@ public class Inventory {
         this.stock = stock;
     }
 
+    public void takeItemFromStock(int amountFromStock) {
+        this.stock -= amountFromStock;
+    }
+
+    public void reStockItem(int amountToStock) {
+        this.stock += amountToStock;
+    }
+
     public int getUsedParts() {
         return usedParts;
     }
@@ -72,5 +80,13 @@ public class Inventory {
 
     public void setRepairs(List<Repair> repairs) {
         this.repairs = repairs;
+    }
+
+    public void addRepair(Repair repair) {
+        this.repairs.add(repair);
+    }
+
+    public void removeRepair(Repair repair) {
+        this.repairs.remove(repair);
     }
 }
