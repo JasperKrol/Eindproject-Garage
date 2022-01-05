@@ -42,4 +42,12 @@ VALUES ('Remset voor', 99, 21, 2),
        ('Ruitenwisser', 33, 20, 10),
        ('Winterband', 100, 8, 35),
        ('Allroundband', 120, 20, 99),
-       ('Zomerband', 95, 10, 95)
+       ('Zomerband', 95, 10, 95);
+
+--Inspecties
+INSERT INTO inspecties (findings, estimated_costs, inspection_status, inspection_date, car_id)
+VALUES ('Remset voor en achter', 300, 0, '2022-01-01T10:45:00', 1 ),
+       ('Ruitenwisser en vloeistof. Voor en achter', 1400, 1, '2022-01-01T10:45:00', 2 ),
+       ('Banden vervangen 4x winter', 400, 0, '2022-01-03T10:45:00', 2 ),
+       ('Koppeling vervangen en rem voor ', 1000, 0, '2022-01-04T16:45:00', 2 ),
+       ('Remset voor en achter', 300, 0, '2022-01-02T10:45:00', 4 );
