@@ -27,7 +27,7 @@ public class RepairService {
 
     public Repair createRepairAppointment(Repair repair) {
         var date = repair.getRepairDateWorkshop();
-        List<Repair> repairs = repairRepository.findAllByAppointmentDate(date);
+        List<Repair> repairs = repairRepository.findAllByRepairDateWorkshop(date);
 
         if (!repairs.isEmpty()){
             repair.setAppointmentStatus(AppointmentStatus.REPARATIE_GEPLAND);

@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface RepairRepository extends JpaRepository<Repair, Long> {
 
-    List<Repair> findAllByAppointmentDate(LocalDateTime date);
+    List<Repair> findAllByRepairDateWorkshop(LocalDateTime repairDateWorkshop);
 
 }
