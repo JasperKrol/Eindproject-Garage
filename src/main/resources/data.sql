@@ -53,9 +53,9 @@ VALUES ('Remset voor en achter', 300, 0, '2022-01-01T10:45:00', 1),
        ('Remset voor en achter', 300, 0, '2022-01-02T10:45:00', 4);
 
 --Inspecties
-INSERT INTO reparaties (appointment_status, inspection_date, car_id)
+INSERT INTO reparaties (appointment_status, repair_Date_Workshop, car_id)
 VALUES (0, '2022-01-01T00:45:00', 1),
        (1, '2022-12-01T15:00:00', 2),
        (0, '2022-01-11T18:30:00', 3),
-       (1, '2022-12-24T10:45:00', 4),
+       (1, '2022-12-24T10:45:00', 4);
 

@@ -21,7 +21,7 @@ public class CarDto {
     public CustomerDto owner;
 
 //        @JsonIgnoreProperties("owner")
-    @JsonSerialize
+//    @JsonSerialize
     public List<Inspection> inspection;
 
     //Constructor

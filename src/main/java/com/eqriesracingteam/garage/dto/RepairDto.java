@@ -4,6 +4,7 @@ import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Inventory;
 import com.eqriesracingteam.garage.model.Repair;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,6 @@ public class RepairDto {
 
     public List<Inventory> itemsUsed;
 
-    @JsonSerialize
     public CarDto carForReparation;
 
     public static RepairDto fromRepair(Repair repair){
