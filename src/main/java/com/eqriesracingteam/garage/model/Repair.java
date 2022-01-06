@@ -5,6 +5,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Repair {
     long id;
 
     private AppointmentStatus appointmentStatus;
+    private LocalDateTime repairDateWorkshop;
 
     @JsonIgnoreProperties("repairs")
     @ManyToOne
@@ -43,6 +45,14 @@ public class Repair {
 
     public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
         this.appointmentStatus = appointmentStatus;
+    }
+
+    public LocalDateTime getRepairDateWorkshop() {
+        return repairDateWorkshop;
+    }
+
+    public void setRepairDateWorkshop(LocalDateTime repairDateWorkshop) {
+        this.repairDateWorkshop = repairDateWorkshop;
     }
 
     public Car getScheduledCar() {

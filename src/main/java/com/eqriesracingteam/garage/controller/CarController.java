@@ -17,7 +17,6 @@ import java.util.List;
 public class CarController {
 
     //Attributes
-    @Autowired
     private CarService carService;
 
     //Constructor
