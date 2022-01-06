@@ -3,6 +3,7 @@ package com.eqriesracingteam.garage.controller;
 import com.eqriesracingteam.garage.dto.AppointmentDto;
 import com.eqriesracingteam.garage.dto.RepairDto;
 import com.eqriesracingteam.garage.dto.RepairInputDto;
+import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Repair;
 import com.eqriesracingteam.garage.service.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,19 @@ public class RepairController {
         }
         return dtos;
     }
+
+    // Adjust
+    @PutMapping(value = "/api/garage/appointments/{id}")
+    public RepairDto adjustRepairAppointment(@PathVariable("id") long id, @RequestBody Repair repair) {
+        repairService.adjustRepairAppointment(id, repair);
+        return RepairDto.fromRepair(repair);
+
+    }
+
+    // Delete appointment
+    @DeleteMapping(value = "/api/garage/appointments/{id}")
+    public void deleteAppointment(@PathVariable("id") long id){
+        appointmentService.deleteAppointment(id);
+    }
+
 }
