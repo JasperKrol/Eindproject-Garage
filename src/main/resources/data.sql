@@ -46,8 +46,16 @@ VALUES ('Remset voor', 99, 21, 2),
 
 --Inspecties
 INSERT INTO inspecties (findings, estimated_costs, inspection_status, inspection_date, car_id)
-VALUES ('Remset voor en achter', 300, 0, '2022-01-01T10:45:00', 1 ),
-       ('Ruitenwisser en vloeistof. Voor en achter', 1400, 1, '2022-01-01T10:45:00', 2 ),
-       ('Banden vervangen 4x winter', 400, 0, '2022-01-03T10:45:00', 2 ),
-       ('Koppeling vervangen en rem voor ', 1000, 0, '2022-01-04T16:45:00', 2 ),
-       ('Remset voor en achter', 300, 0, '2022-01-02T10:45:00', 4 );
+VALUES ('Remset voor en achter', 300, 0, '2022-01-01T10:45:00', 1),
+       ('Ruitenwisser en vloeistof. Voor en achter', 1400, 1, '2022-01-01T10:45:00', 2),
+       ('Banden vervangen 4x winter', 400, 0, '2022-01-03T10:45:00', 2),
+       ('Koppeling vervangen en rem voor ', 1000, 0, '2022-01-04T16:45:00', 2),
+       ('Remset voor en achter', 300, 0, '2022-01-02T10:45:00', 4);
+
+--Inspecties
+INSERT INTO reparaties (appointment_status, inspection_date, car_id)
+VALUES (0, '2022-01-01T00:45:00', 1),
+       (1, '2022-12-01T15:00:00', 2),
+       (0, '2022-01-11T18:30:00', 3),
+       (1, '2022-12-24T10:45:00', 4),
+
