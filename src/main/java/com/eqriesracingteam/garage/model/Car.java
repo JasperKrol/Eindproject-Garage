@@ -26,24 +26,23 @@ public class Car {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonIgnore
     private Customer owner;
 
 
-//    @OneToMany(mappedBy = "carForAppointment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //    @OneToMany(mappedBy = "carForAppointment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "carForAppointment")
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnoreProperties("carForAppointment")
     private List<Appointment> appointments;
 
 
-//    @OneToMany(mappedBy = "scheduledCar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    //    @OneToMany(mappedBy = "scheduledCar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToMany(mappedBy = "scheduledCar")
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore
     private List<Inspection> inspections = new ArrayList<>();
 
-    @OneToMany(mappedBy = "scheduledCar", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "scheduledCar")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Repair> repairs = new ArrayList<>();
 
