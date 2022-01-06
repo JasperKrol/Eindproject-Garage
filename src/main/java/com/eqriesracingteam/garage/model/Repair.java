@@ -16,6 +16,8 @@ public class Repair {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
+    private AppointmentStatus appointmentStatus;
+
     @JsonIgnoreProperties("repairs")
     @ManyToOne
     @JoinColumn(name = "car_id", referencedColumnName = "id")
@@ -33,6 +35,14 @@ public class Repair {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public AppointmentStatus getAppointmentStatus() {
+        return appointmentStatus;
+    }
+
+    public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
     }
 
     public Car getScheduledCar() {
