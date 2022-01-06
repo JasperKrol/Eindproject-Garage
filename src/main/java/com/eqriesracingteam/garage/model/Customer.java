@@ -1,6 +1,8 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -25,9 +27,12 @@ public class Customer {
     private String postalCode;
 
     @OneToMany(mappedBy = "owner")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Car> cars;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "customer")
     private List<Appointment> appointments = new ArrayList<>();
 
 

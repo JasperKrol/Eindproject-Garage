@@ -6,6 +6,7 @@ import com.eqriesracingteam.garage.model.Customer;
 import com.eqriesracingteam.garage.model.Inspection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.List;
 
@@ -15,10 +16,12 @@ public class CarDto {
     public String licensePlate;
     public String registrationPapers;
 
-    @JsonIgnoreProperties({"appointments", "cars"})
+    //    @JsonIgnoreProperties({"appointments", "cars"})
+    @JsonSerialize
     public Customer owner;
 
-    @JsonIgnoreProperties("cars")
+    //    @JsonIgnoreProperties("cars")
+    @JsonSerialize
     public List<Inspection> inspection;
 
     //Constructor
@@ -28,7 +31,6 @@ public class CarDto {
         dto.id = car.getId();
         dto.licensePlate = car.getLicensePlate();
         dto.registrationPapers = car.getRegistrationPapers();
-        dto.owner = car.getOwner();
 
         return dto;
     }

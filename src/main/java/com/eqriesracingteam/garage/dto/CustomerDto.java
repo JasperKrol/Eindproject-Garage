@@ -5,6 +5,7 @@ import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +18,12 @@ public class CustomerDto {
     public String lastName;
     public String postalCode;
 
-
-    @JsonIgnoreProperties("appointments")
+    //    @JsonIgnoreProperties("appointments")
+    @JsonSerialize
     public List<Car> cars;
 
-    @JsonIgnoreProperties("customer")
+    //    @JsonIgnoreProperties("customer")
+    @JsonSerialize
     public List<Appointment> appointments;
 
     public static CustomerDto fromCustomer(Customer customer) {

@@ -22,10 +22,9 @@ public class AppointmentDto {
 
     public String description;
 
-    @JsonIgnoreProperties("appointments")
     public Car car;
 
-    @JsonIgnoreProperties({"appointments", "cars"})
+    @JsonIgnore
     public Customer customer;
 
     public static AppointmentDto fromAppointment(Appointment appointment) {
@@ -37,8 +36,6 @@ public class AppointmentDto {
         dto.appointmentStatus = appointment.getAppointmentStatus();
         dto.carPickupDate = appointment.getCarPickupDate();
         dto.description = appointment.getDescription();
-        dto.car = appointment.getCarForAppointment();
-        dto.customer = appointment.getCustomer();
 
         return dto;
     }

@@ -29,9 +29,9 @@ public class Inspection {
     private InspectionStatus inspectionStatus;
 
     // TODO: 4-1-2022 Jsonigonre other get one get all loop fixen gi
-    @JsonIgnoreProperties("cars")
     @ManyToOne
     @JoinColumn(name = "car_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("carForAppointment")
     private Car scheduledCar;
 
     // Getters and setters
