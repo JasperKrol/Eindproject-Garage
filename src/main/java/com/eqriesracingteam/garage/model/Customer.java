@@ -28,11 +28,13 @@ public class Customer {
 
     @OneToMany(mappedBy = "owner")
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
     private List<Car> cars;
 
 //    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<Appointment> appointments = new ArrayList<>();
 
 
