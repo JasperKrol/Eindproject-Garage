@@ -16,6 +16,7 @@ public class RepairDto {
     public LocalDateTime repairDateWorkshop;
 
     public List<Inventory> itemsUsed;
+
     @JsonSerialize
     public CarDto carForReparation;
 

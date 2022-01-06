@@ -24,6 +24,7 @@ public class Car {
     @Column(name = "registration_papers")
     private String registrationPapers;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer owner;
