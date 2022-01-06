@@ -14,7 +14,7 @@ public class RepairInputDto {
     public AppointmentStatus appointmentStatus;
     public LocalDateTime repairDateWorkshop;
     public List<Inventory> itemsUsed;
-    public Car carForReparation;
+    public long carId;
 
     public Repair toRepair(){
        var repair = new Repair();

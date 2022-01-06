@@ -3,7 +3,9 @@ package com.eqriesracingteam.garage.service;
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.AppointmentStatus;
+import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Repair;
+import com.eqriesracingteam.garage.repository.CarRepository;
 import com.eqriesracingteam.garage.repository.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,25 +17,32 @@ import java.util.Optional;
 public class RepairService {
 
     private RepairRepository repairRepository;
+    private CarRepository carRepository;
 
     // Constructor
 
     @Autowired
-    public RepairService(RepairRepository repairRepository) {
+    public RepairService(RepairRepository repairRepository, CarRepository carRepository) {
         this.repairRepository = repairRepository;
+        this.carRepository = carRepository;
     }
 
     // Methods
 
-    public Repair createRepairAppointment(Repair repair) {
-        var date = repair.getRepairDateWorkshop();
-        List<Repair> repairs = repairRepository.findAllByRepairDateWorkshop(date);
+    public Repair createRepairAppointment(Repair repair, long carId) {
+//        var date = repair.getRepairDateWorkshop();
+        var optionalCar = carRepository.findById(carId);
+        repair.setAppointmentStatus(AppointmentStatus.REPARATIE_GEPLAND);
+        if (optionalCar.isPresent()){
+            var car = optionalCar.get();
+            repair.setScheduledCar(car);
 
-        if (!repairs.isEmpty()){
-            repair.setAppointmentStatus(AppointmentStatus.REPARATIE_GEPLAND);
-            Repair newRepair = repairRepository.save(repair);
+            return repairRepository.save(repair);
 
-            return newRepair;
+
+//            Repair newRepair = repairRepository.save(repair);
+//
+//            return newRepair;
         }
         throw new AppointmentException("Appointment date with timeslot taken");
     }
@@ -45,7 +54,7 @@ public class RepairService {
         if (optionalRepair.isPresent()){
             return optionalRepair.get();
         } else {
-            throw new AppointmentException("Appointment date with timeslot taken");
+            throw new AppointmentException("Could not find repair with that id");
         }
     }
 
