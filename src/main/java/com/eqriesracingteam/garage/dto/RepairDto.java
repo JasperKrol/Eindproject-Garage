@@ -20,6 +20,7 @@ public class RepairDto {
     public CarDto carForReparation;
 
     public static RepairDto fromRepair(Repair repair){
+
         var dto = new RepairDto();
 
         dto.id = repair.getId();

@@ -26,6 +26,8 @@ public class CarDto {
 
     //Constructor
     public static CarDto fromCar(Car car) {
+        if (car == null) return null;
+
         var dto = new CarDto();
 
         dto.id = car.getId();

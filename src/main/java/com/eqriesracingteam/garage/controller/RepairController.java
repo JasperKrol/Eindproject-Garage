@@ -50,7 +50,7 @@ public class RepairController {
     }
 
     // Adjust
-    @PutMapping(value = "/api/garage/appointments/{id}")
+    @PutMapping(value = "/api/garage/repairs/{id}")
     public RepairDto adjustRepairAppointment(@PathVariable("id") long id, @RequestBody Repair repair) {
         repairService.adjustRepairAppointment(id, repair);
         return RepairDto.fromRepair(repair);
@@ -58,9 +58,9 @@ public class RepairController {
     }
 
     // Delete appointment
-    @DeleteMapping(value = "/api/garage/appointments/{id}")
-    public void deleteAppointment(@PathVariable("id") long id){
-        appointmentService.deleteAppointment(id);
+    @DeleteMapping(value = "/api/garage/repairs/{id}")
+    public void deleteRepairAppointment(@PathVariable("id") long id){
+        repairService.deleteRepairAppointment(id);
     }
 
 }
