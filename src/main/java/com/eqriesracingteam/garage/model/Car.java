@@ -28,15 +28,11 @@ public class Car {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer owner;
 
-
-    //    @OneToMany(mappedBy = "carForAppointment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "carForAppointment")
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonIgnoreProperties("carForAppointment")
+    @JsonIgnore
     private List<Appointment> appointments;
 
-
-    //    @OneToMany(mappedBy = "scheduledCar", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToMany(mappedBy = "scheduledCar")
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore

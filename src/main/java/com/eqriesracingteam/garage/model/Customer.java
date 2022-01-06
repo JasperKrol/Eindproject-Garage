@@ -31,14 +31,10 @@ public class Customer {
     @JsonIgnore
     private List<Car> cars;
 
-//    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "customer")
     @JsonIgnore
     private List<Appointment> appointments = new ArrayList<>();
-
-
-    //Constructor
 
     //Getters and setters
     public long getId() {

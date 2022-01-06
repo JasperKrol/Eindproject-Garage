@@ -26,22 +26,15 @@ public class Appointment {
 
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car carForAppointment;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonIgnore
     private Customer customer;
 
-
     // TODO: 28-12-2021 invoice link?
-    ////    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    ////    @JoinColumn(name = "invoice_nr", referencedColumnName = "invoice_nr")
-    ////    private Invoice invoiceNumber;
-    //
-    //
 
     // Getters and setters
 
