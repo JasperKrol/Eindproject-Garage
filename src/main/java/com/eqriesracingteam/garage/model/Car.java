@@ -33,7 +33,7 @@ public class Car {
 //    @OneToMany(mappedBy = "carForAppointment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "carForAppointment")
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonIgnore
+    @JsonIgnoreProperties("carForAppointment")
     private List<Appointment> appointments;
 
 

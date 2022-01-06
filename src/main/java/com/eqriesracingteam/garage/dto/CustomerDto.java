@@ -19,11 +19,11 @@ public class CustomerDto {
     public String postalCode;
 
     //    @JsonIgnoreProperties("appointments")
-    @JsonSerialize
+//    @JsonSerialize
     public List<Car> cars;
 
     //    @JsonIgnoreProperties("customer")
-    @JsonSerialize
+//    @JsonSerialize
     public List<Appointment> appointments;
 
     public static CustomerDto fromCustomer(Customer customer) {

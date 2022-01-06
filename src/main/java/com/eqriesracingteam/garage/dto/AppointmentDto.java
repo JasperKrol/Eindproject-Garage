@@ -24,7 +24,6 @@ public class AppointmentDto {
 
     public Car car;
 
-    @JsonIgnore
     public Customer customer;
 
     public static AppointmentDto fromAppointment(Appointment appointment) {
