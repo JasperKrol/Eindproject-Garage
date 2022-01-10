@@ -8,9 +8,8 @@ import javax.persistence.*;
 @Table(name = "repairs_items")
 public class RepairsItems {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @EmbeddedId
+    private RepairsItemsKey id;
 
     @ManyToOne
     @JsonManagedReference
@@ -20,11 +19,11 @@ public class RepairsItems {
     private Repair repair;
 
 
-    public long getId() {
+    public RepairsItemsKey getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(RepairsItemsKey id) {
         this.id = id;
     }
 
