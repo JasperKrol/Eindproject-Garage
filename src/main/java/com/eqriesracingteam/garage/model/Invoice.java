@@ -10,16 +10,56 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long invoiceNumber;
-
     private BigDecimal grossAmount;
     private BigDecimal vatAmount;
     private BigDecimal nettoAmount;
-
     private boolean invoicePaid;
+    private static final BigDecimal vatPercentage = new BigDecimal("0.21");
 
     // TODO: 10-1-2022 Customer / repair relation
     // one invoice can have one customer
     // one invoice at one repairList met onderdelen en daar over loopen
 
-    private static final BigDecimal vatPercentage = new BigDecimal("0.21");
+    // Getters and setters
+
+
+    public long getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(long invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
+    }
+
+    public BigDecimal getGrossAmount() {
+        return grossAmount;
+    }
+
+    public void setGrossAmount(BigDecimal grossAmount) {
+        this.grossAmount = grossAmount;
+    }
+
+    public BigDecimal getVatAmount() {
+        return vatAmount;
+    }
+
+    public void setVatAmount(BigDecimal vatAmount) {
+        this.vatAmount = vatAmount;
+    }
+
+    public BigDecimal getNettoAmount() {
+        return nettoAmount;
+    }
+
+    public void setNettoAmount(BigDecimal nettoAmount) {
+        this.nettoAmount = nettoAmount;
+    }
+
+    public boolean isInvoicePaid() {
+        return invoicePaid;
+    }
+
+    public void setInvoicePaid(boolean invoicePaid) {
+        this.invoicePaid = invoicePaid;
+    }
 }
