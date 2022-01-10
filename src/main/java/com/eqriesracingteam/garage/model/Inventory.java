@@ -1,7 +1,5 @@
 package com.eqriesracingteam.garage.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,8 +19,8 @@ public class Inventory {
     private int usedParts;
 
     // TODO: 5-1-2022 many to many relation
-    @ManyToMany(mappedBy = "repairItems", fetch = FetchType.LAZY)
-    private List<Repair> repairs;
+    @OneToMany(mappedBy = "inventoryItem")
+    private List<RepairsItems> repairs;
 
     // Getters and setters
 
@@ -74,19 +72,19 @@ public class Inventory {
         this.usedParts = usedParts;
     }
 
-    public List<Repair> getRepairs() {
+    public List<RepairsItems> getRepairs() {
         return repairs;
     }
 
-    public void setRepairs(List<Repair> repairs) {
+    public void setRepairs(List<RepairsItems> repairs) {
         this.repairs = repairs;
     }
 
-    public void addRepair(Repair repair) {
-        this.repairs.add(repair);
-    }
-
-    public void removeRepair(Repair repair) {
-        this.repairs.remove(repair);
-    }
+//    public void addRepair(RepairsItems repair) {
+//        this.repairs.add(repair);
+//    }
+//
+//    public void removeRepair(Repair repair) {
+//        this.repairs.remove(repair);
+//    }
 }

@@ -7,6 +7,7 @@ import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Repair;
 import com.eqriesracingteam.garage.service.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -63,4 +64,11 @@ public class RepairController {
         repairService.deleteRepairAppointment(id);
     }
 
+
+    // Patch
+//    @PatchMapping(value = "/api/garage/repairs/{id}/repairItems" )
+//    public ResponseEntity<?> addUsedInventoryItemsByRepair(@PathVariable("id") long id, @RequestBody long repairItemId) {
+//        repairService.addARepairItem(id, repairItemId);
+//        return ResponseEntity.ok().build();
+//    }
 }

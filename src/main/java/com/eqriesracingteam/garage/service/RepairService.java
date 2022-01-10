@@ -3,11 +3,10 @@ package com.eqriesracingteam.garage.service;
 import com.eqriesracingteam.garage.dto.RepairDto;
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
-import com.eqriesracingteam.garage.model.Appointment;
-import com.eqriesracingteam.garage.model.AppointmentStatus;
-import com.eqriesracingteam.garage.model.Car;
-import com.eqriesracingteam.garage.model.Repair;
+import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
+import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.CarRepository;
+import com.eqriesracingteam.garage.repository.InventoryRepository;
 import com.eqriesracingteam.garage.repository.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +19,15 @@ public class RepairService {
 
     private RepairRepository repairRepository;
     private CarRepository carRepository;
+    private InventoryRepository inventoryRepository;
 
     // Constructor
 
     @Autowired
-    public RepairService(RepairRepository repairRepository, CarRepository carRepository) {
+    public RepairService(RepairRepository repairRepository, CarRepository carRepository, InventoryRepository inventoryRepository) {
         this.repairRepository = repairRepository;
         this.carRepository = carRepository;
+        this.inventoryRepository = inventoryRepository;
     }
 
     // Methods
@@ -94,4 +95,17 @@ public class RepairService {
             throw new AppointmentException("Appointment not found");
         }
     }
+
+
+//    public void addARepairItem(long id, long repairItemId) {
+//        Repair repair = getOneAppointment(id);
+//        Optional<Inventory> optionalInventory = inventoryRepository.findById(repairItemId);
+//
+//        if (optionalInventory.isPresent()){
+//            Inventory repairItem = optionalInventory.get();
+//            if (repairItem.getStock() != 0){
+//
+//            }
+//        }
+//    }
 }

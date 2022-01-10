@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -25,11 +26,11 @@ public class Repair {
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car scheduledCar;
 
-    // TODO: 5-1-2022 many to many relation
+    // Many2many relation w/ass. class
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany
-    @JoinTable(name = "repairs_items", joinColumns = @JoinColumn(name = "repair_id"), inverseJoinColumns = @JoinColumn(name = "inventory_id"))
-    private List<Inventory> repairItems = new ArrayList<>();
+    @OneToMany(mappedBy = "repair")
+    @JsonIgnore
+    private List<RepairsItems> repairsItems = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -63,19 +64,19 @@ public class Repair {
         this.scheduledCar = scheduledCar;
     }
 
-    public List<Inventory> getRepairItems() {
-        return repairItems;
+    public List<RepairsItems> getRepairItems() {
+        return repairsItems;
     }
 
-    public void setRepairItems(List<Inventory> repairItems) {
-        this.repairItems = repairItems;
+    public void setRepairItems(List<RepairsItems> repairsItems) {
+        this.repairsItems = repairsItems;
     }
 
-    public void addInventoryItem(Inventory inventoryItem) {
-        this.repairItems.add(inventoryItem);
-    }
-
-    public void removeInventoryItem(Inventory inventoryItem) {
-        this.repairItems.remove(inventoryItem);
-    }
+//    public void addInventoryItem(RepairsItems inventoryItem) {
+//        this.repairsItems.add(inventoryItem);
+//    }
+//
+//    public void removeInventoryItem(Inventory inventoryItem) {
+//        this.repairsItems.remove(inventoryItem);
+//    }
 }
