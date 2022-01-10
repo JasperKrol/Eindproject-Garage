@@ -8,6 +8,7 @@ import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.CarRepository;
 import com.eqriesracingteam.garage.repository.InventoryRepository;
 import com.eqriesracingteam.garage.repository.RepairRepository;
+import com.eqriesracingteam.garage.repository.RepairsItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,17 @@ public class RepairService {
     private RepairRepository repairRepository;
     private CarRepository carRepository;
     private InventoryRepository inventoryRepository;
+    private RepairsItemsRepository repairsItemsRepository;
+
 
     // Constructor
 
     @Autowired
-    public RepairService(RepairRepository repairRepository, CarRepository carRepository, InventoryRepository inventoryRepository) {
+    public RepairService(RepairRepository repairRepository, CarRepository carRepository, InventoryRepository inventoryRepository, RepairsItemsRepository repairsItemsRepository) {
         this.repairRepository = repairRepository;
         this.carRepository = carRepository;
         this.inventoryRepository = inventoryRepository;
+        this.repairsItemsRepository = repairsItemsRepository;
     }
 
     // Methods
@@ -71,7 +75,7 @@ public class RepairService {
         Optional<Repair> optionalAppointment = repairRepository.findById(id);
 
         if (optionalAppointment.isPresent()) {
-//            var repair = repairRepository.getById(id);
+            //            var repair = repairRepository.getById(id);
             Repair existingRepair = optionalAppointment.get();
 
             existingRepair.setId(existingRepair.getId());
@@ -97,15 +101,26 @@ public class RepairService {
     }
 
 
-//    public void addARepairItem(long id, long repairItemId) {
-//        Repair repair = getOneAppointment(id);
-//        Optional<Inventory> optionalInventory = inventoryRepository.findById(repairItemId);
-//
-//        if (optionalInventory.isPresent()){
-//            Inventory repairItem = optionalInventory.get();
-//            if (repairItem.getStock() != 0){
-//
-//            }
-//        }
-//    }
+    public void addARepairItem(long id, long repairItemId) {
+        Repair repair = getOneAppointment(id);
+        Optional<Inventory> optionalInventory = inventoryRepository.findById(repairItemId);
+
+        if (optionalInventory.isPresent()) {
+            Inventory inventoryItem = optionalInventory.get();
+            if (inventoryItem.getStock() != 0) {
+                RepairsItems repairItems = new RepairsItems();
+
+                repairItems.setRepair(repair);
+                repairItems.setInventoryItem(inventoryItem);
+                repairsItemsRepository.save(repairItems);
+
+                repair.getRepairItems().add(repairItems);
+                repairRepository.save(repair);
+                inventoryItem.setStock(-1);
+                inventoryRepository.save(inventoryItem);
+            }
+        } else {
+            throw new RecordNotFoundException("No repairItemId with id" + repairItemId );
+        }
+    }
 }

@@ -6,6 +6,7 @@ import com.eqriesracingteam.garage.dto.RepairInputDto;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Repair;
 import com.eqriesracingteam.garage.service.RepairService;
+import com.eqriesracingteam.garage.service.RepairsItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.List;
 public class RepairController {
 
     private RepairService repairService;
+    private RepairsItemsService repairsItemsService;
 
     @Autowired
     public RepairController(RepairService repairService) {
@@ -66,9 +68,9 @@ public class RepairController {
 
 
     // Patch
-//    @PatchMapping(value = "/api/garage/repairs/{id}/repairItems" )
-//    public ResponseEntity<?> addUsedInventoryItemsByRepair(@PathVariable("id") long id, @RequestBody long repairItemId) {
-//        repairService.addARepairItem(id, repairItemId);
-//        return ResponseEntity.ok().build();
-//    }
+    @PatchMapping(value = "/api/garage/repairs/{id}/repairItems" )
+    public ResponseEntity<?> addUsedInventoryItemsByRepair(@PathVariable("id") long id, @RequestBody long repairItemId) {
+        repairService.addARepairItem(id, repairItemId);
+        return ResponseEntity.ok().build();
+    }
 }
