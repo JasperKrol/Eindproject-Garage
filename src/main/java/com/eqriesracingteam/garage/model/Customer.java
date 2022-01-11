@@ -36,6 +36,11 @@ public class Customer {
     @JsonIgnore
     private List<Appointment> appointments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "customer")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
+    private List<Invoice> invoices;
+
     //Getters and setters
     public long getId() {
         return id;
@@ -83,5 +88,13 @@ public class Customer {
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }

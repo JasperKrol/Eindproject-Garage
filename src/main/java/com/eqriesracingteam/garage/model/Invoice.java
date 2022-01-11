@@ -1,5 +1,7 @@
 package com.eqriesracingteam.garage.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -20,7 +22,12 @@ public class Invoice {
     private static final BigDecimal vatPercentage = new BigDecimal("0.21");
 
     // TODO: 10-1-2022 Customer / repair relation
-    // one invoice can have one customer
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Customer customer;
+
+
     // one invoice at one repairList met onderdelen en daar over loopen
 
     // Getters and setters
