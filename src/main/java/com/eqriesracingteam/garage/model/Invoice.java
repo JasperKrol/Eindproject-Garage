@@ -29,7 +29,7 @@ public class Invoice {
 
 
     // one invoice at one repairList met onderdelen en daar over loopen
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "repair")
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "repair_id", referencedColumnName = "id")
     private Repair repair;
 

@@ -1,6 +1,8 @@
 package com.eqriesracingteam.garage.dto;
 
+import com.eqriesracingteam.garage.model.Customer;
 import com.eqriesracingteam.garage.model.Invoice;
+import com.eqriesracingteam.garage.model.Repair;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,8 +17,8 @@ public class InvoiceDto {
     public boolean invoicePaid;
     // TODO: 10-1-2022 relations in dto zetten
 
-    public CustomerDto customer;
-    public RepairDto repair;
+    public Customer customer;
+    public Repair repair;
 
     public static InvoiceDto fromInvoice(Invoice invoice){
         var dto = new InvoiceDto();
