@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "repairs_items")
+@Table(name = "reparatie_items")
 public class RepairItems {
 
     @EmbeddedId

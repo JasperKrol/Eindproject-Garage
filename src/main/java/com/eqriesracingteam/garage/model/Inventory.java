@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -24,7 +25,8 @@ public class Inventory {
 
     // many to many wit ass. class
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "inventoryItem")
+    @OneToMany(mappedBy = "repair")
+    @JsonIgnore
     private List<RepairItems> repairs;
 
     // Getters and setters
