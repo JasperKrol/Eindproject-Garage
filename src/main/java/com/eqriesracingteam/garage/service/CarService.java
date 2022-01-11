@@ -86,9 +86,6 @@ public class CarService {
             if (car.getLicensePlate() != null && !car.getLicensePlate().isEmpty()) {
                 existingCar.setLicensePlate(car.getLicensePlate());
             }
-            if (car.getRegistrationPapers() != null && !car.getRegistrationPapers().isEmpty()) {
-                existingCar.setRegistrationPapers(car.getRegistrationPapers());
-            }
             carRepository.save(existingCar);
 
         } else {

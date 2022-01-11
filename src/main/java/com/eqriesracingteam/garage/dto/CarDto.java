@@ -1,9 +1,6 @@
 package com.eqriesracingteam.garage.dto;
 
-import com.eqriesracingteam.garage.model.Appointment;
-import com.eqriesracingteam.garage.model.Car;
-import com.eqriesracingteam.garage.model.Customer;
-import com.eqriesracingteam.garage.model.Inspection;
+import com.eqriesracingteam.garage.model.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -14,11 +11,13 @@ public class CarDto {
     //Attributes
     public long id;
     public String licensePlate;
-    public String registrationPapers;
 
     //    @JsonIgnoreProperties({"appointments", "cars"})
     @JsonSerialize
     public CustomerDto owner;
+
+    @JsonSerialize
+    public RegistrationPapers registrationPapers;
 
 //        @JsonIgnoreProperties("owner")
 //    @JsonSerialize

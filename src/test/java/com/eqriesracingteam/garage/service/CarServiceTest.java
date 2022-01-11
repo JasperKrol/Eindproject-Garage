@@ -54,22 +54,22 @@ class CarServiceTest {
     void getallbylicscenplate() {
     }
 
-    @Test
-    void getAllCars() {
-        Car car1 = new Car(1,"aa-bb-cc", "document", null);
-        Car car2 = new Car(2,"xx-xx-xx", "document", null);
-
-        List<Car> cars = new ArrayList<>();
-        cars.add(car1);
-        cars.add(car2);
-
-        when(carRepository.findAll()).thenReturn(cars);
-
-        carService.getAllCars();
-
-        verify(carRepository, times(1)).findAll();
-
-        assertThat(cars.size()).isEqualTo(2);
+//    @Test
+//    void getAllCars() {
+//        Car car1 = new Car(1,"aa-bb-cc", "document", null);
+//        Car car2 = new Car(2,"xx-xx-xx", "document", null);
+//
+//        List<Car> cars = new ArrayList<>();
+//        cars.add(car1);
+//        cars.add(car2);
+//
+//        when(carRepository.findAll()).thenReturn(cars);
+//
+//        carService.getAllCars();
+//
+//        verify(carRepository, times(1)).findAll();
+//
+//        assertThat(cars.size()).isEqualTo(2);
 //        Mockito.when(carRepository.findAll())
 //                .thenReturn(cars);
 
@@ -79,7 +79,7 @@ class CarServiceTest {
 //        var found = carService.getAllCars();
 //
 //        assertEquals(found, cars);
-    }
+//    }
 
     @Test
     void getOneCar() {

@@ -20,9 +20,8 @@ public class Car {
     @Column(name = "license_plate")
     private String licensePlate;
 
-    // TODO: 11-11-2021 veranderen in PDF
-    @Column(name = "registration_papers")
-    private String registrationPapers;
+    @OneToOne
+    private RegistrationPapers registrationPapers;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -44,15 +43,6 @@ public class Car {
     private List<Repair> repairs = new ArrayList<>();
 
     // Constructors
-    public Car() {
-    }
-
-    public Car(long id, String licensePlate, String registrationPapers, Customer owner) {
-        this.id = id;
-        this.licensePlate = licensePlate;
-        this.registrationPapers = registrationPapers;
-        this.owner = owner;
-    }
 
     //Getters and Setters
 
@@ -72,11 +62,11 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
-    public String getRegistrationPapers() {
+    public RegistrationPapers getRegistrationPapers() {
         return registrationPapers;
     }
 
-    public void setRegistrationPapers(String registrationPapers) {
+    public void setRegistrationPapers(RegistrationPapers registrationPapers) {
         this.registrationPapers = registrationPapers;
     }
 

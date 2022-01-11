@@ -19,11 +19,11 @@ VALUES ('Paul', 'Krol', '1234AB'),
        ('Henk', 'Jansen', '2341CD');
 
 --Cars
-INSERT INTO autos (license_plate, registration_papers, customer_id)
-VALUES ('vv-11-ww', 'legalDocument', 1),
-       ('aa-99-bc', 'legalDocument', 2),
-       ('dd-23-qw', 'legalDocument', 2),
-       ('ff-11-dd', 'legalDocument', 3);
+INSERT INTO autos (license_plate, customer_id)
+VALUES ('vv-11-ww',  1),
+       ('aa-99-bc', 2),
+       ('dd-23-qw', 2),
+       ('ff-11-dd', 3);
 
 --Appointments
 INSERT INTO afspraken (appointment_date, appointment_status, car_pickup_date, customer_id, car_id, description)
