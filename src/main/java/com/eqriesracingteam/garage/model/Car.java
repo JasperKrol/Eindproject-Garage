@@ -39,6 +39,7 @@ public class Car {
     private List<Inspection> inspections = new ArrayList<>();
 
     @OneToMany(mappedBy = "scheduledCar")
+    @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Repair> repairs = new ArrayList<>();
 
