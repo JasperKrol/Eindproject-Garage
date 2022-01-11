@@ -1,7 +1,7 @@
 package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
-import com.eqriesracingteam.garage.model.RepairsItems;
+import com.eqriesracingteam.garage.model.RepairItems;
 import com.eqriesracingteam.garage.model.RepairsItemsKey;
 import com.eqriesracingteam.garage.repository.RepairsItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ public class RepairsItemsService {
     @Autowired
     private RepairsItemsRepository repairsItemsRepository;
 
-    public List<RepairsItems> getAllRepairsWithItems() {
+    public List<RepairItems> getAllRepairsWithItems() {
         return repairsItemsRepository.findAll();
     }
 
-    public RepairsItems getRepairWithItems(long id) {
+    public RepairItems getRepairWithItems(long id) {
         if (repairsItemsRepository.existsById(id)) {
             return repairsItemsRepository.findById(id).get();
         }
@@ -28,8 +28,8 @@ public class RepairsItemsService {
         }
     }
 
-    public RepairsItemsKey save(RepairsItems repairItems) {
-        RepairsItems saved = repairsItemsRepository.save(repairItems);
+    public RepairsItemsKey save(RepairItems repairItems) {
+        RepairItems saved = repairsItemsRepository.save(repairItems);
         return saved.getId();
     }
 

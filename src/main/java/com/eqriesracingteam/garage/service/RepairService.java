@@ -1,8 +1,6 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.dto.RepairDto;
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
-import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.CarRepository;
@@ -108,7 +106,7 @@ public class RepairService {
         if (optionalInventory.isPresent()) {
             Inventory inventoryItem = optionalInventory.get();
             if (inventoryItem.getStock() != 0) {
-                RepairsItems repairItems = new RepairsItems();
+                RepairItems repairItems = new RepairItems();
 
                 repairItems.setRepair(repair);
                 repairItems.setInventoryItem(inventoryItem);

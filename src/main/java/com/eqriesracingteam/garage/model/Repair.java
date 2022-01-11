@@ -1,7 +1,6 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -31,7 +30,7 @@ public class Repair {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany
     @JsonBackReference("inventoryItem")
-    private List<RepairsItems> repairsItems = new ArrayList<>();
+    private List<RepairItems> repairItems = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -65,12 +64,12 @@ public class Repair {
         this.scheduledCar = scheduledCar;
     }
 
-    public List<RepairsItems> getRepairItems() {
-        return repairsItems;
+    public List<RepairItems> getRepairItems() {
+        return repairItems;
     }
 
-    public void setRepairItems(List<RepairsItems> repairsItems) {
-        this.repairsItems = repairsItems;
+    public void setRepairItems(List<RepairItems> repairItems) {
+        this.repairItems = repairItems;
     }
 
 //    public void addInventoryItem(RepairsItems inventoryItem) {

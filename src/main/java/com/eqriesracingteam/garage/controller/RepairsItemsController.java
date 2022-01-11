@@ -1,6 +1,6 @@
 package com.eqriesracingteam.garage.controller;
 
-import com.eqriesracingteam.garage.model.RepairsItems;
+import com.eqriesracingteam.garage.model.RepairItems;
 import com.eqriesracingteam.garage.model.RepairsItemsKey;
 import com.eqriesracingteam.garage.service.RepairsItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,8 @@ public class RepairsItemsController {
 
     @GetMapping(value = "/repairs_items")
     public ResponseEntity<?> getAllRepairsWithItems() {
-        List<RepairsItems> repairsItems = repairsItemsService.getAllRepairsWithItems();
-        return ResponseEntity.ok(repairsItems);
+        List<RepairItems> repairItems = repairsItemsService.getAllRepairsWithItems();
+        return ResponseEntity.ok(repairItems);
     }
 
     @GetMapping(value = "/repairs_items/{id}")
@@ -30,8 +30,8 @@ public class RepairsItemsController {
     }
 
     @PostMapping(value = "/repairs_items")
-    public ResponseEntity<?> createRepairWithItems(@RequestBody RepairsItems repairsItems) {
-        RepairsItemsKey newId = repairsItemsService.save(repairsItems);
+    public ResponseEntity<?> createRepairWithItems(@RequestBody RepairItems repairItems) {
+        RepairsItemsKey newId = repairsItemsService.save(repairItems);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

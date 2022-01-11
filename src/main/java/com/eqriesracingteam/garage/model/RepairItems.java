@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "repairs_items")
-public class RepairsItems {
+public class RepairItems {
 
     @EmbeddedId
     private RepairsItemsKey id;
