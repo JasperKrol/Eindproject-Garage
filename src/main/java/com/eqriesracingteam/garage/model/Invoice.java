@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "facturen")
@@ -10,6 +11,8 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long invoiceNumber;
+
+    private LocalDate invoiceDate;
     private BigDecimal grossAmount;
     private BigDecimal vatAmount;
     private BigDecimal nettoAmount;
@@ -29,6 +32,14 @@ public class Invoice {
 
     public void setInvoiceNumber(long invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
+    }
+
+    public void setInvoiceDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public LocalDate getInvoiceDate() {
+        return invoiceDate;
     }
 
     public BigDecimal getGrossAmount() {
