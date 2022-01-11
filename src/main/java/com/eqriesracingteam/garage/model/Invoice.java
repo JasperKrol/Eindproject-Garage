@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "facturen")
@@ -19,6 +20,7 @@ public class Invoice {
     private BigDecimal vatAmount;
     private BigDecimal nettoAmount;
     private boolean invoicePaid;
+
     private static final BigDecimal vatPercentage = new BigDecimal("0.21");
 
     // TODO: 10-1-2022 Customer / repair relation

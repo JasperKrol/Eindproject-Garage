@@ -18,8 +18,8 @@ public class RepairsItems {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("repairId")
+    @JsonManagedReference
     private Repair repair;
-
 
     public RepairsItemsKey getId() {
         return id;

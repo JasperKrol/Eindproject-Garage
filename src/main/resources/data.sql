@@ -59,3 +59,10 @@ VALUES (0, '2022-01-01T00:45:00', 1),
        (0, '2022-01-11T18:30:00', 3),
        (1, '2022-12-24T10:45:00', 4);
 
+-- Facturen
+INSERT INTO facturen (gross_amount, netto_amount, vat_amount, invoice_date, invoice_paid, customer_id, repair_id)
+VALUES (300, 363, 63, '2022-01-01', true, 1, 1),
+       (1400, 1694, 294, '2022-12-01', false, 2, 2),
+       (450, 544.50, 94.50, '2022-12-04', false, 2, 3),
+       (300, 363, 63, '2022-01-01', true, 3, 4);
+
