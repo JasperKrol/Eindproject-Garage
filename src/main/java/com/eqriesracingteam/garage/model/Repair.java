@@ -29,8 +29,8 @@ public class Repair {
 
     // Many2many relation w/ass. class
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "repair")
-    @JsonIgnore
+    @OneToMany
+    @JsonBackReference("inventoryItem")
     private List<RepairsItems> repairsItems = new ArrayList<>();
 
     public long getId() {

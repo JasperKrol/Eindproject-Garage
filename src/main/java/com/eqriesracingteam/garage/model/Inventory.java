@@ -2,6 +2,8 @@ package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -22,7 +24,9 @@ public class Inventory {
     private int usedParts;
 
     // many to many wit ass. class
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "inventoryItem")
+    @JsonBackReference("repair")
     private List<RepairsItems> repairs;
 
     // Getters and setters
