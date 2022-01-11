@@ -15,6 +15,9 @@ public class InvoiceDto {
     public boolean invoicePaid;
     // TODO: 10-1-2022 relations in dto zetten
 
+    public CustomerDto customer;
+    public RepairDto repair;
+
     public static InvoiceDto fromInvoice(Invoice invoice){
         var dto = new InvoiceDto();
 

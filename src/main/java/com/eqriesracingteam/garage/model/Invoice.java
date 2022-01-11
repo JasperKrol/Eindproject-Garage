@@ -29,6 +29,9 @@ public class Invoice {
 
 
     // one invoice at one repairList met onderdelen en daar over loopen
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "repair")
+    @JoinColumn(name = "repair_id", referencedColumnName = "id")
+    private Repair repair;
 
     // Getters and setters
 
@@ -79,5 +82,21 @@ public class Invoice {
 
     public void setInvoicePaid(boolean invoicePaid) {
         this.invoicePaid = invoicePaid;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Repair getRepair() {
+        return repair;
+    }
+
+    public void setRepair(Repair repair) {
+        this.repair = repair;
     }
 }

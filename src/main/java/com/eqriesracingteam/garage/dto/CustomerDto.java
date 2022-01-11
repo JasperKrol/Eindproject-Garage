@@ -3,6 +3,7 @@ package com.eqriesracingteam.garage.dto;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
+import com.eqriesracingteam.garage.model.Invoice;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -24,6 +25,8 @@ public class CustomerDto {
     //    @JsonIgnoreProperties("customer")
     //    @JsonSerialize
     public List<Appointment> appointments;
+
+    public List<Invoice> invoices;
 
     public static CustomerDto fromCustomer(Customer customer) {
         var dto = new CustomerDto();
