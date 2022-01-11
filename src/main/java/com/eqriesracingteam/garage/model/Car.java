@@ -3,7 +3,6 @@ package com.eqriesracingteam.garage.model;
 import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class Car {
     private String licensePlate;
 
     @OneToOne
-    private RegistrationPapers registrationPapers;
+    private RegistrationPaper registrationPaper;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -63,12 +62,12 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
-    public RegistrationPapers getRegistrationPapers() {
-        return registrationPapers;
+    public RegistrationPaper getRegistrationPapers() {
+        return registrationPaper;
     }
 
-    public void setRegistrationPapers(RegistrationPapers registrationPapers) {
-        this.registrationPapers = registrationPapers;
+    public void setRegistrationPapers(RegistrationPaper registrationPaper) {
+        this.registrationPaper = registrationPaper;
     }
 
     public Customer getOwner() {

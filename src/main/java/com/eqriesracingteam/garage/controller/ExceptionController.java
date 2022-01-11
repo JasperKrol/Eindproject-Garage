@@ -48,4 +48,9 @@ public class ExceptionController {
     public ResponseEntity<Object> exception(InspectionException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
+
+    @ExceptionHandler(value = FileStorageException.class)
+    public ResponseEntity<Object> exception(FileStorageException exception) {
+        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(exception.getMessage());
+    }
 }
