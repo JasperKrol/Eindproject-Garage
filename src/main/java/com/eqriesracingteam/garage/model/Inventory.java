@@ -25,7 +25,6 @@ public class Inventory {
     // many to many wit ass. class
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "inventoryItem")
-    @JsonBackReference("repair")
     private List<RepairItems> repairs;
 
     // Getters and setters

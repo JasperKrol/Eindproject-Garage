@@ -20,7 +20,7 @@ public class CarDto {
     public RegistrationPapers registrationPapers;
 
 //        @JsonIgnoreProperties("owner")
-//    @JsonSerialize
+    @JsonSerialize
     public List<Inspection> inspection;
 
     //Constructor

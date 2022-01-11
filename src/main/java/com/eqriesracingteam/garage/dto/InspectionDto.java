@@ -5,6 +5,7 @@ import com.eqriesracingteam.garage.model.Inspection;
 import com.eqriesracingteam.garage.model.InspectionStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public class InspectionDto {
     public InspectionStatus inspectionStatus;
 
     // TODO: 5-1-2022 for now just this hard ignore
+    @JsonSerialize
     public Car scheduledCar;
 
     public static InspectionDto fromInspection(Inspection inspection){

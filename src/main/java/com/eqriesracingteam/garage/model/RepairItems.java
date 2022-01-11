@@ -11,14 +11,14 @@ public class RepairItems {
     @EmbeddedId
     private RepairsItemsKey id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("inventoryId")
-    @JsonManagedReference
+    @JoinColumn(name = "inventory_item_id")
     private Inventory inventoryItem;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("repairId")
-    @JsonManagedReference
+    @JoinColumn(name = "repair_id")
     private Repair repair;
 
     public RepairsItemsKey getId() {
