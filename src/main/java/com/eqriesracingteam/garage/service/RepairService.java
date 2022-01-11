@@ -118,7 +118,7 @@ public class RepairService {
                 inventoryRepository.save(inventoryItem);
             }
         } else {
-            throw new RecordNotFoundException("No repairItemId with id" + repairItemId );
+            throw new RecordNotFoundException("No item with id " + repairItemId + " found" );
         }
     }
 }
