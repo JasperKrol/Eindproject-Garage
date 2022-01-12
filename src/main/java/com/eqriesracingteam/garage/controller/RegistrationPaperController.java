@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -37,8 +38,8 @@ public class RegistrationPaperController {
     // Get file info
     // Upload document
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Object> uploadDocument(RegistrationPaperRequestDto dto) {
-        long newId = registrationPaperService.uploadDocument(dto);
+    public ResponseEntity<Object> uploadDocument(MultipartFile file) {
+        long newId = registrationPaperService.uploadDocument(file);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newId).toUri();
 

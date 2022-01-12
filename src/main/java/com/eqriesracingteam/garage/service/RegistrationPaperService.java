@@ -36,28 +36,40 @@ public class RegistrationPaperService {
 
     // Get one
 
-    // Upload
-    public long uploadDocument(RegistrationPaperRequestDto dto) {
+    // TODO: 12-1-2022   Upload to designated map -> to add path in app.prop
+//    public long uploadDocument(RegistrationPaperRequestDto dto) {
+//
+//        MultipartFile file = dto.getFile();
+//
+//        String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
+//        Path copyLocation = this.uploads.resolve(file.getOriginalFilename());
+//
+//        try {
+//            Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
+//        } catch (Exception e) {
+//            throw new FileStorageException("Could not store file " + originalFilename + ". Please try again!");
+//        }
+//
+//        RegistrationPaper newFileToStore = new RegistrationPaper();
+//        newFileToStore.setFileName(originalFilename);
+//        newFileToStore.setTitle(dto.getTitle());
+//        newFileToStore.setDescription(dto.getDescription());
+//
+//        RegistrationPaper saved = registrationPaperRepository.save(newFileToStore);
+//
+//        return saved.getId();
+//    }
 
-        MultipartFile file = dto.getFile();
+    public long uploadDocument(MultipartFile file) {
 
         String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
-        Path copyLocation = this.uploads.resolve(file.getOriginalFilename());
-
-        try {
-            Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
-        } catch (Exception e) {
-            throw new FileStorageException("Could not store file " + originalFilename + ". Please try again!");
-        }
-
         RegistrationPaper newFileToStore = new RegistrationPaper();
         newFileToStore.setFileName(originalFilename);
-        newFileToStore.setTitle(dto.getTitle());
-        newFileToStore.setDescription(dto.getDescription());
 
-        RegistrationPaper saved = registrationPaperRepository.save(newFileToStore);
+        RegistrationPaper storedFile = registrationPaperRepository.save(newFileToStore);
 
-        return saved.getId();
+        return storedFile.getId();
+
     }
 
     public Resource downloadDocument(long id) {

@@ -51,6 +51,6 @@ public class ExceptionController {
 
     @ExceptionHandler(value = FileStorageException.class)
     public ResponseEntity<Object> exception(FileStorageException exception) {
-        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 }

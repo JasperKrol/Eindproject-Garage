@@ -3,6 +3,7 @@ package com.eqriesracingteam.garage.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "registration_papers")
 public class RegistrationPaper {
 
     @Id
