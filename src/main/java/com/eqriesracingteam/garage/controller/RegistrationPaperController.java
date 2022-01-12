@@ -5,6 +5,8 @@ import com.eqriesracingteam.garage.model.RegistrationPaper;
 import com.eqriesracingteam.garage.repository.RegistrationPaperRepository;
 import com.eqriesracingteam.garage.service.RegistrationPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,5 +43,15 @@ public class RegistrationPaperController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newId).toUri();
 
         return ResponseEntity.created(location).body(location);
+    }
+
+    @GetMapping("/{id}/download")
+    public ResponseEntity downloadDocument(@PathVariable long id) {
+        Resource resource = registrationPaperService.downloadDocument(id);
+        String mediaType = "application/octet-stream";
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(mediaType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
     }
 }

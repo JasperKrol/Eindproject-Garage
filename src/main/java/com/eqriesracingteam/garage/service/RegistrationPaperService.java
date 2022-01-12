@@ -2,18 +2,23 @@ package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.dto.RegistrationPaperRequestDto;
 import com.eqriesracingteam.garage.exceptions.FileStorageException;
+import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.RegistrationPaper;
 import com.eqriesracingteam.garage.repository.RegistrationPaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 
 @Service
 public class RegistrationPaperService {
@@ -53,5 +58,27 @@ public class RegistrationPaperService {
         RegistrationPaper saved = registrationPaperRepository.save(newFileToStore);
 
         return saved.getId();
+    }
+
+    public Resource downloadDocument(long id) {
+        Optional<RegistrationPaper> stored = registrationPaperRepository.findById(id);
+
+        if (stored.isPresent()) {
+            String filename = stored.get().getFileName();
+            Path path = this.uploads.resolve(filename);
+
+            Resource resource = null;
+            try {
+                resource = new UrlResource(path.toUri());
+                return resource;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            throw new RecordNotFoundException("Registration paper with id " + id + " not found");
+        }
+
+        return null;
     }
 }
