@@ -36,7 +36,7 @@ public class RegistrationPaperController {
     }
 
     // Get file info
-    // Upload document
+    // Upload document - working
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Object> uploadDocument(MultipartFile file) {
         long newId = registrationPaperService.uploadDocument(file);
@@ -55,4 +55,7 @@ public class RegistrationPaperController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
+
+    // TODO: 12-1-2022 Testing upload downlaod
+
 }

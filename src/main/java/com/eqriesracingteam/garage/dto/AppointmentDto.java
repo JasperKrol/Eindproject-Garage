@@ -35,6 +35,13 @@ public class AppointmentDto {
         dto.appointmentStatus = appointment.getAppointmentStatus();
         dto.carPickupDate = appointment.getCarPickupDate();
         dto.description = appointment.getDescription();
+        
+        if (appointment.getCarForAppointment() != null){
+            dto.car = appointment.getCarForAppointment();
+        }
+        if (appointment.getCustomer() != null){
+            dto.customer = appointment.getCustomer();
+        }
 
         return dto;
     }

@@ -31,7 +31,7 @@ public class Repair {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "repair")
     @JsonIgnore
-    private List<RepairItems> repairItems = new ArrayList<>();
+    private List<RepairItems> repairItems;
 
     public long getId() {
         return id;
