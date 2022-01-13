@@ -34,6 +34,17 @@ public class RepairsItemsKey implements Serializable {
         this.inventoryId = inventoryId;
     }
 
+
+    // Constructor
+
+    public RepairsItemsKey() {
+    }
+
+    public RepairsItemsKey(long repairId, long inventoryId) {
+        this.repairId = repairId;
+        this.inventoryId = inventoryId;
+    }
+
     // Hash and equals
 
     @Override
