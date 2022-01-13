@@ -8,8 +8,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 @Entity
 @Table(name = "reparaties")
@@ -29,9 +28,9 @@ public class Repair {
 
     // Many2many relation w/ass. class
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "repair")
+    @OneToMany(mappedBy = "inventoryItem")
     @JsonIgnore
-    private List<RepairItems> repairItems;
+    private Collection<RepairItems> repairItems;
 
     public long getId() {
         return id;
@@ -65,11 +64,11 @@ public class Repair {
         this.scheduledCar = scheduledCar;
     }
 
-    public List<RepairItems> getRepairItems() {
+    public Collection<RepairItems> getRepairItems() {
         return repairItems;
     }
 
-    public void setRepairItems(List<RepairItems> repairItems) {
+    public void setRepairItems(Collection<RepairItems> repairItems) {
         this.repairItems = repairItems;
     }
 

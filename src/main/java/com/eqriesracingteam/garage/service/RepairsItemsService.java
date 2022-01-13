@@ -30,31 +30,20 @@ public class RepairsItemsService {
 
     // Method to be able to get all inventoryitems in repair list
     public RepairsItemsKey addRepairsItems(long repairId, long inventoryId) {
-
-        // instantiate repairsItems
-        var repairsItems = new RepairItems();
-        // check if repair id is available
-        if (!repairsItemsRepository.existsById(repairId)) {
-            throw new RecordNotFoundException("Repair with id " + repairId + " not found");
-        }
-        // get if so get and put in variable
+        var repairItems = new RepairItems();
+        if (!repairRepository.existsById(repairId)) { throw new RecordNotFoundException(); }
         Repair repair = repairRepository.findById(repairId).orElse(null);
-        // same for inventory item
-        if (!inventoryRepository.existsById(inventoryId)){
-            throw new RecordNotFoundException("Inventory item with id " + inventoryId + " not found");
-        }
+        if (!inventoryRepository.existsById(inventoryId)) { throw new RecordNotFoundException(); }
         Inventory inventoryItem = inventoryRepository.findById(inventoryId).orElse(null);
-
-        //add the repair item and inventory item to repairsItems object
-        repairsItems.setRepair(repair);
-        repairsItems.setInventoryItem(inventoryItem);
-
-        // create the key for both ids and put them in key variable
+        repairItems.setRepair(repair);
+        repairItems.setInventoryItem(inventoryItem);
         RepairsItemsKey id = new RepairsItemsKey(repairId, inventoryId);
-        repairsItems.setId(id);
-        repairsItemsRepository.save(repairsItems);
+        repairItems.setId(id);
+        repairsItemsRepository.save(repairItems);
         return id;
     }
+
+    // normal methods for CRUD requests
 
     public List<RepairItems> getAllRepairsWithItems() {
         return repairsItemsRepository.findAll();

@@ -12,14 +12,14 @@ public class RepairItems {
     private RepairsItemsKey id;
 
     @ManyToOne
-    @MapsId("inventoryId")
-    @JoinColumn(name = "inventory_item_id")
-    private Inventory inventoryItem;
-
-    @ManyToOne
     @MapsId("repairId")
     @JoinColumn(name = "repair_id")
     private Repair repair;
+
+    @ManyToOne
+    @MapsId("inventoryId")
+    @JoinColumn(name = "inventory_item_id")
+    private Inventory inventoryItem;
 
     public RepairsItemsKey getId() {
         return id;

@@ -21,40 +21,45 @@ public class RepairController {
     private RepairsItemsService repairsItemsService;
 
     @Autowired
-    public RepairController(RepairService repairService) {
+    public RepairController(RepairService repairService, RepairsItemsService repairsItemsService) {
         this.repairService = repairService;
+        this.repairsItemsService = repairsItemsService;
     }
 
     // CRUD Requests
     // Post request
     // TODO: 12-1-2022 repair controller veratnwoordelijk maken voor het de inventory items
-//    @PostMapping(value = "/api/garage/repairs")
-//    public RepairDto addRepairAppointment(@RequestBody RepairInputDto dto){
-//        var repairId = repairService.createRepairAppointment(dto.re);
-//        return RepairDto.fromRepair(repairAppointment);
-//    }
+    @PostMapping(value = "/api/garage/repairs")
+    public void addRepairAppointment(@RequestBody RepairInputDto dto) {
+        var repairId = repairService.createRepairAppointment(dto.repairDateWorkshop, dto.inventoryIdList, dto.carId);
+
+        for (Long inventoryId : dto.inventoryIdList){
+            repairsItemsService.addRepairsItems(repairId, inventoryId);
+        }
+    }
 
     // TODO: 13-1-2022 old way if for back up
-    @PostMapping(value = "/api/garage/repairs")
-    public RepairDto addRepairAppointment(@RequestBody RepairInputDto dto){
-        var repairAppointment = repairService.createRepairAppointment(dto.toRepair(), dto.carId);
-        return RepairDto.fromRepair(repairAppointment);
-    }
+
+    //    @PostMapping(value = "/api/garage/repairs")
+    //    public RepairDto addRepairAppointment(@RequestBody RepairInputDto dto){
+    //        var repairAppointment = repairService.createRepairAppointment(dto.toRepair(), dto.carId);
+    //        return RepairDto.fromRepair(repairAppointment);
+    //    }
 
     // Get one
     @GetMapping(value = "/api/garage/repairs/{id}")
-    public RepairDto getOneRepairAppointment(@PathVariable("id") long id){
+    public RepairDto getOneRepairAppointment(@PathVariable("id") long id) {
         var repairAppointment = repairService.getOneAppointment(id);
         return RepairDto.fromRepair(repairAppointment);
     }
 
     // Get all
     @GetMapping(value = "/api/garage/repairs")
-    public List<RepairDto> getAllRepairAppointments(){
+    public List<RepairDto> getAllRepairAppointments() {
         var dtos = new ArrayList<RepairDto>();
         var repairAppointments = repairService.getAllRepairAppointments();
 
-        for (Repair repair: repairAppointments) {
+        for (Repair repair : repairAppointments) {
             dtos.add(RepairDto.fromRepair(repair));
         }
         return dtos;
@@ -70,16 +75,16 @@ public class RepairController {
 
     // Delete appointment
     @DeleteMapping(value = "/api/garage/repairs/{id}")
-    public void deleteRepairAppointment(@PathVariable("id") long id){
+    public void deleteRepairAppointment(@PathVariable("id") long id) {
         repairService.deleteRepairAppointment(id);
     }
 
 
     // Patch
-    @PatchMapping(value = "/api/garage/repairs/{id}/repairItems" )
-    public ResponseEntity<?> addUsedInventoryItemsByRepair(@PathVariable("id") long id, @RequestBody long repairItemId) {
-        repairService.addARepairItem(id, repairItemId);
-        return ResponseEntity.ok().build();
-    }
+//    @PatchMapping(value = "/api/garage/repairs/{id}/repairItems")
+//    public ResponseEntity<?> addUsedInventoryItemsByRepair(@PathVariable("id") long id, @RequestBody long repairItemId) {
+//        repairService.addARepairItem(id, repairItemId);
+//        return ResponseEntity.ok().build();
+//    }
 
 }
