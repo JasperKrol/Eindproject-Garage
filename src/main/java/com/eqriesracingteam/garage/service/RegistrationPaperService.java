@@ -72,7 +72,7 @@ public class RegistrationPaperService {
 
     }
 
-    public Resource downloadDocument(long id) {
+      public Resource downloadDocument(long id) {
         Optional<RegistrationPaper> stored = registrationPaperRepository.findById(id);
 
         if (stored.isPresent()) {
