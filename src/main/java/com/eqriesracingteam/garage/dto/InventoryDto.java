@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class InventoryDto {
 
-    public long itemId;
+    public long id;
     public String itemDescription;
     public BigDecimal price;
     public int stock;
@@ -16,7 +16,7 @@ public class InventoryDto {
 
         var dto = new InventoryDto();
 
-        dto.itemId = inventory.getId();
+        dto.id = inventory.getId();
         dto.itemDescription = inventory.getItemDescription();
         dto.price = inventory.getPrice();
         dto.stock = inventory.getStock();

@@ -19,18 +19,18 @@ public class RepairsItemsController {
     private RepairsItemsService repairsItemsService;
 
     @GetMapping(value = "/repairs_items")
-    public ResponseEntity<?> getAllRepairsWithItems() {
+    public ResponseEntity<Object> getAllRepairsWithItems() {
         List<RepairItems> repairItems = repairsItemsService.getAllRepairsWithItems();
         return ResponseEntity.ok(repairItems);
     }
 
     @GetMapping(value = "/repairs_items/{id}")
-    public ResponseEntity<?> getRepairWithItems(@PathVariable("id") long id) {
+    public ResponseEntity<Object> getRepairWithItems(@PathVariable("id") long id) {
         return ResponseEntity.ok(repairsItemsService.getRepairWithItems(id));
     }
 
     @PostMapping(value = "/repairs_items")
-    public ResponseEntity<?> createRepairWithItems(@RequestBody RepairItems repairItems) {
+    public ResponseEntity<Object> createRepairWithItems(@RequestBody RepairItems repairItems) {
         RepairsItemsKey newId = repairsItemsService.save(repairItems);
 
         URI location = ServletUriComponentsBuilder
@@ -43,7 +43,7 @@ public class RepairsItemsController {
     }
 
     @DeleteMapping(value = "/repairs_items/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable("id") long id) {
+    public ResponseEntity<Object> deleteById(@PathVariable("id") long id) {
         repairsItemsService.deleteById(id);
         return new ResponseEntity<>("Repair with items deleted", HttpStatus.OK);
     }

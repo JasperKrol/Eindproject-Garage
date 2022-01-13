@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RepairInputDto {
 
-    public long id;
+    public Long id;
     public AppointmentStatus appointmentStatus;
     public LocalDateTime repairDateWorkshop;
     public Collection<Long> inventoryIdList;

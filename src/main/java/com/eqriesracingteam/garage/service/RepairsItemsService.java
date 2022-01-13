@@ -29,7 +29,7 @@ public class RepairsItemsService {
     }
 
     // Method to be able to get all inventoryitems in repair list
-    public RepairsItemsKey addRepairsItems(long repairId, long inventoryId) {
+    public RepairsItemsKey addRepairsItems(Long repairId, Long inventoryId) {
         var repairItems = new RepairItems();
         if (!repairRepository.existsById(repairId)) { throw new RecordNotFoundException(); }
         Repair repair = repairRepository.findById(repairId).orElse(null);
@@ -49,7 +49,7 @@ public class RepairsItemsService {
         return repairsItemsRepository.findAll();
     }
 
-    public RepairItems getRepairWithItems(long id) {
+    public RepairItems getRepairWithItems(Long id) {
         if (repairsItemsRepository.existsById(id)) {
             return repairsItemsRepository.findById(id).get();
         } else {
@@ -62,7 +62,7 @@ public class RepairsItemsService {
         return saved.getId();
     }
 
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         if (repairsItemsRepository.existsById(id)) {
             repairsItemsRepository.deleteById(id);
         } else {

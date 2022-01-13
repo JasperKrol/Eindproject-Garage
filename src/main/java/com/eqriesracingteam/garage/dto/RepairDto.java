@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RepairDto {
 
-    public long id;
+    public Long id;
     public AppointmentStatus appointmentStatus;
     public LocalDateTime repairDateWorkshop;
     public Collection<RepairItems> repairItems;

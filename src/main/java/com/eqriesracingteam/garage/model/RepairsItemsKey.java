@@ -11,10 +11,10 @@ import java.util.Objects;
 public class RepairsItemsKey implements Serializable {
 
     @Column(name = "repair_id")
-    private long repairId;
+    private Long repairId;
 
     @Column(name = "inventory_id")
-    private long inventoryId;
+    private Long inventoryId;
 
     // Getters and setters
 
@@ -61,4 +61,16 @@ public class RepairsItemsKey implements Serializable {
     public int hashCode() {
         return Objects.hash(getRepairId(), getInventoryId());
     }
+//    @Override
+//    public boolean equals(Object o) {
+//        if(this == o) return true;
+//        if(o == null || getClass() != o.getClass()) return false;
+//        RepairsItemsKey that = (RepairsItemsKey) o;
+//        return repairId.equals(that.repairId)&& inventoryId.equals(that.inventoryId);
+//    }
+//
+//    @Override
+//    public int hashCode() {return Objects.hash(requestId, machineId);}
+//
+//
 }

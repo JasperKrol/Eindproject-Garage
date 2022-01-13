@@ -16,7 +16,7 @@ public class Inventory {
     // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String itemDescription;
     private BigDecimal price;

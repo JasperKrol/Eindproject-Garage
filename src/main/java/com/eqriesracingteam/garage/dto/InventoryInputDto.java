@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class InventoryInputDto {
 
-    public long itemId;
+    public Long itemId;
     public String itemDescription;
     public BigDecimal price;
     public int stock;
