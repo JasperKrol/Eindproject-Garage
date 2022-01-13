@@ -30,7 +30,7 @@ public class RepairController {
     // TODO: 12-1-2022 repair controller veratnwoordelijk maken voor het de inventory items
     @PostMapping(value = "/api/garage/repairs")
     public RepairDto addRepairAppointment(@RequestBody RepairInputDto dto){
-        var repairAppointment = repairService.createRepairAppointment(dto.toRepair(), dto.carId);
+        var repairId = repairService.createRepairAppointment(dto.re)
         return RepairDto.fromRepair(repairAppointment);
     }
 
