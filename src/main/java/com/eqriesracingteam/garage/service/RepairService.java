@@ -73,6 +73,7 @@ public class RepairService {
     }
 
     // TODO: 6-1-2022 request param for date search option or car
+    // TODO: 13-1-2022 postman request not werking 
     public List<Repair> getAllRepairAppointments() {
         return repairRepository.findAll();
     }
@@ -131,7 +132,7 @@ public class RepairService {
 //        }
 //    }
 
-    public Long createRepairAppointment(LocalDateTime repairDateWorkshop, Collection<Long> inventoryIdList, long carId) {
+    public Long createRepairAppointment(LocalDateTime repairDateWorkshop, Collection<Long> repairItemIdList, long carId) {
         var optionalCar = carRepository.findById(carId);
         var car = optionalCar.get();
 
@@ -141,14 +142,14 @@ public class RepairService {
         repair.setRepairDateWorkshop(repairDateWorkshop);
         repairRepository.save(repair);
 
-        var repairId = repair.getId();
-        repair.setRepairItems(repairsItemsRepository.findAllByRepairId(repairId));
+//        var repairId = repair.getId();
+//        repair.setRepairItems(repairsItemsRepository.findAllByRepairId(repairId));
 
-        if (optionalCar.isEmpty() || inventoryIdList.isEmpty()) {
+        if (optionalCar.isEmpty() || repairItemIdList.isEmpty()) {
 
             throw new BadRequestException("missing information");
 
         }
-        return repairId;
+        return repair.getId();
     }
 }

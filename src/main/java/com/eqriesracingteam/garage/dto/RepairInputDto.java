@@ -11,7 +11,7 @@ public class RepairInputDto {
     public Long id;
     public AppointmentStatus appointmentStatus;
     public LocalDateTime repairDateWorkshop;
-    public Collection<Long> inventoryIdList;
+    public Collection<Long> inventoryItemIdList;
     public long carId;
 
 }

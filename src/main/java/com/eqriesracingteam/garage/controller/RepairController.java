@@ -1,14 +1,11 @@
 package com.eqriesracingteam.garage.controller;
 
-import com.eqriesracingteam.garage.dto.AppointmentDto;
 import com.eqriesracingteam.garage.dto.RepairDto;
 import com.eqriesracingteam.garage.dto.RepairInputDto;
-import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Repair;
 import com.eqriesracingteam.garage.service.RepairService;
 import com.eqriesracingteam.garage.service.RepairsItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -28,13 +25,14 @@ public class RepairController {
 
     // CRUD Requests
     // Post request
-    // TODO: 12-1-2022 repair controller veratnwoordelijk maken voor het de inventory items
+    // als je twee services moet aanspreken doe je dat in de controller
+    // TODO: 12-1-2022 repair controller verantwoordelijk maken voor het de inventory items
     @PostMapping(value = "/api/garage/repairs")
     public void addRepairAppointment(@RequestBody RepairInputDto dto) {
-        var repairId = repairService.createRepairAppointment(dto.repairDateWorkshop, dto.inventoryIdList, dto.carId);
+        var repairId = repairService.createRepairAppointment(dto.repairDateWorkshop, dto.inventoryItemIdList, dto.carId);
 
-        for (Long inventoryId : dto.inventoryIdList){
-            repairsItemsService.addRepairsItems(repairId, inventoryId);
+        for (Long inventoryItemId : dto.inventoryItemIdList){
+            repairsItemsService.addRepairsItems(repairId, inventoryItemId);
         }
     }
 

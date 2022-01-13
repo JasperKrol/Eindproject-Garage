@@ -21,12 +21,22 @@ public class RepairItems {
     @JoinColumn(name = "inventory_item_id")
     private Inventory inventoryItem;
 
+    private int amount;
+
     public RepairsItemsKey getId() {
         return id;
     }
 
     public void setId(RepairsItemsKey id) {
         this.id = id;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public Inventory getInventoryItem() {
