@@ -13,6 +13,7 @@ public class RepairDto {
     public Long id;
     public AppointmentStatus appointmentStatus;
     public LocalDateTime repairDateWorkshop;
+    @JsonSerialize
     public Collection<RepairItems> repairItems;
     public CarDto carForReparation;
 
@@ -24,6 +25,7 @@ public class RepairDto {
         dto.repairDateWorkshop = repair.getRepairDateWorkshop();
         dto.appointmentStatus = repair.getAppointmentStatus();
         dto.repairItems = repair.getRepairItems();
+
         dto.carForReparation = CarDto.fromCar(repair.getScheduledCar());
 
         return dto;

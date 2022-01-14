@@ -2,7 +2,6 @@ package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
-import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.CarRepository;
 import com.eqriesracingteam.garage.repository.InventoryRepository;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -142,8 +142,8 @@ public class RepairService {
         repair.setRepairDateWorkshop(repairDateWorkshop);
         repairRepository.save(repair);
 
-//        var repairId = repair.getId();
-//        repair.setRepairItems(repairsItemsRepository.findAllByRepairId(repairId));
+        var repairId = repair.getId();
+        repair.setRepairItems(repairsItemsRepository.findAllByRepairId(repairId));
 
         if (optionalCar.isEmpty() || repairItemIdList.isEmpty()) {
 

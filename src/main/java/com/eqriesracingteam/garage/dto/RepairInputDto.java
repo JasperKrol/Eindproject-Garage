@@ -4,7 +4,6 @@ import com.eqriesracingteam.garage.model.*;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 
 public class RepairInputDto {
 

@@ -3,6 +3,7 @@ package com.eqriesracingteam.garage.controller;
 import com.eqriesracingteam.garage.dto.RepairDto;
 import com.eqriesracingteam.garage.dto.RepairInputDto;
 import com.eqriesracingteam.garage.model.Repair;
+import com.eqriesracingteam.garage.model.RepairItems;
 import com.eqriesracingteam.garage.service.RepairService;
 import com.eqriesracingteam.garage.service.RepairsItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class RepairController {
         var repairId = repairService.createRepairAppointment(dto.repairDateWorkshop, dto.inventoryItemIdList, dto.carId);
 
         for (Long inventoryItemId : dto.inventoryItemIdList){
-            repairsItemsService.addRepairsItems(inventoryItemId);
+            repairsItemsService.addRepairsItems(repairId, inventoryItemId);
         }
     }
 

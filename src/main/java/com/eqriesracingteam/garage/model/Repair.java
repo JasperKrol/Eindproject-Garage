@@ -8,6 +8,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -28,7 +29,7 @@ public class Repair {
 
     // Many2many relation w/ass. class
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "inventoryItem")
+    @OneToMany(mappedBy = "repair")
     @JsonIgnore
     private Collection<RepairItems> repairItems;
 
