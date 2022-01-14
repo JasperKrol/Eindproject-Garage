@@ -32,7 +32,7 @@ public class RepairController {
         var repairId = repairService.createRepairAppointment(dto.repairDateWorkshop, dto.inventoryItemIdList, dto.carId);
 
         for (Long inventoryItemId : dto.inventoryItemIdList){
-            repairsItemsService.addRepairsItems(repairId, inventoryItemId);
+            repairsItemsService.addRepairsItems(inventoryItemId);
         }
     }
 
