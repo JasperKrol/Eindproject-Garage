@@ -103,25 +103,4 @@ public class RegistrationPaperController {
 
     }
 
-    // TODO: 16-1-2022 upload working
-    // Get file info
-    // Upload document - working
-//    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-//    public ResponseEntity<Object> uploadDocument(MultipartFile file) {
-//        long newId = registrationPaperService.uploadDocument(file);
-//
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newId).toUri();
-//
-//        return ResponseEntity.created(location).body(location);
-//    }
-//
-//    @GetMapping("/{id}/download")
-//    public ResponseEntity downloadDocument(@PathVariable long id) {
-//        Resource resource = registrationPaperService.downloadDocument(id);
-//        String mediaType = "application/octet-stream";
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.parseMediaType(mediaType))
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-//                .body(resource);
-//    }
 }
