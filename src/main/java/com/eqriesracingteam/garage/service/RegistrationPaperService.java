@@ -1,6 +1,5 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.exceptions.FileStorageException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.RegistrationPaper;
 import com.eqriesracingteam.garage.repository.RegistrationPaperRepository;
@@ -27,7 +26,7 @@ public class RegistrationPaperService {
 
         var optionalRegistrationPaper = registrationPaperRepository.findById(id);
 
-        if(optionalRegistrationPaper.isPresent()) {
+        if (optionalRegistrationPaper.isPresent()) {
 
             return optionalRegistrationPaper.get();
 
@@ -38,6 +37,7 @@ public class RegistrationPaperService {
         }
 
     }
+
     public RegistrationPaper getPictureByNameEquals(String name) {
 
         var registrationPaper = registrationPaperRepository.findByNameEquals(name);

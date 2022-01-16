@@ -28,8 +28,6 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class RegistrationPaperController {
 
-    private static final Logger logger = LoggerFactory.getLogger(RegistrationPaperController.class);
-
     private RegistrationPaperService registrationPaperService;
 
     @Autowired
@@ -43,17 +41,9 @@ public class RegistrationPaperController {
 
         List<RegistrationPaperResponseFile> files = registrationPaperService.getPictures().map(picture -> {
 
-            String fileDownloadUri = ServletUriComponentsBuilder
-                    .fromCurrentContextPath()
-                    .path("/pictures/")
-                    .path(String.valueOf(picture.getId()))
-                    .toUriString();
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/registration_papers/").path(String.valueOf(picture.getId())).toUriString();
 
-            return new RegistrationPaperResponseFile(
-                    picture.getName(),
-                    fileDownloadUri,
-                    picture.getType(),
-                    picture.getData().length);
+            return new RegistrationPaperResponseFile(picture.getName(), fileDownloadUri, picture.getType(), picture.getData().length);
         }).collect(Collectors.toList());
 
         return ResponseEntity.status(HttpStatus.OK).body(files);
@@ -64,12 +54,8 @@ public class RegistrationPaperController {
     public ResponseEntity<byte[]> getPicture(@PathVariable("id") Long id) {
         RegistrationPaper registrationPaper = registrationPaperService.getPicture(id);
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename =\"" + registrationPaper.getName() + "\"")
-                .body(registrationPaper.getData());
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename =\"" + registrationPaper.getName() + "\"").body(registrationPaper.getData());
     }
-
 
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadPicture(@RequestBody MultipartFile file) {
@@ -88,7 +74,7 @@ public class RegistrationPaperController {
 
         } catch (Exception e) {
 
-            message = "Could not upload the file: " +file.getOriginalFilename() + "!";
+            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
 
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
 
@@ -96,8 +82,8 @@ public class RegistrationPaperController {
 
     }
 
-    @DeleteMapping( "/{id}")
-    public void deletePicture(@PathVariable("id")Long id) {
+    @DeleteMapping("/{id}")
+    public void deletePicture(@PathVariable("id") Long id) {
 
         registrationPaperService.deletePicture(id);
 
