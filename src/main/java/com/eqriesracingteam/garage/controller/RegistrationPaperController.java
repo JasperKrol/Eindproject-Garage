@@ -66,9 +66,9 @@ public class RegistrationPaperController {
 
             registrationPaperService.storePicture(file);
 
-            var registrationPaper = registrationPaperService.getPictureByNameEquals(file.getOriginalFilename()).getId();
+            var registrationPaper = registrationPaperService.getPictureByNameEquals(file.getOriginalFilename());
 
-            message = "" + registrationPaper;
+            message = "Upload successfully " + registrationPaper;
 
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
 
@@ -79,14 +79,18 @@ public class RegistrationPaperController {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
 
         }
-
     }
 
     @DeleteMapping("/{id}")
     public void deletePicture(@PathVariable("id") Long id) {
-
         registrationPaperService.deletePicture(id);
-
     }
 
+    @GetMapping("/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+        Resource file = registrationPaperService.load(filename);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
 }
