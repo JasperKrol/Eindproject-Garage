@@ -10,16 +10,26 @@ public class RegistrationPaper {
     @GeneratedValue
     Long id;
 
-    private String fileName;
-    private String title;
-    private String description;
-    private String mediaType;
+    String name;
+    String type;
 
     @Lob
     byte[] data;
 
+
     @OneToOne(mappedBy = "registrationPaper")
     Car car;
+
+    // Constructor
+
+    public RegistrationPaper() {
+    }
+
+    public RegistrationPaper(String name, String type, byte[] data) {
+        this.name = name;
+        this.type = type;
+        this.data = data;
+    }
 
     // Getters and setters
 
@@ -31,36 +41,20 @@ public class RegistrationPaper {
         this.id = id;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getName() {
+        return name;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTitle() {
-        return title;
+    public String getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getMediaType() {
-        return mediaType;
-    }
-
-    public void setMediaType(String mediaType) {
-        this.mediaType = mediaType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public byte[] getData() {
