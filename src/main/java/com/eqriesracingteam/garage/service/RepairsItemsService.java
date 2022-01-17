@@ -30,7 +30,7 @@ public class RepairsItemsService {
 
     // Method to be able to get all inventoryItems in repair list
     // amount in parameter en daarna setAmount in repairsItemAmount
-    public RepairsItemsKey addRepairsItems(Long repairId, Long inventoryId) {
+    public RepairsItemsKey addRepairsItems(Long repairId, Long inventoryId, int amount) {
         var repairItems = new RepairItems();
         if (!repairRepository.existsById(repairId)) { throw new RecordNotFoundException(); }
         Repair repair = repairRepository.findById(repairId).orElse(null);

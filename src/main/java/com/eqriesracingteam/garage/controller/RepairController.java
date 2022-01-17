@@ -34,6 +34,7 @@ public class RepairController {
 
         for (Long inventoryItemId : dto.inventoryItemIdList){
             repairsItemsService.addRepairsItems(repairId, inventoryItemId);
+            repairsItemsService.a
         }
     }
 

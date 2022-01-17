@@ -25,14 +25,16 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Autowired
     private DataSource dataSource;
+    @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    WebSecurityConfiguration(DataSource dataSource, JwtRequestFilter jwtRequestFilter) {
-        this.dataSource = dataSource;
-        this.jwtRequestFilter = jwtRequestFilter;
-    }
+//    @Autowired
+//    WebSecurityConfiguration(DataSource dataSource, JwtRequestFilter jwtRequestFilter) {
+//        this.dataSource = dataSource;
+//        this.jwtRequestFilter = jwtRequestFilter;
+//    }
 
     // Authentication
 
