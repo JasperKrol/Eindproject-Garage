@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/garage/registration_papers")
-@CrossOrigin
+@CrossOrigin("http://localhost:8081")
 public class RegistrationPaperController {
 
     private RegistrationPaperService registrationPaperService;
@@ -44,13 +45,13 @@ public class RegistrationPaperController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getPicture(@PathVariable("id") Long id) {
-        RegistrationPaper picture = registrationPaperService.getPicture(id);
-
+    public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
+        RegistrationPaper fileDB = registrationPaperService.getFile(id);
+        String mediaType = "application/octet-stream";
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename =\"" + picture.getName() + "\"")
-                .body(picture.getData());
+                .contentType(MediaType.parseMediaType(mediaType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData());
     }
 
     @PostMapping("/upload")

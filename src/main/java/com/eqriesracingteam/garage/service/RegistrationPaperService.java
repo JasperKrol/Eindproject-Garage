@@ -28,17 +28,16 @@ public class RegistrationPaperService {
         return registrationPaperRepository.findAll().stream();
     }
 
-    public RegistrationPaper getPicture(Long id) {
+    public RegistrationPaper getFile(Long id) {
 
         var optionalRegistrationPaper = registrationPaperRepository.findById(id);
 
         if (optionalRegistrationPaper.isPresent()) {
-            return optionalRegistrationPaper.get();
+            return registrationPaperRepository.findById(id).get();
         } else {
             throw new RecordNotFoundException("Document with id " + id + " does not exist");
         }
     }
-
 
     public RegistrationPaper store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
