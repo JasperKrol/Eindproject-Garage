@@ -5,6 +5,7 @@ import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Inspection;
 import com.eqriesracingteam.garage.repository.CarRepository;
+import com.eqriesracingteam.garage.repository.RegistrationPaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,13 @@ public class CarService {
 
     //Attributes
     private CarRepository carRepository;
+    private RegistrationPaperRepository registrationPaperRepository;
 
     //Constructor
     @Autowired
-    public CarService(CarRepository carRepository) {
+    public CarService(CarRepository carRepository, RegistrationPaperRepository registrationPaperRepository) {
         this.carRepository = carRepository;
+        this.registrationPaperRepository = registrationPaperRepository;
     }
 
     //Methods
@@ -101,6 +104,21 @@ public class CarService {
             return car.getInspections();
         } else {
             throw new RecordNotFoundException("No inspection found under car id");
+        }
+    }
+
+    public void assignRegistrationPaperToCar(Long carId, Long id) {
+        var optionalRegistrationPaper = registrationPaperRepository.findById(id);
+        var optionalCar = carRepository.findById(carId);
+
+        if (optionalCar.isPresent() && optionalRegistrationPaper.isPresent()){
+            var car = optionalCar.get();
+            var registrationPaper = optionalRegistrationPaper.get();
+
+            car.setRegistrationPapers(registrationPaper);
+            carRepository.save(car);
+        } else {
+            throw new RecordNotFoundException("Missing information");
         }
     }
 }

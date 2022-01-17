@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.CarDto;
 import com.eqriesracingteam.garage.dto.CarInputDto;
+import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Inspection;
@@ -87,5 +88,11 @@ public class CarController {
     public CarDto partialUpdateCar(@PathVariable("id") long id, @RequestBody Car car) {
         carService.partialUpdateCar(id, car);
         return CarDto.fromCar(car);
+    }
+
+    // assign registration paper to car
+    @PutMapping("/api/garage/cars/{id}/registrationpaper")
+    public void assignRegistrationPaperToCar(@PathVariable("id") Long carId, @RequestBody IdInputDto input) {
+        carService.assignRegistrationPaperToCar(carId, input.id);
     }
 }
