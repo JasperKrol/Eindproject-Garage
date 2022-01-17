@@ -14,10 +14,10 @@ public class CarDto {
 
     //    @JsonIgnoreProperties({"appointments", "cars"})
 //    @JsonSerialize
-    public CustomerDto owner;
+    public Customer owner;
 
-//    @JsonSerialize
-//    public RegistrationPapers registrationPapers;
+    @JsonSerialize
+    public RegistrationPaper registrationPaper;
 
 //        @JsonIgnoreProperties("owner")
 //    @JsonSerialize
@@ -31,7 +31,7 @@ public class CarDto {
         dto.id = car.getId();
         dto.licensePlate = car.getLicensePlate();
 //        dto.registrationPapers = car.getRegistrationPapers();
-        dto.owner = CustomerDto.fromCustomer(car.getOwner());
+        dto.owner = car.getOwner();
 
         return dto;
     }

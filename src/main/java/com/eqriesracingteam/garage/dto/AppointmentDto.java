@@ -22,6 +22,7 @@ public class AppointmentDto {
 
     public String description;
 
+    @JsonIgnoreProperties("registrationPapers")
     public Car car;
 
     public Customer customer;
