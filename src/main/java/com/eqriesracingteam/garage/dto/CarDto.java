@@ -30,7 +30,7 @@ public class CarDto {
 
         dto.id = car.getId();
         dto.licensePlate = car.getLicensePlate();
-//        dto.registrationPapers = car.getRegistrationPapers();
+        dto.registrationPaper = car.getRegistrationPapers();
         dto.owner = car.getOwner();
 
         return dto;

@@ -1,5 +1,7 @@
 package com.eqriesracingteam.garage.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class RegistrationPaper {
     String type;
 
     @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     byte[] data;
 
 
