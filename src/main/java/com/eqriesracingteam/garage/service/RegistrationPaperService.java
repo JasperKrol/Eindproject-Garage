@@ -39,17 +39,11 @@ public class RegistrationPaperService {
         }
     }
 
-    public RegistrationPaper getDocumentByName(String name) {
 
-        var registrationPaper = registrationPaperRepository.findByNameEquals(name);
+    public RegistrationPaper store(MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        RegistrationPaper registrationPaper = new RegistrationPaper(fileName, file.getContentType(), file.getBytes());
 
-        return registrationPaper;
-    }
-
-    public RegistrationPaper uploadFile(MultipartFile file) throws IOException {
-        String filename = StringUtils.cleanPath(file.getOriginalFilename());
-
-        RegistrationPaper registrationPaper = new RegistrationPaper(filename, file.getContentType(), file.getBytes());
         return registrationPaperRepository.save(registrationPaper);
     }
 
@@ -58,27 +52,27 @@ public class RegistrationPaperService {
     }
 
     // TODO: 16-1-2022 download as resource
-    private final Path root = Paths.get("uploads");
-    public void init() {
-        try {
-            Files.createDirectory(root);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not initialize folder for upload!");
-        }
-    }
-
-    public Resource load(String filename) {
-        try {
-            Path file = root.resolve(filename);
-            Resource resource = new UrlResource(file.toUri());
-
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                throw new RuntimeException("Could not read the file!");
-            }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Error: " + e.getMessage());
-        }
-    }
+//    private final Path root = Paths.get("uploads");
+//    public void init() {
+//        try {
+//            Files.createDirectory(root);
+//        } catch (IOException e) {
+//            throw new RuntimeException("Could not initialize folder for upload!");
+//        }
+//    }
+//
+//    public Resource load(String filename) {
+//        try {
+//            Path file = root.resolve(filename);
+//            Resource resource = new UrlResource(file.toUri());
+//
+//            if (resource.exists() || resource.isReadable()) {
+//                return resource;
+//            } else {
+//                throw new RuntimeException("Could not read the file!");
+//            }
+//        } catch (MalformedURLException e) {
+//            throw new RuntimeException("Error: " + e.getMessage());
+//        }
+//    }
 }

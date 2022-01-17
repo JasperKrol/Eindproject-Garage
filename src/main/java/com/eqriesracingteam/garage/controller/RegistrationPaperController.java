@@ -44,33 +44,26 @@ public class RegistrationPaperController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getOneDocument(@PathVariable("id") Long id) {
-        RegistrationPaper registrationPaper = registrationPaperService.getPicture(id);
+    public ResponseEntity<byte[]> getPicture(@PathVariable("id") Long id) {
+        RegistrationPaper picture = registrationPaperService.getPicture(id);
 
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename =\"" + registrationPaper.getName() + "\"").body(registrationPaper.getData());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename =\"" + picture.getName() + "\"")
+                .body(picture.getData());
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestBody MultipartFile file) {
-
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
-
         try {
+            registrationPaperService.store(file);
 
-            registrationPaperService.uploadFile(file);
-
-            var registrationPaper = registrationPaperService.getDocumentByName(file.getOriginalFilename());
-
-            message = "Upload successfully " + registrationPaper;
-
+            message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-
         } catch (Exception e) {
-
             message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-
         }
     }
 
@@ -80,11 +73,11 @@ public class RegistrationPaperController {
     }
 
     // TODO: 17-1-2022 testing if working
-    @GetMapping("/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
-        Resource file = registrationPaperService.load(filename);
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-    }
+//    @GetMapping("/{filename:.+}")
+//    @ResponseBody
+//    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+//        Resource file = registrationPaperService.load(filename);
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+//    }
 }
