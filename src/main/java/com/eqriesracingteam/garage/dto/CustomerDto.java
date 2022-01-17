@@ -22,8 +22,8 @@ public class CustomerDto {
     //    @JsonIgnoreProperties("appointments")
     public List<Car> cars;
 
-    //    @JsonIgnoreProperties("customer")
-    //    @JsonSerialize
+        @JsonIgnoreProperties({"registrationPapers"})
+        @JsonSerialize
     public List<Appointment> appointments;
 
     public List<Invoice> invoices;
