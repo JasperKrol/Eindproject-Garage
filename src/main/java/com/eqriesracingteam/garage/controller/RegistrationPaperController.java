@@ -1,25 +1,18 @@
 package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.RegistrationPaperResponseFile;
-import com.eqriesracingteam.garage.exceptions.FileStorageException;
 import com.eqriesracingteam.garage.exceptions.ResponseMessage;
 import com.eqriesracingteam.garage.model.RegistrationPaper;
 import com.eqriesracingteam.garage.service.RegistrationPaperService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,9 +30,9 @@ public class RegistrationPaperController {
 
     // TODO: 16-1-2022 testing from callicoder
     @GetMapping
-    public ResponseEntity<List<RegistrationPaperResponseFile>> getPictures() {
+    public ResponseEntity<List<RegistrationPaperResponseFile>> getAllDocuments() {
 
-        List<RegistrationPaperResponseFile> files = registrationPaperService.getPictures().map(picture -> {
+        List<RegistrationPaperResponseFile> files = registrationPaperService.getAllDocuments().map(picture -> {
 
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/registration_papers/").path(String.valueOf(picture.getId())).toUriString();
 
@@ -51,22 +44,22 @@ public class RegistrationPaperController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getPicture(@PathVariable("id") Long id) {
+    public ResponseEntity<byte[]> getOneDocument(@PathVariable("id") Long id) {
         RegistrationPaper registrationPaper = registrationPaperService.getPicture(id);
 
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename =\"" + registrationPaper.getName() + "\"").body(registrationPaper.getData());
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadPicture(@RequestBody MultipartFile file) {
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestBody MultipartFile file) {
 
         String message = "";
 
         try {
 
-            registrationPaperService.storePicture(file);
+            registrationPaperService.uploadFile(file);
 
-            var registrationPaper = registrationPaperService.getPictureByNameEquals(file.getOriginalFilename());
+            var registrationPaper = registrationPaperService.getDocumentByName(file.getOriginalFilename());
 
             message = "Upload successfully " + registrationPaper;
 
@@ -82,10 +75,11 @@ public class RegistrationPaperController {
     }
 
     @DeleteMapping("/{id}")
-    public void deletePicture(@PathVariable("id") Long id) {
-        registrationPaperService.deletePicture(id);
+    public void deleteFile(@PathVariable("id") Long id) {
+        registrationPaperService.deleteFile(id);
     }
 
+    // TODO: 17-1-2022 testing if working
     @GetMapping("/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {

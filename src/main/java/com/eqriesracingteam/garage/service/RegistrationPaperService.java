@@ -24,7 +24,7 @@ public class RegistrationPaperService {
     private RegistrationPaperRepository registrationPaperRepository;
 
     // TODO: 16-1-2022 to use for localstorage
-    public Stream<RegistrationPaper> getPictures() {
+    public Stream<RegistrationPaper> getAllDocuments() {
         return registrationPaperRepository.findAll().stream();
     }
 
@@ -39,21 +39,21 @@ public class RegistrationPaperService {
         }
     }
 
-    public RegistrationPaper getPictureByNameEquals(String name) {
+    public RegistrationPaper getDocumentByName(String name) {
 
         var registrationPaper = registrationPaperRepository.findByNameEquals(name);
 
         return registrationPaper;
     }
 
-    public RegistrationPaper storePicture(MultipartFile file) throws IOException {
+    public RegistrationPaper uploadFile(MultipartFile file) throws IOException {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
 
         RegistrationPaper registrationPaper = new RegistrationPaper(filename, file.getContentType(), file.getBytes());
         return registrationPaperRepository.save(registrationPaper);
     }
 
-    public void deletePicture(Long id) {
+    public void deleteFile(Long id) {
         registrationPaperRepository.deleteById(id);
     }
 
