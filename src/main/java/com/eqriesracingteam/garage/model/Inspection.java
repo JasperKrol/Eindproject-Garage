@@ -30,6 +30,7 @@ public class Inspection {
 
     @ManyToOne
     @JoinColumn(name = "car_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("registrationPapers")
     private Car scheduledCar;
 
     // Getters and setters

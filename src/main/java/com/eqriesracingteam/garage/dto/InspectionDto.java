@@ -18,7 +18,7 @@ public class InspectionDto {
     public InspectionStatus inspectionStatus;
 
     // TODO: 5-1-2022 for now just this hard ignore
-    @JsonSerialize
+    @JsonIgnoreProperties("registrationPapers")
     public Car scheduledCar;
 
     public static InspectionDto fromInspection(Inspection inspection){
@@ -29,6 +29,7 @@ public class InspectionDto {
         dto.findings = inspection.getFindings();
         dto.estimatedCosts = inspection.getEstimatedCosts();
         dto.inspectionStatus = inspection.getInspectionStatus();
+        dto.scheduledCar = inspection.getScheduledCar();
 
         return dto;
     }

@@ -22,7 +22,7 @@ public class CustomerDto {
     //    @JsonIgnoreProperties("appointments")
     public List<Car> cars;
 
-        @JsonIgnoreProperties({"registrationPapers"})
+        @JsonIgnoreProperties("registrationPapers")
         @JsonSerialize
     public List<Appointment> appointments;
 
