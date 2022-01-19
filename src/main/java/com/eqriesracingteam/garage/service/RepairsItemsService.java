@@ -40,6 +40,7 @@ public class RepairsItemsService {
         repairItems.setInventoryItem(inventoryItem);
         RepairsItemsKey id = new RepairsItemsKey(repairId, inventoryId);
         repairItems.setId(id);
+        repairItems.setAmount(amount);
         repairsItemsRepository.save(repairItems);
         return id;
     }
@@ -70,5 +71,4 @@ public class RepairsItemsService {
             throw new RecordNotFoundException("No Repair with id " + id);
         }
     }
-
 }

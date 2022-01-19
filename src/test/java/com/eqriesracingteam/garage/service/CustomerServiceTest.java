@@ -38,7 +38,6 @@ class CustomerServiceTest {
         customer.setPostalCode("1234AA");
         customer.setId(20L);
 
-
         Mockito
                 .when(customerRepository.save(customer))
                 .thenReturn(customer);

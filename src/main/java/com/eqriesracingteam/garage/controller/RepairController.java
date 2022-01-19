@@ -29,12 +29,13 @@ public class RepairController {
     // als je twee services moet aanspreken doe je dat in de controller
     // TODO: 12-1-2022 repair controller verantwoordelijk maken voor het de inventory items
     @PostMapping(value = "/api/garage/repairs")
-    public void addRepairAppointment(@RequestBody RepairInputDto dto) {
+    public void addRepairAppointment(@RequestBody RepairInputDto dto, @RequestBody RepairItems repairItems) {
+        int amount = repairItems.getAmount();
+
         var repairId = repairService.createRepairAppointment(dto.repairDateWorkshop, dto.inventoryItemIdList, dto.carId);
 
-        for (Long inventoryItemId : dto.inventoryItemIdList){
-            repairsItemsService.addRepairsItems(repairId, inventoryItemId);
-            repairsItemsService.a
+        for (Long inventoryItemId : dto.inventoryItemIdList) {
+            repairsItemsService.addRepairsItems(repairId, inventoryItemId, amount);
         }
     }
 
@@ -81,10 +82,10 @@ public class RepairController {
 
 
     // Patch
-//    @PatchMapping(value = "/api/garage/repairs/{id}/repairItems")
-//    public ResponseEntity<?> addUsedInventoryItemsByRepair(@PathVariable("id") long id, @RequestBody long repairItemId) {
-//        repairService.addARepairItem(id, repairItemId);
-//        return ResponseEntity.ok().build();
-//    }
+    //    @PatchMapping(value = "/api/garage/repairs/{id}/repairItems")
+    //    public ResponseEntity<?> addUsedInventoryItemsByRepair(@PathVariable("id") long id, @RequestBody long repairItemId) {
+    //        repairService.addARepairItem(id, repairItemId);
+    //        return ResponseEntity.ok().build();
+    //    }
 
 }
