@@ -104,6 +104,9 @@ public class CustomerService {
             if (customer.getPostalCode() != null && !customer.getPostalCode().isEmpty()) {
                 existingCustomer.setPostalCode(customer.getPostalCode());
             }
+            if (customer.getTelephoneNumber() != null && !customer.getTelephoneNumber().isEmpty()) {
+                existingCustomer.setTelephoneNumber(customer.getTelephoneNumber());
+            }
             if (customer.getAppointments() != null && !customer.getAppointments().isEmpty()) {
                 existingCustomer.setAppointments(customer.getAppointments());
             }

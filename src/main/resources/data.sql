@@ -13,10 +13,10 @@ VALUES ('Henk', 'ROLE_USER'),
        ('Jasper', 'ROLE_ADMIN');
 
 --Customers
-INSERT INTO klanten (first_name, last_name, postal_code)
-VALUES ('Paul', 'Krol', '1234AB'),
-       ('Willeke', 'Vossen', '4321BA'),
-       ('Henk', 'Jansen', '2341CD');
+INSERT INTO klanten (first_name, last_name, postal_code, telephone_number)
+VALUES ('Paul', 'Krol', '1234AB', '06123465'),
+       ('Willeke', 'Vossen', '4321BA', '06999999'),
+       ('Henk', 'Jansen', '2341CD', '061115555');
 
 --Cars
 INSERT INTO autos (license_plate, customer_id)

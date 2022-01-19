@@ -10,6 +10,8 @@ public class CustomerInputDto {
     public String lastName;
     public String postalCode;
     public Appointment appointment;
+    public String telephoneNumber;
+
 
     public Customer toCustomer() {
         var customer = new Customer();
@@ -18,6 +20,7 @@ public class CustomerInputDto {
         customer.setFirstName(firstName);
         customer.setLastName(lastName);
         customer.setPostalCode(postalCode);
+        customer.setTelephoneNumber(telephoneNumber);
         return customer;
     }
 }

@@ -26,6 +26,9 @@ public class Customer {
     @Column(name = "postal_code")
     private String postalCode;
 
+    @Column(name = "telephone_number")
+    private String telephoneNumber;
+
     @OneToMany(mappedBy = "owner")
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore
@@ -96,5 +99,13 @@ public class Customer {
 
     public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
+    }
+
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 }

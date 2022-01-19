@@ -18,12 +18,13 @@ public class CustomerDto {
     public String firstName;
     public String lastName;
     public String postalCode;
+    public String telephoneNumber;
 
     //    @JsonIgnoreProperties("appointments")
     public List<Car> cars;
 
-        @JsonIgnoreProperties("registrationPapers")
-        @JsonSerialize
+    @JsonIgnoreProperties("registrationPapers")
+    @JsonSerialize
     public List<Appointment> appointments;
 
     public List<Invoice> invoices;
@@ -35,6 +36,7 @@ public class CustomerDto {
         dto.firstName = customer.getFirstName();
         dto.lastName = customer.getLastName();
         dto.postalCode = customer.getPostalCode();
+        dto.telephoneNumber = customer.getTelephoneNumber();
         dto.appointments = customer.getAppointments();
         dto.cars = customer.getCars();
 
