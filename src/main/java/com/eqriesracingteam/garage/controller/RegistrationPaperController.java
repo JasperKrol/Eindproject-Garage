@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,13 +74,4 @@ public class RegistrationPaperController {
     public void deleteFile(@PathVariable("id") Long id) {
         registrationPaperService.deleteFile(id);
     }
-
-    // TODO: 17-1-2022 testing if working
-//    @GetMapping("/{filename:.+}")
-//    @ResponseBody
-//    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
-//        Resource file = registrationPaperService.load(filename);
-//        return ResponseEntity.ok()
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-//    }
 }

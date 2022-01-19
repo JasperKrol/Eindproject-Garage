@@ -4,11 +4,13 @@ import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.RegistrationPaper;
 import com.eqriesracingteam.garage.repository.RegistrationPaperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.stream.Stream;
 
 @Service
@@ -43,29 +45,4 @@ public class RegistrationPaperService {
     public void deleteFile(Long id) {
         registrationPaperRepository.deleteById(id);
     }
-
-    // TODO: 16-1-2022 download as resource
-//    private final Path root = Paths.get("uploads");
-//    public void init() {
-//        try {
-//            Files.createDirectory(root);
-//        } catch (IOException e) {
-//            throw new RuntimeException("Could not initialize folder for upload!");
-//        }
-//    }
-//
-//    public Resource load(String filename) {
-//        try {
-//            Path file = root.resolve(filename);
-//            Resource resource = new UrlResource(file.toUri());
-//
-//            if (resource.exists() || resource.isReadable()) {
-//                return resource;
-//            } else {
-//                throw new RuntimeException("Could not read the file!");
-//            }
-//        } catch (MalformedURLException e) {
-//            throw new RuntimeException("Error: " + e.getMessage());
-//        }
-//    }
 }
