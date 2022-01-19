@@ -5,6 +5,7 @@ import com.eqriesracingteam.garage.exceptions.ResponseMessage;
 import com.eqriesracingteam.garage.model.RegistrationPaper;
 import com.eqriesracingteam.garage.service.RegistrationPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -73,5 +74,16 @@ public class RegistrationPaperController {
     @DeleteMapping("/{id}")
     public void deleteFile(@PathVariable("id") Long id) {
         registrationPaperService.deleteFile(id);
+    }
+
+    @GetMapping("/downloadFile/{fileId}")
+    public ResponseEntity<Resource> downloadFileTest(@PathVariable long fileId) {
+        // Load file from database
+        RegistrationPaper dbFile = registrationPaperService.getFileTest(fileId);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(dbFile.getType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getName() + "\"")
+                .body(new ByteArrayResource(dbFile.getData()));
     }
 }
