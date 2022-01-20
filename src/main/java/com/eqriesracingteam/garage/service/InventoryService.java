@@ -36,12 +36,13 @@ public class InventoryService {
 
     public Inventory createNewInventoryItem(Inventory inventoryItem) {
         var description = inventoryItem.getItemDescription();
-        List<Inventory> inventoryList = (List<Inventory>) inventoryRepository.findAllByItemDescriptionContainingIgnoreCase(description);
+        List<Inventory> inventoryList = inventoryRepository.findAllByItemDescriptionContainingIgnoreCase(description);
 
         if (inventoryList.size() > 0) {
             throw new InventoryException("Inventory item already exists");
         } else {
-            inventoryItem.setUsedParts(0);
+//            inventoryItem.setUsedParts(0);
+//            Inventory newItem = new Inventory();
             return inventoryRepository.save(inventoryItem);
         }
     }
