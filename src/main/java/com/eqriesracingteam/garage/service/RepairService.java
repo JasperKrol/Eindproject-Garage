@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -36,32 +35,6 @@ public class RepairService {
     }
 
     // Methods
-
-
-
-
-    // TODO: 13-1-2022 Working create method
-
-//        public Repair createRepairAppointment(Repair repair, long carId) {
-//            //        var date = repair.getRepairDateWorkshop();
-//            var optionalCar = carRepository.findById(carId);
-//
-//            repair.setAppointmentStatus(AppointmentStatus.REPARATIE_GEPLAND);
-//            if (optionalCar.isPresent()) {
-//                var car = optionalCar.get();
-//                repair.setScheduledCar(car);
-//
-//                return repairRepository.save(repair);
-//
-//
-//                //            Repair newRepair = repairRepository.save(repair);
-//                //
-//                //            return newRepair;
-//            }
-//            throw new AppointmentException("Appointment date with timeslot taken");
-//        }
-
-
     public Repair getOneAppointment(long id) {
         Optional<Repair> optionalRepair = repairRepository.findById(id);
 
@@ -109,28 +82,28 @@ public class RepairService {
 
 
     // TODO: 13-1-2022 after creating solution, check if needed
-//    public void addARepairItem(long id, long repairItemId) {
-//        Repair repair = getOneAppointment(id);
-//        Optional<Inventory> optionalInventory = inventoryRepository.findById(repairItemId);
-//
-//        if (optionalInventory.isPresent()) {
-//            Inventory inventoryItem = optionalInventory.get();
-//            if (inventoryItem.getStock() != 0) {
-//                RepairItems repairItems = new RepairItems();
-//
-//                repairItems.setRepair(repair);
-//                repairItems.setInventoryItem(inventoryItem);
-//                repairsItemsRepository.save(repairItems);
-//
-//                repair.getRepairItems().add(repairItems);
-//                repairRepository.save(repair);
-//                inventoryItem.setStock(-1);
-//                inventoryRepository.save(inventoryItem);
-//            }
-//        } else {
-//            throw new RecordNotFoundException("No item with id " + repairItemId + " found");
-//        }
-//    }
+    //    public void addARepairItem(long id, long repairItemId) {
+    //        Repair repair = getOneAppointment(id);
+    //        Optional<Inventory> optionalInventory = inventoryRepository.findById(repairItemId);
+    //
+    //        if (optionalInventory.isPresent()) {
+    //            Inventory inventoryItem = optionalInventory.get();
+    //            if (inventoryItem.getStock() != 0) {
+    //                RepairItems repairItems = new RepairItems();
+    //
+    //                repairItems.setRepair(repair);
+    //                repairItems.setInventoryItem(inventoryItem);
+    //                repairsItemsRepository.save(repairItems);
+    //
+    //                repair.getRepairItems().add(repairItems);
+    //                repairRepository.save(repair);
+    //                inventoryItem.setStock(-1);
+    //                inventoryRepository.save(inventoryItem);
+    //            }
+    //        } else {
+    //            throw new RecordNotFoundException("No item with id " + repairItemId + " found");
+    //        }
+    //    }
 
     public Long createRepairAppointment(LocalDateTime repairDateWorkshop, Collection<Long> repairItemIdList, long carId) {
         var optionalCar = carRepository.findById(carId);

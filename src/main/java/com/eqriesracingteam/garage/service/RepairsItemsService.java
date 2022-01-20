@@ -32,15 +32,23 @@ public class RepairsItemsService {
     // amount in parameter en daarna setAmount in repairsItemAmount
     public RepairsItemsKey addRepairsItems(Long repairId, Long inventoryId, int amount) {
         var repairItems = new RepairItems();
-        if (!repairRepository.existsById(repairId)) { throw new RecordNotFoundException(); }
+        if (!repairRepository.existsById(repairId)) {
+            throw new RecordNotFoundException();
+        }
         Repair repair = repairRepository.findById(repairId).orElse(null);
-        if (!inventoryRepository.existsById(inventoryId)) { throw new RecordNotFoundException(); }
+
+        if (!inventoryRepository.existsById(inventoryId)) {
+            throw new RecordNotFoundException();
+        }
         Inventory inventoryItem = inventoryRepository.findById(inventoryId).orElse(null);
+
         repairItems.setRepair(repair);
         repairItems.setInventoryItem(inventoryItem);
         RepairsItemsKey id = new RepairsItemsKey(repairId, inventoryId);
         repairItems.setId(id);
         repairItems.setAmount(amount);
+        inventoryItem.setStock(inventoryItem.getStock() - amount);
+
         repairsItemsRepository.save(repairItems);
         return id;
     }
