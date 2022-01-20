@@ -23,7 +23,7 @@ class CustomerRepositoryTest {
     private CustomerRepository customerRepository;
 
     @Test
-    void testFindByLastLast() {
+    void testFindByLastName() {
         // given
         Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
         entityManager.persist(customer);
