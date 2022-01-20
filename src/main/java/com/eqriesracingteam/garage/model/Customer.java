@@ -44,6 +44,18 @@ public class Customer {
     @JsonIgnore
     private List<Invoice> invoices;
 
+    //Constructors
+
+    public Customer(String firstName, String lastName, String postalCode, String telephoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.postalCode = postalCode;
+        this.telephoneNumber = telephoneNumber;
+    }
+
+    public Customer() {
+    }
+
     //Getters and setters
     public long getId() {
         return id;

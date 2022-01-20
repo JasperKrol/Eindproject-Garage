@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
+@SpringBootTest()
 @ContextConfiguration(classes={GarageApplication.class})
 class GarageApplicationTests {
 

@@ -42,7 +42,19 @@ public class Car {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Repair> repairs = new ArrayList<>();
 
+
     // Constructors
+
+    public Car(String licensePlate, RegistrationPaper registrationPaper) {
+        this.licensePlate = licensePlate;
+        this.registrationPaper = registrationPaper;
+    }
+
+    public Car() {
+    }
+
+    public Car(String s, String registrationpaper) {
+    }
 
     //Getters and Setters
 
