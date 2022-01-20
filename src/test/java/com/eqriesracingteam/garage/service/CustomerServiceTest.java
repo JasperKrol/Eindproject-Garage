@@ -3,6 +3,7 @@ package com.eqriesracingteam.garage.service;
 import com.eqriesracingteam.garage.GarageApplication;
 import com.eqriesracingteam.garage.model.Customer;
 import com.eqriesracingteam.garage.repository.CustomerRepository;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,16 @@ class CustomerServiceTest {
 
     @Mock
     Customer customer;
+
+    @Before
+    public void setUp(){
+        Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
+
+        Mockito
+                .when(customerRepository.findByLastName(customer.getLastName()))
+                .thenReturn(customer);
+
+    }
 
     @Test
     public void testAddCustomer(){
@@ -68,4 +80,20 @@ class CustomerServiceTest {
 
     }
 
+    @Test
+    void testDeleteCustomerByID() {
+//
+//        int customerId = 1;
+//
+//        customerService.deleteCustomer(customerId);
+//
+//        verify(customerRepository, times(1)).deleteById(eq(customerId));
+
+
+    }
+
+    @Test
+    void testCreateCustomer() {
+
+    }
 }
