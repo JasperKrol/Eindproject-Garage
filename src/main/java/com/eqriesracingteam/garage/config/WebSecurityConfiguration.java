@@ -5,6 +5,7 @@ import com.eqriesracingteam.garage.service.UserAuthenticateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,16 +26,14 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private DataSource dataSource;
-    @Autowired
+    private DataSource  dataSource;
     private JwtRequestFilter jwtRequestFilter;
 
-//    @Autowired
-//    WebSecurityConfiguration(DataSource dataSource, JwtRequestFilter jwtRequestFilter) {
-//        this.dataSource = dataSource;
-//        this.jwtRequestFilter = jwtRequestFilter;
-//    }
+    @Autowired
+    WebSecurityConfiguration(@Lazy DataSource dataSource, @Lazy JwtRequestFilter jwtRequestFilter) {
+        this.dataSource = dataSource;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     // Authentication
 
