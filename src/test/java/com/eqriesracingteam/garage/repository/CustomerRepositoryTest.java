@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -35,6 +37,25 @@ class CustomerRepositoryTest {
         // then
         String expected = "Einstein";
         String actual = found.getLastName();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testFindById() {
+
+        // given
+        Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
+        entityManager.persist(customer);
+        entityManager.flush();
+
+
+        //when
+        Optional<Customer> found = customerRepository.findById(3L);
+
+        //then
+        long expected = 3L ;
+        long actual = found.get().getId() ;
 
         assertEquals(expected, actual);
     }

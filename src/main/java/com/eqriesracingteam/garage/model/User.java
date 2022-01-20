@@ -25,6 +25,18 @@ public class User {
     @OneToMany(targetEntity = Authority.class, mappedBy = "username", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
+    // Constructor
+
+    public User() {
+    }
+
+    public User(String username, String password, boolean enabled, String telephoneNumber, String email) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+    }
     // getters and setters
 
 

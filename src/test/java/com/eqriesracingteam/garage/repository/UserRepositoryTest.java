@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -17,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
 
     @Autowired
-    private TestEntityManager testEntityManager;
+    private TestEntityManager entityManager;
 
     @Autowired
     private UserRepository userRepository;
@@ -25,7 +27,23 @@ class UserRepositoryTest {
     @Test
     void testFindByID(){
         // given
-//        User testUser = new User("Jasper", "password", true, "061233244", "test1@email", "ROLE_USER");
+        User testUser = new User();
+        testUser.setUsername("Testy");
+        testUser.setPassword("Password123");
+        testUser.setTelephoneNumber("06565656");
+        testUser.setEnabled(true);
+        testUser.setEmail("test@test.nl");
+        entityManager.persist(testUser);
+        entityManager.flush();
+
+        // when
+        Optional<User> found = userRepository.findById("testy");
+
+        // then
+        String expected = "Testy";
+        String actual = found.get().getUsername();
+
+        assertEquals(expected,actual);
     }
 
 }
