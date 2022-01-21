@@ -10,23 +10,27 @@ import java.util.List;
 
 public class RepairDto {
 
-    public Long id;
+    public long id;
     public AppointmentStatus appointmentStatus;
     public LocalDateTime repairDateWorkshop;
     @JsonSerialize
     public Collection<RepairItems> repairItems;
-    public CarDto carForReparation;
+    public Car carForReparation;
 
-    public static RepairDto fromRepair(Repair repair){
+    public static RepairDto fromRepair(Repair repair) {
 
         var dto = new RepairDto();
 
         dto.id = repair.getId();
         dto.repairDateWorkshop = repair.getRepairDateWorkshop();
         dto.appointmentStatus = repair.getAppointmentStatus();
-        dto.repairItems = repair.getRepairItems();
 
-        dto.carForReparation = CarDto.fromCar(repair.getScheduledCar());
+        if (repair.getScheduledCar() != null) {
+            dto.carForReparation = repair.getScheduledCar();
+        }
+        if (repair.getRepairItems() != null) {
+            dto.repairItems = repair.getRepairItems();
+        }
 
         return dto;
     }

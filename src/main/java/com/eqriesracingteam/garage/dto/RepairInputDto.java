@@ -13,4 +13,14 @@ public class RepairInputDto {
     public Collection<Long> inventoryItemIdList;
     public long carId;
 
+    public Repair toRepair(){
+        var repair = new Repair();
+
+        repair.setId(id);
+        repair.setAppointmentStatus(appointmentStatus);
+        repair.setRepairDateWorkshop(repairDateWorkshop);
+
+        return repair;
+    }
+
 }

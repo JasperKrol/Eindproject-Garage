@@ -105,24 +105,18 @@ public class RepairService {
     //        }
     //    }
 
-    public Long createRepairAppointment(LocalDateTime repairDateWorkshop, Collection<Long> repairItemIdList, long carId) {
-        var optionalCar = carRepository.findById(carId);
-        var car = optionalCar.get();
+    public Repair createRepairAppointment(Repair repair) {
+        var date = repair.getRepairDateWorkshop();
+        List<Repair> repairs = repairRepository.findAllByRepairDateWorkshop(date);
 
-        var repair = new Repair();
-        repair.setScheduledCar(car);
-        repair.setAppointmentStatus(AppointmentStatus.REPARATIE_GEPLAND);
-        repair.setRepairDateWorkshop(repairDateWorkshop);
-        repairRepository.save(repair);
+        if (repairs.isEmpty()) {
+            //            repair.setScheduledCar(car);
+            repair.setAppointmentStatus(AppointmentStatus.REPARATIE_GEPLAND);
+            Repair newRepair = repairRepository.save(repair);
+            return newRepair;
 
-        var repairId = repair.getId();
-        repair.setRepairItems(repairsItemsRepository.findAllByRepairId(repairId));
-
-        if (optionalCar.isEmpty() || repairItemIdList.isEmpty()) {
-
-            throw new BadRequestException("missing information");
-
+        } else {
+            throw new BadRequestException("Missing car information");
         }
-        return repair.getId();
     }
 }

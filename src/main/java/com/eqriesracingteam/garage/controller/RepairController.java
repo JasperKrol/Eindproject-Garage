@@ -28,24 +28,24 @@ public class RepairController {
     // Post request
     // als je twee services moet aanspreken doe je dat in de controller
     // TODO: 12-1-2022 repair controller verantwoordelijk maken voor het de inventory items
-    @PostMapping(value = "/api/garage/repairs")
-    public void addRepairAppointment(@RequestBody RepairInputDto dto, @RequestBody RepairItems repairItems) {
-        int amount = repairItems.getAmount();
-
-        var repairId = repairService.createRepairAppointment(dto.repairDateWorkshop, dto.inventoryItemIdList, dto.carId);
-
-        for (Long inventoryItemId : dto.inventoryItemIdList) {
-            repairsItemsService.addRepairsItems(repairId, inventoryItemId, amount);
-        }
-    }
+//    @PostMapping(value = "/api/garage/repairs")
+//    public void addRepairAppointment(@RequestBody RepairInputDto dto) {
+////        int amount = repairItems.getAmount();
+//
+//        var repairId = repairService.createRepairAppointment(dto.repairDateWorkshop, dto.inventoryItemIdList, dto.carId);
+//
+//        for (Long inventoryItemId : dto.inventoryItemIdList) {
+//            repairsItemsService.addRepairsItems(repairId, inventoryItemId);
+//        }
+//    }
 
     // TODO: 13-1-2022 old way if for back up
 
-    //    @PostMapping(value = "/api/garage/repairs")
-    //    public RepairDto addRepairAppointment(@RequestBody RepairInputDto dto){
-    //        var repairAppointment = repairService.createRepairAppointment(dto.toRepair(), dto.carId);
-    //        return RepairDto.fromRepair(repairAppointment);
-    //    }
+        @PostMapping(value = "/api/garage/repairs")
+        public RepairDto addRepairAppointment(@RequestBody RepairInputDto dto){
+            var repairAppointment = repairService.createRepairAppointment(dto.toRepair());
+            return RepairDto.fromRepair(repairAppointment);
+        }
 
     // Get one
     @GetMapping(value = "/api/garage/repairs/{id}")
