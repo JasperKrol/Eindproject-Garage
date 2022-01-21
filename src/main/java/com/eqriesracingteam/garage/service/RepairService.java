@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.service;
 
+import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.*;
@@ -105,13 +106,19 @@ public class RepairService {
     //        }
     //    }
 
-    public Repair createRepairAppointment(Repair repair) {
+    public Repair createRepairAppointment(Repair repair, Long carId) {
         var date = repair.getRepairDateWorkshop();
         List<Repair> repairs = repairRepository.findAllByRepairDateWorkshop(date);
+        var optionalCar = carRepository.findById(carId);
 
-        if (repairs.isEmpty()) {
-            //            repair.setScheduledCar(car);
+
+        if (repairs.isEmpty() && optionalCar.isPresent()) {
+
             repair.setAppointmentStatus(AppointmentStatus.REPARATIE_GEPLAND);
+
+            var car = optionalCar.get();
+            repair.setScheduledCar(car);
+
             Repair newRepair = repairRepository.save(repair);
             return newRepair;
 
