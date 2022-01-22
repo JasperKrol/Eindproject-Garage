@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.controller;
 
+import com.eqriesracingteam.garage.dto.RepairItemsDto;
 import com.eqriesracingteam.garage.model.RepairItems;
 import com.eqriesracingteam.garage.model.RepairsItemsKey;
 import com.eqriesracingteam.garage.service.RepairsItemsService;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -25,9 +28,14 @@ public class RepairsItemsController {
         return ResponseEntity.ok(repairItems);
     }
 
-    @GetMapping(value = "/repairs_items/{id}")
-    public ResponseEntity<Object> getRepairWithItems(@PathVariable("id") long id) {
-        return ResponseEntity.ok(repairsItemsService.getRepairWithItems(id));
+    @GetMapping(value = "/repairs_items/{inventoryId}/repairs")
+    public ResponseEntity<Object> getJobPartsByPartId(@PathVariable("inventoryId") Long inventoryId){
+        Collection<RepairItems> repairItemsCollection =  repairsItemsService.getJobPartsByPartId(inventoryId);
+        List<RepairItemsDto> dtos = new ArrayList<>();
+        for(RepairItems repairItem : repairItemsCollection){
+            dtos.add(RepairItemsDto.fromRepairItems(repairItem));
+        }
+        return ResponseEntity.ok().body(dtos);
     }
 
     @PostMapping(value = "/repairs_items/{repair_id}/{inventory_id}")
@@ -39,7 +47,7 @@ public class RepairsItemsController {
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
 
-        return ResponseEntity.created(location).body(location);
+        return ResponseEntity.created(location).body(ID);
     }
 
     @DeleteMapping(value = "/repairs_items/{id}")
