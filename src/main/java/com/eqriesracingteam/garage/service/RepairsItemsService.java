@@ -67,24 +67,25 @@ public class RepairsItemsService {
     }
 
 
-    public RepairItems getRepairWithItems(Long id) {
-        if (repairsItemsRepository.existsById(id)) {
-            return repairsItemsRepository.findById(id).get();
-        } else {
-            throw new RecordNotFoundException("No Repair with id " + id);
-        }
-    }
+//    public RepairItems getRepairWithItems(Long id) {
+//        if (repairsItemsRepository.existsById(id)) {
+//            return repairsItemsRepository.findById(id).get();
+//        } else {
+//            throw new RecordNotFoundException("No Repair with id " + id);
+//        }
+//    }
 
     public RepairsItemsKey save(RepairItems repairItems) {
         RepairItems saved = repairsItemsRepository.save(repairItems);
         return saved.getId();
     }
 
-    public void deleteById(Long id) {
-        if (repairsItemsRepository.existsById(id)) {
-            repairsItemsRepository.deleteById(id);
+    public void deleteById(long repair_id, Long inventoryId) {
+        if (repairsItemsRepository.existsById(repair_id) && repairsItemsRepository.existsById(inventoryId)) {
+            repairsItemsRepository.deleteById(repair_id);
+            repairsItemsRepository.deleteById(inventoryId);
         } else {
-            throw new RecordNotFoundException("No Repair with id " + id);
+            throw new RecordNotFoundException("No Repair with repair_id " + repair_id + " or inventory id with inventory id " + inventoryId);
         }
     }
 }

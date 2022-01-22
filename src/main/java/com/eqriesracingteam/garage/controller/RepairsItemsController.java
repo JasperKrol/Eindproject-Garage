@@ -28,16 +28,6 @@ public class RepairsItemsController {
         return ResponseEntity.ok(repairItems);
     }
 
-    @GetMapping(value = "/repairs_items/{inventoryId}/repairs")
-    public ResponseEntity<Object> getJobPartsByPartId(@PathVariable("inventoryId") Long inventoryId){
-        Collection<RepairItems> repairItemsCollection =  repairsItemsService.getJobPartsByPartId(inventoryId);
-        List<RepairItemsDto> dtos = new ArrayList<>();
-        for(RepairItems repairItem : repairItemsCollection){
-            dtos.add(RepairItemsDto.fromRepairItems(repairItem));
-        }
-        return ResponseEntity.ok().body(dtos);
-    }
-
     @PostMapping(value = "/repairs_items/{repair_id}/{inventory_id}")
     public ResponseEntity<Object> createRepairWithItems(@PathVariable("repair_id") Long repairId, @PathVariable("inventory_id") Long inventoryId, @RequestBody RepairItems repairItems) {
 
@@ -50,9 +40,19 @@ public class RepairsItemsController {
         return ResponseEntity.created(location).body(ID);
     }
 
-    @DeleteMapping(value = "/repairs_items/{id}")
-    public ResponseEntity<Object> deleteById(@PathVariable("id") long id) {
-        repairsItemsService.deleteById(id);
+    @DeleteMapping(value = "/repairs_items/{repair_id}/{inventoryId}")
+    public ResponseEntity<Object> deleteById(@PathVariable("repair_id") long repair_id, @PathVariable("inventoryId") long inventoryId) {
+        repairsItemsService.deleteById(repair_id, inventoryId);
         return new ResponseEntity<>("Repair with items deleted", HttpStatus.OK);
     }
+
+    //    @GetMapping(value = "/repairs_items/{inventoryId}/repairs")
+    //    public ResponseEntity<Object> getJobPartsByPartId(@PathVariable("inventoryId") Long inventoryId){
+    //        Collection<RepairItems> repairItemsCollection =  repairsItemsService.getJobPartsByPartId(inventoryId);
+    //        List<RepairItemsDto> dtos = new ArrayList<>();
+    //        for(RepairItems repairItem : repairItemsCollection){
+    //            dtos.add(RepairItemsDto.fromRepairItems(repairItem));
+    //        }
+    //        return ResponseEntity.ok().body(dtos);
+    //    }
 }
