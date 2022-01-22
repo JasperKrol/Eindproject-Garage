@@ -13,6 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/garage")
 public class RepairsItemsController {
 
     @Autowired
@@ -29,17 +30,16 @@ public class RepairsItemsController {
         return ResponseEntity.ok(repairsItemsService.getRepairWithItems(id));
     }
 
-    @PostMapping(value = "/repairs_items")
-    public ResponseEntity<Object> createRepairWithItems(@RequestBody RepairItems repairItems) {
-        RepairsItemsKey newId = repairsItemsService.save(repairItems);
+    @PostMapping(value = "/repairs_items/{repair_id}/{inventory_id}")
+    public ResponseEntity<Object> createRepairWithItems(@PathVariable("repair_id") Long repairId, @PathVariable("inventory_id") Long inventoryId, @RequestBody RepairItems repairItems) {
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(newId)
-                .toUri();
+        int quantity = repairItems.getAmount();
 
-        return ResponseEntity.created(location).build();
+        RepairsItemsKey ID = repairsItemsService.addRepairsItems(repairId, inventoryId, quantity);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+
+        return ResponseEntity.created(location).body(location);
     }
 
     @DeleteMapping(value = "/repairs_items/{id}")
