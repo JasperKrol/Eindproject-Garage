@@ -3,9 +3,12 @@ package com.eqriesracingteam.garage.controller;
 import com.eqriesracingteam.garage.dto.AppointmentDto;
 
 import com.eqriesracingteam.garage.dto.AppointmentInputDto;
+import com.eqriesracingteam.garage.dto.CarInputDto;
+import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -65,4 +68,10 @@ public class AppointmentController {
         appointmentService.deleteAppointment(id);
     }
 
+
+    // Assign car to appointment
+    @PutMapping(value = "/api/garage/appointments/{id}/car")
+    public AppointmentDto assignCarToAppointment(@PathVariable("id") long id, @RequestBody CarInputDto input){
+        return AppointmentDto.fromAppointment(appointmentService.assignCarToAppointment(id, input.id));
+    }
 }
