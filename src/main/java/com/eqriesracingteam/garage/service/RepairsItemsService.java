@@ -60,6 +60,7 @@ public class RepairsItemsService {
         repairItems.setId(id);
         repairItems.setAmount(amount);
         inventoryItem.setStock(inventoryItem.getStock() - amount);
+        inventoryItem.setUsedParts(inventoryItem.getUsedParts() + amount);
 
         repairsItemsRepository.save(repairItems);
         return id;
