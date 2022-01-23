@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collection;
 
 public class InvoiceDto {
 
@@ -21,6 +22,7 @@ public class InvoiceDto {
     // TODO: 10-1-2022 relations in dto zetten
     public Customer customer;
     public Repair repair;
+//    public Collection<RepairItems> repairItems;
 
     public static InvoiceDto fromInvoice(Invoice invoice){
         var dto = new InvoiceDto();
@@ -34,6 +36,7 @@ public class InvoiceDto {
 
         dto.customer = invoice.getCustomer();
         dto.repair = invoice.getRepair();
+//        dto.repairItems = invoice.getRepairItems();
 
         return dto;
     }

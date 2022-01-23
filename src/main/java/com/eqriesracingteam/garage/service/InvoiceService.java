@@ -30,6 +30,8 @@ public class InvoiceService {
             throw new BadRequestException("Invoice with invoice number " + invoiceNumber + " already exists");
         } else {
             Invoice newInvoice = invoiceRepository.save(invoice);
+
+
             return newInvoice;
         }
     }

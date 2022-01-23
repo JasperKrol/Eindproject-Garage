@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -34,6 +35,10 @@ public class Invoice {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "repair_id", referencedColumnName = "id")
     private Repair repair;
+
+//    @OneToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "repair_id", referencedColumnName = "id")
+//    private Collection<RepairItems> repairItems;
 
     // Getters and setters
 

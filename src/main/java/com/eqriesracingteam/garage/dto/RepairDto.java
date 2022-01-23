@@ -14,6 +14,7 @@ public class RepairDto {
     public AppointmentStatus appointmentStatus;
     public LocalDateTime repairDateWorkshop;
     @JsonSerialize
+    @JsonIgnoreProperties({"repair"})
     public Collection<RepairItems> repairItems;
     public Car carForReparation;
 
