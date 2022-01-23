@@ -72,7 +72,6 @@ public class Repair {
     public void setRepairItems(Collection<RepairItems> repairItems) {
         this.repairItems = repairItems;
     }
-
 //    public void addInventoryItem(RepairsItems inventoryItem) {
 //        this.repairsItems.add(inventoryItem);
 //    }

@@ -1,7 +1,6 @@
 package com.eqriesracingteam.garage.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -32,10 +31,8 @@ public class Invoice {
 
 
     // one invoice at one repairList met onderdelen en daar over loopen
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "repair_id", referencedColumnName = "id")
-    @JsonSerialize
-    @JsonIgnore
     private Repair repair;
 
     // Getters and setters

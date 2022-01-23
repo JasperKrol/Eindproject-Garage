@@ -3,6 +3,7 @@ package com.eqriesracingteam.garage.dto;
 import com.eqriesracingteam.garage.model.Customer;
 import com.eqriesracingteam.garage.model.Invoice;
 import com.eqriesracingteam.garage.model.Repair;
+import com.eqriesracingteam.garage.model.RepairItems;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
@@ -32,6 +33,8 @@ public class InvoiceDto {
         dto.invoicePaid = invoice.isInvoicePaid();
 
         dto.customer = invoice.getCustomer();
+        dto.repair = invoice.getRepair();
+
         return dto;
     }
 }
