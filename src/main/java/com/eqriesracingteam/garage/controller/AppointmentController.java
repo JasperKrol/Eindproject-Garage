@@ -68,7 +68,6 @@ public class AppointmentController {
         appointmentService.deleteAppointment(id);
     }
 
-
     // Assign car to appointment
     @PutMapping(value = "/api/garage/appointments/{id}/car")
     public AppointmentDto assignCarToAppointment(@PathVariable("id") long id, @RequestBody CarInputDto input){
