@@ -3,6 +3,7 @@ package com.eqriesracingteam.garage.dto;
 import com.eqriesracingteam.garage.model.Customer;
 import com.eqriesracingteam.garage.model.Invoice;
 import com.eqriesracingteam.garage.model.Repair;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,8 +16,8 @@ public class InvoiceDto {
     public BigDecimal vatAmount;
     public BigDecimal nettoAmount;
     public boolean invoicePaid;
-    // TODO: 10-1-2022 relations in dto zetten
 
+    // TODO: 10-1-2022 relations in dto zetten
     public Customer customer;
     public Repair repair;
 
@@ -30,6 +31,7 @@ public class InvoiceDto {
         dto.nettoAmount = invoice.getNettoAmount();
         dto.invoicePaid = invoice.isInvoicePaid();
 
+        dto.customer = invoice.getCustomer();
         return dto;
     }
 }
