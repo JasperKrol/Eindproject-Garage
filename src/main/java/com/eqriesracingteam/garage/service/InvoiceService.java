@@ -1,11 +1,17 @@
 package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
+import com.eqriesracingteam.garage.model.Appointment;
+import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.model.Invoice;
+import com.eqriesracingteam.garage.model.Repair;
+import com.eqriesracingteam.garage.repository.AppointmentRepository;
 import com.eqriesracingteam.garage.repository.InvoiceRepository;
+import com.eqriesracingteam.garage.repository.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -14,27 +20,41 @@ import java.util.Optional;
 public class InvoiceService {
 
     private InvoiceRepository invoiceRepository;
+    private AppointmentRepository appointmentRepository;
+    private RepairRepository repairRepository;
+
+    private static final BigDecimal vatPercentage = new BigDecimal("0.21");
+    private static final BigDecimal vatPercentageToNetAmount = new BigDecimal("1.21");
 
     @Autowired
-    public InvoiceService(InvoiceRepository invoiceRepository) {
+    public InvoiceService(InvoiceRepository invoiceRepository, AppointmentRepository appointmentRepository, RepairRepository repairRepository) {
         this.invoiceRepository = invoiceRepository;
+        this.appointmentRepository = appointmentRepository;
+        this.repairRepository = repairRepository;
     }
 
     // Methods
-    public Invoice createInvoice(Invoice invoice) {
-        Long invoiceNumber = invoice.getInvoiceNumber();
+    public Invoice createInvoice(Invoice invoice, Long appointmentId, Long repairId) {
+        BigDecimal nettoAmount = new BigDecimal(0); // without vat
+        BigDecimal vatAmount = new BigDecimal(0);
+        BigDecimal grossAmount = new BigDecimal(45); // with vat
 
+        Appointment appointment = appointmentRepository.getById(appointmentId);
+        Repair ExecutedRepair = repairRepository.getById(repairId);
+        boolean approvalCustomer = approvalCustomer(appointment);
+        boolean repairStatus = statusCheck(appointment);
         invoice.setInvoicePaid(false);
+        invoice.setInvoiceDate(LocalDate.now());
+        if (!approvalCustomer){
 
-        if (invoiceRepository.existsById(invoiceNumber)){
-            throw new BadRequestException("Invoice with invoice number " + invoiceNumber + " already exists");
-        } else {
-            Invoice newInvoice = invoiceRepository.save(invoice);
-
-
-            return newInvoice;
+            invoice.setGrossAmount(grossAmount);
+            invoice.setVatAmount(grossAmount.multiply(vatPercentage));
+            invoice.setNettoAmount(grossAmount.divide(vatPercentageToNetAmount));
         }
-    }
+
+        return invoiceRepository.save(invoice);
+        }
+
 
     public List<Invoice> getAllInvoices() {
         return invoiceRepository.findAll();
@@ -72,4 +92,20 @@ public class InvoiceService {
     }
 
     // TODO: 11-1-2022 assingments to invoice customer appointment
+
+    public boolean statusCheck(Appointment appointment) {
+        AppointmentStatus status = appointment.getAppointmentStatus();
+        if (status == AppointmentStatus.REPARATIE_UITGEVOERD || status == AppointmentStatus.NIET_UITVOEREN) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean approvalCustomer(Appointment appointment) {
+        AppointmentStatus status = appointment.getAppointmentStatus();
+        if (status == AppointmentStatus.NIET_UITVOEREN) {
+        return false;
+        }
+        return true;
+    }
 }

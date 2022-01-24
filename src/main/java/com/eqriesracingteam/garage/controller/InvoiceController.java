@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.controller;
 
+import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.dto.InvoiceDto;
 import com.eqriesracingteam.garage.dto.InvoiceInputDto;
 import com.eqriesracingteam.garage.dto.RepairDto;
@@ -21,8 +22,8 @@ public class InvoiceController {
     // Requests
     // Post request
     @PostMapping(value = "/api/garage/invoices")
-    public InvoiceDto createInvoice(@RequestBody InvoiceInputDto dto){
-        var invoice = invoiceService.createInvoice(dto.toInvoice());
+    public InvoiceDto createInvoice(@RequestBody InvoiceInputDto dto, @RequestBody IdInputDto appointmentId, @RequestBody IdInputDto repairId){
+        var invoice = invoiceService.createInvoice(dto.toInvoice(),appointmentId.id, repairId.id);
         return InvoiceDto.fromInvoice(invoice);
     }
 

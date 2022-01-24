@@ -17,9 +17,9 @@ public class Invoice {
     private long invoiceNumber;
 
     private LocalDate invoiceDate;
-    private BigDecimal grossAmount;
+    private BigDecimal nettoAmount; // without vat
     private BigDecimal vatAmount;
-    private BigDecimal nettoAmount;
+    private BigDecimal grossAmount; // with vat
     private boolean invoicePaid;
 
     private static final BigDecimal vatPercentage = new BigDecimal("0.21");
