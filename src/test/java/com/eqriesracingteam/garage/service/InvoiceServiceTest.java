@@ -32,6 +32,15 @@ class InvoiceServiceTest {
 
     @Test
     void statusCheck() {
+        // Arrange
+        Appointment appointment = new Appointment();
+        appointment.setAppointmentStatus(AppointmentStatus.NIET_UITVOEREN);
+
+        // Act
+        boolean statusOk = invoiceService.statusCheck(appointment);
+
+        // Assert
+        assertTrue(statusOk);
     }
 
     @Test
