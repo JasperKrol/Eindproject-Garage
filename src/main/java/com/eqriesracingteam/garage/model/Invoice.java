@@ -28,7 +28,6 @@ public class Invoice {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-
     // one invoice at one repairList met onderdelen en daar over loopen
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "repair_id", referencedColumnName = "id")

@@ -39,9 +39,10 @@ class InvoiceServiceTest {
 
 
     @Test
-    void createInvoice() {
+    void createInvoice_withNoApprovalForRepair() {
         // Arrange
         Appointment appointment = new Appointment();
+        appointment.setId(1l);
         appointment.setAppointmentStatus(AppointmentStatus.NIET_UITVOEREN);
         Invoice invoice = new Invoice();
         invoice.setInvoicePaid(false);

@@ -29,8 +29,8 @@ public class InvoiceService {
     private static final BigDecimal vatPercentageToNetAmount = new BigDecimal("1.21");
     private static final BigDecimal inspectionFeeNoRepair = new BigDecimal(45);
 
-//    BigDecimal nettoAmount = without vat
-//    BigDecimal grossAmount = with vat
+    //    BigDecimal nettoAmount = without vat
+    //    BigDecimal grossAmount = with vat
 
 
     @Autowired
@@ -43,7 +43,8 @@ public class InvoiceService {
     // Methods
     public Invoice createInvoice(Invoice invoice, Long appointmentId, Long repairId) {
 
-        Appointment appointment = appointmentRepository.getById(appointmentId);
+
+        var appointment = appointmentRepository.getById(appointmentId);
         Repair ExecutedRepair = repairRepository.getById(repairId);
         boolean approvalCustomer = approvalCustomer(appointment);
         boolean repairAndInspectionOk = statusCheck(appointment);
@@ -51,8 +52,9 @@ public class InvoiceService {
         invoice.setInvoicePaid(false);
         invoice.setInvoiceDate(LocalDate.now());
 
-        if (repairAndInspectionOk) {
+        if (appointmentRepository.existsById(appointmentId) && repairAndInspectionOk) {
             if (!approvalCustomer) {
+                var customer = appointment.getCustomer();
                 BigDecimal grossAmount = inspectionFeeNoRepair;
                 BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageToNetAmount, 2, RoundingMode.HALF_EVEN);
                 BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
@@ -60,11 +62,13 @@ public class InvoiceService {
                 invoice.setGrossAmount(grossAmount);
                 invoice.setNettoAmount(calculatedNettoAmount);
                 invoice.setVatAmount(calculatedVatAmount);
+                invoice.setCustomer(customer);
+            } else if (approvalCustomer) {
+
             } else {
                 throw new AppointmentException("Appointment status not ready");
             }
         }
-
         return invoiceRepository.save(invoice);
     }
 
