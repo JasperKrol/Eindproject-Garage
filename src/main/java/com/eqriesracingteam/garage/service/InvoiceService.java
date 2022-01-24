@@ -7,6 +7,7 @@ import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.model.Invoice;
 import com.eqriesracingteam.garage.model.Repair;
 import com.eqriesracingteam.garage.repository.AppointmentRepository;
+import com.eqriesracingteam.garage.repository.CustomerRepository;
 import com.eqriesracingteam.garage.repository.InvoiceRepository;
 import com.eqriesracingteam.garage.repository.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,15 @@ public class InvoiceService {
     private InvoiceRepository invoiceRepository;
     private AppointmentRepository appointmentRepository;
     private RepairRepository repairRepository;
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    public InvoiceService(InvoiceRepository invoiceRepository, AppointmentRepository appointmentRepository, RepairRepository repairRepository, CustomerRepository customerRepository) {
+        this.invoiceRepository = invoiceRepository;
+        this.appointmentRepository = appointmentRepository;
+        this.repairRepository = repairRepository;
+        this.customerRepository = customerRepository;
+    }
 
     private static final BigDecimal vatPercentage = new BigDecimal("0.21");
     private static final BigDecimal vatPercentageToNetAmount = new BigDecimal("1.21");
@@ -31,14 +41,6 @@ public class InvoiceService {
 
     //    BigDecimal nettoAmount = without vat
     //    BigDecimal grossAmount = with vat
-
-
-    @Autowired
-    public InvoiceService(InvoiceRepository invoiceRepository, AppointmentRepository appointmentRepository, RepairRepository repairRepository) {
-        this.invoiceRepository = invoiceRepository;
-        this.appointmentRepository = appointmentRepository;
-        this.repairRepository = repairRepository;
-    }
 
     // Methods
     public Invoice createInvoice(Invoice invoice, Long appointmentId, Long repairId) {
@@ -54,7 +56,7 @@ public class InvoiceService {
 
         if (appointmentRepository.existsById(appointmentId) && repairAndInspectionOk) {
             if (!approvalCustomer) {
-                var customer = appointment.getCustomer();
+//                var customer = appointment.getCustomer();
                 BigDecimal grossAmount = inspectionFeeNoRepair;
                 BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageToNetAmount, 2, RoundingMode.HALF_EVEN);
                 BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
@@ -62,7 +64,8 @@ public class InvoiceService {
                 invoice.setGrossAmount(grossAmount);
                 invoice.setNettoAmount(calculatedNettoAmount);
                 invoice.setVatAmount(calculatedVatAmount);
-                invoice.setCustomer(customer);
+//                invoice.setCustomer(customer);
+                return invoiceRepository.save(invoice);
             } else if (approvalCustomer) {
 
             } else {

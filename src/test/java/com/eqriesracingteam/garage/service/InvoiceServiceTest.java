@@ -1,9 +1,6 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.model.Appointment;
-import com.eqriesracingteam.garage.model.AppointmentStatus;
-import com.eqriesracingteam.garage.model.Invoice;
-import com.eqriesracingteam.garage.model.Repair;
+import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.AppointmentRepository;
 import com.eqriesracingteam.garage.repository.InvoiceRepository;
 import com.eqriesracingteam.garage.repository.RepairRepository;
@@ -17,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,6 +51,64 @@ class InvoiceServiceTest {
         // Act
 
         if (appointment.getAppointmentStatus() == AppointmentStatus.NIET_UITVOEREN){
+            BigDecimal grossAmount = inspectionFeeNoRepair;
+            BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageToNetAmount, 2, RoundingMode.HALF_EVEN);
+            BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2,RoundingMode.HALF_EVEN);
+            invoice.setGrossAmount(grossAmount);
+            invoice.setNettoAmount(calculatedNettoAmount);
+            invoice.setVatAmount(calculatedVatAmount);
+        }
+
+        BigDecimal expectedNetAmount = BigDecimal.valueOf(37.19);
+        BigDecimal expectedVatAmount = BigDecimal.valueOf(7.81);
+        BigDecimal expectedGrossAmount = BigDecimal.valueOf(45);
+
+        BigDecimal foundNetAmount = invoice.getNettoAmount().setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal foundVatAmount = invoice.getVatAmount().setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal foundGrossAmount = invoice.getGrossAmount();
+        // Assert
+
+        assertEquals(expectedNetAmount, foundNetAmount );
+        assertEquals(expectedVatAmount ,foundVatAmount);
+        assertEquals(expectedGrossAmount,foundGrossAmount);
+    }
+
+    @Test
+    void createInvoice_withApproval() {
+        // Arrange
+        Appointment appointment = new Appointment();
+        appointment.setId(1l);
+        appointment.setAppointmentStatus(AppointmentStatus.REPARATIE_UITGEVOERD);
+        Invoice invoice = new Invoice();
+
+        Repair repair = new Repair();
+        repair.setId(1l);
+
+        Inventory inventoryItem1 = new Inventory();
+        inventoryItem1.setPrice(BigDecimal.valueOf(100));
+        inventoryItem1.setItemDescription("testitem");
+
+        Inventory inventoryItem2 = new Inventory();
+        inventoryItem1.setPrice(BigDecimal.valueOf(50));
+        inventoryItem1.setItemDescription("unit2");
+
+        RepairItems repairItems = new RepairItems();
+        repairItems.setRepair(repair);
+        repairItems.setInventoryItem(inventoryItem1);
+        repairItems.setAmount(2);
+
+        RepairItems repairItems = new RepairItems();
+        repairItems.setRepair(repair);
+        repairItems.setInventoryItem(inventoryItem2);
+        repairItems.setAmount(3);
+
+//        List<RepairItems> repairItems = new ArrayList<>();
+//        repairItems.add(repairItems);
+
+
+        // Act
+
+        if (appointment.getAppointmentStatus() == AppointmentStatus.REPARATIE_UITGEVOERD){
             BigDecimal grossAmount = inspectionFeeNoRepair;
             BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageToNetAmount, 2, RoundingMode.HALF_EVEN);
             BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2,RoundingMode.HALF_EVEN);
