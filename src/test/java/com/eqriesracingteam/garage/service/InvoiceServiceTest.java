@@ -33,8 +33,10 @@ class InvoiceServiceTest {
     @InjectMocks
     InvoiceService invoiceService;
 
-    private static final BigDecimal vatPercentage = new BigDecimal("0.21");
-    private static final BigDecimal vatPercentageToNetAmount = new BigDecimal("1.21");
+    private static final BigDecimal vatPercentage = new BigDecimal(0.21);
+    private static final BigDecimal vatPercentageToNetAmount = new BigDecimal(1.21);
+    private static final BigDecimal inspectionFeeNoRepair = new BigDecimal(45);
+
 
     @Test
     void createInvoice() {
@@ -42,10 +44,6 @@ class InvoiceServiceTest {
         Appointment appointment = new Appointment();
         appointment.setAppointmentStatus(AppointmentStatus.NIET_UITVOEREN);
         Invoice invoice = new Invoice();
-
-        BigDecimal nettoAmount = new BigDecimal(37.19); // without vat
-        BigDecimal vatAmount = new BigDecimal(7.81);
-        BigDecimal grossAmount = new BigDecimal(45); // with vat
         invoice.setInvoicePaid(false);
         invoice.setInvoiceDate(LocalDate.now());
 
@@ -53,10 +51,12 @@ class InvoiceServiceTest {
         // Act
 
         if (appointment.getAppointmentStatus() == AppointmentStatus.NIET_UITVOEREN){
-
-            invoice.setNettoAmount(nettoAmount);
-            invoice.setVatAmount(vatAmount);
+            BigDecimal grossAmount = inspectionFeeNoRepair;
+            BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageToNetAmount, 2, RoundingMode.HALF_EVEN);
+            BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2,RoundingMode.HALF_EVEN);
             invoice.setGrossAmount(grossAmount);
+            invoice.setNettoAmount(calculatedNettoAmount);
+            invoice.setVatAmount(calculatedVatAmount);
         }
 
         BigDecimal expectedNetAmount = BigDecimal.valueOf(37.19);

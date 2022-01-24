@@ -22,8 +22,6 @@ public class Invoice {
     private BigDecimal grossAmount; // with vat
     private boolean invoicePaid;
 
-    private static final BigDecimal vatPercentage = new BigDecimal("0.21");
-
     // TODO: 10-1-2022 Customer / repair relation
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -36,12 +34,11 @@ public class Invoice {
     @JoinColumn(name = "repair_id", referencedColumnName = "id")
     private Repair repair;
 
-//    @OneToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "repair_id", referencedColumnName = "id")
-//    private Collection<RepairItems> repairItems;
+    //    @OneToOne(fetch = FetchType.EAGER)
+    //    @JoinColumn(name = "repair_id", referencedColumnName = "id")
+    //    private Collection<RepairItems> repairItems;
 
     // Getters and setters
-
 
     public long getInvoiceNumber() {
         return invoiceNumber;
@@ -105,5 +102,18 @@ public class Invoice {
 
     public void setRepair(Repair repair) {
         this.repair = repair;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" + "invoiceNumber=" + invoiceNumber +
+                ", invoiceDate=" + invoiceDate +
+                ", nettoAmount=" + nettoAmount +
+                ", vatAmount=" + vatAmount +
+                ", grossAmount=" + grossAmount +
+                ", invoicePaid=" + invoicePaid +
+                ", customer=" + customer +
+                ", repair=" + repair +
+                '}';
     }
 }

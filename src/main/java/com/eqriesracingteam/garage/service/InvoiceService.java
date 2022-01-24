@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,8 @@ public class InvoiceService {
 
     private static final BigDecimal vatPercentage = new BigDecimal("0.21");
     private static final BigDecimal vatPercentageToNetAmount = new BigDecimal("1.21");
+    private static final BigDecimal inspectionFeeNoRepair = new BigDecimal(45);
+
 
     @Autowired
     public InvoiceService(InvoiceRepository invoiceRepository, AppointmentRepository appointmentRepository, RepairRepository repairRepository) {
@@ -35,25 +38,34 @@ public class InvoiceService {
 
     // Methods
     public Invoice createInvoice(Invoice invoice, Long appointmentId, Long repairId) {
-        BigDecimal nettoAmount = new BigDecimal(0); // without vat
-        BigDecimal vatAmount = new BigDecimal(0);
-        BigDecimal grossAmount = new BigDecimal(45); // with vat
+//        BigDecimal nettoAmount = new BigDecimal(0); // without vat
+//        BigDecimal vatAmount = new BigDecimal(0);
+//        BigDecimal grossAmount = new BigDecimal(45); // with vat
 
         Appointment appointment = appointmentRepository.getById(appointmentId);
         Repair ExecutedRepair = repairRepository.getById(repairId);
         boolean approvalCustomer = approvalCustomer(appointment);
-        boolean repairStatus = statusCheck(appointment);
+        boolean repairAndInspectionOk = statusCheck(appointment);
+
         invoice.setInvoicePaid(false);
         invoice.setInvoiceDate(LocalDate.now());
-        if (!approvalCustomer){
 
-            invoice.setGrossAmount(grossAmount);
-            invoice.setVatAmount(grossAmount.multiply(vatPercentage));
-            invoice.setNettoAmount(grossAmount.divide(vatPercentageToNetAmount));
+        if (repairAndInspectionOk) {
+            if (!approvalCustomer) {
+                BigDecimal grossAmount = inspectionFeeNoRepair;
+                BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageToNetAmount, 2, RoundingMode.HALF_EVEN);
+                BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2,RoundingMode.HALF_EVEN);
+
+                invoice.setGrossAmount(grossAmount);
+                invoice.setNettoAmount(calculatedNettoAmount);
+                invoice.setVatAmount(calculatedVatAmount);
+            } else {
+
+            }
         }
 
         return invoiceRepository.save(invoice);
-        }
+    }
 
 
     public List<Invoice> getAllInvoices() {
@@ -63,7 +75,7 @@ public class InvoiceService {
     public Invoice getOneInvoice(long invoiceNumber) {
         Optional<Invoice> optionalInvoice = invoiceRepository.findById(invoiceNumber);
 
-        if (optionalInvoice.isPresent()){
+        if (optionalInvoice.isPresent()) {
             return optionalInvoice.get();
         } else {
             throw new BadRequestException("Invoice with invoice number " + invoiceNumber + " not found");
@@ -73,7 +85,7 @@ public class InvoiceService {
     public void adjustInvoice(long invoiceNumber, Invoice invoice) {
         Optional<Invoice> optionalInvoice = invoiceRepository.findById(invoiceNumber);
 
-        if (optionalInvoice.isPresent()){
+        if (optionalInvoice.isPresent()) {
             Invoice existingInvoice = optionalInvoice.get();
 
             invoice.setInvoiceNumber(existingInvoice.getInvoiceNumber());
@@ -84,9 +96,9 @@ public class InvoiceService {
     }
 
     public void deleteInvoice(long invoiceNumber) {
-        if (invoiceRepository.existsById(invoiceNumber)){
+        if (invoiceRepository.existsById(invoiceNumber)) {
             invoiceRepository.deleteById(invoiceNumber);
-        } else{
+        } else {
             throw new BadRequestException("Invoice with invoice number" + invoiceNumber + " not found");
         }
     }
@@ -104,7 +116,7 @@ public class InvoiceService {
     public boolean approvalCustomer(Appointment appointment) {
         AppointmentStatus status = appointment.getAppointmentStatus();
         if (status == AppointmentStatus.NIET_UITVOEREN) {
-        return false;
+            return false;
         }
         return true;
     }
