@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.service;
 
+import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.AppointmentStatus;
@@ -28,6 +29,9 @@ public class InvoiceService {
     private static final BigDecimal vatPercentageToNetAmount = new BigDecimal("1.21");
     private static final BigDecimal inspectionFeeNoRepair = new BigDecimal(45);
 
+//    BigDecimal nettoAmount = without vat
+//    BigDecimal grossAmount = with vat
+
 
     @Autowired
     public InvoiceService(InvoiceRepository invoiceRepository, AppointmentRepository appointmentRepository, RepairRepository repairRepository) {
@@ -38,9 +42,6 @@ public class InvoiceService {
 
     // Methods
     public Invoice createInvoice(Invoice invoice, Long appointmentId, Long repairId) {
-//        BigDecimal nettoAmount = new BigDecimal(0); // without vat
-//        BigDecimal vatAmount = new BigDecimal(0);
-//        BigDecimal grossAmount = new BigDecimal(45); // with vat
 
         Appointment appointment = appointmentRepository.getById(appointmentId);
         Repair ExecutedRepair = repairRepository.getById(repairId);
@@ -54,13 +55,13 @@ public class InvoiceService {
             if (!approvalCustomer) {
                 BigDecimal grossAmount = inspectionFeeNoRepair;
                 BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageToNetAmount, 2, RoundingMode.HALF_EVEN);
-                BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2,RoundingMode.HALF_EVEN);
+                BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
 
                 invoice.setGrossAmount(grossAmount);
                 invoice.setNettoAmount(calculatedNettoAmount);
                 invoice.setVatAmount(calculatedVatAmount);
             } else {
-
+                throw new AppointmentException("Appointment status not ready");
             }
         }
 

@@ -63,10 +63,10 @@ class InvoiceServiceTest {
         BigDecimal expectedVatAmount = BigDecimal.valueOf(7.81);
         BigDecimal expectedGrossAmount = BigDecimal.valueOf(45);
 
-        // Assert
         BigDecimal foundNetAmount = invoice.getNettoAmount().setScale(2, RoundingMode.HALF_EVEN);
         BigDecimal foundVatAmount = invoice.getVatAmount().setScale(2, RoundingMode.HALF_EVEN);
         BigDecimal foundGrossAmount = invoice.getGrossAmount();
+        // Assert
 
         assertEquals(expectedNetAmount, foundNetAmount );
         assertEquals(expectedVatAmount ,foundVatAmount);
