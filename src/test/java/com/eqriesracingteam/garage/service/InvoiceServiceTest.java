@@ -36,7 +36,53 @@ class InvoiceServiceTest {
     private static final BigDecimal vatPercentageToNetAmount = new BigDecimal(1.21);
     private static final BigDecimal inspectionFeeNoRepair = new BigDecimal(45);
 
+    @Test
+    void calculateTotalPriceOfRepair(){
 
+        // Arrange
+        Repair repair = new Repair();
+        repair.setId(1l);
+
+        Inventory inventoryItem1 = new Inventory();
+        inventoryItem1.setPrice(BigDecimal.valueOf(100));
+        inventoryItem1.setItemDescription("testitem");
+
+        Inventory inventoryItem2 = new Inventory();
+        inventoryItem1.setPrice(BigDecimal.valueOf(50));
+        inventoryItem1.setItemDescription("unit2");
+
+        RepairItems repairItems1 = new RepairItems();
+        repairItems1.setRepair(repair);
+        repairItems1.setInventoryItem(inventoryItem1);
+        repairItems1.setAmount(2);
+
+        RepairItems repairItems2 = new RepairItems();
+        repairItems2.setRepair(repair);
+        repairItems2.setInventoryItem(inventoryItem2);
+        repairItems2.setAmount(3);
+
+        List<RepairItems> repairItems = new ArrayList<>();
+        repairItems.add(repairItems1);
+        repairItems.add(repairItems2);
+
+        BigDecimal nettoPrice = new BigDecimal(0);
+        for (RepairItems repairItem : repairItems){
+            BigDecimal price = repairItem.getInventoryItem().getPrice();
+            int amount = repairItem.getAmount();
+            BigDecimal totalPrice = price.multiply(amount);
+            nettoPrice.add(totalPrice);
+        }
+
+        // Arrange
+        BigDecimal expected = BigDecimal.valueOf(100*2 + 3*50);
+        BigDecimal found = nettoPrice;
+
+        // Assert
+        assertEquals(expected,found);
+
+
+
+    }
     @Test
     void createInvoice_withNoApprovalForRepair() {
         // Arrange
@@ -92,18 +138,19 @@ class InvoiceServiceTest {
         inventoryItem1.setPrice(BigDecimal.valueOf(50));
         inventoryItem1.setItemDescription("unit2");
 
-        RepairItems repairItems = new RepairItems();
-        repairItems.setRepair(repair);
-        repairItems.setInventoryItem(inventoryItem1);
-        repairItems.setAmount(2);
+        RepairItems repairItems1 = new RepairItems();
+        repairItems1.setRepair(repair);
+        repairItems1.setInventoryItem(inventoryItem1);
+        repairItems1.setAmount(2);
 
-        RepairItems repairItems = new RepairItems();
-        repairItems.setRepair(repair);
-        repairItems.setInventoryItem(inventoryItem2);
-        repairItems.setAmount(3);
+        RepairItems repairItems2 = new RepairItems();
+        repairItems2.setRepair(repair);
+        repairItems2.setInventoryItem(inventoryItem2);
+        repairItems2.setAmount(3);
 
-//        List<RepairItems> repairItems = new ArrayList<>();
-//        repairItems.add(repairItems);
+        List<RepairItems> repairItems = new ArrayList<>();
+        repairItems.add(repairItems1);
+        repairItems.add(repairItems2);
 
 
         // Act
