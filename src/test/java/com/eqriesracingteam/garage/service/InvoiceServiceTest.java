@@ -64,13 +64,15 @@ class InvoiceServiceTest {
         List<RepairItems> repairItems = new ArrayList<>();
         repairItems.add(repairItems1);
         repairItems.add(repairItems2);
+        System.out.println(repairItems);
 
         BigDecimal nettoPrice = new BigDecimal(0);
         for (RepairItems repairItem : repairItems){
             BigDecimal price = repairItem.getInventoryItem().getPrice();
             int amount = repairItem.getAmount();
-            BigDecimal totalPrice = price.multiply(amount);
-            nettoPrice.add(totalPrice);
+            BigDecimal amountBD = BigDecimal.valueOf(amount);
+            BigDecimal totalPrice = price.multiply(amountBD);
+            nettoPrice = nettoPrice.add(totalPrice);
         }
 
         // Arrange

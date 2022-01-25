@@ -22,8 +22,8 @@ public class InvoiceController {
     // Requests
     // Post request
     @PostMapping(value = "/api/garage/invoices")
-    public InvoiceDto createInvoice(@RequestBody InvoiceInputDto dto, @RequestBody IdInputDto appointmentId, @RequestBody IdInputDto repairId){
-        var invoice = invoiceService.createInvoice(dto.toInvoice(),appointmentId.id, repairId.id);
+    public InvoiceDto createInvoice(@RequestBody IdInputDto appointmentId, IdInputDto repairId){
+        var invoice = invoiceService.createInvoice(appointmentId.id, repairId.id);
         return InvoiceDto.fromInvoice(invoice);
     }
 

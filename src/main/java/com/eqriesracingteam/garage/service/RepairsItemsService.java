@@ -80,12 +80,12 @@ public class RepairsItemsService {
         return saved.getId();
     }
 
-    public void deleteById(long repair_id, Long inventoryId) {
-        if (repairsItemsRepository.existsById(repair_id) && repairsItemsRepository.existsById(inventoryId)) {
-            repairsItemsRepository.deleteById(repair_id);
-            repairsItemsRepository.deleteById(inventoryId);
-        } else {
-            throw new RecordNotFoundException("No Repair with repair_id " + repair_id + " or inventory id with inventory id " + inventoryId);
-        }
-    }
+//    public void deleteById(long repair_id, Long inventoryId) {
+//        if (repairsItemsRepository.existsById(repair_id) && repairsItemsRepository.existsById(inventoryId)) {
+//            repairsItemsRepository.deleteById(repair_id);
+//            repairsItemsRepository.deleteById(inventoryId);
+//        } else {
+//            throw new RecordNotFoundException("No Repair with repair_id " + repair_id + " or inventory id with inventory id " + inventoryId);
+//        }
+//    }
 }

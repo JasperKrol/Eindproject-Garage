@@ -34,8 +34,8 @@ public class InvoiceDto {
         dto.nettoAmount = invoice.getNettoAmount();
         dto.invoicePaid = invoice.isInvoicePaid();
 
-        dto.customer = invoice.getCustomer();
-        dto.repair = invoice.getRepair();
+//        dto.customer = invoice.getCustomer();
+//        dto.repair = invoice.getRepair();
 //        dto.repairItems = invoice.getRepairItems();
 
         return dto;
