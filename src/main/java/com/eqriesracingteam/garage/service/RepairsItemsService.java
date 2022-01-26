@@ -59,6 +59,8 @@ public class RepairsItemsService {
         RepairsItemsKey id = new RepairsItemsKey(repairId, inventoryId);
         repairItems.setId(id);
         repairItems.setAmount(amount);
+
+        // TODO: 26-1-2022 check if needed for now
         inventoryItem.setStock(inventoryItem.getStock() - amount);
         inventoryItem.setUsedParts(inventoryItem.getUsedParts() + amount);
 

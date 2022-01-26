@@ -28,6 +28,7 @@ public class RepairsItemsController {
         return ResponseEntity.ok(repairItems);
     }
 
+    //bij een repair aanmaken frontend id ophalen
     @PostMapping(value = "/repairs_items/{repair_id}/{inventory_id}")
     public ResponseEntity<Object> createRepairWithItems(@PathVariable("repair_id") Long repairId, @PathVariable("inventory_id") Long inventoryId, @RequestBody RepairItems repairItems) {
 

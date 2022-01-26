@@ -9,6 +9,5 @@ import java.util.Collection;
 
 public interface RepairsItemsRepository extends JpaRepository <RepairItems, RepairsItemsKey> {
     Collection<RepairItems> findAllByRepairId(Long repairId);
-
     Collection<RepairItems> findAllByInventoryItem_Id(Long inventoryId);
 }

@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,23 +62,22 @@ class InvoiceServiceTest {
         repairItems2.setInventoryItem(inventoryItem2);
         repairItems2.setAmount(3);
 
-        List<RepairItems> repairItems = new ArrayList<>();
+        Collection<RepairItems> repairItems = new ArrayList<>();
         repairItems.add(repairItems1);
         repairItems.add(repairItems2);
-        System.out.println(repairItems);
+//        System.out.println(repairItems);
 
-        BigDecimal nettoPrice = new BigDecimal(0);
-        for (RepairItems repairItem : repairItems){
-            BigDecimal price = repairItem.getInventoryItem().getPrice();
-            int amount = repairItem.getAmount();
-            BigDecimal amountBD = BigDecimal.valueOf(amount);
-            BigDecimal totalPrice = price.multiply(amountBD);
-            nettoPrice = nettoPrice.add(totalPrice);
-        }
+        BigDecimal found = repairItems.;
+
+        BigDecimal expected = BigDecimal.valueOf(100);
+
+
 
         // Arrange
-        BigDecimal expected = BigDecimal.valueOf(100*2 + 3*50);
-        BigDecimal found = nettoPrice;
+//        BigDecimal expected = BigDecimal.valueOf(100*2 + 3*50);
+//        BigDecimal costs = invoiceService.calculatePartsCharge(repairItems);
+//
+//        BigDecimal found = costs.setScale(2, RoundingMode.HALF_EVEN);
 
         // Assert
         assertEquals(expected,found);

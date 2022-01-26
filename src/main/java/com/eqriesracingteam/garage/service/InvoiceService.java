@@ -148,16 +148,15 @@ public class InvoiceService {
     }
 
     public BigDecimal calculatePartsCharge(Collection<RepairItems> repairItems) {
-        BigDecimal costs = new BigDecimal(0);
-        for (RepairItems item : repairItems) {
+        BigDecimal partsCharge = new BigDecimal(0);
+        for (RepairItems repairItem : repairItems) {
 
-            BigDecimal price = (item.getInventoryItem().getPrice());
-            int amount = item.getAmount();
+            BigDecimal price = repairItem.getInventoryItem().getPrice();
+            int amount = repairItem.getAmount();
             BigDecimal amountBD = BigDecimal.valueOf(amount);
-            BigDecimal totalPrice = price.multiply(amountBD);
-
-            costs = costs.add(totalPrice);
+            BigDecimal charge = price.multiply(amountBD);
+            partsCharge = partsCharge.add(charge);
         }
-        return costs;
+        return partsCharge;
     }
 }
