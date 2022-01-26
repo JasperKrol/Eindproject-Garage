@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "reparaties")
@@ -31,7 +32,7 @@ public class Repair {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "repair")
     @JsonIgnore
-    private Collection<RepairItems> repairItems;
+    private List<RepairItems> repairItems;
 
     public Long getId() {
         return id;
@@ -65,11 +66,11 @@ public class Repair {
         this.scheduledCar = scheduledCar;
     }
 
-    public Collection<RepairItems> getRepairItems() {
+    public List<RepairItems> getRepairItems() {
         return repairItems;
     }
 
-    public void setRepairItems(Collection<RepairItems> repairItems) {
+    public void setRepairItems(List<RepairItems> repairItems) {
         this.repairItems = repairItems;
     }
 //    public void addInventoryItem(RepairsItems inventoryItem) {

@@ -22,7 +22,7 @@ public class InvoiceDto {
     // TODO: 10-1-2022 relations in dto zetten
     public Customer customer;
     public Repair repair;
-//    public Collection<RepairItems> repairItems;
+//    public List<RepairItems> repairItems;
 
     public static InvoiceDto fromInvoice(Invoice invoice){
         var dto = new InvoiceDto();

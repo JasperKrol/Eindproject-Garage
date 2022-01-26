@@ -73,7 +73,7 @@ public class InvoiceService {
 
             } else if (approvalCustomer) {
 
-                Collection<RepairItems> repairItems = repairsItemsRepository.findAllByRepairId(repairId);
+                List<RepairItems> repairItems = repairsItemsRepository.findAllByRepairId(repairId);
 
                 BigDecimal calculatedNettoAmount = calculatePartsCharge(repairItems);
                 BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
@@ -147,7 +147,7 @@ public class InvoiceService {
         return true;
     }
 
-    public BigDecimal calculatePartsCharge(Collection<RepairItems> repairItems) {
+    public BigDecimal calculatePartsCharge(List<RepairItems> repairItems) {
         BigDecimal partsCharge = new BigDecimal(0);
         for (RepairItems repairItem : repairItems) {
 

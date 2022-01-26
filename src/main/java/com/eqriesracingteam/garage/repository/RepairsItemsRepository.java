@@ -6,8 +6,9 @@ import org.apache.juli.logging.Log;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface RepairsItemsRepository extends JpaRepository <RepairItems, RepairsItemsKey> {
-    Collection<RepairItems> findAllByRepairId(Long repairId);
-    Collection<RepairItems> findAllByInventoryItem_Id(Long inventoryId);
+    List<RepairItems> findAllByRepairId(Long repairId);
+    List<RepairItems> findAllByInventoryItem_Id(Long inventoryId);
 }

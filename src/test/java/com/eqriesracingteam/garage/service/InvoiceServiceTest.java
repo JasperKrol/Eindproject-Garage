@@ -1,5 +1,6 @@
 package com.eqriesracingteam.garage.service;
 
+import com.eqriesracingteam.garage.dto.RepairInputDto;
 import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.AppointmentRepository;
 import com.eqriesracingteam.garage.repository.InvoiceRepository;
@@ -45,39 +46,44 @@ class InvoiceServiceTest {
         repair.setId(1l);
 
         Inventory inventoryItem1 = new Inventory();
+        inventoryItem1.setId(1l);
         inventoryItem1.setPrice(BigDecimal.valueOf(100));
         inventoryItem1.setItemDescription("testitem");
 
         Inventory inventoryItem2 = new Inventory();
-        inventoryItem1.setPrice(BigDecimal.valueOf(50));
-        inventoryItem1.setItemDescription("unit2");
+        inventoryItem2.setId(2l);
+        inventoryItem2.setPrice(BigDecimal.valueOf(50));
+        inventoryItem2.setItemDescription("unit2");
 
-        RepairItems repairItems1 = new RepairItems();
-        repairItems1.setRepair(repair);
-        repairItems1.setInventoryItem(inventoryItem1);
-        repairItems1.setAmount(2);
+        RepairItems repairsItem1 = new RepairItems();
+        repairsItem1.setRepair(repair);
+        repairsItem1.setInventoryItem(inventoryItem1);
+        repairsItem1.setAmount(2);
 
-        RepairItems repairItems2 = new RepairItems();
-        repairItems2.setRepair(repair);
-        repairItems2.setInventoryItem(inventoryItem2);
-        repairItems2.setAmount(3);
+        RepairItems repairsItem2 = new RepairItems();
+        repairsItem2.setRepair(repair);
+        repairsItem2.setInventoryItem(inventoryItem1);
+        repairsItem2.setAmount(2);
 
-        Collection<RepairItems> repairItems = new ArrayList<>();
-        repairItems.add(repairItems1);
-        repairItems.add(repairItems2);
+
+        List<RepairItems> repairItemsList = new ArrayList<>();
+        repairItemsList.add(repairsItem1);
+        repairItemsList.add(repairsItem2);
 //        System.out.println(repairItems);
 
-        BigDecimal found = repairItems.;
-
-        BigDecimal expected = BigDecimal.valueOf(100);
-
+//        BigDecimal found = repairItemsList.get(0).getInventoryItem().getPrice();
+//
+//        BigDecimal expected = BigDecimal.valueOf(100);
+//
+//        assertEquals(BigDecimal.valueOf(100), repairItemsList.get(0).getInventoryItem().getPrice());
+//        assertEquals(BigDecimal.valueOf(50), repairItemsList.get(1).getInventoryItem().getPrice());
 
 
         // Arrange
-//        BigDecimal expected = BigDecimal.valueOf(100*2 + 3*50);
-//        BigDecimal costs = invoiceService.calculatePartsCharge(repairItems);
-//
-//        BigDecimal found = costs.setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal expected = BigDecimal.valueOf(100*2 + 2*50);
+        BigDecimal costs = invoiceService.calculatePartsCharge(repairItemsList);
+
+        BigDecimal found = costs.setScale(2, RoundingMode.HALF_EVEN);
 
         // Assert
         assertEquals(expected,found);
