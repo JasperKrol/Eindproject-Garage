@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,7 +74,7 @@ public class InvoiceService {
 
                 List<RepairItems> repairItems = repairsItemsRepository.findAllByRepairId(repairId);
 
-                BigDecimal calculatedNettoAmount = calculatePartsCharge(repairItems);
+                BigDecimal calculatedNettoAmount = calculateTotalAmountOfPartsUsed(repairItems);
                 BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
                 BigDecimal calculatedGrossAmount = calculatedNettoAmount.add(calculatedVatAmount).setScale(2, RoundingMode.HALF_EVEN);
 
@@ -147,7 +146,7 @@ public class InvoiceService {
         return true;
     }
 
-    public BigDecimal calculatePartsCharge(List<RepairItems> repairItems) {
+    public BigDecimal calculateTotalAmountOfPartsUsed(List<RepairItems> repairItems) {
         BigDecimal partsCharge = new BigDecimal(0);
         for (RepairItems repairItem : repairItems) {
 

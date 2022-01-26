@@ -1,11 +1,9 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.dto.RepairInputDto;
 import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.AppointmentRepository;
 import com.eqriesracingteam.garage.repository.InvoiceRepository;
 import com.eqriesracingteam.garage.repository.RepairRepository;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,26 +59,17 @@ class InvoiceServiceTest {
 
         RepairItems repairsItem2 = new RepairItems();
         repairsItem2.setRepair(repair);
-        repairsItem2.setInventoryItem(inventoryItem1);
+        repairsItem2.setInventoryItem(inventoryItem2);
         repairsItem2.setAmount(2);
 
 
         List<RepairItems> repairItemsList = new ArrayList<>();
         repairItemsList.add(repairsItem1);
         repairItemsList.add(repairsItem2);
-//        System.out.println(repairItems);
-
-//        BigDecimal found = repairItemsList.get(0).getInventoryItem().getPrice();
-//
-//        BigDecimal expected = BigDecimal.valueOf(100);
-//
-//        assertEquals(BigDecimal.valueOf(100), repairItemsList.get(0).getInventoryItem().getPrice());
-//        assertEquals(BigDecimal.valueOf(50), repairItemsList.get(1).getInventoryItem().getPrice());
-
 
         // Arrange
-        BigDecimal expected = BigDecimal.valueOf(100*2 + 2*50);
-        BigDecimal costs = invoiceService.calculatePartsCharge(repairItemsList);
+        BigDecimal expected = BigDecimal.valueOf(100*2 + 2*50).setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal costs = invoiceService.calculateTotalAmountOfPartsUsed(repairItemsList);
 
         BigDecimal found = costs.setScale(2, RoundingMode.HALF_EVEN);
 
