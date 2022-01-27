@@ -16,12 +16,15 @@ import java.util.Optional;
 @Service
 public class InvoiceService {
 
+    private static final BigDecimal vatPercentage = new BigDecimal(0.21);
+    private static final BigDecimal vatPercentageForCalculation = new BigDecimal(1.21);
+    private static final BigDecimal inspectionFeeNoRepair = new BigDecimal(45);
+
     private InvoiceRepository invoiceRepository;
     private AppointmentRepository appointmentRepository;
     private RepairRepository repairRepository;
     private CustomerRepository customerRepository;
     private RepairsItemsRepository repairsItemsRepository;
-
 
     @Autowired
     public InvoiceService(InvoiceRepository invoiceRepository, AppointmentRepository appointmentRepository, RepairRepository repairRepository, CustomerRepository customerRepository, RepairsItemsRepository repairsItemsRepository) {
@@ -31,10 +34,6 @@ public class InvoiceService {
         this.customerRepository = customerRepository;
         this.repairsItemsRepository = repairsItemsRepository;
     }
-
-    private static final BigDecimal vatPercentage = new BigDecimal(0.21);
-    private static final BigDecimal vatPercentageForCalculation = new BigDecimal(1.21);
-    private static final BigDecimal inspectionFeeNoRepair = new BigDecimal(45);
 
     //    BigDecimal nettoAmount = without vat
     //    BigDecimal grossAmount = with vat
@@ -147,15 +146,15 @@ public class InvoiceService {
     }
 
     public BigDecimal calculateTotalAmountOfPartsUsed(List<RepairItems> repairItems) {
-        BigDecimal partsCharge = new BigDecimal(0);
+        BigDecimal totalAmount = new BigDecimal(0);
         for (RepairItems repairItem : repairItems) {
 
             BigDecimal price = repairItem.getInventoryItem().getPrice();
             int amount = repairItem.getAmount();
             BigDecimal amountBD = BigDecimal.valueOf(amount);
             BigDecimal charge = price.multiply(amountBD);
-            partsCharge = partsCharge.add(charge);
+            totalAmount = totalAmount.add(charge);
         }
-        return partsCharge;
+        return totalAmount;
     }
 }

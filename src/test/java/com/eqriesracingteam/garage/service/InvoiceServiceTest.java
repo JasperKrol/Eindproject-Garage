@@ -36,6 +36,31 @@ class InvoiceServiceTest {
     private static final BigDecimal inspectionFeeNoRepair = new BigDecimal(45);
 
     @Test
+    void statusCheck() {
+        // Arrange
+        Appointment appointment = new Appointment();
+        appointment.setAppointmentStatus(AppointmentStatus.NIET_UITVOEREN);
+
+        // Act
+        boolean statusOk = invoiceService.statusCheck(appointment);
+
+        // Assert
+        assertTrue(statusOk);
+    }
+
+    @Test
+    void approvalCustomer() {
+        // Arrange
+        Appointment appointment = new Appointment();
+        appointment.setAppointmentStatus(AppointmentStatus.AKKOORD_KLANT);
+
+        // Act
+        boolean statusOk = invoiceService.approvalCustomer(appointment);
+
+        // Assert
+        assertTrue(statusOk);
+    }
+    @Test
     void calculateTotalPriceOfRepair(){
 
         // Arrange
@@ -79,6 +104,7 @@ class InvoiceServiceTest {
 
 
     }
+
     @Test
     void createInvoice_withNoApprovalForRepair() {
         // Arrange
@@ -172,31 +198,5 @@ class InvoiceServiceTest {
         assertEquals(expectedNetAmount, foundNetAmount );
         assertEquals(expectedVatAmount ,foundVatAmount);
         assertEquals(expectedGrossAmount,foundGrossAmount);
-    }
-
-    @Test
-    void statusCheck() {
-        // Arrange
-        Appointment appointment = new Appointment();
-        appointment.setAppointmentStatus(AppointmentStatus.NIET_UITVOEREN);
-
-        // Act
-        boolean statusOk = invoiceService.statusCheck(appointment);
-
-        // Assert
-        assertTrue(statusOk);
-    }
-
-    @Test
-    void approvalCustomer() {
-        // Arrange
-        Appointment appointment = new Appointment();
-        appointment.setAppointmentStatus(AppointmentStatus.AKKOORD_KLANT);
-
-        // Act
-        boolean statusOk = invoiceService.approvalCustomer(appointment);
-
-        // Assert
-        assertTrue(statusOk);
     }
 }
