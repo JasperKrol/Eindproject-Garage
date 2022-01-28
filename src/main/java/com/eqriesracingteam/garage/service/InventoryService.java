@@ -63,6 +63,8 @@ public class InventoryService {
 
             inventoryItem.setId(storedItem.getId());
             inventoryRepository.save(inventoryItem);
+        } else {
+            throw new InventoryException("inventory item not found, id : " + id);
         }
     }
 }

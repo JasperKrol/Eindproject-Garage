@@ -21,7 +21,7 @@ public class InspectionService {
     private CarRepository carRepository;
 
     @Autowired
-    public InspectionService (InspectionRepository inspectionRepository, CarRepository carRepository){
+    public InspectionService(InspectionRepository inspectionRepository, CarRepository carRepository) {
         this.inspectionRepository = inspectionRepository;
         this.carRepository = carRepository;
     }
@@ -30,7 +30,8 @@ public class InspectionService {
 
         if (inspectionDate == null) {
             return inspectionRepository.findAll();
-        }if (licensePlate == null) {
+        }
+        if (licensePlate == null) {
             return inspectionRepository.findAll();
         } else {
             return inspectionRepository.findAllByInspectionDate(inspectionDate);
@@ -67,13 +68,10 @@ public class InspectionService {
         if (optionalInspection.isPresent()) {
             Inspection plannedInspection = optionalInspection.get();
 
-            plannedInspection.setId(plannedInspection.getId());
-            plannedInspection.setInspectionDate(inspection.getInspectionDate());
-            plannedInspection.setInspectionStatus(inspection.getInspectionStatus());
-            plannedInspection.setFindings(inspection.getFindings());
-            plannedInspection.setEstimatedCosts(inspection.getEstimatedCosts());
-
+            inspection.setId(plannedInspection.getId());
+            inspection.setScheduledCar(plannedInspection.getScheduledCar());
             return inspectionRepository.save(plannedInspection);
+
         } else {
             throw new InspectionException("Inspection could not be saved or found");
         }
@@ -82,10 +80,10 @@ public class InspectionService {
     public void deleteInspection(long id) {
         Optional<Inspection> optionalInspection = inspectionRepository.findById(id);
 
-        if (!optionalInspection.isPresent()){
+        if (!optionalInspection.isPresent()) {
             throw new InspectionException("Inspection with id not found");
         } else {
-           inspectionRepository.deleteById(id);
+            inspectionRepository.deleteById(id);
         }
     }
 
@@ -93,7 +91,7 @@ public class InspectionService {
         Optional<Inspection> optionalInspection = inspectionRepository.findById(id);
         Optional<Car> optionalCar = carRepository.findById(carId);
 
-        if (optionalInspection.isPresent() && optionalCar.isPresent()){
+        if (optionalInspection.isPresent() && optionalCar.isPresent()) {
             var inspection = optionalInspection.get();
             var car = optionalCar.get();
 

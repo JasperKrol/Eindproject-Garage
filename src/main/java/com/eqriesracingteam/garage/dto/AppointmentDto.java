@@ -36,7 +36,9 @@ public class AppointmentDto {
         dto.appointmentStatus = appointment.getAppointmentStatus();
         dto.carPickupDate = appointment.getCarPickupDate();
         dto.description = appointment.getDescription();
-        
+
+
+        // TODO: 28-1-2022 null execption eruit
         if (appointment.getCarForAppointment() != null){
             dto.car = appointment.getCarForAppointment();
         }

@@ -12,5 +12,5 @@ import java.util.List;
 public interface RepairsItemsRepository extends JpaRepository <RepairItems, RepairsItemsKey> {
     List<RepairItems> findAllByRepairId(Long repairId);
     List<RepairItems> findAllByInventoryItem_Id(Long inventoryId);
-    List<RepairItems> countRepairItemsByInventoryItem_Price(BigDecimal inventoryItem_price);
+    List<RepairItems> findRepairItemsByRepairId(Long repairId);
 }

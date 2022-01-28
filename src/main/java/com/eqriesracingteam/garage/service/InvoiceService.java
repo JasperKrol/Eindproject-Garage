@@ -71,7 +71,8 @@ public class InvoiceService {
 
             } else if (approvalCustomer) {
 
-                List<RepairItems> repairItems = repairsItemsRepository.findAllByRepairId(repairId);
+                // TODO: 28-1-2022 fout ophalen, ik haal de repair op, maar nog niet de repairslist
+                List<RepairItems> repairItems = repairsItemsRepository.findRepairItemsByRepairId(repairId);
 
                 BigDecimal calculatedNettoAmount = calculateTotalAmountOfPartsUsed(repairItems);
                 BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);

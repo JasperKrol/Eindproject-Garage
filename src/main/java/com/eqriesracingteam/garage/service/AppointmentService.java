@@ -70,11 +70,7 @@ public class AppointmentService {
         if (optionalAppointment.isPresent()){
             Appointment existingAppointment = optionalAppointment.get();
 
-            existingAppointment.setId(existingAppointment.getId());
-            existingAppointment.setAppointmentStatus(appointment.getAppointmentStatus());
-            existingAppointment.setAppointmentDate(appointment.getAppointmentDate());
-            existingAppointment.setCarPickupDate(appointment.getCarPickupDate());
-            existingAppointment.setDescription(appointment.getDescription());
+           appointment.setId(existingAppointment.getId());
 
             appointmentRepository.save(existingAppointment);
 

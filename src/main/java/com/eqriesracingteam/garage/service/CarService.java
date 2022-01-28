@@ -69,10 +69,12 @@ public class CarService {
     public void updateCar(long id, Car car) {
         Optional<Car> optionalCar = carRepository.findById(id);
         if (optionalCar.isPresent()) {
-            Car existingCar = optionalCar.get();
+            var existingCar = optionalCar.get();
 
             car.setId(existingCar.getId());
             car.setOwner(existingCar.getOwner());
+            car.setRegistrationPapers(existingCar.getRegistrationPapers());
+            car.setAppointments(existingCar.getAppointments());
             carRepository.save(car);
         } else {
             throw new RecordNotFoundException("Car ID not found");

@@ -82,6 +82,7 @@ public class CustomerService {
             customer.setId(existingCustomer.getId());
             customer.setAppointments(existingCustomer.getAppointments());
             customer.setCars(existingCustomer.getCars());
+            customer.setInvoices(existingCustomer.getInvoices());
             customerRepository.save(customer);
         } else {
             throw new RecordNotFoundException("Customer ID does not exists");

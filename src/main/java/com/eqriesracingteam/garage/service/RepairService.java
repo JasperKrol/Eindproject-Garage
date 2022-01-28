@@ -60,6 +60,8 @@ public class RepairService {
             Repair existingRepair = optionalRepair.get();
 
             repair.setId(existingRepair.getId());
+            repair.setRepairItems(existingRepair.getRepairItems());
+            repair.setScheduledCar(existingRepair.getScheduledCar());
             repairRepository.save(repair);
 
         } else {

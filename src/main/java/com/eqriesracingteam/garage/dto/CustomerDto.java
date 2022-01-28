@@ -27,6 +27,7 @@ public class CustomerDto {
     @JsonSerialize
     public List<Appointment> appointments;
 
+    @JsonIgnoreProperties("repair")
     public List<Invoice> invoices;
 
     public static CustomerDto fromCustomer(Customer customer) {
@@ -39,6 +40,7 @@ public class CustomerDto {
         dto.telephoneNumber = customer.getTelephoneNumber();
         dto.appointments = customer.getAppointments();
         dto.cars = customer.getCars();
+        dto.invoices = customer.getInvoices();
 
         // TODO: 30-12-2021 if appointmentstatus is !afgerond customer.get) :: ""
         //        dto.appointments = customer.getAppointments();
