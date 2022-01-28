@@ -27,20 +27,20 @@ class CustomerControllerTest {
     @MockBean
     private CustomerService customerService;
 
-    @Test
-    public void testEndpointCustomers() throws Exception {
-
-        Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
-        List<Customer> allCustomers = Arrays.asList(customer);
-
-        given(customerService.getAllCustomers()).willReturn(allCustomers);
-
-        mvc.perform(get("/customers")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].lastName", is(customer.getLastName())));
-
-    }
+//    @Test
+//    public void testEndpointCustomers() throws Exception {
+//
+//        Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
+//        List<Customer> allCustomers = Arrays.asList(customer);
+//
+//        given(customerService.getAllCustomers()).willReturn(allCustomers);
+//
+//        mvc.perform(get("/customers")
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$", hasSize(1)))
+//                .andExpect(jsonPath("$[0].lastName", is(customer.getLastName())));
+//
+//    }
 
 }

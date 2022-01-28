@@ -26,9 +26,9 @@ class AuthenticationControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    void shouldReturn200() throws Exception {
-        mockMvc.perform(get("/users"))
-                .andExpect(status().isOk());
-    }
+//    @Test
+//    void shouldReturn200() throws Exception {
+//        mockMvc.perform(get("/users"))
+//                .andExpect(status().isOk());
+//    }
 }

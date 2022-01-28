@@ -9,6 +9,6 @@ import java.time.LocalDate;
 
 public class InvoiceInputDto {
 
-    long appointmentId;
-    long repairId;
+    public long appointmentId;
+    public long repairId;
 }
