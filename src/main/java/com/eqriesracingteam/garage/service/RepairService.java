@@ -36,7 +36,7 @@ public class RepairService {
     }
 
     // Methods
-    public Repair getOneAppointment(long id) {
+    public Repair getOneAppointment(Long id) {
         Optional<Repair> optionalRepair = repairRepository.findById(id);
 
         if (optionalRepair.isPresent()) {
@@ -52,26 +52,22 @@ public class RepairService {
         return repairRepository.findAll();
     }
 
-    public Repair adjustRepairAppointment(long id, Repair repair) {
-        Optional<Repair> optionalAppointment = repairRepository.findById(id);
+    public void adjustRepairAppointment(Long id, Repair repair) {
 
-        if (optionalAppointment.isPresent()) {
-            //            var repair = repairRepository.getById(id);
-            Repair existingRepair = optionalAppointment.get();
+        Optional<Repair> optionalRepair = repairRepository.findById(id);
 
-            existingRepair.setId(existingRepair.getId());
-            existingRepair.setAppointmentStatus(repair.getAppointmentStatus());
-            existingRepair.setRepairDateWorkshop(repair.getRepairDateWorkshop());
-            // TODO: 25-12-2021 add customer and car
-            repairRepository.save(existingRepair);
-            return existingRepair;
+        if (optionalRepair.isPresent()) {
+            Repair existingRepair = optionalRepair.get();
+
+            repair.setId(existingRepair.getId());
+            repairRepository.save(repair);
 
         } else {
             throw new AppointmentException("Appointment with id not found");
         }
     }
 
-    public void deleteRepairAppointment(long id) {
+    public void deleteRepairAppointment(Long id) {
         var existingAppointment = repairRepository.findById(id);
 
         if (existingAppointment.isPresent()) {
@@ -83,7 +79,7 @@ public class RepairService {
 
 
     // TODO: 13-1-2022 after creating solution, check if needed
-    //    public void addARepairItem(long id, long repairItemId) {
+    //    public void addARepairItem(Long id, Long repairItemId) {
     //        Repair repair = getOneAppointment(id);
     //        Optional<Inventory> optionalInventory = inventoryRepository.findById(repairItemId);
     //

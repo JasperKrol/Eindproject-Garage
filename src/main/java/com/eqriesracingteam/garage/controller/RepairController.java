@@ -50,7 +50,7 @@ public class RepairController {
 
     // Get one
     @GetMapping(value = "/api/garage/repairs/{id}")
-    public RepairDto getOneRepairAppointment(@PathVariable("id") long id) {
+    public RepairDto getOneRepairAppointment(@PathVariable("id") Long id) {
         var repairAppointment = repairService.getOneAppointment(id);
         return RepairDto.fromRepair(repairAppointment);
     }
@@ -69,7 +69,7 @@ public class RepairController {
 
     // Adjust
     @PutMapping(value = "/api/garage/repairs/{id}")
-    public RepairDto adjustRepairAppointment(@PathVariable("id") long id, @RequestBody Repair repair) {
+    public RepairDto adjustRepairAppointment(@PathVariable("id") Long id, @RequestBody Repair repair) {
         repairService.adjustRepairAppointment(id, repair);
         return RepairDto.fromRepair(repair);
 
@@ -77,14 +77,14 @@ public class RepairController {
 
     // Delete appointment
     @DeleteMapping(value = "/api/garage/repairs/{id}")
-    public void deleteRepairAppointment(@PathVariable("id") long id) {
+    public void deleteRepairAppointment(@PathVariable("id") Long id) {
         repairService.deleteRepairAppointment(id);
     }
 
 
     // Patch
     //    @PatchMapping(value = "/api/garage/repairs/{id}/repairItems")
-    //    public ResponseEntity<?> addUsedInventoryItemsByRepair(@PathVariable("id") long id, @RequestBody long repairItemId) {
+    //    public ResponseEntity<?> addUsedInventoryItemsByRepair(@PathVariable("id") Long id, @RequestBody Long repairItemId) {
     //        repairService.addARepairItem(id, repairItemId);
     //        return ResponseEntity.ok().build();
     //    }

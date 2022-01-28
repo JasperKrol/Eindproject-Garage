@@ -10,9 +10,10 @@ import java.util.List;
 
 public class RepairDto {
 
-    public long id;
+    public Long id;
     public AppointmentStatus appointmentStatus;
     public LocalDateTime repairDateWorkshop;
+
     @JsonSerialize
     @JsonIgnoreProperties({"repair"})
     public List<RepairItems> repairItems;
