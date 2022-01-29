@@ -54,7 +54,9 @@ public class InvoiceService {
         invoice.setInvoicePaid(false);
         invoice.setInvoiceDate(LocalDate.now());
 
-        if (appointmentRepository.existsById(appointmentId) && repairAndInspectionOk) {
+        // TODO: 29-1-2022 to make check if appointment id or repair id are in system else thr
+
+        if (repairAndInspectionOk) {
             if (!approvalCustomer) {
                 //                var customer = appointment.getCustomer();
                 BigDecimal grossAmount = inspectionFeeNoRepair;
@@ -68,11 +70,11 @@ public class InvoiceService {
                 //                invoice.setCustomer(customer);
 
                 return invoiceRepository.save(invoice);
-
-            } else if (approvalCustomer) {
+            }
+            if (approvalCustomer) {
 
                 // TODO: 28-1-2022 fout ophalen, ik haal de repair op, maar nog niet de repairslist
-                List<RepairItems> repairItems = repairsItemsRepository.findRepairItemsByRepairId(repairId);
+                List<RepairItems> repairItems = repairsItemsRepository.findAllByRepairId(repairId);
 
                 BigDecimal calculatedNettoAmount = calculateTotalAmountOfPartsUsed(repairItems);
                 BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
@@ -85,13 +87,12 @@ public class InvoiceService {
                 appointment.setAppointmentStatus(AppointmentStatus.FACTUUR_AANGEMAAKT);
 
                 return invoiceRepository.save(invoice);
-            } else {
-                throw new AppointmentException("Appointment status not ready");
             }
+        } else {
+            throw new AppointmentException("please check for approval or appointment status");
         }
         return invoice;
     }
-
 
     public List<Invoice> getAllInvoices() {
         return invoiceRepository.findAll();
