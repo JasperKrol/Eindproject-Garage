@@ -4,10 +4,7 @@ import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.*;
-import com.eqriesracingteam.garage.repository.CarRepository;
-import com.eqriesracingteam.garage.repository.InventoryRepository;
-import com.eqriesracingteam.garage.repository.RepairRepository;
-import com.eqriesracingteam.garage.repository.RepairsItemsRepository;
+import com.eqriesracingteam.garage.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,16 +20,18 @@ public class RepairService {
     private CarRepository carRepository;
     private InventoryRepository inventoryRepository;
     private RepairsItemsRepository repairsItemsRepository;
+    private AppointmentRepository appointmentRepository;
 
 
     // Constructor
 
     @Autowired
-    public RepairService(RepairRepository repairRepository, CarRepository carRepository, InventoryRepository inventoryRepository, RepairsItemsRepository repairsItemsRepository) {
+    public RepairService(RepairRepository repairRepository, CarRepository carRepository, InventoryRepository inventoryRepository, RepairsItemsRepository repairsItemsRepository, AppointmentRepository appointmentRepository) {
         this.repairRepository = repairRepository;
         this.carRepository = carRepository;
         this.inventoryRepository = inventoryRepository;
         this.repairsItemsRepository = repairsItemsRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     // Methods
@@ -122,6 +121,19 @@ public class RepairService {
 
         } else {
             throw new BadRequestException("Missing car information");
+        }
+    }
+
+    public void assignAppointment(long repairId, Long appointmentId) {
+        var optionalRepair = repairRepository.findById(repairId);
+        var optionalAppointment = appointmentRepository.findById(appointmentId);
+
+        if (optionalAppointment.isPresent() && optionalRepair.isPresent()){
+            var repair = optionalRepair.get();
+            var appointment = optionalAppointment.get();
+
+            repair.setAppointment(appointment);
+            repairRepository.save(repair);
         }
     }
 }

@@ -69,5 +69,9 @@ public class RepairController {
         repairService.deleteRepairAppointment(id);
     }
 
-
+    // Assign appointment to repair
+    @PutMapping(value = "/api/garage/repairs/{id}/appointment")
+    public void assignAppointmentToRepair(@PathVariable("id") long repairId, @RequestBody IdInputDto inputDto) {
+        repairService.assignAppointment(repairId, inputDto.id);
+    }
 }
