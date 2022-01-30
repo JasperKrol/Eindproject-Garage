@@ -23,7 +23,7 @@ public class InvoiceController {
     // Post request
     @PostMapping(value = "/api/garage/invoices")
     public InvoiceDto createInvoice(@RequestBody InvoiceInputDto input){
-        var invoice = invoiceService.createInvoice(input.appointmentId,input.repairId);
+        var invoice = invoiceService.createInvoice(input.repairId);
         return InvoiceDto.fromInvoice(invoice);
     }
 

@@ -39,17 +39,19 @@ public class InvoiceService {
     //    BigDecimal grossAmount = with vat
 
     // Methods
-    public Invoice createInvoice(Long appointmentId, Long repairId) {
+    public Invoice createInvoice(Long repairId) {
 
 
-        var appointment = appointmentRepository.getById(appointmentId);
+//        var appointment = appointmentRepository.getById(appointmentId);
         Repair executedRepair = repairRepository.getById(repairId);
         repairId = executedRepair.getId();
+        var appointment = executedRepair.getAppointment();
 
         boolean approvalCustomer = approvalCustomer(appointment);
         boolean repairAndInspectionOk = statusCheck(appointment);
 
         var invoice = new Invoice();
+        var customer = appointment.getCustomer();
 
         invoice.setInvoicePaid(false);
         invoice.setInvoiceDate(LocalDate.now());
@@ -58,7 +60,7 @@ public class InvoiceService {
 
         if (repairAndInspectionOk) {
             if (!approvalCustomer) {
-                var customer = appointment.getCustomer();
+
                 BigDecimal grossAmount = inspectionFeeNoRepair;
                 BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageForCalculation, 2, RoundingMode.HALF_EVEN);
                 BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
@@ -83,6 +85,7 @@ public class InvoiceService {
                 invoice.setNettoAmount(calculatedNettoAmount);
                 invoice.setVatAmount(calculatedVatAmount);
                 invoice.setGrossAmount(calculatedGrossAmount);
+                invoice.setCustomer(customer);
 
                 appointment.setAppointmentStatus(AppointmentStatus.FACTUUR_AANGEMAAKT);
 
