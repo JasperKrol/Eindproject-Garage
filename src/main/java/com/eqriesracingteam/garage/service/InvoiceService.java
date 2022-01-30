@@ -58,7 +58,7 @@ public class InvoiceService {
 
         if (repairAndInspectionOk) {
             if (!approvalCustomer) {
-                //                var customer = appointment.getCustomer();
+                var customer = appointment.getCustomer();
                 BigDecimal grossAmount = inspectionFeeNoRepair;
                 BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageForCalculation, 2, RoundingMode.HALF_EVEN);
                 BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
@@ -67,7 +67,7 @@ public class InvoiceService {
                 invoice.setNettoAmount(calculatedNettoAmount);
                 invoice.setVatAmount(calculatedVatAmount);
                 appointment.setAppointmentStatus(AppointmentStatus.FACTUUR_AANGEMAAKT);
-                //                invoice.setCustomer(customer);
+                invoice.setCustomer(customer);
 
                 return invoiceRepository.save(invoice);
             }

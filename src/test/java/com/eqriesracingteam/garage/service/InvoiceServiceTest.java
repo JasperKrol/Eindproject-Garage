@@ -60,8 +60,9 @@ class InvoiceServiceTest {
         // Assert
         assertTrue(statusOk);
     }
+
     @Test
-    void calculateTotalPriceOfRepair(){
+    void calculateTotalPriceOfRepair() {
 
         // Arrange
         Repair repair = new Repair();
@@ -93,14 +94,13 @@ class InvoiceServiceTest {
         repairItemsList.add(repairsItem2);
 
         // Arrange
-        BigDecimal expected = BigDecimal.valueOf(100*2 + 2*50).setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal expected = BigDecimal.valueOf(100 * 2 + 2 * 50).setScale(2, RoundingMode.HALF_EVEN);
         BigDecimal costs = invoiceService.calculateTotalAmountOfPartsUsed(repairItemsList);
 
         BigDecimal found = costs.setScale(2, RoundingMode.HALF_EVEN);
 
         // Assert
-        assertEquals(expected,found);
-
+        assertEquals(expected, found);
 
 
     }
@@ -118,10 +118,10 @@ class InvoiceServiceTest {
 
         // Act
 
-        if (appointment.getAppointmentStatus() == AppointmentStatus.NIET_UITVOEREN){
+        if (appointment.getAppointmentStatus() == AppointmentStatus.NIET_UITVOEREN) {
             BigDecimal grossAmount = inspectionFeeNoRepair;
             BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageToNetAmount, 2, RoundingMode.HALF_EVEN);
-            BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2,RoundingMode.HALF_EVEN);
+            BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
             invoice.setGrossAmount(grossAmount);
             invoice.setNettoAmount(calculatedNettoAmount);
             invoice.setVatAmount(calculatedVatAmount);
@@ -136,9 +136,9 @@ class InvoiceServiceTest {
         BigDecimal foundGrossAmount = invoice.getGrossAmount();
         // Assert
 
-        assertEquals(expectedNetAmount, foundNetAmount );
-        assertEquals(expectedVatAmount ,foundVatAmount);
-        assertEquals(expectedGrossAmount,foundGrossAmount);
+        assertEquals(expectedNetAmount, foundNetAmount);
+        assertEquals(expectedVatAmount, foundVatAmount);
+        assertEquals(expectedGrossAmount, foundGrossAmount);
     }
 
     @Test
@@ -177,10 +177,10 @@ class InvoiceServiceTest {
 
         // Act
 
-        if (appointment.getAppointmentStatus() == AppointmentStatus.REPARATIE_UITGEVOERD){
+        if (appointment.getAppointmentStatus() == AppointmentStatus.REPARATIE_UITGEVOERD) {
             BigDecimal grossAmount = inspectionFeeNoRepair;
             BigDecimal calculatedNettoAmount = grossAmount.divide(vatPercentageToNetAmount, 2, RoundingMode.HALF_EVEN);
-            BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2,RoundingMode.HALF_EVEN);
+            BigDecimal calculatedVatAmount = calculatedNettoAmount.multiply(vatPercentage).setScale(2, RoundingMode.HALF_EVEN);
             invoice.setGrossAmount(grossAmount);
             invoice.setNettoAmount(calculatedNettoAmount);
             invoice.setVatAmount(calculatedVatAmount);
@@ -195,8 +195,8 @@ class InvoiceServiceTest {
         BigDecimal foundGrossAmount = invoice.getGrossAmount();
         // Assert
 
-        assertEquals(expectedNetAmount, foundNetAmount );
-        assertEquals(expectedVatAmount ,foundVatAmount);
-        assertEquals(expectedGrossAmount,foundGrossAmount);
+        assertEquals(expectedNetAmount, foundNetAmount);
+        assertEquals(expectedVatAmount, foundVatAmount);
+        assertEquals(expectedGrossAmount, foundGrossAmount);
     }
 }
