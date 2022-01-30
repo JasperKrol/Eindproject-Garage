@@ -1,9 +1,6 @@
 package com.eqriesracingteam.garage.dto;
 
-import com.eqriesracingteam.garage.model.Appointment;
-import com.eqriesracingteam.garage.model.AppointmentStatus;
-import com.eqriesracingteam.garage.model.Car;
-import com.eqriesracingteam.garage.model.Customer;
+import com.eqriesracingteam.garage.model.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,6 +24,8 @@ public class AppointmentDto {
 
     public Customer customer;
 
+    public Repair repair;
+
     public static AppointmentDto fromAppointment(Appointment appointment) {
 
         var dto = new AppointmentDto();
@@ -45,6 +44,8 @@ public class AppointmentDto {
         if (appointment.getCustomer() != null){
             dto.customer = appointment.getCustomer();
         }
+
+        dto.repair = appointment.getRepair();
 
         return dto;
     }

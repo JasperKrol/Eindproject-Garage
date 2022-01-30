@@ -34,6 +34,11 @@ public class Repair {
     @JsonIgnore
     private List<RepairItems> repairItems;
 
+    @OneToOne
+    @JoinColumn(name = "appointment_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Appointment appointment;
+
     public Long getId() {
         return id;
     }
@@ -73,11 +78,12 @@ public class Repair {
     public void setRepairItems(List<RepairItems> repairItems) {
         this.repairItems = repairItems;
     }
-//    public void addInventoryItem(RepairsItems inventoryItem) {
-//        this.repairsItems.add(inventoryItem);
-//    }
-//
-//    public void removeInventoryItem(Inventory inventoryItem) {
-//        this.repairsItems.remove(inventoryItem);
-//    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
 }

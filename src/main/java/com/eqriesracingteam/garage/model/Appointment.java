@@ -34,6 +34,10 @@ public class Appointment {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
+    @OneToOne(mappedBy = "appointment")
+    @JoinColumn(name = "repair_id", referencedColumnName = "id")
+    private Repair repair;
+
     // TODO: 28-12-2021 invoice link?
 
     // Getters and setters
@@ -94,4 +98,11 @@ public class Appointment {
         this.customer = customer;
     }
 
+    public Repair getRepair() {
+        return repair;
+    }
+
+    public void setRepair(Repair repair) {
+        this.repair = repair;
+    }
 }
