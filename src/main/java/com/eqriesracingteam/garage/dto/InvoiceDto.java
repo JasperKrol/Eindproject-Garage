@@ -22,7 +22,6 @@ public class InvoiceDto {
     // TODO: 10-1-2022 relations in dto zetten
     public Customer customer;
     public Repair repair;
-//    public List<RepairItems> repairItems;
 
     public static InvoiceDto fromInvoice(Invoice invoice){
         var dto = new InvoiceDto();
@@ -35,8 +34,7 @@ public class InvoiceDto {
         dto.invoicePaid = invoice.isInvoicePaid();
 
         dto.customer = invoice.getCustomer();
-        dto.repair = invoice.getRepair();
-//        dto.repairItems = invoice.getRepairItems();
+//        dto.repair = invoice.getRepair();
 
         return dto;
     }

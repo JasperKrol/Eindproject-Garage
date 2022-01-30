@@ -87,6 +87,7 @@ public class InvoiceService {
                 invoice.setGrossAmount(calculatedGrossAmount);
                 invoice.setCustomer(customer);
 
+                invoice.setRepair(executedRepair);
                 appointment.setAppointmentStatus(AppointmentStatus.FACTUUR_AANGEMAAKT);
 
                 return invoiceRepository.save(invoice);

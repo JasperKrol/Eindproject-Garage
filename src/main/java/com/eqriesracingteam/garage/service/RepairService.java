@@ -60,7 +60,7 @@ public class RepairService {
 
             // TODO: 30-1-2022 make function to clean up code
             if (repair.getAppointmentStatus() == AppointmentStatus.REPARATIE_UITGEVOERD){
-                optionalRepair.get().getAppointment().setAppointmentStatus(repair.getAppointmentStatus());
+                optionalRepair.get().getAppointment().setAppointmentStatus(AppointmentStatus.REPARATIE_UITGEVOERD);
             }
             repairRepository.save(repair);
 
