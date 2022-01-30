@@ -42,7 +42,6 @@ public class RepairService {
     }
 
     // TODO: 6-1-2022 request param for date search option or car
-    // TODO: 13-1-2022 postman request not werking 
     public List<Repair> getAllRepairAppointments() {
         return repairRepository.findAll();
     }
