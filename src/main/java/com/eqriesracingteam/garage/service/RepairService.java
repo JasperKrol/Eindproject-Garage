@@ -1,6 +1,5 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.*;
@@ -8,8 +7,6 @@ import com.eqriesracingteam.garage.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +18,6 @@ public class RepairService {
     private InventoryRepository inventoryRepository;
     private RepairsItemsRepository repairsItemsRepository;
     private AppointmentRepository appointmentRepository;
-
 
     // Constructor
 
@@ -61,6 +57,12 @@ public class RepairService {
             repair.setId(existingRepair.getId());
             repair.setRepairItems(existingRepair.getRepairItems());
             repair.setScheduledCar(existingRepair.getScheduledCar());
+            repair.setAppointment(existingRepair.getAppointment());
+
+            // TODO: 30-1-2022 make function to clean up code
+            if (repair.getAppointmentStatus() == AppointmentStatus.REPARATIE_UITGEVOERD){
+                optionalRepair.get().getAppointment().setAppointmentStatus(repair.getAppointmentStatus());
+            }
             repairRepository.save(repair);
 
         } else {
@@ -77,31 +79,6 @@ public class RepairService {
             throw new AppointmentException("Appointment not found");
         }
     }
-
-
-    // TODO: 13-1-2022 after creating solution, check if needed
-    //    public void addARepairItem(Long id, Long repairItemId) {
-    //        Repair repair = getOneAppointment(id);
-    //        Optional<Inventory> optionalInventory = inventoryRepository.findById(repairItemId);
-    //
-    //        if (optionalInventory.isPresent()) {
-    //            Inventory inventoryItem = optionalInventory.get();
-    //            if (inventoryItem.getStock() != 0) {
-    //                RepairItems repairItems = new RepairItems();
-    //
-    //                repairItems.setRepair(repair);
-    //                repairItems.setInventoryItem(inventoryItem);
-    //                repairsItemsRepository.save(repairItems);
-    //
-    //                repair.getRepairItems().add(repairItems);
-    //                repairRepository.save(repair);
-    //                inventoryItem.setStock(-1);
-    //                inventoryRepository.save(inventoryItem);
-    //            }
-    //        } else {
-    //            throw new RecordNotFoundException("No item with id " + repairItemId + " found");
-    //        }
-    //    }
 
     public Repair createRepairAppointment(Repair repair, Long carId) {
         var date = repair.getRepairDateWorkshop();
@@ -128,7 +105,7 @@ public class RepairService {
         var optionalRepair = repairRepository.findById(repairId);
         var optionalAppointment = appointmentRepository.findById(appointmentId);
 
-        if (optionalAppointment.isPresent() && optionalRepair.isPresent()){
+        if (optionalAppointment.isPresent() && optionalRepair.isPresent()) {
             var repair = optionalRepair.get();
             var appointment = optionalAppointment.get();
 
