@@ -68,6 +68,7 @@ public class CustomerController {
         return CustomerDto.fromCustomer(customer);
     }
 
+    //Delete
     @DeleteMapping(value = "/api/garage/customers/{id}")
     public void deleteCustomer(@PathVariable("id") long id) {
         customerService.deleteCustomer(id);
@@ -108,5 +109,10 @@ public class CustomerController {
     public ResponseEntity<Object> addAppointmentToCustomer(@PathVariable("id") long id, @RequestBody Appointment appointment) {
         customerService.addAppointmentToCustomer(id, appointment);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value = "/api/garage/customers/{id}/invoices")
+    public ResponseEntity<Object> getCustomerInvoices(@PathVariable("id") long id){
+        return ResponseEntity.ok(customerService.getCustomerInvoices(id));
     }
 }

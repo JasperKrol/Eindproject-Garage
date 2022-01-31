@@ -4,10 +4,7 @@ import com.eqriesracingteam.garage.dto.CustomerDto;
 import com.eqriesracingteam.garage.dto.CustomerInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
-import com.eqriesracingteam.garage.model.Appointment;
-import com.eqriesracingteam.garage.model.AppointmentStatus;
-import com.eqriesracingteam.garage.model.Car;
-import com.eqriesracingteam.garage.model.Customer;
+import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.AppointmentRepository;
 import com.eqriesracingteam.garage.repository.CarRepository;
 import com.eqriesracingteam.garage.repository.CustomerRepository;
@@ -178,20 +175,15 @@ public class CustomerService {
         }
     }
 
-    // TODO: 13-12-2021 needed for plan?
+    public List<Invoice> getCustomerInvoices(long id) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
 
-    //        public void assingCarToCustomer(Long id, Long carId) {
-    //            var optionalCustomer = customerRepository.findById(id);
-    //            var optionalCar = carRepository.findById(carId);
-    //
-    //            if (optionalCustomer.isPresent() && optionalCar.isPresent()) {
-    //                var customer = optionalCustomer.get();
-    //                var car = optionalCar.get();
-    //
-    //                customer.setCars((List<Car>) car);
-    //                customerRepository.save(customer);
-    //            } else {
-    //                throw new RecordNotFoundException();
-    //            }
-    //        }
+        if (optionalCustomer.isPresent()) {
+            Customer customer = optionalCustomer.get();
+            return customer.getInvoices();
+        } else {
+            throw new RecordNotFoundException("Customer not found");
+        }
+    }
 }
+
