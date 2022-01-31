@@ -33,11 +33,11 @@ public class AppointmentService {
     // TODO: 29-12-2021 date param
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
-//        if (date == null) {
-//            return appointmentRepository.findAll();
-//        } else {
-//            return appointmentRepository.findAllByAppointmentDate(date);
-//        }
+        //        if (date == null) {
+        //            return appointmentRepository.findAll();
+        //        } else {
+        //            return appointmentRepository.findAllByAppointmentDate(date);
+        //        }
     }
 
     public Appointment getAppointment(long id) {
@@ -54,7 +54,7 @@ public class AppointmentService {
         var date = appointment.getAppointmentDate();
         List<Appointment> appointments = appointmentRepository.findAllByAppointmentDate(date);
 
-        if (appointments.isEmpty()){
+        if (appointments.isEmpty()) {
             appointment.setAppointmentStatus(AppointmentStatus.AFSPRAAK_GEPLAND);
             Appointment newAppointment = appointmentRepository.save(appointment);
 
@@ -67,10 +67,10 @@ public class AppointmentService {
     public void updateAppointment(long id, Appointment appointment) {
         Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
 
-        if (optionalAppointment.isPresent()){
+        if (optionalAppointment.isPresent()) {
             Appointment existingAppointment = optionalAppointment.get();
 
-           appointment.setId(existingAppointment.getId());
+            appointment.setId(existingAppointment.getId());
 
             appointmentRepository.save(existingAppointment);
 
@@ -83,7 +83,7 @@ public class AppointmentService {
     public void deleteAppointment(long id) {
         var existingAppointment = appointmentRepository.findById(id);
 
-        if (existingAppointment.isPresent()){
+        if (existingAppointment.isPresent()) {
             appointmentRepository.deleteById(id);
         } else {
             throw new AppointmentException("Appointment not found");
@@ -94,7 +94,7 @@ public class AppointmentService {
         var optionalAppointment = appointmentRepository.findById(id);
         var optionalCar = carRepository.findById(carId);
 
-        if (!optionalAppointment.isPresent() || !optionalCar.isPresent()){
+        if (!optionalAppointment.isPresent() || !optionalCar.isPresent()) {
             throw new RecordNotFoundException("Please check input for car id + " + id + " and/or appointment id" + id);
         } else {
             var existingAppointment = optionalAppointment.get();

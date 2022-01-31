@@ -39,6 +39,8 @@ public class Repair {
     @JsonIgnore
     private Appointment appointment;
 
+    // Getters and setters
+
     public Long getId() {
         return id;
     }

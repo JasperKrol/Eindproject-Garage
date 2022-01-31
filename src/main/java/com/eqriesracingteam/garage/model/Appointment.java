@@ -38,7 +38,9 @@ public class Appointment {
     @JoinColumn(name = "repair_id", referencedColumnName = "id")
     private Repair repair;
 
-    // TODO: 28-12-2021 invoice link?
+    @OneToOne(mappedBy = "appointment",fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Inspection inspection;
 
     // Getters and setters
 
@@ -104,5 +106,13 @@ public class Appointment {
 
     public void setRepair(Repair repair) {
         this.repair = repair;
+    }
+
+    public Inspection getInspection() {
+        return inspection;
+    }
+
+    public void setInspection(Inspection inspection) {
+        this.inspection = inspection;
     }
 }

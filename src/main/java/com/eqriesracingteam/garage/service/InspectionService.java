@@ -1,10 +1,12 @@
 package com.eqriesracingteam.garage.service;
 
+import com.eqriesracingteam.garage.dto.InspectionDto;
+import com.eqriesracingteam.garage.exceptions.AppointmentException;
+import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.InspectionException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
-import com.eqriesracingteam.garage.model.Car;
-import com.eqriesracingteam.garage.model.Inspection;
-import com.eqriesracingteam.garage.model.InspectionStatus;
+import com.eqriesracingteam.garage.model.*;
+import com.eqriesracingteam.garage.repository.AppointmentRepository;
 import com.eqriesracingteam.garage.repository.CarRepository;
 import com.eqriesracingteam.garage.repository.InspectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,13 @@ public class InspectionService {
 
     private InspectionRepository inspectionRepository;
     private CarRepository carRepository;
+    private AppointmentRepository appointmentRepository;
 
     @Autowired
-    public InspectionService(InspectionRepository inspectionRepository, CarRepository carRepository) {
+    public InspectionService(InspectionRepository inspectionRepository, CarRepository carRepository, AppointmentRepository appointmentRepository) {
         this.inspectionRepository = inspectionRepository;
         this.carRepository = carRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     public List<Inspection> getInspections(LocalDateTime inspectionDate, String licensePlate) {
@@ -49,16 +53,28 @@ public class InspectionService {
         }
     }
 
-    public Inspection createInspection(Inspection inspection) {
+    public Inspection createInspection(Inspection inspection, long appointmentId) {
         var inspectionDate = inspection.getInspectionDate();
         List<Inspection> inspections = inspectionRepository.findAllByInspectionDate(inspectionDate);
+
+        Optional<Appointment> optionalAppointment = appointmentRepository.findById(appointmentId);
+
+        Appointment appointmentForInspection = optionalAppointment.orElseThrow(() -> new AppointmentException("Appointment id not found"));
+        Car carForAppointment = appointmentForInspection.getCarForAppointment();
+
+        if (carForAppointment == null){
+            throw new RecordNotFoundException("car has not been matched to appointment");
+        }
 
         inspection.setInspectionStatus(InspectionStatus.INSPECTIE_GEPLAND);
 
         if (inspections.size() > 0) {
             throw new InspectionException("No more space on this date/time combination");
         } else {
+            inspection.setAppointment(appointmentForInspection);
+            inspection.setScheduledCar(carForAppointment);
             return inspectionRepository.save(inspection);
+
         }
     }
 
@@ -67,10 +83,19 @@ public class InspectionService {
 
         if (optionalInspection.isPresent()) {
             Inspection plannedInspection = optionalInspection.get();
+            var appointment = plannedInspection.getAppointment();
 
             inspection.setId(plannedInspection.getId());
             inspection.setScheduledCar(plannedInspection.getScheduledCar());
-            return inspectionRepository.save(plannedInspection);
+
+            inspectionRepository.save(plannedInspection);
+
+            if (plannedInspection.getInspectionStatus() == InspectionStatus.INSPECTION_UITGEVOERD){
+                appointment.setAppointmentStatus(AppointmentStatus.INSPECTIE_KLAAR);
+            }
+
+            return plannedInspection;
+
 
         } else {
             throw new InspectionException("Inspection could not be saved or found");

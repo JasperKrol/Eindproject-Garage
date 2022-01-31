@@ -12,14 +12,15 @@ public class InspectionInputDto {
     public String findings;
     public BigDecimal estimatedCosts;
     public InspectionStatus inspectionStatus;
+    public long appointmentId;
 
     public Inspection toInspection(){
         var inspection = new Inspection();
 
         inspection.setId(id);
         inspection.setInspectionDate(inspectionDate);
-        inspection.setFindings(findings);
-        inspection.setEstimatedCosts(estimatedCosts);
+//        inspection.setFindings(findings);
+//        inspection.setEstimatedCosts(estimatedCosts);
 
         return inspection;
     }

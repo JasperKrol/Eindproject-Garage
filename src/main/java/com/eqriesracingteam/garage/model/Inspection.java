@@ -33,6 +33,10 @@ public class Inspection {
     @JsonIgnoreProperties("registrationPapers")
     private Car scheduledCar;
 
+    @OneToOne
+    @JsonIgnore
+    private Appointment appointment;
+
     // Getters and setters
 
     public long getId() {
@@ -83,4 +87,11 @@ public class Inspection {
         this.scheduledCar = scheduledCar;
     }
 
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
 }
