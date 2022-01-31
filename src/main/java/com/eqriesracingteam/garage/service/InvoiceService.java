@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
+import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,26 +39,26 @@ public class InvoiceService {
     //    BigDecimal nettoAmount = without vat
     //    BigDecimal grossAmount = with vat
 
+    // TODO: 31-1-2022 Clean up code in create invoice with cleancode practices 
+
     // Methods
     public Invoice createInvoice(Long repairId) {
 
+        Optional<Repair> optionalRepair = repairRepository.findById(repairId);
 
-//        var appointment = appointmentRepository.getById(appointmentId);
-        Repair executedRepair = repairRepository.getById(repairId);
-        repairId = executedRepair.getId();
+        Repair executedRepair = optionalRepair.orElseThrow(() -> new RecordNotFoundException("Repair with given id not found"));
+
         var appointment = executedRepair.getAppointment();
-
-        boolean approvalCustomer = approvalCustomer(appointment);
-        boolean repairAndInspectionOk = statusCheck(appointment);
 
         var invoice = new Invoice();
         var customer = appointment.getCustomer();
 
+        boolean approvalCustomer = approvalCustomer(appointment);
+        boolean repairAndInspectionOk = statusCheck(appointment);
+
         invoice.setInvoicePaid(false);
         invoice.setInvoiceDate(LocalDate.now());
-
-        // TODO: 29-1-2022 to make check if appointment id or repair id are in system else thr
-
+        
         if (repairAndInspectionOk) {
             if (!approvalCustomer) {
 
@@ -75,7 +76,6 @@ public class InvoiceService {
             }
             if (approvalCustomer) {
 
-                // TODO: 28-1-2022 fout ophalen, ik haal de repair op, maar nog niet de repairslist
                 List<RepairItems> repairItems = repairsItemsRepository.findAllByRepairId(repairId);
 
                 BigDecimal calculatedNettoAmount = calculateTotalAmountOfPartsUsed(repairItems);
@@ -132,9 +132,7 @@ public class InvoiceService {
             throw new BadRequestException("Invoice with invoice number" + invoiceNumber + " not found");
         }
     }
-
-    // TODO: 11-1-2022 assingments to invoice customer appointment
-
+    
     public boolean statusCheck(Appointment appointment) {
         AppointmentStatus status = appointment.getAppointmentStatus();
         if (status == AppointmentStatus.REPARATIE_UITGEVOERD || status == AppointmentStatus.NIET_UITVOEREN) {
