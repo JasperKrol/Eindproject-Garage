@@ -31,7 +31,7 @@ VALUES ('2021-12-01T08:00:00', 0, '2021-12-20T08:00:00', 1, 1, 'motor doet raar,
        ('2021-11-04T09:00:00', 1, '2021-12-04T12:00:00', 2, 2, 'ruitenwisser veegt strepen'),
        ('2021-09-02T12:00:00', 4, '2021-10-04T09:00:00', 2, 2, 'knipperlicht vloeistof is op'),
        ('2021-12-02T12:00:00', 3, '2021-12-31T09:00:00', 2, 3, 'Remmen lopen aan'),
-       ('2021-09-02T12:00:00', 6, '2021-10-04T09:00:00', 3, 4, 'distributieriem versleten en koelvloeistof op');
+       ('2021-09-02T12:00:00', 5, '2021-10-04T09:00:00', 3, 4, 'distributieriem versleten en koelvloeistof op');
 
 --Onderdelen
 INSERT INTO auto_onderdelen (item_description, price, stock, used_parts)
@@ -58,7 +58,7 @@ VALUES (0, '2022-01-01T00:45:00', 1,1),
        (1, '2022-12-01T15:00:00', 2,2),
        (0, '2022-01-11T18:30:00', 2,3),
        (0, '2022-01-11T18:30:00', 3,4),
-       (1, '2022-12-24T10:45:00', 4,5);
+       (5, '2022-12-24T10:45:00', 4,5);
 
 -- Repairs with items
 INSERT INTO reparatie_items (repair_id, inventory_item_id, amount)

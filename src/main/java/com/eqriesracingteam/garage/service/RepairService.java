@@ -86,6 +86,7 @@ public class RepairService {
 
         Optional<Appointment> optionalAppointment = appointmentRepository.findById(appointmentId);
         Appointment appointmentForRepair = optionalAppointment.orElseThrow(() -> new AppointmentException("Appointment id not found"));
+
         Car carForAppointment = appointmentForRepair.getCarForAppointment();
 
         if (carForAppointment == null){

@@ -5,7 +5,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "registration_papers")
+@Table(name = "kentekenbewijzen")
 public class RegistrationPaper {
 
     @Id
