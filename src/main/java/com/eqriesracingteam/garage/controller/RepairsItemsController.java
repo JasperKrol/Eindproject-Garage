@@ -41,11 +41,11 @@ public class RepairsItemsController {
         return ResponseEntity.created(location).body(ID);
     }
 
-//    @DeleteMapping(value = "/repairs_items/{repair_id}/{inventoryId}")
-//    public ResponseEntity<Object> deleteById(@PathVariable("repair_id") long repair_id, @PathVariable("inventoryId") long inventoryId) {
-//        repairsItemsService.deleteById(repair_id, inventoryId);
-//        return new ResponseEntity<>("Repair with items deleted", HttpStatus.OK);
-//    }
+    @DeleteMapping(value = "/repairs_items/{repair_id}/{inventoryId}")
+    public ResponseEntity<Object> deleteById(@PathVariable("repair_id") long repairId, @PathVariable("inventoryId") long inventoryId) {
+        repairsItemsService.deleteById(repairId, inventoryId);
+        return new ResponseEntity<>("Repair with items deleted", HttpStatus.OK);
+    }
 
     //    @GetMapping(value = "/repairs_items/{inventoryId}/repairs")
     //    public ResponseEntity<Object> getJobPartsByPartId(@PathVariable("inventoryId") Long inventoryId){
