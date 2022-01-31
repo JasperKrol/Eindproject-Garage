@@ -65,19 +65,15 @@ public class AppointmentService {
     }
 
     public void updateAppointment(long id, Appointment appointment) {
-        Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
+       Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
 
-        if (optionalAppointment.isPresent()) {
-            Appointment existingAppointment = optionalAppointment.get();
+       Appointment existingAppointment = optionalAppointment.orElseThrow(()-> new AppointmentException("appointment not found"));
+       appointment.setId(existingAppointment.getId());
+       appointment.setCarForAppointment(existingAppointment.getCarForAppointment());
+       appointment.setCustomer(existingAppointment.getCustomer());
+       appointment.setRepair(existingAppointment.getRepair());
 
-            appointment.setId(existingAppointment.getId());
-
-            appointmentRepository.save(existingAppointment);
-
-
-        } else {
-            throw new AppointmentException("Appointment could not be saved");
-        }
+       appointmentRepository.save(appointment);
     }
 
     public void deleteAppointment(long id) {
