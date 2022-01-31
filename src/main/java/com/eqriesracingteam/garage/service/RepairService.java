@@ -90,13 +90,14 @@ public class RepairService {
         Optional<Appointment> optionalAppointment = appointmentRepository.findById(appointmentId);
         Appointment appointmentForRepair = optionalAppointment.orElseThrow(() -> new AppointmentException("Appointment id not found"));
 
+        boolean approvalCustomer = approvalCustomer(appointmentForRepair);
         Car carForAppointment = appointmentForRepair.getCarForAppointment();
 
         if (carForAppointment == null) {
             throw new RecordNotFoundException("car has not been matched to appointment");
         }
 
-        if (repairs.isEmpty()) {
+        if (repairs.isEmpty() && approvalCustomer) {
 
             repair.setAppointmentStatus(AppointmentStatus.REPARATIE_GEPLAND);
             repair.setScheduledCar(carForAppointment);
@@ -105,7 +106,7 @@ public class RepairService {
             return newRepair;
 
         } else {
-            throw new BadRequestException("Missing car information");
+            throw new BadRequestException("No Approval for customer or not yet set");
         }
     }
 
@@ -120,5 +121,10 @@ public class RepairService {
             repair.setAppointment(appointment);
             repairRepository.save(repair);
         }
+    }
+
+    public boolean approvalCustomer(Appointment appointment){
+        AppointmentStatus status = appointment.getAppointmentStatus();
+        return status == AppointmentStatus.AKKOORD_KLANT;
     }
 }
