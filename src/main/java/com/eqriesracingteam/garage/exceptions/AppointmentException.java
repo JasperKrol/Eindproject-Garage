@@ -1,6 +1,6 @@
 package com.eqriesracingteam.garage.exceptions;
 
-public class AppointmentException extends RuntimeException{
+public class AppointmentException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     public AppointmentException() {

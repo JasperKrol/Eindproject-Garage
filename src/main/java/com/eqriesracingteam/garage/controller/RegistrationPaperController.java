@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +30,6 @@ public class RegistrationPaperController {
         this.registrationPaperService = registrationPaperService;
     }
 
-    // TODO: 16-1-2022 testing from callicoder
     @GetMapping
     public ResponseEntity<List<RegistrationPaperResponseFile>> getAllDocuments() {
 
@@ -51,10 +48,7 @@ public class RegistrationPaperController {
     public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
         RegistrationPaper fileDB = registrationPaperService.getFile(id);
         String mediaType = "application/octet-stream";
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(mediaType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
-                .body(fileDB.getData());
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(mediaType)).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"").body(fileDB.getData());
     }
 
     @PostMapping("/upload")
@@ -81,9 +75,6 @@ public class RegistrationPaperController {
         // Load file from database
         RegistrationPaper dbFile = registrationPaperService.getFileTest(fileId);
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(dbFile.getType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getName() + "\"")
-                .body(new ByteArrayResource(dbFile.getData()));
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(dbFile.getType())).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getName() + "\"").body(new ByteArrayResource(dbFile.getData()));
     }
 }

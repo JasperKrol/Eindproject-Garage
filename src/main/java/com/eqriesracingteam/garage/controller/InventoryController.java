@@ -21,7 +21,7 @@ public class InventoryController {
     private InventoryService inventoryService;
 
     @Autowired
-    public InventoryController(InventoryService inventoryService){
+    public InventoryController(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 
@@ -35,14 +35,14 @@ public class InventoryController {
 
     // Get all
     @GetMapping(value = "/api/garage/inventory")
-    public List<InventoryDto> getAllInventoryItems(@RequestParam(name = "description", defaultValue = "")String description){
+    public List<InventoryDto> getAllInventoryItems(@RequestParam(name = "description", defaultValue = "") String description) {
         var dtos = new ArrayList<InventoryDto>();
 
         List<Inventory> inventoryList;
 
-        if (description !=null ){
+        if (description != null) {
             inventoryList = inventoryService.getAllItemsByDescription(description);
-        } else if (description == null){
+        } else if (description == null) {
             inventoryList = inventoryService.getAllInventoryItems();
         } else {
             throw new BadRequestException("Items not found");
@@ -55,18 +55,18 @@ public class InventoryController {
     }
 
     @PostMapping(value = "/api/garage/inventory")
-    public InventoryDto addInventoryItem(@RequestBody InventoryInputDto dto){
+    public InventoryDto addInventoryItem(@RequestBody InventoryInputDto dto) {
         var inventoryItem = inventoryService.createNewInventoryItem(dto.toInventory());
         return InventoryDto.fromInventory(inventoryItem);
     }
 
     @DeleteMapping(value = "/api/garage/inventory/{id}")
-    public void deleteItem(@PathVariable("id") long id){
+    public void deleteItem(@PathVariable("id") long id) {
         inventoryService.deleteItemFromInventory(id);
     }
 
     @PutMapping(value = "/api/garage/inventory/{id}")
-    public InventoryDto updateInventoryItem(@PathVariable("id") long id, @RequestBody Inventory inventory){
+    public InventoryDto updateInventoryItem(@PathVariable("id") long id, @RequestBody Inventory inventory) {
         inventoryService.updateInventoryItem(id, inventory);
         return InventoryDto.fromInventory(inventory);
     }

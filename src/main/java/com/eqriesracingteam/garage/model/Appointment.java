@@ -1,12 +1,8 @@
 package com.eqriesracingteam.garage.model;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -38,7 +34,7 @@ public class Appointment {
     @JoinColumn(name = "repair_id", referencedColumnName = "id")
     private Repair repair;
 
-    @OneToOne(mappedBy = "appointment",fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "appointment", fetch = FetchType.EAGER)
     @JsonIgnore
     private Inspection inspection;
 

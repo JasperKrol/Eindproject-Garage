@@ -1,7 +1,5 @@
 package com.eqriesracingteam.garage.dto;
 
-import com.eqriesracingteam.garage.model.RepairItems;
-
 public class RepairItemsInputDto {
 
     private Long partId;
@@ -9,6 +7,5 @@ public class RepairItemsInputDto {
     private Long repairId;
 
     private int quantity;
-
 
 }

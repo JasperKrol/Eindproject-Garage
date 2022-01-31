@@ -4,7 +4,6 @@ import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.dto.RepairDto;
 import com.eqriesracingteam.garage.dto.RepairInputDto;
 import com.eqriesracingteam.garage.model.Repair;
-import com.eqriesracingteam.garage.model.RepairItems;
 import com.eqriesracingteam.garage.service.RepairService;
 import com.eqriesracingteam.garage.service.RepairsItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ public class RepairController {
 
     // CRUD Requests
     // Post request
-    // als je twee services moet aanspreken doe je dat in de controller
     // TODO: 12-1-2022 repair controller verantwoordelijk maken voor het de inventory items
 
     @PostMapping(value = "/api/garage/repairs")

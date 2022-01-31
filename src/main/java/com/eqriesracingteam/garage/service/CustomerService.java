@@ -1,7 +1,5 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.dto.CustomerDto;
-import com.eqriesracingteam.garage.dto.CustomerInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.*;
@@ -11,7 +9,6 @@ import com.eqriesracingteam.garage.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +16,9 @@ import java.util.Optional;
 public class CustomerService {
 
     //talks to Repository layer
-    private CustomerRepository customerRepository;
-    private CarRepository carRepository;
-    private AppointmentRepository appointmentRepository;
+    private final CustomerRepository customerRepository;
+    private final CarRepository carRepository;
+    private final AppointmentRepository appointmentRepository;
 
     @Autowired
     public CustomerService(CustomerRepository customerRepository, CarRepository carRepository, AppointmentRepository appointmentRepository) {

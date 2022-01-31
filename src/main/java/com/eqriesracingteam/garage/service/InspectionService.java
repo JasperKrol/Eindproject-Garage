@@ -1,8 +1,6 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.dto.InspectionDto;
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
-import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.InspectionException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.*;
@@ -19,9 +17,9 @@ import java.util.Optional;
 @Service
 public class InspectionService {
 
-    private InspectionRepository inspectionRepository;
-    private CarRepository carRepository;
-    private AppointmentRepository appointmentRepository;
+    private final InspectionRepository inspectionRepository;
+    private final CarRepository carRepository;
+    private final AppointmentRepository appointmentRepository;
 
     @Autowired
     public InspectionService(InspectionRepository inspectionRepository, CarRepository carRepository, AppointmentRepository appointmentRepository) {
@@ -62,7 +60,7 @@ public class InspectionService {
         Appointment appointmentForInspection = optionalAppointment.orElseThrow(() -> new AppointmentException("Appointment id not found"));
         Car carForAppointment = appointmentForInspection.getCarForAppointment();
 
-        if (carForAppointment == null){
+        if (carForAppointment == null) {
             throw new RecordNotFoundException("car has not been matched to appointment");
         }
 
@@ -90,7 +88,7 @@ public class InspectionService {
 
             inspectionRepository.save(plannedInspection);
 
-            if (plannedInspection.getInspectionStatus() == InspectionStatus.INSPECTION_UITGEVOERD){
+            if (plannedInspection.getInspectionStatus() == InspectionStatus.INSPECTION_UITGEVOERD) {
                 appointment.setAppointmentStatus(AppointmentStatus.INSPECTIE_KLAAR);
             }
 

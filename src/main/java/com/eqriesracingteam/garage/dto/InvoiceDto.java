@@ -22,7 +22,7 @@ public class InvoiceDto {
     public Customer customer;
     public Repair repair;
 
-    public static InvoiceDto fromInvoice(Invoice invoice){
+    public static InvoiceDto fromInvoice(Invoice invoice) {
         var dto = new InvoiceDto();
 
         dto.invoiceNumber = invoice.getInvoiceNumber();

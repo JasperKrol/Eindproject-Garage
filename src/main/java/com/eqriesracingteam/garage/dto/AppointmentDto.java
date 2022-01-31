@@ -1,8 +1,6 @@
 package com.eqriesracingteam.garage.dto;
 
 import com.eqriesracingteam.garage.model.*;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
@@ -36,12 +34,10 @@ public class AppointmentDto {
         dto.carPickupDate = appointment.getCarPickupDate();
         dto.description = appointment.getDescription();
 
-
-        // TODO: 28-1-2022 null execption eruit
-        if (appointment.getCarForAppointment() != null){
+        if (appointment.getCarForAppointment() != null) {
             dto.car = appointment.getCarForAppointment();
         }
-        if (appointment.getCustomer() != null){
+        if (appointment.getCustomer() != null) {
             dto.customer = appointment.getCustomer();
         }
 

@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "facturen")
@@ -102,14 +100,6 @@ public class Invoice {
 
     @Override
     public String toString() {
-        return "Invoice{" + "invoiceNumber=" + invoiceNumber +
-                ", invoiceDate=" + invoiceDate +
-                ", nettoAmount=" + nettoAmount +
-                ", vatAmount=" + vatAmount +
-                ", grossAmount=" + grossAmount +
-                ", invoicePaid=" + invoicePaid +
-                ", customer=" + customer +
-                ", repair=" + repair +
-                '}';
+        return "Invoice{" + "invoiceNumber=" + invoiceNumber + ", invoiceDate=" + invoiceDate + ", nettoAmount=" + nettoAmount + ", vatAmount=" + vatAmount + ", grossAmount=" + grossAmount + ", invoicePaid=" + invoicePaid + ", customer=" + customer + ", repair=" + repair + '}';
     }
 }

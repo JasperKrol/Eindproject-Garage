@@ -17,11 +17,10 @@ public class InspectionDto {
     public BigDecimal estimatedCosts;
     public InspectionStatus inspectionStatus;
 
-    // TODO: 5-1-2022 for now just this hard ignore
     @JsonIgnoreProperties("registrationPapers")
     public Car scheduledCar;
 
-    public static InspectionDto fromInspection(Inspection inspection){
+    public static InspectionDto fromInspection(Inspection inspection) {
         var dto = new InspectionDto();
 
         dto.id = inspection.getId();

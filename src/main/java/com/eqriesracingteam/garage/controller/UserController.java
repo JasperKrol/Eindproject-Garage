@@ -1,17 +1,11 @@
 package com.eqriesracingteam.garage.controller;
 
-import com.eqriesracingteam.garage.dto.UserDto;
-import com.eqriesracingteam.garage.dto.UserInputDto;
-
 import com.eqriesracingteam.garage.dto.UserPostRequestDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.User;
 import com.eqriesracingteam.garage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -29,9 +23,7 @@ public class UserController {
     }
 
     // Requests
-
-    // Get
-    // -- All
+    // Get all
     @GetMapping(value = "/api/garage/users")
     public ResponseEntity<Object> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
@@ -59,19 +51,13 @@ public class UserController {
         return ResponseEntity.created(location).build();
     }
 
-    // TODO: 15-12-2021 testing
-//    @PostMapping(value = "")
-//    public UserDto createUser(@RequestBody UserInputDto dto) {
-//        var user = userService.createUser(dto.toUser());
-//        return UserDto.fromUser(user);
-//    }
-
     // Put
     @PutMapping(value = "/api/garage/users/{username}")
     public ResponseEntity<Object> updateUser(@PathVariable("username") String username, @RequestBody User user) {
         userService.updateUser(username, user);
-    return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
+
     // Delete
     @DeleteMapping(value = "/api/garage/users/{username}")
     public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
@@ -86,8 +72,7 @@ public class UserController {
             String authorityName = (String) fields.get("authority");
             userService.addAuthority(username, authorityName);
             return ResponseEntity.noContent().build();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new BadRequestException();
         }
     }
@@ -103,6 +88,4 @@ public class UserController {
         userService.setPassword(username, password);
         return ResponseEntity.noContent().build();
     }
-
-
 }

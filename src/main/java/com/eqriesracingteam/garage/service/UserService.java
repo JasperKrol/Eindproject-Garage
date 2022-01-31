@@ -1,6 +1,5 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.dto.UserDto;
 import com.eqriesracingteam.garage.dto.UserPostRequestDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.InvalidPasswordException;
@@ -16,15 +15,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -73,25 +71,6 @@ public class UserService {
             throw new BadRequestException("Cannot create user.");
         }
     }
-
-    // TODO: 15-12-2021 testing
-    //    public User createUser(User user) {
-    //
-    //            String username = user.getUsername();
-    //            Optional<User> existingUser = userRepository.findById(username);
-    //
-    //            if (existingUser.isPresent()) {
-    //                throw new BadRequestException("Cannot create user.");
-    //            } else {
-    //                Authority authority = new Authority();
-    //                authority.setUsername(user.getUsername());
-    //                authority.setAuthority("ROLE_USER");
-    //                user.addAuthority(authority);
-    //                User newUser = userRepository.save(user);
-    //
-    //                return newUser;
-    //            }
-    //    }
 
     public void updateUser(String username, User user) {
         Optional<User> optionalUser = userRepository.findById(username);
@@ -160,12 +139,15 @@ public class UserService {
         long countUpper = password.chars().filter(ch -> ch >= 'A' && ch <= 'Z').count();
         long countSpecial = password.chars().filter(ch -> SPECIAL_CHARS.indexOf(ch) >= 0).count();
 
-        boolean validPassword = true;
-        if (password.length() < MIN_LENGTH) validPassword = false;
-        if (countLower < MIN_LOWER) validPassword = false;
-        if (countUpper < MIN_UPPER) validPassword = false;
-        if (countDigit < MIN_DIGITS) validPassword = false;
-        if (countSpecial < MIN_SPECIAL) validPassword = false;
+        boolean validPassword = password.length() >= MIN_LENGTH;
+        if (countLower < MIN_LOWER)
+            validPassword = false;
+        if (countUpper < MIN_UPPER)
+            validPassword = false;
+        if (countDigit < MIN_DIGITS)
+            validPassword = false;
+        if (countSpecial < MIN_SPECIAL)
+            validPassword = false;
 
         return validPassword;
     }

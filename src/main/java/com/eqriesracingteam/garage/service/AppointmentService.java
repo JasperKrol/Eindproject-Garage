@@ -1,19 +1,15 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.dto.AppointmentDto;
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.AppointmentStatus;
-import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.repository.AppointmentRepository;
 import com.eqriesracingteam.garage.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +17,8 @@ import java.util.Optional;
 @Service
 public class AppointmentService {
 
-    private AppointmentRepository appointmentRepository;
-    private CarRepository carRepository;
+    private final AppointmentRepository appointmentRepository;
+    private final CarRepository carRepository;
 
     @Autowired
     public AppointmentService(AppointmentRepository appointmentRepository, CarRepository carRepository) {
@@ -65,15 +61,15 @@ public class AppointmentService {
     }
 
     public void updateAppointment(long id, Appointment appointment) {
-       Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
+        Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
 
-       Appointment existingAppointment = optionalAppointment.orElseThrow(()-> new AppointmentException("appointment not found"));
-       appointment.setId(existingAppointment.getId());
-       appointment.setCarForAppointment(existingAppointment.getCarForAppointment());
-       appointment.setCustomer(existingAppointment.getCustomer());
-       appointment.setRepair(existingAppointment.getRepair());
+        Appointment existingAppointment = optionalAppointment.orElseThrow(() -> new AppointmentException("appointment not found"));
+        appointment.setId(existingAppointment.getId());
+        appointment.setCarForAppointment(existingAppointment.getCarForAppointment());
+        appointment.setCustomer(existingAppointment.getCustomer());
+        appointment.setRepair(existingAppointment.getRepair());
 
-       appointmentRepository.save(appointment);
+        appointmentRepository.save(appointment);
     }
 
     public void deleteAppointment(long id) {

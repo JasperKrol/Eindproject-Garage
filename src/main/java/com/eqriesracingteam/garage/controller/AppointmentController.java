@@ -4,11 +4,9 @@ import com.eqriesracingteam.garage.dto.AppointmentDto;
 
 import com.eqriesracingteam.garage.dto.AppointmentInputDto;
 import com.eqriesracingteam.garage.dto.CarInputDto;
-import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -28,7 +26,7 @@ public class AppointmentController {
     //  get all
     // TODO: 29-12-2021 data param @RequestParam(name = "date", defaultValue="") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime date
     @GetMapping(value = "/api/garage/appointments")
-    public List<AppointmentDto> getAppointments(){
+    public List<AppointmentDto> getAppointments() {
         var dtos = new ArrayList<AppointmentDto>();
 
         var appointments = appointmentService.getAllAppointments();
@@ -59,18 +57,17 @@ public class AppointmentController {
     public AppointmentDto adjustAppointment(@PathVariable("id") long id, @RequestBody Appointment appointment) {
         appointmentService.updateAppointment(id, appointment);
         return AppointmentDto.fromAppointment(appointment);
-
     }
 
     // Delete appointment
     @DeleteMapping(value = "/api/garage/appointments/{id}")
-    public void deleteAppointment(@PathVariable("id") long id){
+    public void deleteAppointment(@PathVariable("id") long id) {
         appointmentService.deleteAppointment(id);
     }
 
     // Assign car to appointment
     @PutMapping(value = "/api/garage/appointments/{id}/car")
-    public AppointmentDto assignCarToAppointment(@PathVariable("id") long id, @RequestBody CarInputDto input){
+    public AppointmentDto assignCarToAppointment(@PathVariable("id") long id, @RequestBody CarInputDto input) {
         return AppointmentDto.fromAppointment(appointmentService.assignCarToAppointment(id, input.id));
     }
 }

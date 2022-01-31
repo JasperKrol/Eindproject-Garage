@@ -10,16 +10,14 @@ public class InventoryInputDto {
     public String itemDescription;
     public BigDecimal price;
     public int stock;
-//    private int usedParts;
 
-    public Inventory toInventory(){
+    public Inventory toInventory() {
         var inventory = new Inventory();
 
         inventory.setId(id);
         inventory.setItemDescription(itemDescription);
         inventory.setPrice(price);
         inventory.setStock(stock);
-//        inventory.setUsedParts(usedParts);
 
         return inventory;
     }

@@ -18,9 +18,9 @@ import java.util.List;
 public class RepairsItemsService {
 
 
-    private RepairsItemsRepository repairsItemsRepository;
-    private RepairRepository repairRepository;
-    private InventoryRepository inventoryRepository;
+    private final RepairsItemsRepository repairsItemsRepository;
+    private final RepairRepository repairRepository;
+    private final InventoryRepository inventoryRepository;
 
     @Autowired
     public RepairsItemsService(RepairsItemsRepository repairsItemsRepository, RepairRepository repairRepository, InventoryRepository inventoryRepository) {
@@ -35,7 +35,7 @@ public class RepairsItemsService {
         return repairsItemsRepository.findAll();
     }
 
-    public Collection<RepairItems> getJobPartsByPartId(Long inventoryId){
+    public Collection<RepairItems> getJobPartsByPartId(Long inventoryId) {
         return repairsItemsRepository.findAllByInventoryItem_Id(inventoryId);
     }
 
@@ -43,7 +43,7 @@ public class RepairsItemsService {
     // amount in parameter en daarna setAmount in repairsItemAmount
     // TODO: 22-1-2022 add check if stock is 0, bad request
     public RepairsItemsKey addRepairsItems(Long repairId, Long inventoryId, int amount) {
-         var repairItems = new RepairItems();
+        var repairItems = new RepairItems();
         if (!repairRepository.existsById(repairId)) {
             throw new RecordNotFoundException();
         }
@@ -75,9 +75,10 @@ public class RepairsItemsService {
 
     public void deleteById(long repairId, Long inventoryId) {
         RepairsItemsKey ID = new RepairsItemsKey(repairId, inventoryId);
-        if(repairsItemsRepository.existsById(ID)){
+        if (repairsItemsRepository.existsById(ID)) {
             repairsItemsRepository.deleteById(ID);
-        }else {
-            throw new RecordNotFoundException("ID's not found"); }
+        } else {
+            throw new RecordNotFoundException("ID's not found");
+        }
     }
 }

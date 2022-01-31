@@ -14,13 +14,11 @@ public class InspectionInputDto {
     public InspectionStatus inspectionStatus;
     public long appointmentId;
 
-    public Inspection toInspection(){
+    public Inspection toInspection() {
         var inspection = new Inspection();
 
         inspection.setId(id);
         inspection.setInspectionDate(inspectionDate);
-//        inspection.setFindings(findings);
-//        inspection.setEstimatedCosts(estimatedCosts);
 
         return inspection;
     }

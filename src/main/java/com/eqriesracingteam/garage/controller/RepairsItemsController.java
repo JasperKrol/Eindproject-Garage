@@ -47,13 +47,4 @@ public class RepairsItemsController {
         return new ResponseEntity<>("Repair with items deleted", HttpStatus.OK);
     }
 
-    //    @GetMapping(value = "/repairs_items/{inventoryId}/repairs")
-    //    public ResponseEntity<Object> getJobPartsByPartId(@PathVariable("inventoryId") Long inventoryId){
-    //        Collection<RepairItems> repairItemsCollection =  repairsItemsService.getJobPartsByPartId(inventoryId);
-    //        List<RepairItemsDto> dtos = new ArrayList<>();
-    //        for(RepairItems repairItem : repairItemsCollection){
-    //            dtos.add(RepairItemsDto.fromRepairItems(repairItem));
-    //        }
-    //        return ResponseEntity.ok().body(dtos);
-    //    }
 }

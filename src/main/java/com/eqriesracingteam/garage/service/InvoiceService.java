@@ -21,11 +21,11 @@ public class InvoiceService {
     private static final BigDecimal vatPercentageForCalculation = new BigDecimal(1.21);
     private static final BigDecimal inspectionFeeNoRepair = new BigDecimal(45);
 
-    private InvoiceRepository invoiceRepository;
-    private AppointmentRepository appointmentRepository;
-    private RepairRepository repairRepository;
-    private CustomerRepository customerRepository;
-    private RepairsItemsRepository repairsItemsRepository;
+    private final InvoiceRepository invoiceRepository;
+    private final AppointmentRepository appointmentRepository;
+    private final RepairRepository repairRepository;
+    private final CustomerRepository customerRepository;
+    private final RepairsItemsRepository repairsItemsRepository;
 
     @Autowired
     public InvoiceService(InvoiceRepository invoiceRepository, AppointmentRepository appointmentRepository, RepairRepository repairRepository, CustomerRepository customerRepository, RepairsItemsRepository repairsItemsRepository) {
@@ -58,7 +58,7 @@ public class InvoiceService {
 
         invoice.setInvoicePaid(false);
         invoice.setInvoiceDate(LocalDate.now());
-        
+
         if (repairAndInspectionOk) {
             if (!approvalCustomer) {
 
@@ -134,21 +134,15 @@ public class InvoiceService {
             throw new BadRequestException("Invoice with invoice number" + invoiceNumber + " not found");
         }
     }
-    
+
     public boolean statusCheck(Appointment appointment) {
         AppointmentStatus status = appointment.getAppointmentStatus();
-        if (status == AppointmentStatus.REPARATIE_UITGEVOERD || status == AppointmentStatus.NIET_UITVOEREN) {
-            return true;
-        }
-        return false;
+        return status == AppointmentStatus.REPARATIE_UITGEVOERD || status == AppointmentStatus.NIET_UITVOEREN;
     }
 
     public boolean approvalCustomer(Appointment appointment) {
         AppointmentStatus status = appointment.getAppointmentStatus();
-        if (status == AppointmentStatus.NIET_UITVOEREN) {
-            return false;
-        }
-        return true;
+        return status != AppointmentStatus.NIET_UITVOEREN;
     }
 
     public BigDecimal calculateTotalAmountOfPartsUsed(List<RepairItems> repairItems) {

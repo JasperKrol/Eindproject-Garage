@@ -12,8 +12,6 @@ public class CarDto {
     public long id;
     public String licensePlate;
 
-    //    @JsonIgnoreProperties({"appointments", "cars"})
-    //    @JsonSerialize
     public Customer owner;
 
     @JsonSerialize

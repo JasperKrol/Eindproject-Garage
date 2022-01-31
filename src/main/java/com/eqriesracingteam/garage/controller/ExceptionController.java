@@ -15,13 +15,13 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(value = BadRequestException.class)
-    public ResponseEntity<Object> exception(BadRequestException exception){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST). body(exception.getMessage());
+    public ResponseEntity<Object> exception(BadRequestException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 
     @ExceptionHandler(value = UserNotFoundException.class)
-    public ResponseEntity<Object> exception(UserNotFoundException exception){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND). body(exception.getMessage());
+    public ResponseEntity<Object> exception(UserNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidPasswordException.class)

@@ -3,20 +3,12 @@ package com.eqriesracingteam.garage.controller;
 import com.eqriesracingteam.garage.dto.CarInputDto;
 import com.eqriesracingteam.garage.dto.InspectionDto;
 import com.eqriesracingteam.garage.dto.InspectionInputDto;
-import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Inspection;
-import com.eqriesracingteam.garage.repository.InspectionRepository;
-import com.eqriesracingteam.garage.service.AppointmentService;
-import com.eqriesracingteam.garage.service.CarService;
 import com.eqriesracingteam.garage.service.InspectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.net.URI;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
@@ -28,6 +20,7 @@ public class InspectionController {
     public InspectionController(InspectionService inspectionService) {
         this.inspectionService = inspectionService;
     }
+
     // Requests
     // Get all
     @GetMapping(value = "/api/garage/inspections")
@@ -57,14 +50,14 @@ public class InspectionController {
 
     // Delete
     @DeleteMapping(value = "/api/garage/inspections/{id}")
-    public void deleteInspection(@PathVariable("id") long id){
+    public void deleteInspection(@PathVariable("id") long id) {
         inspectionService.deleteInspection(id);
     }
 
     //Assign
     // Put
     @PutMapping(value = "/api/garage/inspections/{id}/car")
-    public InspectionDto assignCarToInspection(@PathVariable("id") long id, @RequestBody CarInputDto inputDto){
+    public InspectionDto assignCarToInspection(@PathVariable("id") long id, @RequestBody CarInputDto inputDto) {
         return InspectionDto.fromInspection(inspectionService.assignCarToInspection(id, inputDto.id));
     }
 }

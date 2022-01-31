@@ -17,8 +17,8 @@ import java.util.Optional;
 public class CarService {
 
     //Attributes
-    private CarRepository carRepository;
-    private RegistrationPaperRepository registrationPaperRepository;
+    private final CarRepository carRepository;
+    private final RegistrationPaperRepository registrationPaperRepository;
 
     //Constructor
     @Autowired
@@ -101,7 +101,7 @@ public class CarService {
     public List<Inspection> getCarInspection(long id) {
         Optional<Car> optionalCar = carRepository.findById(id);
 
-        if (optionalCar.isPresent()){
+        if (optionalCar.isPresent()) {
             Car car = optionalCar.get();
             return car.getInspections();
         } else {
@@ -113,7 +113,7 @@ public class CarService {
         var optionalRegistrationPaper = registrationPaperRepository.findById(id);
         var optionalCar = carRepository.findById(carId);
 
-        if (optionalCar.isPresent() && optionalRegistrationPaper.isPresent()){
+        if (optionalCar.isPresent() && optionalRegistrationPaper.isPresent()) {
             var car = optionalCar.get();
             var registrationPaper = optionalRegistrationPaper.get();
 

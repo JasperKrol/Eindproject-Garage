@@ -1,11 +1,13 @@
 package com.eqriesracingteam.garage.dto;
 
-import com.eqriesracingteam.garage.model.*;
+import com.eqriesracingteam.garage.model.AppointmentStatus;
+import com.eqriesracingteam.garage.model.Car;
+import com.eqriesracingteam.garage.model.Repair;
+import com.eqriesracingteam.garage.model.RepairItems;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 public class RepairDto {

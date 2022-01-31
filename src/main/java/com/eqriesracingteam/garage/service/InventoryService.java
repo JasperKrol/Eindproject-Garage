@@ -1,6 +1,5 @@
 package com.eqriesracingteam.garage.service;
 
-import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.InventoryException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.Inventory;
@@ -14,7 +13,7 @@ import java.util.Optional;
 @Service
 public class InventoryService {
 
-    private InventoryRepository inventoryRepository;
+    private final InventoryRepository inventoryRepository;
 
     @Autowired
     public InventoryService(InventoryRepository inventoryRepository) {
@@ -41,8 +40,8 @@ public class InventoryService {
         if (inventoryList.size() > 0) {
             throw new InventoryException("Inventory item already exists");
         } else {
-//            inventoryItem.setUsedParts(0);
-//            Inventory newItem = new Inventory();
+            //            inventoryItem.setUsedParts(0);
+            //            Inventory newItem = new Inventory();
             return inventoryRepository.save(inventoryItem);
         }
     }

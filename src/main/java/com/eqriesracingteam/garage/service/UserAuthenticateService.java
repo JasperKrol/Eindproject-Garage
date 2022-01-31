@@ -2,22 +2,18 @@ package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.dto.AuthenticationRequest;
 import com.eqriesracingteam.garage.dto.AuthenticationResponse;
-import com.eqriesracingteam.garage.model.Authority;
-import com.eqriesracingteam.garage.model.User;
 import com.eqriesracingteam.garage.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserAuthenticateService  {
+public class UserAuthenticateService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -34,11 +30,8 @@ public class UserAuthenticateService  {
         String password = authenticationRequest.getPassword();
 
         try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
-            );
-        }
-        catch (BadCredentialsException ex) {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        } catch (BadCredentialsException ex) {
             throw new UsernameNotFoundException("Incorrect username or password");
         }
 

@@ -1,7 +1,5 @@
 package com.eqriesracingteam.garage.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 
 @Entity

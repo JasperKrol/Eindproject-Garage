@@ -12,7 +12,7 @@ public class RepairItemsDto {
     private long inventoryItemId;
     private int amount;
 
-    public static RepairItemsDto fromRepairItems(RepairItems repairItems){
+    public static RepairItemsDto fromRepairItems(RepairItems repairItems) {
         var dto = new RepairItemsDto();
 
         dto.id = repairItems.getId();

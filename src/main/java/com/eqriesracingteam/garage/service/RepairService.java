@@ -3,7 +3,10 @@ package com.eqriesracingteam.garage.service;
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
-import com.eqriesracingteam.garage.model.*;
+import com.eqriesracingteam.garage.model.Appointment;
+import com.eqriesracingteam.garage.model.AppointmentStatus;
+import com.eqriesracingteam.garage.model.Car;
+import com.eqriesracingteam.garage.model.Repair;
 import com.eqriesracingteam.garage.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +17,11 @@ import java.util.Optional;
 @Service
 public class RepairService {
 
-    private RepairRepository repairRepository;
-    private CarRepository carRepository;
-    private InventoryRepository inventoryRepository;
-    private RepairsItemsRepository repairsItemsRepository;
-    private AppointmentRepository appointmentRepository;
+    private final RepairRepository repairRepository;
+    private final CarRepository carRepository;
+    private final InventoryRepository inventoryRepository;
+    private final RepairsItemsRepository repairsItemsRepository;
+    private final AppointmentRepository appointmentRepository;
 
     // Constructor
 
@@ -60,7 +63,7 @@ public class RepairService {
             repair.setAppointment(existingRepair.getAppointment());
 
             // TODO: 30-1-2022 make function to clean up code
-            if (repair.getAppointmentStatus() == AppointmentStatus.REPARATIE_UITGEVOERD){
+            if (repair.getAppointmentStatus() == AppointmentStatus.REPARATIE_UITGEVOERD) {
                 optionalRepair.get().getAppointment().setAppointmentStatus(AppointmentStatus.REPARATIE_UITGEVOERD);
             }
             repairRepository.save(repair);
@@ -89,7 +92,7 @@ public class RepairService {
 
         Car carForAppointment = appointmentForRepair.getCarForAppointment();
 
-        if (carForAppointment == null){
+        if (carForAppointment == null) {
             throw new RecordNotFoundException("car has not been matched to appointment");
         }
 

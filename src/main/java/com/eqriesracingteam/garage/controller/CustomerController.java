@@ -2,7 +2,6 @@ package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.CustomerDto;
 import com.eqriesracingteam.garage.dto.CustomerInputDto;
-import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
 import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.Car;
@@ -11,9 +10,7 @@ import com.eqriesracingteam.garage.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +98,7 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/api/garage/customers/{id}/appointments")
-    public ResponseEntity<Object> getCustomerAppointments(@PathVariable("id") long id){
+    public ResponseEntity<Object> getCustomerAppointments(@PathVariable("id") long id) {
         return ResponseEntity.ok(customerService.getCustomerAppointments(id));
     }
 
@@ -112,7 +109,7 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/api/garage/customers/{id}/invoices")
-    public ResponseEntity<Object> getCustomerInvoices(@PathVariable("id") long id){
+    public ResponseEntity<Object> getCustomerInvoices(@PathVariable("id") long id) {
         return ResponseEntity.ok(customerService.getCustomerInvoices(id));
     }
 }

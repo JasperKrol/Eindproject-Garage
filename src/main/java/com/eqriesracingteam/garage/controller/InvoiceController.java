@@ -1,11 +1,8 @@
 package com.eqriesracingteam.garage.controller;
 
-import com.eqriesracingteam.garage.dto.IdInputDto;
 import com.eqriesracingteam.garage.dto.InvoiceDto;
 import com.eqriesracingteam.garage.dto.InvoiceInputDto;
-import com.eqriesracingteam.garage.dto.RepairDto;
 import com.eqriesracingteam.garage.model.Invoice;
-import com.eqriesracingteam.garage.model.Repair;
 import com.eqriesracingteam.garage.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +19,7 @@ public class InvoiceController {
     // Requests
     // Post request
     @PostMapping(value = "/api/garage/invoices")
-    public InvoiceDto createInvoice(@RequestBody InvoiceInputDto input){
+    public InvoiceDto createInvoice(@RequestBody InvoiceInputDto input) {
         var invoice = invoiceService.createInvoice(input.repairId);
         return InvoiceDto.fromInvoice(invoice);
     }
@@ -30,7 +27,7 @@ public class InvoiceController {
     // Get all
     // TODO: 11-1-2022 request param for invoice number or customer
     @GetMapping(value = "/api/garage/invoices")
-    public List<InvoiceDto> getAllInvoices(){
+    public List<InvoiceDto> getAllInvoices() {
         var dtos = new ArrayList<InvoiceDto>();
         var invoices = invoiceService.getAllInvoices();
 
@@ -41,7 +38,7 @@ public class InvoiceController {
     }
 
     @GetMapping(value = "/api/garage/invoices/{id}")
-    public InvoiceDto getOneInvoice(@PathVariable("id") long invoiceNumber){
+    public InvoiceDto getOneInvoice(@PathVariable("id") long invoiceNumber) {
         var invoice = invoiceService.getOneInvoice(invoiceNumber);
         return InvoiceDto.fromInvoice(invoice);
     }
@@ -56,7 +53,7 @@ public class InvoiceController {
 
     // Delete appointment
     @DeleteMapping(value = "/api/garage/invoices/{id}")
-    public void deleteInvoice(@PathVariable("id") long invoiceNumber){
+    public void deleteInvoice(@PathVariable("id") long invoiceNumber) {
         invoiceService.deleteInvoice(invoiceNumber);
     }
 

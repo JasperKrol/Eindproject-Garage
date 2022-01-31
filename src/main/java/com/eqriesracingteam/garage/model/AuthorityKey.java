@@ -12,11 +12,12 @@ public class AuthorityKey implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         AuthorityKey that = (AuthorityKey) o;
-        return username.equals(that.username) &&
-                authority.equals(that.authority);
+        return username.equals(that.username) && authority.equals(that.authority);
     }
 
     // Provides hash

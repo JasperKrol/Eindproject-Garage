@@ -1,16 +1,11 @@
 package com.eqriesracingteam.garage.model;
 
-import com.eqriesracingteam.garage.dto.AppointmentDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 @Entity
 @Table(name = "inspecties")
