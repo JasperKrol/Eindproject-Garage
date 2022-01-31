@@ -29,9 +29,9 @@ VALUES ('vv-11-ww',  1),
 INSERT INTO afspraken (appointment_date, appointment_status, car_pickup_date, customer_id, car_id, description)
 VALUES ('2021-12-01T08:00:00', 0, '2021-12-20T08:00:00', 1, 1, 'motor doet raar, piept voor'),
        ('2021-11-04T09:00:00', 1, '2021-12-04T12:00:00', 2, 2, 'ruitenwisser veegt strepen'),
-       ('2021-09-02T12:00:00', 2, '2021-10-04T09:00:00', 2, 2, 'knipperlicht vloeistof is op'),
-       ('2021-12-02T12:00:00', 2, '2021-12-31T09:00:00', 2, 3, 'Remmen lopen aan'),
-       ('2021-09-02T12:00:00', 4, '2021-10-04T09:00:00', 3, 4, 'distributieriem versleten en koelvloeistof op');
+       ('2021-09-02T12:00:00', 4, '2021-10-04T09:00:00', 2, 2, 'knipperlicht vloeistof is op'),
+       ('2021-12-02T12:00:00', 3, '2021-12-31T09:00:00', 2, 3, 'Remmen lopen aan'),
+       ('2021-09-02T12:00:00', 6, '2021-10-04T09:00:00', 3, 4, 'distributieriem versleten en koelvloeistof op');
 
 --Onderdelen
 INSERT INTO auto_onderdelen (item_description, price, stock, used_parts)
@@ -45,12 +45,12 @@ VALUES ('Remset voor', 99, 21, 2),
        ('Zomerband', 95, 10, 95);
 
 --Inspecties
-INSERT INTO inspecties (findings, estimated_costs, inspection_status, inspection_date, car_id)
-VALUES ('Remset voor en achter', 300, 0, '2022-01-01T10:45:00', 1),
-       ('Ruitenwisser voor en achter + knip. vloeistof. ', 1400, 1, '2022-01-01T10:45:00', 2),
-       ('Banden vervangen 4x winter', 400, 0, '2022-01-03T10:45:00', 2),
-       ('Koppeling vervangen en remmen voor ', 1000, 0, '2022-01-04T16:45:00', 3),
-       ('Remset voor en achter', 300, 0, '2022-01-02T10:45:00', 4);
+INSERT INTO inspecties (findings, estimated_costs, inspection_status, inspection_date, car_id, appointment_id)
+VALUES ('Remset voor en achter', 300, 0, '2022-01-01T10:45:00', 1, 1),
+       ('Ruitenwisser voor en achter + knip. vloeistof. ', 1400, 1, '2022-01-01T10:45:00', 2,2),
+       ('Banden vervangen 4x winter', 400, 0, '2022-01-03T10:45:00', 2,3),
+       ('Koppeling vervangen en remmen voor ', 1000, 0, '2022-01-04T16:45:00', 3,4),
+       ('Remset voor en achter', 300, 0, '2022-01-02T10:45:00', 4,5);
 
 --Reparaties
 INSERT INTO reparaties (appointment_status, repair_date_workshop, car_id, appointment_id)
