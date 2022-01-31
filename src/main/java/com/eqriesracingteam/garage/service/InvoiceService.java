@@ -119,6 +119,8 @@ public class InvoiceService {
             Invoice existingInvoice = optionalInvoice.get();
 
             invoice.setInvoiceNumber(existingInvoice.getInvoiceNumber());
+            invoice.setCustomer(existingInvoice.getCustomer());
+            invoice.setRepair(existingInvoice.getRepair());
             invoiceRepository.save(invoice);
         } else {
             throw new BadRequestException("Invoice with invoice number" + invoiceNumber + " not found");

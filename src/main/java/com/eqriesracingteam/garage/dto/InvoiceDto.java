@@ -19,7 +19,6 @@ public class InvoiceDto {
     public BigDecimal nettoAmount;
     public boolean invoicePaid;
 
-    // TODO: 10-1-2022 relations in dto zetten
     public Customer customer;
     public Repair repair;
 
@@ -34,7 +33,7 @@ public class InvoiceDto {
         dto.invoicePaid = invoice.isInvoicePaid();
 
         dto.customer = invoice.getCustomer();
-//        dto.repair = invoice.getRepair();
+        dto.repair = invoice.getRepair();
 
         return dto;
     }

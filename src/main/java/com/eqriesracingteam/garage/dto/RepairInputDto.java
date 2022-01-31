@@ -12,7 +12,7 @@ public class RepairInputDto {
     public AppointmentStatus appointmentStatus;
     public LocalDateTime repairDateWorkshop;
     public List<Long> inventoryItemIdList;
-    public long carId;
+    public long appointmentId;
 
     public Repair toRepair(){
         var repair = new Repair();

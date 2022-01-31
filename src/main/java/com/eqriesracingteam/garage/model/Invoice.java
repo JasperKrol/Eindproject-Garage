@@ -30,13 +30,9 @@ public class Invoice {
 
     // one invoice at one repairList met onderdelen en daar over loopen
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonIgnore
     @JoinColumn(name = "repair_id", referencedColumnName = "id")
     private Repair repair;
 
-    //    @OneToOne(fetch = FetchType.EAGER)
-    //    @JoinColumn(name = "repair_id", referencedColumnName = "id")
-    //    private Collection<RepairItems> repairItems;
 
     // Getters and setters
 

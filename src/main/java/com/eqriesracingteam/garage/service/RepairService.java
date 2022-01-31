@@ -2,6 +2,7 @@ package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.exceptions.AppointmentException;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
+import com.eqriesracingteam.garage.exceptions.RecordNotFoundException;
 import com.eqriesracingteam.garage.model.*;
 import com.eqriesracingteam.garage.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,18 +80,22 @@ public class RepairService {
         }
     }
 
-    public Repair createRepairAppointment(Repair repair, Long carId) {
+    public Repair createRepairAppointment(Repair repair, Long appointmentId) {
         var date = repair.getRepairDateWorkshop();
         List<Repair> repairs = repairRepository.findAllByRepairDateWorkshop(date);
-        var optionalCar = carRepository.findById(carId);
 
+        Optional<Appointment> optionalAppointment = appointmentRepository.findById(appointmentId);
+        Appointment appointmentForRepair = optionalAppointment.orElseThrow(() -> new AppointmentException("Appointment id not found"));
+        Car carForAppointment = appointmentForRepair.getCarForAppointment();
 
-        if (repairs.isEmpty() && optionalCar.isPresent()) {
+        if (carForAppointment == null){
+            throw new RecordNotFoundException("car has not been matched to appointment");
+        }
+
+        if (repairs.isEmpty()) {
 
             repair.setAppointmentStatus(AppointmentStatus.REPARATIE_GEPLAND);
-
-            var car = optionalCar.get();
-            repair.setScheduledCar(car);
+            repair.setScheduledCar(carForAppointment);
 
             Repair newRepair = repairRepository.save(repair);
             return newRepair;

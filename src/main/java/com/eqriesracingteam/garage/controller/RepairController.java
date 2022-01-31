@@ -32,7 +32,7 @@ public class RepairController {
 
     @PostMapping(value = "/api/garage/repairs")
     public RepairDto addRepairAppointment(@RequestBody RepairInputDto dto) {
-        var repairAppointment = repairService.createRepairAppointment(dto.toRepair(), dto.carId);
+        var repairAppointment = repairService.createRepairAppointment(dto.toRepair(), dto.appointmentId);
         return RepairDto.fromRepair(repairAppointment);
     }
 
