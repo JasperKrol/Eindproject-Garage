@@ -9,7 +9,7 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 ## Inhoudsopgave
 
 * [Vooraf](#vooraf)
-    + [Rollen en users](#Rollen en users)
+    + [Rollen en users](#Rollen-en-users)
 
 - [Installatie](#Installatie)
 
