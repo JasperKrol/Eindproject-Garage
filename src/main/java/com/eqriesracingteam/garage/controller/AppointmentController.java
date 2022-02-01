@@ -5,6 +5,7 @@ import com.eqriesracingteam.garage.dto.AppointmentDto;
 import com.eqriesracingteam.garage.dto.AppointmentInputDto;
 import com.eqriesracingteam.garage.dto.CarInputDto;
 import com.eqriesracingteam.garage.model.Appointment;
+import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,18 @@ public class AppointmentController {
         var dtos = new ArrayList<AppointmentDto>();
 
         var appointments = appointmentService.getAllAppointments();
+
+        for (Appointment appointment : appointments) {
+            dtos.add(AppointmentDto.fromAppointment(appointment));
+        }
+
+        return dtos;
+    }
+
+    @GetMapping("/api/garage/appointments/status")
+    public List<AppointmentDto> getByStatus(@RequestParam AppointmentStatus status){
+        var appointments = appointmentService.appointmentByStatus(status);
+        var dtos = new ArrayList<AppointmentDto>();
 
         for (Appointment appointment : appointments) {
             dtos.add(AppointmentDto.fromAppointment(appointment));

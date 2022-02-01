@@ -96,4 +96,8 @@ public class AppointmentService {
             return appointmentRepository.save(existingAppointment);
         }
     }
+
+    public List<Appointment> appointmentByStatus(AppointmentStatus status) {
+        return appointmentRepository.findAllByAppointmentStatus(status);
+    }
 }
