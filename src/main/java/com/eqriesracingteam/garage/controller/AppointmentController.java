@@ -25,7 +25,6 @@ public class AppointmentController {
 
     // Get requests
     //  get all
-    // TODO: 29-12-2021 data param @RequestParam(name = "date", defaultValue="") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime date
     @GetMapping(value = "/api/garage/appointments")
     public List<AppointmentDto> getAppointments(@RequestParam (name = "status", required = false)AppointmentStatus status) {
         var dtos = new ArrayList<AppointmentDto>();
