@@ -3,13 +3,13 @@
 Welkom bij mijn eindproject van Hogeschool Novi. Het project is een resultaat van de geleerde stof uit het "Full-Stack
 Developer" curriculum. Binnen dit project heb ik de backend van een autogarage ontworpen. Hierin kan het proces van
 keuringen en reparaties rondom auto's en klanten worden nagebootst. Het bevat al vooraf bepaalde data voor o.a. klanten,
-auto's, keuringen, facturen en reparaties. Natuurlijk is het ook mogelijk om de applicatie met nieuwe date entries te
+auto's, keuringen, facturen en reparaties. Natuurlijk is het ook mogelijk om de applicatie van nieuwe date entries te
 voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepast.
 
 ## Inhoudsopgave
 
 * [Vooraf](#vooraf)
-    + [De volgende users worden in het project geladen om het te testen.](#De volgende users worden in het project geladen om het te testen.)
+    + [De volgende users worden in het project geladen om het te testen](#De volgende users worden in het project geladen om het te testen)
 
 - [Installatie](#Installatie)
 
@@ -40,7 +40,7 @@ Dit dient gespecificeerd te worden bij gebruik. Voor de beoordeling staat nu ope
 
 <br/>
 
-#### De volgende users worden in het project geladen om het te testen.
+#### De volgende users worden in het project geladen om het te testen
 
 Deze rollen kunnen gebruikt worden voor de beoordeling en het testen van de applicatie. De verschillende rollen hebben
 toegang tot hun eigen endpoints. Deze staan in de meest rechter kolom.
