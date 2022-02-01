@@ -74,7 +74,7 @@ toegang tot hun eigen endpoints. Deze staan in de meest rechter kolom.
 
 > https://github.com/JasperKrol/Eindproject-Garage
 
-5. Verander de PostgreSQL credentials in resources > application-dev.properties naar jouw eigen local settings:<br/>
+5. In dit project is onderstaande configuratie gebruikt voor PostgreSQL.<br/>
    server.port=8081</br>
    spring.datasource.url=jdbc:postgresql://localhost:5432/garage<br/>
    spring.datasource.username=postgres<br/>
