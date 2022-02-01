@@ -9,9 +9,7 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 ## Inhoudsopgave
 
 * [Vooraf](#vooraf)
-    + [Users die worden toegevoegd aan de database bij het starten van het project](#De volgende user worden in het
-      project geladen om het te testen. Ook kun je in dit schema de verschillende rollen vinden en de daarbij behorende
-      endpoints)
+    + [De volgende user worden in het project geladen om het te testen. Ook kun je in dit schema de verschillende rollen vinden en de daarbij behorende endpoints]
 
 - [Installatie](#Installatie)
 
