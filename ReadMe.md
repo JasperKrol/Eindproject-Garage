@@ -50,9 +50,9 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 
    Wil je een andere configuratie gebruiken, dan pas je dit aan in het **application.properties** bestand.
 
-6. Cross-Origin is aangezet voor alle endpoints en alle origins.
+6. Cross-Origin is aangezet voor alle endpoints.
 
-7. Authorization verplicht. (JWT token) zie sectie endpoints.
+7. Authorization verplicht (JWT token). Zie onderwerp endpoints enkele alinea's hieronder.
 
 8. Run het project via het groene pijltje in de rechterbovenhoek van IntelliJ.
 
