@@ -1,7 +1,6 @@
 package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.AppointmentDto;
-
 import com.eqriesracingteam.garage.dto.AppointmentInputDto;
 import com.eqriesracingteam.garage.dto.CarInputDto;
 import com.eqriesracingteam.garage.model.Appointment;
@@ -26,7 +25,7 @@ public class AppointmentController {
     // Get requests
     //  get all
     @GetMapping(value = "/api/garage/appointments")
-    public List<AppointmentDto> getAppointments(@RequestParam (name = "status", required = false)AppointmentStatus status) {
+    public List<AppointmentDto> getAppointments(@RequestParam(name = "status", required = false) AppointmentStatus status) {
         var dtos = new ArrayList<AppointmentDto>();
 
         var appointments = appointmentService.getAllAppointments(status);
