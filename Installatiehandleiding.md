@@ -9,7 +9,7 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 ## Inhoudsopgave
 
 * [Vooraf](#vooraf)
-    + [De volgende user worden in het project geladen om het te testen. Ook kun je in dit schema de verschillende rollen vinden en de daarbij behorende endpoints](#De volgende user worden in het project geladen om het te testen)
+    + [De volgende users worden in het project geladen om het te testen.](#De volgende users worden in het project geladen om het te testen.)
 
 - [Installatie](#Installatie)
 
@@ -29,25 +29,30 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 
 2. Database PostgreSQL.
 
-3. Cross-Origin is aangezet voor alle endpoints en alle origins.
+3. Cross-Origin is aangezet voor alle endpoints en alle origins. 
+> **_NOTE:_**
+   Dit dient gespecificeerd te worden bij gebruik. Voor de beoordeling staat nu open.
 
-4. Authorization verplicht. (JWT token) zie sectie endpoints.
+5. Authorization verplicht. (JWT token) zie sectie endpoints.
 
-5. Voorbeelden van alle Postman collections zijn toegevoegd in de resource folder.
+6. Voorbeelden van alle Postman collections zijn toegevoegd in de resource folder.
 
 <br/>
 
-#### De volgende user worden in het project geladen om het te testen. Ook kun je in dit schema de verschillende rollen vinden en de daarbij behorende endpoints
+#### De volgende users worden in het project geladen om het te testen. 
 
-| Username                  | Password | Role                     | Endpoints persmissons                              |
+Deze rollen kunnen gebruikt worden voor de beoordeling en het testen van de applicatie. De verschillende rollen hebben toegang
+tot hun eigen endpoints. Deze staan in de meest rechter kolom.
+
+| Username                  | Password | Role                     | Endpoints authorization                            |
 |---------------------------|----------|--------------------------|----------------------------------------------------|
-| Henk                      | password | MONTEUR                  | Get.customers Get.cars  inventory** inspections**  |
-|                           |          |                          | repair_items** invoices**                          |
-| Peter                     | password | MONTEUR                  | Get.customers Get.cars  inventory** inspections**  |
-|                           |          |                          | repair_items** invoices**                          |
+| Henk                      | password | MONTEUR                  | Get.customers, Get.cars,inventory**, inspections** |
+|                           |          |                          | repair_items**, invoices**                         |
+| Peter                     | password | MONTEUR                  | Get.customers, Get.cars, inventory**, inspections**|
+|                           |          |                          | repair_items**, invoices**                         |
 | Jasper                    | password | ADMIN                    | Alles als admin                                    |
-| Pien                      | password | OFFICE                   | invoices** customers** cars** inspections**        |
-|                           |          |                          | repairs** registration_papers** appointments**     |
+| Pien                      | password | OFFICE                   | invoices**, customers**, cars**, inspections**     |
+|                           |          |                          | repairs**, registration_papers**, appointments**   |
 
 <br>
 
@@ -63,16 +68,12 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 
 > https://www.postman.com/downloads/
 
-<br/><br/>
-
-3. Clone het project in IntelliJ via onderstaande link van mijn repository of download het zipp-bestand en open het via
+4. Clone het project in IntelliJ via onderstaande link van mijn repository of download het zipp-bestand en open het via
    File → new → project from existing source en klik op het pom bestand uit de zipp-file.
 
 > https://github.com/JasperKrol/Eindproject-Garage
 
-<br/></br>
-
-4. Verander de PostgreSQL credentials in resources > application-dev.properties naar jouw eigen local settings:<br/>
+5. Verander de PostgreSQL credentials in resources > application-dev.properties naar jouw eigen local settings:<br/>
    server.port=8081</br>
    spring.datasource.url=jdbc:postgresql://localhost:5432/garage<br/>
    spring.datasource.username=postgres<br/>
@@ -80,15 +81,13 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 
    Wil je een andere configuratie gebruiken, dan pas je dit aan in het **application.properties** bestand.
 
-5. Run het project via het groene pijltje in de rechterbovenhoek van IntelliJ
+6. Run het project via het groene pijltje in de rechterbovenhoek van IntelliJ.
    <br/></br>
 
 ### Endpoints
 
-De endpoints kunnen getest worden met een applicatie als Postman.<br/>
-
-De authenticatie van de applicatie werkt met een Bearer token. Deze token moet mee gegeven worden aan elk request. Dit
-doe je in Postman door onder Authorization, Bearer Token in te stellen en de token in te vullen.
+Hieronder vind u alle endpoints die de applicatie bevat. Deze kunnen benaderd worden via postman en werken via het MVC-model. De authenticatie van de applicatie werkt met een Bearer token.
+Deze token moet mee gegeven worden aan elk request. Dit doe je in Postman door onder Authorization, Bearer Token in te stellen en de token in te vullen.
 
 De token verkrijg je door eerst het Authorization endpoint uit te voeren. De token is vervolgens 10 dagen geldig.
 
@@ -97,10 +96,8 @@ De token verkrijg je door eerst het Authorization endpoint uit te voeren. De tok
 * POST /api/v1/authenticate
   <br/><br/>
   In de body geef je de username en password mee. Hiervoor kan een user uit bovenstaande tabel gebruikt worden:
-  <br/><br/>
 
-  voorbeeld:
-
+Voorbeeld:
 ```json
  {
   "username": "jasper",
