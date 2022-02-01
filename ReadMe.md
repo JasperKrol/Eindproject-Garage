@@ -74,7 +74,7 @@ toegang tot hun eigen endpoints. Deze staan in de meest rechter kolom.
 
 <br>
 
-### Endpoints
+## Endpoints
 
 Hieronder vind u alle endpoints die de applicatie bevat. Deze kunnen benaderd worden via postman en werken via het
 MVC-model. De authenticatie van de applicatie werkt met een Bearer token. Deze token moet mee gegeven worden aan elk
