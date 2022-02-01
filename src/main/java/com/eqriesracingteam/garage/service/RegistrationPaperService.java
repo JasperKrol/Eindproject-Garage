@@ -44,7 +44,7 @@ public class RegistrationPaperService {
         registrationPaperRepository.deleteById(id);
     }
 
-    public RegistrationPaper getFileTest(Long fileId) {
+    public RegistrationPaper downloadFile(Long fileId) {
         return registrationPaperRepository.findById(fileId).orElseThrow(() -> new RecordNotFoundException("File not found with id " + fileId));
     }
 }

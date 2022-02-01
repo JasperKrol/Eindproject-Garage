@@ -71,9 +71,9 @@ public class RegistrationPaperController {
     }
 
     @GetMapping("/downloadFile/{fileId}")
-    public ResponseEntity<Resource> downloadFileTest(@PathVariable long fileId) {
+    public ResponseEntity<Resource> downloadFile(@PathVariable long fileId) {
         // Load file from database
-        RegistrationPaper dbFile = registrationPaperService.getFileTest(fileId);
+        RegistrationPaper dbFile = registrationPaperService.downloadFile(fileId);
 
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(dbFile.getType())).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getName() + "\"").body(new ByteArrayResource(dbFile.getData()));
     }
