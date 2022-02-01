@@ -1,0 +1,34 @@
+{
+  "info": {
+    "_postman_id": "045955c5-4ef2-4b1c-a47f-6806b758e3e6",
+    "name": "Garage EkriesRacingTeam",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "password": "password",
+            "username": "Jasper"
+          }
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"Test\",\r\n    \"password\": \"Test123!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8080/authenticate"
+      },
+      "response": []
+    }
+  ]
+}

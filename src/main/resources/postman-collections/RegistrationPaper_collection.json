@@ -1,0 +1,103 @@
+{
+  "info": {
+    "_postman_id": "045955c5-4ef2-4b1c-a47f-6806b758e3e6",
+    "name": "Garage EkriesRacingTeam",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Upload document",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+          }
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/C:/Users/jaspe/OneDrive/Afbeeldingen/kentekenbewijs jansen.PNG"
+            }
+          ]
+        },
+        "url": "http://localhost:8080/api/garage/registration_papers/upload"
+      },
+      "response": []
+    },
+    {
+      "name": "Get all documents",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8080/api/garage/registration_papers"
+      },
+      "response": []
+    },
+    {
+      "name": "Get one document",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8080/api/garage/registration_papers"
+      },
+      "response": []
+    },
+    {
+      "name": "Download document by id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8080/api/garage/registration_papers/downloadFile/1"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete document by id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+          }
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"invoiceDate\": \"2022-01-01\",\r\n    \"grossAmount\": 100,\r\n    \"vatAmount\": 21,\r\n    \"nettoAmount\": 121,\r\n    \"invoicePaid\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8080/api/garage/registration_papers/2"
+      },
+      "response": []
+    }
+  ]
+}

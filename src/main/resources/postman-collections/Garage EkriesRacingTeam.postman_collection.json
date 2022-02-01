@@ -1,0 +1,1340 @@
+{
+	"info": {
+		"_postman_id": "045955c5-4ef2-4b1c-a47f-6806b758e3e6",
+		"name": "Garage EkriesRacingTeam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+				"name": "Authorization -thentication",
+			"item": [
+				{
+					"name": "Authentication",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "password",
+								"username": "Jasper"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Test\",\r\n    \"password\": \"Test123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/authenticate"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assignments",
+			"item": [
+				{
+					"name": "Add Car to Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDM1NDc2NDcsImlhdCI6MTY0MjY4MzY0N30.ypNejXSKjxVuzLw8rqNqwTGBfvoNkKM_YeJ9_Qz0T0o"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"licensePlate\" : \"bb-99-bb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/customers/3/cars"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Car to Appointment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDM1NDc2NDcsImlhdCI6MTY0MjY4MzY0N30.ypNejXSKjxVuzLw8rqNqwTGBfvoNkKM_YeJ9_Qz0T0o"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/appointments/6/car"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Appointment to Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDEyMDMxNjcsImlhdCI6MTY0MDMzOTE2N30.XGmYlc_u9qxrw_vGrTZ-_nRtPRpkzJnQuUee-VV1EyQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentDate\" : \"2021-01-01\",\r\n    \"appointmentStatus\" : 1,\r\n    \"carPickupDate\" : \"2021-12-31\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/customers/3/appointments"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Car by id to inspection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemDescription\": \"TESTITEM\",\r\n    \"price\": 99.00,\r\n    \"stock\": 99,\r\n    \"usedParts\": 99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/inspections/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Add registration paper to car by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/cars/1/registrationpaper"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign appointment to repair",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/cars/1/registrationpaper"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Car",
+			"item": [
+				{
+					"name": "Cars Get all",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garage/cars?licenseplate=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garage",
+								"cars"
+							],
+							"query": [
+								{
+									"key": "licenseplate",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Car Get one",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/cars/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Car Get inspections",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/cars/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Car Post",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "jasper",
+								"password": "password"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"licensePlate\" : \"aa-99-aa\",\r\n    \"registrationPapers\" : \"im a document\",\r\n    \"owner\" : 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/cars"
+					},
+					"response": []
+				},
+				{
+					"name": "Car Delete",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "jasper",
+								"password": "password"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/cars/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Car Update",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "jasper",
+								"password": "password"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"licensePlate\" : \"aa-99-aa\",\r\n    \"registrationPapers\" : \"im not a document\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/cars/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Car Partial update",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "jasper",
+								"password": "password"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"registrationPapers\" : \"im a test document\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/cars/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Customers Get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garage/customers?lastname=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garage",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "lastname",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Get one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/customers/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Test\",\r\n    \"lastName\": \"Testy\",\r\n    \"postalCode\" : \"0000AD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Get one lastname",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDEwNDU0NTIsImlhdCI6MTY0MDE4MTQ1Mn0.7p50n3LtoK-gR3GMiBD2A5XIu7yzVeqjgALTZIje6fI"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garage/customers/1?lastname=krol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garage",
+								"customers",
+								"1"
+							],
+							"query": [
+								{
+									"key": "lastname",
+									"value": "krol"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Delete",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/customers/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Update",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"PB\",\r\n    \"lastName\": \"VDS\",\r\n    \"postalCode\": \"0000ww\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/customers/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Partial update",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postalCode\": \"0000PK\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/customers/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer car",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/customers/1/cars"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer appointments",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer invoices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDQ0MTkyNDEsImlhdCI6MTY0MzU1NTI0MX0.Q-3HNJYzHPRzjj0jm4wUJ_Hb8ChCX20guoF9uRemD4A"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/customers/3/invoices"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventory",
+			"item": [
+				{
+					"name": "Get one part",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/inventory/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garage/inventory?description=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garage",
+								"inventory"
+							],
+							"query": [
+								{
+									"key": "description",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post new item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemDescription\": \"Uitlaat\",\r\n    \"price\": 99.00,\r\n    \"stock\": 99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/inventory"
+					},
+					"response": []
+				},
+				{
+					"name": "Update item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemDescription\": \"TESTITEM\",\r\n    \"price\": 99.00,\r\n    \"stock\": 99,\r\n    \"usedParts\": 99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/inventory/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemDescription\": \"TESTITEM\",\r\n    \"price\": 99.00,\r\n    \"stock\": 99,\r\n    \"usedParts\": 99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/inventory/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inspections",
+			"item": [
+				{
+					"name": "Get one inspection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/inventory/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all inspections",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/inspections/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Post new inspection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemDescription\": \"Uitlaat\",\r\n    \"price\": 99.00,\r\n    \"stock\": 99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/inventory"
+					},
+					"response": []
+				},
+				{
+					"name": "Update inspection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDQ0MTkyNDEsImlhdCI6MTY0MzU1NTI0MX0.Q-3HNJYzHPRzjj0jm4wUJ_Hb8ChCX20guoF9uRemD4A"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inspectionDate\": \"2022-01-01T09:00:00\",\r\n    \"findings\": \"Update; minder findings\",\r\n    \"estimatedCosts\": 90.00,\r\n    \"inspectionStatus\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/inspections/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete inspection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemDescription\": \"TESTITEM\",\r\n    \"price\": 99.00,\r\n    \"stock\": 99,\r\n    \"usedParts\": 99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/inspections/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "Get all invoices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/invoices"
+					},
+					"response": []
+				},
+				{
+					"name": "Get one invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/invoices/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Post create invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invoiceDate\" : \"2022-01-01\",\r\n    \"grossAmount\" : 100,\r\n    \"vatAmount\": 21,\r\n    \"nettoAmount\" : 121,\r\n    \"invoicePaid\" : false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/invoices"
+					},
+					"response": []
+				},
+				{
+					"name": "Update invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invoiceDate\" : \"2022-01-01\",\r\n    \"grossAmount\" : 100,\r\n    \"vatAmount\": 21,\r\n    \"nettoAmount\" : 121,\r\n    \"invoicePaid\" : true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/invoices/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update invoice Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invoiceDate\": \"2022-01-01\",\r\n    \"grossAmount\": 100,\r\n    \"vatAmount\": 21,\r\n    \"nettoAmount\": 121,\r\n    \"invoicePaid\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/invoices/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Registration papers",
+			"item": [
+				{
+					"name": "Upload document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/jaspe/OneDrive/Afbeeldingen/kentekenbewijs jansen.PNG"
+								}
+							]
+						},
+						"url": "http://localhost:8080/api/garage/registration_papers/upload"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all documents",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/registration_papers"
+					},
+					"response": []
+				},
+				{
+					"name": "Get one document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/registration_papers"
+					},
+					"response": []
+				},
+				{
+					"name": "Download document by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/registration_papers/downloadFile/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete document by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invoiceDate\": \"2022-01-01\",\r\n    \"grossAmount\": 100,\r\n    \"vatAmount\": 21,\r\n    \"nettoAmount\": 121,\r\n    \"invoicePaid\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/registration_papers/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Repairs",
+			"item": [
+				{
+					"name": "Get all repairs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/garage/repairs?date=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"garage",
+								"repairs"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one repair appointment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/repairs/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Create repair appointment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"carId\": 1,\r\n    \"repairDateWorkshop\": \"2022-01-12T11:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/repairs"
+					},
+					"response": []
+				},
+				{
+					"name": "Update repair",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointmentDate\": \"2021-12-01T08:00:00\",\r\n    \"appointmentStatus\": \"AFSPRAAK_GEPLAND\",\r\n    \"carPickupDate\": \"2021-12-20T08:00:00\",\r\n    \"description\": \"motor doet raar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/repairs/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete repair",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDE2NjE5MzQsImlhdCI6MTY0MDc5NzkzNH0.32-KzunEyGrJLCyPXGDHKeir1_A-xd9G33rKqXqpcLQ"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/repairs/4"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Repair items",
+			"item": [
+				{
+					"name": "Post repair items with amount",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDQ0MTkyNDEsImlhdCI6MTY0MzU1NTI0MX0.Q-3HNJYzHPRzjj0jm4wUJ_Hb8ChCX20guoF9uRemD4A"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inventoryId\" : 4,\r\n    \"repairId\" : 6,\r\n    \"amount\" : 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/repairs_items/6/4"
+					},
+					"response": []
+				},
+				{
+					"name": "Post repair items with amount Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDM1NDc2NDcsImlhdCI6MTY0MjY4MzY0N30.ypNejXSKjxVuzLw8rqNqwTGBfvoNkKM_YeJ9_Qz0T0o"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inventoryId\" : 1,\r\n    \"repairId\" : 5,\r\n    \"amount\" : 99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/repairs_items/5/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all repairs with parts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDM1NDc2NDcsImlhdCI6MTY0MjY4MzY0N30.ypNejXSKjxVuzLw8rqNqwTGBfvoNkKM_YeJ9_Qz0T0o"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/repairs_items"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all repairs with parts Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDM1NDc2NDcsImlhdCI6MTY0MjY4MzY0N30.ypNejXSKjxVuzLw8rqNqwTGBfvoNkKM_YeJ9_Qz0T0o"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/repairs_items/5/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get users",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/users"
+					},
+					"response": []
+				},
+				{
+					"name": "User Get one by username",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/users/Jasper"
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Test\",\r\n    \"password\": \"Test123!\",\r\n    \"enabled\": true,\r\n    \"email\": \"test.test@eqries.nl\",\r\n    \"authorities\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user authorities",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/users/Jasper/authorities"
+					},
+					"response": []
+				},
+				{
+					"name": "Add authority to user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"Test\",\r\n    \"authority\" : \"ROLE_FRONTOFFICE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/garage/users/Test/authorities"
+					},
+					"response": []
+				},
+				{
+					"name": "remove authority from user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/garage/users/Test/authorities/role_user"
+					},
+					"response": []
+				},
+				{
+					"name": "Change password",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "Jasper",
+								"password": "password"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "testwachtwoord"
+						},
+						"url": "http://localhost:8080/api/garage/users/Test/password"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
