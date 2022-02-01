@@ -29,9 +29,10 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 
 2. Database PostgreSQL.
 
-3. Cross-Origin is aangezet voor alle endpoints en alle origins. 
+3. Cross-Origin is aangezet voor alle endpoints en alle origins.
+
 > **_NOTE:_**
-   Dit dient gespecificeerd te worden bij gebruik. Voor de beoordeling staat nu open.
+Dit dient gespecificeerd te worden bij gebruik. Voor de beoordeling staat nu open.
 
 5. Authorization verplicht. (JWT token) zie sectie endpoints.
 
@@ -39,10 +40,10 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 
 <br/>
 
-#### De volgende users worden in het project geladen om het te testen. 
+#### De volgende users worden in het project geladen om het te testen.
 
-Deze rollen kunnen gebruikt worden voor de beoordeling en het testen van de applicatie. De verschillende rollen hebben toegang
-tot hun eigen endpoints. Deze staan in de meest rechter kolom.
+Deze rollen kunnen gebruikt worden voor de beoordeling en het testen van de applicatie. De verschillende rollen hebben
+toegang tot hun eigen endpoints. Deze staan in de meest rechter kolom.
 
 | Username                  | Password | Role                     | Endpoints authorization                            |
 |---------------------------|----------|--------------------------|----------------------------------------------------|
@@ -86,8 +87,9 @@ tot hun eigen endpoints. Deze staan in de meest rechter kolom.
 
 ### Endpoints
 
-Hieronder vind u alle endpoints die de applicatie bevat. Deze kunnen benaderd worden via postman en werken via het MVC-model. De authenticatie van de applicatie werkt met een Bearer token.
-Deze token moet mee gegeven worden aan elk request. Dit doe je in Postman door onder Authorization, Bearer Token in te stellen en de token in te vullen.
+Hieronder vind u alle endpoints die de applicatie bevat. Deze kunnen benaderd worden via postman en werken via het
+MVC-model. De authenticatie van de applicatie werkt met een Bearer token. Deze token moet mee gegeven worden aan elk
+request. Dit doe je in Postman door onder Authorization, Bearer Token in te stellen en de token in te vullen.
 
 De token verkrijg je door eerst het Authorization endpoint uit te voeren. De token is vervolgens 10 dagen geldig.
 
@@ -98,8 +100,9 @@ De token verkrijg je door eerst het Authorization endpoint uit te voeren. De tok
   In de body geef je de username en password mee. Hiervoor kan een user uit bovenstaande tabel gebruikt worden:
 
 Voorbeeld:
+
 ```json
- {
+{
   "username": "jasper",
   "password": "password"
 }
@@ -140,8 +143,7 @@ Voorbeeld:
 * POST /api/v1/cars/{id}/licenseregistrationfile/upload<br/>
 
 > **_NOTE:_**
-Voor upload files worden alleen bestanden geaccepteerd die 5MB of kleiner zijn.
-Downloaden kan via een link of een request afgehandeld worden.
+Voor upload files worden alleen bestanden geaccepteerd die 5MB of kleiner zijn. Downloaden kan via een link of een request afgehandeld worden.
 
 * GET /api/v1/cars/{id}/licenseregistrationfile/download
 * GET api/v1/cars/{id}/carInvoice
