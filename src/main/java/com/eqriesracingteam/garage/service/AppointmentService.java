@@ -26,14 +26,16 @@ public class AppointmentService {
         this.carRepository = carRepository;
     }
 
-    // TODO: 29-12-2021 date param
-    public List<Appointment> getAllAppointments() {
-        return appointmentRepository.findAll();
-        //        if (date == null) {
-        //            return appointmentRepository.findAll();
-        //        } else {
-        //            return appointmentRepository.findAllByAppointmentDate(date);
-        //        }
+    public List<Appointment> getAllAppointments(AppointmentStatus status) {
+        if (status == null) {
+            return appointmentRepository.findAll();
+        } else {
+            return appointmentRepository.findAllByAppointmentStatus(status);
+        }
+    }
+
+    public List<Appointment> appointmentByStatus(AppointmentStatus status) {
+        return appointmentRepository.findAllByAppointmentStatus(status);
     }
 
     public Appointment getAppointment(long id) {
@@ -95,9 +97,5 @@ public class AppointmentService {
             existingAppointment.setCarForAppointment(existingCar);
             return appointmentRepository.save(existingAppointment);
         }
-    }
-
-    public List<Appointment> appointmentByStatus(AppointmentStatus status) {
-        return appointmentRepository.findAllByAppointmentStatus(status);
     }
 }
