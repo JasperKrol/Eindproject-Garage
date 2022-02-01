@@ -9,7 +9,7 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 ## Inhoudsopgave
 
 * [Vooraf](#vooraf)
-    + [De volgende users worden in het project geladen om het te testen](#De volgende users worden in het project geladen om het te testen)
+    + [Rollen en users](#Rollen en users)
 
 - [Installatie](#Installatie)
 
@@ -40,7 +40,7 @@ Dit dient gespecificeerd te worden bij gebruik. Voor de beoordeling staat nu ope
 
 <br/>
 
-#### De volgende users worden in het project geladen om het te testen
+#### Rollen en users
 
 Deze rollen kunnen gebruikt worden voor de beoordeling en het testen van de applicatie. De verschillende rollen hebben
 toegang tot hun eigen endpoints. Deze staan in de meest rechter kolom.
