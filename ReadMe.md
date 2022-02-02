@@ -196,7 +196,7 @@ Optioneel parameter: 'date' <br/> voorbeeld: repairs?date=2022-12-12 <br/>
 
 #### Repair items
 
-* {POST [/api/garage/repairs_items/{repair_id}/{inventory_id}]}
+* {POST [/api/garage/repairs_items/]}
 * {GET [/api/garage/repairs_items]}
 * {DELETE [/api/garage/repairs_items/{repair_id}/{inventoryId}]}
 

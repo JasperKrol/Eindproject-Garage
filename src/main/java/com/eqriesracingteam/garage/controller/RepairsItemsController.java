@@ -1,6 +1,7 @@
 package com.eqriesracingteam.garage.controller;
 
 import com.eqriesracingteam.garage.dto.RepairItemsDto;
+import com.eqriesracingteam.garage.dto.RepairItemsInputDto;
 import com.eqriesracingteam.garage.model.RepairItems;
 import com.eqriesracingteam.garage.model.RepairsItemsKey;
 import com.eqriesracingteam.garage.service.RepairsItemsService;
@@ -29,12 +30,10 @@ public class RepairsItemsController {
     }
 
     //bij een repair aanmaken frontend id ophalen
-    @PostMapping(value = "/repairs_items/{repair_id}/{inventory_id}")
-    public ResponseEntity<Object> createRepairWithItems(@PathVariable("repair_id") Long repairId, @PathVariable("inventory_id") Long inventoryId, @RequestBody RepairItems repairItems) {
+    @PostMapping(value = "/repairs_items")
+    public ResponseEntity<Object> createRepairWithItems(@RequestBody RepairItemsInputDto dto) {
 
-        int quantity = repairItems.getAmount();
-
-        RepairsItemsKey ID = repairsItemsService.addRepairsItems(repairId, inventoryId, quantity);
+        RepairsItemsKey ID = repairsItemsService.addRepairsItems(dto.repairId, dto.repairId, dto.amount);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
 

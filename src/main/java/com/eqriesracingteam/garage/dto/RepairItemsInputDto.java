@@ -2,10 +2,10 @@ package com.eqriesracingteam.garage.dto;
 
 public class RepairItemsInputDto {
 
-    private Long partId;
+    public Long partId;
 
-    private Long repairId;
+    public Long repairId;
 
-    private int quantity;
+    public int amount;
 
 }

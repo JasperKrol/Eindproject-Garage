@@ -89,7 +89,7 @@ public class AppointmentService {
         var optionalCar = carRepository.findById(carId);
 
         if (!optionalAppointment.isPresent() || !optionalCar.isPresent()) {
-            throw new RecordNotFoundException("Please check input for car id + " + id + " and/or appointment id" + id);
+            throw new RecordNotFoundException("Please check input for car id: " + carId + " and/or appointment id: " + id);
         } else {
             var existingAppointment = optionalAppointment.get();
             var existingCar = optionalCar.get();

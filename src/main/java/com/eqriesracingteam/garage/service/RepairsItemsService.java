@@ -39,10 +39,8 @@ public class RepairsItemsService {
         return repairsItemsRepository.findAllByInventoryItem_Id(inventoryId);
     }
 
-    // Method to be able to get all inventoryItems in repair list
-    // amount in parameter en daarna setAmount in repairsItemAmount
     // TODO: 22-1-2022 add check if stock is 0, bad request
-    public RepairsItemsKey addRepairsItems(Long repairId, Long inventoryId, int amount) {
+    public RepairsItemsKey addRepairsItems(Long repairId, Long inventoryId,int amount) {
         var repairItems = new RepairItems();
         if (!repairRepository.existsById(repairId)) {
             throw new RecordNotFoundException();
@@ -65,7 +63,7 @@ public class RepairsItemsService {
         inventoryItem.setUsedParts(inventoryItem.getUsedParts() + amount);
 
         repairsItemsRepository.save(repairItems);
-        return id;
+        return repairItems.getId();
     }
 
     public RepairsItemsKey save(RepairItems repairItems) {
