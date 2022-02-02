@@ -9,7 +9,7 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 ## Inhoudsopgave
 
 * [Installatie](#Installatie)
-  + [Rollen en users](#Rollen-en-users)
+    + [Rollen en users](#Rollen-en-users)
 
 * [Endpoints](#endpoints)
     + [Appointments](#Appointments)
@@ -33,7 +33,8 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 
 2. Installeer de IntelliJ IDE indien dit nog niet gedaan is.
 
-3. Installeer Postman voor op de pc via onderstaande link. Voorbeelden van alle Postman collections zijn toegevoegd in de resource folder.
+3. Installeer Postman voor op de pc via onderstaande link. Voorbeelden van alle Postman collections zijn toegevoegd in
+   de resource folder.
 
 > https://www.postman.com/downloads/
 
@@ -55,7 +56,6 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 7. Authorization verplicht (JWT token). Zie onderwerp endpoints enkele alinea's hieronder.
 
 8. Run het project via het groene pijltje in de rechterbovenhoek van IntelliJ.
-
 
 #### Rollen en users
 
@@ -99,40 +99,117 @@ Voorbeeld:
 
 #### Appointments
 
+> **_NOTE:_**
+Optioneel parameter: 'status' <br/> voorbeeld: status?REPARATIE_KLAAR
+> ![img_2.png](img_2.png)
+
+* {PUT [/api/garage/appointments/{id}]}
+* {PUT [/api/garage/appointments/{id}/car]}
+* {POST [/api/garage/appointments]}
+* {GET [/api/garage/appointments]}
+* {GET [/api/garage/appointments/{id}]}
+* {DELETE [/api/garage/appointments/{id}]}
+
 #### Authorization+Authentication
 
-#### Assignments
-
-> **_NOTE:_**
-Voor upload files worden alleen bestanden geaccepteerd die 5 MB of kleiner zijn. Downloaden kan via een link of een request afgehandeld worden.
-
-* > **_NOTE:_**
-  Invoice wordt opgehaald voor Cars met repairs welke status REPAIR_COMPLETED hebben.<br/>
-  Dummy data is ingevoerd voor een car met id 1, api/v1/car/1/carInvoice
+* {POST [/authenticate]}
 
 #### Cars
 
-> **_NOTE:_**
-Optioneel parameter: 'date' <br/> voorbeeld: repairs?date=2022-01-06
+* {PUT [/api/garage/cars/{id}]}
+* {PUT [/api/garage/cars/{id}/registrationpaper]}
+* {POST [/api/garage/cars]}
+* {PATCH [/api/garage/cars/{id}]}
+* {GET [/api/garage/cars]}
+* {GET [/api/garage/cars/{id}]}
+* {GET [/api/garage/cars/{id}/inspections]}
+* {DELETE [/api/garage/cars/{id}]}
 
 #### Customers
 
 > **_NOTE:_**
-Optioneel parameter: 'date' <br/> voorbeeld: repairs?date=2022-01-06
+Optioneel parameter: 'lastname' <br/> voorbeeld: ?lastname=Jansen
+> *is niet hoofdlettergevoelig*
+> ![img_3.png](img_3.png)
+
+* {PUT [/api/garage/customers/{id}]}
+* {POST [/api/garage/customers]}
+* {POST [/api/garage/customers/{id}/cars]}
+* {POST [/api/garage/customers/{id}/appointments]}
+* {PATCH [/api/garage/customers/{id}]}
+* {GET [/api/garage/customers]}
+* {GET [/api/garage/customers/{id}]}
+* {GET [/api/garage/customers/{id}/invoices]}
+* {GET [/api/garage/customers/{id}/cars]}
+* {GET [/api/garage/customers/{id}/appointments]}
+* {DELETE [/api/garage/customers/{id}]}
 
 #### Inventory
 
+* {PUT [/api/garage/inventory/{id}]}
+* {POST [/api/garage/inventory]}
+* {GET [/api/garage/inventory]}
+* {GET [/api/garage/inventory/{id}]}
+* {DELETE [/api/garage/inventory/{id}]}
+
 #### Inspections
+
+* {PUT [/api/garage/inspections/{id}]}
+* {PUT [/api/garage/inspections/{id}/car]}
+* {POST [/api/garage/inspections]}
+* {GET [/api/garage/inspections]}
+* {GET [/api/garage/inspections/{id}]}
+* {DELETE [/api/garage/inspections/{id}]}
 
 #### Invoices
 
+* {PUT [/api/garage/invoices/{id}]}
+* {POST [/api/garage/invoices]}
+* {GET [/api/garage/invoices]}
+* {GET [/api/garage/invoices/{id}]}
+* {DELETE [/api/garage/invoices/{id}]}
+
 #### Registration papers
+
+* {POST [/api/garage/registration_papers/upload]}
+* {GET [/api/garage/registration_papers]}
+* {GET [/api/garage/registration_papers/downloadFile/{fileId}]}
+* {GET [/api/garage/registration_papers/{id}]}
+* {DELETE [/api/garage/registration_papers/{id}]}
+
+> **_NOTE:_**
+Voor upload files worden alleen bestanden geaccepteerd die 5 MB of kleiner zijn. Downloaden kan via een link of een request afgehandeld worden.
 
 #### Repairs
 
+* {PUT [/api/garage/repairs/{id}]}
+* {PUT [/api/garage/repairs/{id}/appointment]}
+* {POST [/api/garage/repairs]}
+* {GET [/api/garage/repairs_items]}
+* {GET [/api/garage/repairs]}
+* {GET [/api/garage/repairs/{id}]}
+* {DELETE [/api/garage/repairs/{id}]}
+
+> **_NOTE:_**
+Optioneel parameter: 'date' <br/> voorbeeld: repairs?date=2022-01-06
+
 #### Repair items
 
+* {POST [/api/garage/repairs_items/{repair_id}/{inventory_id}]}
+* {GET [/api/garage/repairs_items]}
+* {DELETE [/api/garage/repairs_items/{repair_id}/{inventoryId}]}
+
 #### Users
+
+* {PUT [/api/garage/users/{username}]}
+* {POST [/api/garage/users]}
+* {POST [/api/garage/users/{username}/authorities]}
+* {PATCH [/api/garage/users/{username}/password]}
+* {GET [/api/garage/users]}
+* {GET [/api/garage/users/{username}]}
+* {GET [/api/garage/users/{username}/authorities]}
+* {DELETE [/api/garage/users/{username}]}
+* {DELETE [/api/garage/users/{username}/authorities/{authority}]} 
 
 
 
