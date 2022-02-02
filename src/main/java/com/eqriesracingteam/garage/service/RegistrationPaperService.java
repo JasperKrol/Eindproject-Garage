@@ -17,7 +17,6 @@ public class RegistrationPaperService {
     @Autowired
     private RegistrationPaperRepository registrationPaperRepository;
 
-    // TODO: 16-1-2022 to use for localstorage
     public Stream<RegistrationPaper> getAllDocuments() {
         return registrationPaperRepository.findAll().stream();
     }

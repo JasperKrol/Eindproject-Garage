@@ -26,8 +26,6 @@ public class RepairController {
 
     // CRUD Requests
     // Post request
-    // TODO: 12-1-2022 repair controller verantwoordelijk maken voor het de inventory items
-
     @PostMapping(value = "/api/garage/repairs")
     public RepairDto addRepairAppointment(@RequestBody RepairInputDto dto) {
         var repairAppointment = repairService.createRepairAppointment(dto.toRepair(), dto.appointmentId);

@@ -20,7 +20,6 @@ public class InventoryService {
         this.inventoryRepository = inventoryRepository;
     }
 
-    // TODO: 29-12-2021 @RequestParam for description
     public Optional<Inventory> getOnePart(long id) {
         return inventoryRepository.findById(id);
     }

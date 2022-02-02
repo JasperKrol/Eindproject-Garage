@@ -45,7 +45,6 @@ public class RepairService {
         }
     }
 
-    // TODO: 6-1-2022 request param for date search option or car
     public List<Repair> getAllRepairAppointments() {
         return repairRepository.findAll();
     }
@@ -62,7 +61,6 @@ public class RepairService {
             repair.setScheduledCar(existingRepair.getScheduledCar());
             repair.setAppointment(existingRepair.getAppointment());
 
-            // TODO: 30-1-2022 make function to clean up code
             if (repair.getAppointmentStatus() == AppointmentStatus.REPARATIE_UITGEVOERD) {
                 optionalRepair.get().getAppointment().setAppointmentStatus(AppointmentStatus.REPARATIE_UITGEVOERD);
             }
@@ -123,7 +121,7 @@ public class RepairService {
         }
     }
 
-    public boolean approvalCustomer(Appointment appointment){
+    public boolean approvalCustomer(Appointment appointment) {
         AppointmentStatus status = appointment.getAppointmentStatus();
         return status == AppointmentStatus.AKKOORD_KLANT;
     }

@@ -66,8 +66,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     //Secure endpoints with HTTP authentication
-    // TODO: 20-12-2021 ROLLEN EN REQUESTS INREGELEN NAAR ENDPOINTS
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 

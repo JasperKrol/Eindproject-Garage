@@ -11,7 +11,6 @@ import com.eqriesracingteam.garage.repository.RepairsItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -35,11 +34,8 @@ public class RepairsItemsService {
         return repairsItemsRepository.findAll();
     }
 
-    public Collection<RepairItems> getJobPartsByPartId(Long inventoryId) {
-        return repairsItemsRepository.findAllByInventoryItem_Id(inventoryId);
-    }
 
-    // TODO: 22-1-2022 add check if stock is 0, bad request
+
     public RepairsItemsKey addRepairsItems(Long repairId, Long inventoryId,int amount) {
         var repairItems = new RepairItems();
         if (!repairRepository.existsById(repairId)) {
@@ -58,8 +54,6 @@ public class RepairsItemsService {
         repairItems.setId(id);
         repairItems.setAmount(amount);
 
-        // TODO: 26-1-2022 check if needed for now
-        inventoryItem.setStock(inventoryItem.getStock() - amount);
         inventoryItem.setUsedParts(inventoryItem.getUsedParts() + amount);
 
         repairsItemsRepository.save(repairItems);

@@ -39,8 +39,6 @@ public class InvoiceService {
     //    BigDecimal nettoAmount = without vat
     //    BigDecimal grossAmount = with vat
 
-    // TODO: 31-1-2022 Clean up code in create invoice with cleancode practices 
-
     // Methods
     public Invoice createInvoice(Long repairId) {
 

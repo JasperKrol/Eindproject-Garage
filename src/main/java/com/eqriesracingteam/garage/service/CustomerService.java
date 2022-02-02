@@ -27,8 +27,6 @@ public class CustomerService {
         this.appointmentRepository = appointmentRepository;
     }
 
-    // TODO: 25-11-2021 kijken of er een functie kan komen die checked op achternaam === postcode
-    //@Pathvariable postalcode
     public Customer addCustomer(Customer customer) {
         String postalCode = customer.getPostalCode();
         List<Customer> customers = (List<Customer>) customerRepository.findAllByPostalCode(postalCode);
@@ -48,8 +46,6 @@ public class CustomerService {
         return customerRepository.findAllByLastNameContainingIgnoreCase(lastname);
     }
 
-
-    // TODO: 25-11-2021 customer by lastname vinden
     public Customer getCustomer(long id) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
         if (optionalCustomer.isPresent()) {

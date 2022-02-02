@@ -44,7 +44,6 @@ public class UserService {
         return userRepository.findById(username);
     }
 
-    // TODO: 15-12-2021 working
     public String createUser(UserPostRequestDto userPostRequest) {
         try {
             String encryptedPassword = passwordEncoder.encode(userPostRequest.getPassword());

@@ -41,7 +41,6 @@ public class UserController {
     }
 
     // Post
-    // TODO: 15-12-2021 working request
     @PostMapping(value = "/api/garage/users")
     public ResponseEntity<Object> createUser(@RequestBody UserPostRequestDto user) {
         String newUsername = userService.createUser(user);

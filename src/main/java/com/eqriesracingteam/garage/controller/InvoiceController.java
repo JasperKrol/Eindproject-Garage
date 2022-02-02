@@ -25,7 +25,6 @@ public class InvoiceController {
     }
 
     // Get all
-    // TODO: 11-1-2022 request param for invoice number or customer
     @GetMapping(value = "/api/garage/invoices")
     public List<InvoiceDto> getAllInvoices() {
         var dtos = new ArrayList<InvoiceDto>();

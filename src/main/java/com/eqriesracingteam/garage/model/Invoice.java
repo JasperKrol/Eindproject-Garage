@@ -20,7 +20,6 @@ public class Invoice {
     private BigDecimal grossAmount; // with vat
     private boolean invoicePaid;
 
-    // TODO: 10-1-2022 Customer / repair relation
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -30,7 +29,6 @@ public class Invoice {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "repair_id", referencedColumnName = "id")
     private Repair repair;
-
 
     // Getters and setters
 
