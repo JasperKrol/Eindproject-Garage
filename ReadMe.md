@@ -191,7 +191,7 @@ Voor upload files worden alleen bestanden geaccepteerd die 5 MB of kleiner zijn.
 * {DELETE [/api/garage/repairs/{id}]}
 
 > **_NOTE:_**
-Optioneel parameter: 'date' <br/> voorbeeld: repairs?date=2022-12-12
+Optioneel parameter: 'date' <br/> voorbeeld: repairs?date=2022-12-12 <br/>
 > ![img.png](src/main/resources/templates/img4.png)
 
 #### Repair items
