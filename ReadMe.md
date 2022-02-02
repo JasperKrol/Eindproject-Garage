@@ -100,8 +100,8 @@ Voorbeeld:
 #### Appointments
 
 > **_NOTE:_**
-Optioneel parameter: 'status' <br/> voorbeeld: status?REPARATIE_KLAAR
-> ![img_2.png](img_2.png)
+Optioneel parameter: 'status' <br/> voorbeeld: appointments?status=REPARATIE_KLAAR <br/>
+> ![img_2.png](src/main/resources/templates/img_2.png)
 
 * {PUT [/api/garage/appointments/{id}]}
 * {PUT [/api/garage/appointments/{id}/car]}
@@ -128,9 +128,9 @@ Optioneel parameter: 'status' <br/> voorbeeld: status?REPARATIE_KLAAR
 #### Customers
 
 > **_NOTE:_**
-Optioneel parameter: 'lastname' <br/> voorbeeld: ?lastname=Jansen
+Optioneel parameter: 'lastname' <br/> voorbeeld: customers?lastname=Jansen
 > *is niet hoofdlettergevoelig*
-> ![img_3.png](img_3.png)
+> ![img_3.png](src/main/resources/templates/img_3.png)
 
 * {PUT [/api/garage/customers/{id}]}
 * {POST [/api/garage/customers]}
@@ -191,7 +191,8 @@ Voor upload files worden alleen bestanden geaccepteerd die 5 MB of kleiner zijn.
 * {DELETE [/api/garage/repairs/{id}]}
 
 > **_NOTE:_**
-Optioneel parameter: 'date' <br/> voorbeeld: repairs?date=2022-01-06
+Optioneel parameter: 'date' <br/> voorbeeld: repairs?date=2022-12-12
+> ![img.png](src/main/resources/templates/img4.png)
 
 #### Repair items
 
