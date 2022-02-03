@@ -17,8 +17,8 @@ import java.util.Optional;
 @Service
 public class AppointmentService {
 
-    private final AppointmentRepository appointmentRepository;
-    private final CarRepository carRepository;
+    private AppointmentRepository appointmentRepository;
+    private CarRepository carRepository;
 
     @Autowired
     public AppointmentService(AppointmentRepository appointmentRepository, CarRepository carRepository) {

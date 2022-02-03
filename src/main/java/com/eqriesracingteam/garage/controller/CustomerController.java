@@ -19,10 +19,10 @@ import java.util.List;
 public class CustomerController {
 
     //Attribute
-    @Autowired
     private CustomerService customerService;
 
     //Constructor
+    @Autowired
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
