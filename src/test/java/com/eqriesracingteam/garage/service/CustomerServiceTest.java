@@ -32,8 +32,8 @@ class CustomerServiceTest {
     @Mock
     Customer customer;
 
-    @Before
-    public void setUp(){
+    @Test
+    public void findCustomer(){
         Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
 
         Mockito
@@ -78,5 +78,22 @@ class CustomerServiceTest {
 
         assertThat(customerService.getCustomer(1L)).isEqualTo(customer);
 
+    }
+
+    @Test
+    void testGetCustomerByLastNameNotFound() {
+        String name = "Koos";
+
+        // Setup our mock repository
+        Mockito
+                .doReturn(null).when(customerRepository)
+                .findByLastName(name);
+
+        // Execute the service call
+        List<Customer> found = customerService.getAllCustomersByLastName(name);
+
+
+        // Assert the response
+        assertNotEquals(found, "[]");
     }
 }
