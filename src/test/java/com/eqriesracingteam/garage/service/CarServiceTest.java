@@ -59,4 +59,18 @@ class CarServiceTest {
         assertEquals(found, cars);
     }
 
+//    @Test
+//    void testDeleteCarByID() {
+//
+//        Car car1 = new Car();
+//        car1.setId(1L);
+//
+//        Long carId = 1L;
+//
+//        carService.deleteCar(carId);
+//
+//        verify(carRepository, times(1)).deleteById(eq(carId));
+//
+//
+//    }
 }
