@@ -52,8 +52,7 @@ class CarServiceTest {
         assertThat(cars.size()).isEqualTo(2);
         Mockito.when(carRepository.findAll()).thenReturn(cars);
 
-        String licensePlate = "xx--xx-xx";
-        String expected = "xx-xx-xx";
+
 
         var found = carService.getAllCars();
 

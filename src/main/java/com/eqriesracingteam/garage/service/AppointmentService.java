@@ -34,9 +34,10 @@ public class AppointmentService {
         }
     }
 
-    public List<Appointment> appointmentByStatus(AppointmentStatus status) {
-        return appointmentRepository.findAllByAppointmentStatus(status);
-    }
+    public boolean appointmentByStatus(Appointment appointment) {
+            AppointmentStatus status = appointment.getAppointmentStatus();
+            return status == AppointmentStatus.REPARATIE_UITGEVOERD || status == AppointmentStatus.NIET_UITVOEREN;
+        }
 
     public Appointment getAppointment(long id) {
         Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
