@@ -47,7 +47,7 @@ class CarServiceTest {
 
         carService.getAllCars();
 
-        verify(carRepository, times(2)).findAll();
+        verify(carRepository, times(1)).findAll();
 
         assertThat(cars.size()).isEqualTo(2);
         Mockito.when(carRepository.findAll()).thenReturn(cars);

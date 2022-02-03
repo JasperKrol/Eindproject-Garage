@@ -47,7 +47,7 @@ public class CustomerControllerTest {
         mvc.perform(get("/api/garage/customers")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("", hasSize(1)))
                 .andExpect(jsonPath("$[0].lastName", is(customer.getLastName())));
 
     }
