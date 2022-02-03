@@ -37,7 +37,7 @@ class UserRepositoryTest {
         entityManager.flush();
 
         // when
-        Optional<User> found = userRepository.findById("testy");
+        Optional<User> found = userRepository.findById("Testy");
 
         // then
         String expected = "Testy";

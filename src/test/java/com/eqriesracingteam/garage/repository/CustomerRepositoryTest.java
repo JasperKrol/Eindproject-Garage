@@ -42,20 +42,19 @@ class CustomerRepositoryTest {
     }
 
     @Test
-    void testFindById() {
+    void testFindCustomerByPostalCode() {
 
         // given
         Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
         entityManager.persist(customer);
         entityManager.flush();
 
-
         //when
-        Optional<Customer> found = customerRepository.findById(3L);
+        Customer found = customerRepository.findAllByPostalCode("1111aa");
 
         //then
-        long expected = 3L ;
-        long actual = found.get().getId() ;
+        String expected = "1111aa" ;
+        String actual = found.getPostalCode() ;
 
         assertEquals(expected, actual);
     }

@@ -79,21 +79,4 @@ class CustomerServiceTest {
         assertThat(customerService.getCustomer(1L)).isEqualTo(customer);
 
     }
-
-    @Test
-    void testDeleteCustomerByID() {
-//
-//        int customerId = 1;
-//
-//        customerService.deleteCustomer(customerId);
-//
-//        verify(customerRepository, times(1)).deleteById(eq(customerId));
-
-
-    }
-
-    @Test
-    void testCreateCustomer() {
-
-    }
 }

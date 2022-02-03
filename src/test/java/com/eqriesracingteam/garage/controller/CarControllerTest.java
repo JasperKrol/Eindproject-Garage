@@ -4,6 +4,7 @@ import com.eqriesracingteam.garage.GarageApplication;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.security.JwtUtil;
 import com.eqriesracingteam.garage.service.CarService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.catalina.mapper.Mapper;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -36,31 +38,40 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(CarController.class)
 @ContextConfiguration(classes={GarageApplication.class})
-@EnableConfigurationProperties
+@RunWith(SpringRunner.class)
 class CarControllerTest {
-//    @Autowired
-//    private MockMvc mvc;
-//
-//    @MockBean
-//    private JwtUtil jwtUtil;
-//
-//    @MockBean
-//    private CarService carService;
-//
-//
-//
-//    @Test
-//    public void testEndpointGetAllCars() throws Exception {
-//        Car car = new Car();
-//        car.setLicensePlate("24-xz-zg");
-//        List<Car> allCars = Arrays.asList(car);
-//
-//        given(carService.getAllCars()).willReturn(allCars);
-//
-//        mvc.perform(get("/api/garage/cars")
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", hasSize(1)))
-//                .andExpect(jsonPath("$[0].licensePlate", is("24-xz-zg")));
-//    }
+    @Autowired
+    private MockMvc mvc;
+
+    @MockBean
+    private JwtUtil jwtUtil;
+
+    @MockBean
+    private CarService carService;
+
+
+
+    @Test
+    public void testEndpointGetAllCars() throws Exception {
+        Car car = new Car();
+        car.setLicensePlate("24-xz-zg");
+        List<Car> allCars = Arrays.asList(car);
+
+        given(carService.getAllCars()).willReturn(allCars);
+
+        mvc.perform(get("/api/garage/cars")
+                        .with(user("Jasper").roles("ADMIN"))
+                        .content(asJsonString(car))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -7,6 +7,5 @@ import java.util.Optional;
 
 //Passes through String -> username is the id and is String
 public interface UserRepository extends JpaRepository<User, String> {
-    @Override
     Optional<User> findById(String s);
 }

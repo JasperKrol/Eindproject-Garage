@@ -1,0 +1,220 @@
+{
+  "info": {
+    "_postman_id": "045955c5-4ef2-4b1c-a47f-6806b758e3e6",
+    "name": "Garage EkriesRacingTeam",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Customers Get all",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/garage/customers?lastname=",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "garage",
+            "customers"
+          ],
+          "query": [
+            {
+              "key": "lastname",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Customer Get one",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8080/api/garage/customers/1"
+      },
+      "response": []
+    },
+    {
+      "name": "Customer Post",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDI2ODM2MjcsImlhdCI6MTY0MTgxOTYyN30.GLHZ1IY0UFKHf2tyQ5gw_WI9lUO1oDhansscZg_WeaA"
+          }
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\": \"Test\",\r\n    \"lastName\": \"Testy\",\r\n    \"postalCode\" : \"0000AD\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8080/api/garage/customers"
+      },
+      "response": []
+    },
+    {
+      "name": "Customer Get one lastname",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDEwNDU0NTIsImlhdCI6MTY0MDE4MTQ1Mn0.7p50n3LtoK-gR3GMiBD2A5XIu7yzVeqjgALTZIje6fI"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/garage/customers/1?lastname=krol",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "garage",
+            "customers",
+            "1"
+          ],
+          "query": [
+            {
+              "key": "lastname",
+              "value": "krol"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Customer Delete",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Jasper",
+            "password": "password"
+          }
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": "http://localhost:8080/api/garage/customers/2"
+      },
+      "response": []
+    },
+    {
+      "name": "Customer Update",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Jasper",
+            "password": "password"
+          }
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\": \"PB\",\r\n    \"lastName\": \"VDS\",\r\n    \"postalCode\": \"0000ww\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8080/api/garage/customers/3"
+      },
+      "response": []
+    },
+    {
+      "name": "Customer Partial update",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Jasper",
+            "password": "password"
+          }
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"postalCode\": \"0000PK\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8080/api/garage/customers/3"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Customer car",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": {
+            "username": "Jasper",
+            "password": "password"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8080/api/garage/customers/1/cars"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Customer appointments",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Get Customer invoices",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYXNwZXIiLCJleHAiOjE2NDQ0MTkyNDEsImlhdCI6MTY0MzU1NTI0MX0.Q-3HNJYzHPRzjj0jm4wUJ_Hb8ChCX20guoF9uRemD4A"
+          }
+        },
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8080/api/garage/customers/3/invoices"
+      },
+      "response": []
+    }
+  ]
+}
