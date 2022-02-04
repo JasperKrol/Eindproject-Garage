@@ -46,7 +46,7 @@ class CustomerServiceTest {
     @Test
     public void testAddCustomer(){
 
-        Customer customer = new Customer();
+        customer = new Customer();
         customer.setFirstName("Puck");
         customer.setLastName("Pet");
         customer.setPostalCode("1234AA");
@@ -96,11 +96,5 @@ class CustomerServiceTest {
         assertNotEquals(found, "[]");
     }
 
-    @Test
-    public void deleteCustomerTest(){
-        Customer customer = new Customer();
-        customer.setId(1L);
-        customerService.deleteCustomer(1L);
-        Mockito.verify(customerRepository).delete(customer);
-       }
+
 }

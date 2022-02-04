@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,22 +42,31 @@ class CustomerRepositoryTest {
         assertEquals(expected, actual);
     }
 
+//    @Test
+//    void testFindCustomerByPostalCode() {
+//
+//        // given
+//        Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
+//        entityManager.persist(customer);
+//        entityManager.flush();
+//
+//        //when
+//        Customer found = customerRepository.findAllByPostalCode("1111aa");
+//
+//        //then
+//        String expected = "1111aa" ;
+//        String actual = found.getPostalCode() ;
+//
+//        assertEquals(expected, actual);
+//    }
+
     @Test
-    void testFindCustomerByPostalCode() {
-
-        // given
+    public void givenIdTODeleteThenShouldDeleteTheCustomer() {
         Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
-        entityManager.persist(customer);
-        entityManager.flush();
-
-        //when
-        Customer found = customerRepository.findAllByPostalCode("1111aa");
-
-        //then
-        String expected = "1111aa" ;
-        String actual = found.getPostalCode() ;
-
-        assertEquals(expected, actual);
+        customerRepository.save(customer);
+        customerRepository.deleteById(customer.getId());
+        Optional optional = customerRepository.findById(customer.getId());
+        assertEquals(Optional.empty(), optional);
     }
 
 }

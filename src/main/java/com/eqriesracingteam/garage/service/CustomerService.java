@@ -34,7 +34,8 @@ public class CustomerService {
         if (customers.size() > 0) {
             throw new BadRequestException("Customer already exists");
         } else {
-            return customerRepository.save(customer);
+            Customer newCustomer = customerRepository.save(customer);
+            return newCustomer;
         }
     }
 

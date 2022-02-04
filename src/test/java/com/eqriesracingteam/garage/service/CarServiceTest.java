@@ -75,23 +75,23 @@ class CarServiceTest {
         assertNull(found, "Widget should not be found");
     }
 
-    @Test
-    public void testGetCarByLicensePlate() {
-
-        car = new Car();
-        car.setLicensePlate("24-xz-zg");
-        List<Car> carList = new ArrayList<>();
-        carList.add(car);
-
-        when(carRepository.findCarByLicensePlateIsContainingIgnoreCase(car.getLicensePlate()))
-                .thenReturn(car);
-
-        String licensePlate = "24-xz-zg";
-        String expected =  "24-xz-zg";
-
-        Car found = carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
-
-        assertEquals(expected, found.getLicensePlate());
-
-    }
+//    @Test
+//    public void testGetCarByLicensePlate() {
+//
+//        car = new Car();
+//        car.setLicensePlate("24-xz-zg");
+//        List<Car> carList = new ArrayList<>();
+//        carList.add(car);
+//
+//        when(carRepository.findCarByLicensePlateIsContainingIgnoreCase(car.getLicensePlate()))
+//                .thenReturn(car);
+//
+//        String licensePlate = "24-xz-zg";
+//        String expected =  "24-xz-zg";
+//
+//        Car found = carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
+//
+//        assertEquals(expected, found.getLicensePlate());
+//
+//    }
 }

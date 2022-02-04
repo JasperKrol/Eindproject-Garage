@@ -4,7 +4,6 @@ import com.eqriesracingteam.garage.model.Appointment;
 import com.eqriesracingteam.garage.model.AppointmentStatus;
 import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.repository.AppointmentRepository;
-import com.eqriesracingteam.garage.repository.CarRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,7 +31,7 @@ class AppointmentServiceTest {
     private AppointmentRepository appointmentRepository;
 
     @Mock
-    Car car;
+    Appointment appointment;
 
     @Test
     void AppointmentStatusCheck() {
@@ -49,19 +48,17 @@ class AppointmentServiceTest {
     }
 
     @Test
-    void createAppointment(){
+    void createAppointment() {
 
         Appointment appointment = new Appointment();
         appointment.setDescription("test");
         appointment.setAppointmentStatus(AppointmentStatus.NIET_UITVOEREN);
-        LocalDateTime date = LocalDateTime.of(2020, Month.APRIL,12,22,10);
+        LocalDateTime date = LocalDateTime.of(2020, Month.APRIL, 12, 22, 10);
         appointment.setAppointmentDate(date);
         appointment.setId(22L);
 
 
-        Mockito
-                .when(appointmentRepository.save(appointment))
-                .thenReturn(appointment);
+        when(appointmentRepository.save(appointment)).thenReturn(appointment);
 
         Appointment found = appointmentService.createAppointment(appointment);
         Appointment expect = appointment;
@@ -75,15 +72,12 @@ class AppointmentServiceTest {
         Appointment appointment = new Appointment();
         appointment.setDescription("test");
         appointment.setId(22L);
-        Long id = appointment.getId();
+        long id = appointment.getId();
 
-        Mockito
-                .when(appointmentRepository.findById(id))
-                .thenReturn(Optional.of(appointment));
+        when(appointmentRepository.findById(id)).thenReturn(Optional.of(appointment));
 
         Appointment expected = appointment;
         Appointment found = appointmentService.getAppointment(id);
         assertEquals(expected, found);
     }
-
 }
