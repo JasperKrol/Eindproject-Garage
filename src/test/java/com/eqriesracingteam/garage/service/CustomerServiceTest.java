@@ -19,6 +19,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest()
 @ContextConfiguration(classes= {GarageApplication.class})
@@ -36,8 +38,7 @@ class CustomerServiceTest {
     public void findCustomer(){
         Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
 
-        Mockito
-                .when(customerRepository.findByLastName(customer.getLastName()))
+        when(customerRepository.findByLastName(customer.getLastName()))
                 .thenReturn(customer);
 
     }
@@ -51,8 +52,7 @@ class CustomerServiceTest {
         customer.setPostalCode("1234AA");
         customer.setId(20L);
 
-        Mockito
-                .when(customerRepository.save(customer))
+        when(customerRepository.save(customer))
                 .thenReturn(customer);
 
         Customer expect = customer;
@@ -70,8 +70,7 @@ class CustomerServiceTest {
         customer.setPostalCode("1234AA");
         customer.setId(1L);
 
-        Mockito
-                .when(customerRepository.existsById(1L))
+        when(customerRepository.existsById(1L))
                 .thenReturn(true);
         Mockito
                 .doReturn(Optional.of(customer)).when(customerRepository).findById(1L);
@@ -96,4 +95,12 @@ class CustomerServiceTest {
         // Assert the response
         assertNotEquals(found, "[]");
     }
+
+    @Test
+    public void deleteCustomerTest(){
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customerService.deleteCustomer(1L);
+        Mockito.verify(customerRepository).delete(customer);
+       }
 }

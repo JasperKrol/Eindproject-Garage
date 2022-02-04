@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
@@ -59,18 +59,39 @@ class CarServiceTest {
         assertEquals(found, cars);
     }
 
-//    @Test
-//    void testDeleteCarByID() {
-//
-//        Car car1 = new Car();
-//        car1.setId(1L);
-//
-//        Long carId = 1L;
-//
-//        carService.deleteCar(carId);
-//
-//        verify(carRepository, times(1)).deleteById(eq(carId));
-//
-//
-//    }
+    @Test
+    void testGetCustomerByLicensePlateNotFound() {
+        String licensePlate = "24-xz-ww";
+
+        // Setup our mock repository
+        Mockito
+                .doReturn(null).when(carRepository)
+                .findAllByLicensePlateContainingIgnoreCase(licensePlate);
+
+        // Execute the service call
+        List<Car> found  = carService.getAllCarsByLicensePlate(licensePlate);
+
+        // Assert the response
+        assertNull(found, "Widget should not be found");
+    }
+
+    @Test
+    public void testGetCarByLicensePlate() {
+
+        car = new Car();
+        car.setLicensePlate("24-xz-zg");
+        List<Car> carList = new ArrayList<>();
+        carList.add(car);
+
+        when(carRepository.findCarByLicensePlateIsContainingIgnoreCase(car.getLicensePlate()))
+                .thenReturn(car);
+
+        String licensePlate = "24-xz-zg";
+        String expected =  "24-xz-zg";
+
+        Car found = carRepository.findCarByLicensePlateIsContainingIgnoreCase(licensePlate);
+
+        assertEquals(expected, found.getLicensePlate());
+
+    }
 }

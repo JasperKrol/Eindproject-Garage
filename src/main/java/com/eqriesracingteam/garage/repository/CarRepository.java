@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public interface CarRepository extends JpaRepository<Car, Long> {
-    Iterable<Car> findCarByLicensePlateIsContainingIgnoreCase(String licensePlate);
+    Car findCarByLicensePlateIsContainingIgnoreCase(String licensePlate);
 
     List<Car> findAllByLicensePlateContainingIgnoreCase(String licensePlate);
 }
