@@ -1,13 +1,13 @@
 package com.eqriesracingteam.garage.service;
 
 import com.eqriesracingteam.garage.GarageApplication;
+import com.eqriesracingteam.garage.model.Car;
 import com.eqriesracingteam.garage.model.Customer;
+import com.eqriesracingteam.garage.repository.CarRepository;
 import com.eqriesracingteam.garage.repository.CustomerRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -33,6 +33,7 @@ class CustomerServiceTest {
 
     @Mock
     Customer customer;
+
 
     @Test
     public void findCustomer(){
@@ -95,6 +96,23 @@ class CustomerServiceTest {
         // Assert the response
         assertNotEquals(found, "[]");
     }
+
+    @Test
+    public void updateCustomer() {
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setFirstName("test");
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+
+        customer.setFirstName("test1");
+        customerService.updateCustomer(1L, customer);
+
+        verify(customerRepository).save(customer);
+
+        assertThat(customer.getId()).isEqualTo(1);
+        assertThat(customer.getFirstName()).isEqualTo("test1");
+    }
+
 
 
 }

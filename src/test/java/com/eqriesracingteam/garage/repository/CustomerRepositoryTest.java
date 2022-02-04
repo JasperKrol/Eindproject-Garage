@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @DataJpaTest
 @ContextConfiguration(classes = {GarageApplication.class})
@@ -41,24 +42,6 @@ class CustomerRepositoryTest {
 
         assertEquals(expected, actual);
     }
-
-//    @Test
-//    void testFindCustomerByPostalCode() {
-//
-//        // given
-//        Customer customer = new Customer("Albert", "Einstein", "1111aa", "0612312132");
-//        entityManager.persist(customer);
-//        entityManager.flush();
-//
-//        //when
-//        Customer found = customerRepository.findAllByPostalCode("1111aa");
-//
-//        //then
-//        String expected = "1111aa" ;
-//        String actual = found.getPostalCode() ;
-//
-//        assertEquals(expected, actual);
-//    }
 
     @Test
     public void givenIdTODeleteThenShouldDeleteTheCustomer() {
