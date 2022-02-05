@@ -96,10 +96,6 @@ public class User {
         this.authorities.add(new Authority(this.username, authorityString));
     }
 
-    public void removeAuthority(Authority authority) {
-        this.authorities.remove(authority);
-    }
-
     public void removeAuthority(String authorityString) {
         this.authorities.removeIf(authority -> authority.getAuthority().equalsIgnoreCase(authorityString));
     }

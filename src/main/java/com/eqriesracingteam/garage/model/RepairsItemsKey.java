@@ -1,7 +1,5 @@
 package com.eqriesracingteam.garage.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
