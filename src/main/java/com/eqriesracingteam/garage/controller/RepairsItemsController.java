@@ -1,6 +1,5 @@
 package com.eqriesracingteam.garage.controller;
 
-import com.eqriesracingteam.garage.dto.RepairItemsDto;
 import com.eqriesracingteam.garage.dto.RepairItemsInputDto;
 import com.eqriesracingteam.garage.model.RepairItems;
 import com.eqriesracingteam.garage.model.RepairsItemsKey;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @RestController

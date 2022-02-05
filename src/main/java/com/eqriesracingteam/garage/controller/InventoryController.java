@@ -1,6 +1,5 @@
 package com.eqriesracingteam.garage.controller;
 
-import com.eqriesracingteam.garage.dto.AppointmentDto;
 import com.eqriesracingteam.garage.dto.InventoryDto;
 import com.eqriesracingteam.garage.dto.InventoryInputDto;
 import com.eqriesracingteam.garage.exceptions.BadRequestException;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +24,6 @@ public class InventoryController {
     }
 
     // Requests
-
     // Get one
     @GetMapping(value = "/api/garage/inventory/{id}")
     public ResponseEntity<Object> getOnePart(@PathVariable("id") long id) {
