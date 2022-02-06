@@ -3,7 +3,7 @@
 Welkom bij mijn eindproject van Hogeschool NOVI. Het project is een resultaat van de geleerde stof uit het "Full-Stack
 Developer" curriculum. Binnen dit project heb ik de backend van een autogarage ontworpen. Hierin kan het proces van
 keuringen en reparaties rondom auto's en klanten worden nagebootst. Het bevat al vooraf bepaalde data voor o.a. klanten,
-auto's, keuringen, facturen en reparaties. Natuurlijk is het ook mogelijk om de applicatie van nieuwe date entries te
+auto's, keuringen, facturen en reparaties. Natuurlijk is het ook mogelijk om de applicatie van nieuwe data entries te
 voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepast.
 
 ## Inhoudsopgave
@@ -77,7 +77,7 @@ toegang tot hun eigen endpoints. Deze staan in de meest rechter kolom.
 ## Endpoints
 
 Hieronder vind u alle endpoints die de applicatie bevat. Deze kunnen benaderd worden via postman en werken via het
-MVC-model. De authenticatie van de applicatie werkt met een Bearer token. Deze token moet mee gegeven worden aan elk
+MVC-model. De authenticatie van de applicatie werkt met een Bearer token. Deze token moet meegegeven worden aan elk
 request. Dit doe je in Postman door onder Authorization, Bearer Token in te stellen en de token in te vullen.
 
 De token verkrijg je door eerst het Authorization endpoint uit te voeren. De token is vervolgens 10 dagen geldig.
