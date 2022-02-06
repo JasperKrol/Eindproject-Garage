@@ -14,7 +14,6 @@ voorzien. Binnen deze applicatie is er ook authenticatie en autorisatie toegepas
 * [Endpoints](#endpoints)
     + [Appointments](#Appointments)
     + [Autorisatie](#Autorisatie)
-    + [Assignments](#Assignments)
     + [Cars](#cars)
     + [Customers](#customers)
     + [Inventory](#Inventory)
